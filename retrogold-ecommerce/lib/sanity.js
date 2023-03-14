@@ -8,8 +8,8 @@ const config = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset:  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "production",
-  projectId: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   apiVersion: '2022-12-22',
   useCdn: false,
   /**

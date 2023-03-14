@@ -15,10 +15,6 @@ var _default = (0, _types.defineType)({
     type: Array
   }],
   fields: [(0, _types.defineField)({
-    name: 'hero',
-    title: 'Hero',
-    type: 'image'
-  }), (0, _types.defineField)({
     name: 'headline',
     title: 'Headline',
     type: 'string'
