@@ -3,7 +3,7 @@ import { sanityClient } from '/lib/sanity'
 import Navigation from '/components/Navigation'
 import Hero from '/components/Hero'
 
-export default function Home() {
+export default function Home({hero}) {
   return (
     <>
       <Head>
@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
       <main className="p-8">
         <Navigation/>
-        <Hero/>
+        <Hero hero={hero}/>
       </main>
     </>
   )

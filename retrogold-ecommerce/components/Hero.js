@@ -3,32 +3,75 @@ import styles from '@/styles/Home.module.css'
 import {useState} from 'react'
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
 import {RxDot} from 'react-icons/rx'
+import {RxDotFilled} from 'react-icons/rx'
 
 
 
 
-const heroImg = ['image1', 'image2', 'image3']
 
-const Hero = () => {
+//Hero Object that contains the hero and headline together
+const heroCarousel1 = {
+  hero1: 'heropic1',
+  headline1: 'Connect your mind'
+}
+//We destrcutured the object to retrieve the individual values 
+const {hero1, headline1} = heroCarousel1
+console.log(hero1, headline1)
+
+const heroCarousel2 = {
+  hero2: 'IMG_1358',
+  headline2: 'Connect your body'
+}
+//We destrcutured the object to retrieve the individual values 
+const {hero2, headline2} = heroCarousel2
+
+const heroCarousel3 = {
+  hero3: 'IMG_1360',
+  headline3: 'Connect your soul'
+}
+//We destrcutured the object to retrieve the individual values 
+const {hero3, headline3} = heroCarousel3
+
+const heroCarousel4 = {
+  hero4: 'home3',
+  headline4: 'Connect your spirit'
+}
+//We destrcutured the object to retrieve the individual values 
+const {hero4, headline4} = heroCarousel4
+/*********************************************************** */
+
+
+//Put all the values in their respective arrays(images and headlines)
+const heroImg = [hero1, hero2, hero3, hero4]
+const headlines = [headline1, headline2, headline3, headline4]
+
+
+
+//Carousel Component 
+
+const Hero = ({hero}) => {
+  console.log(hero)
+
+
+
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [color, setColor] = useState('blue')
-
 
   const leftArrow = {
-    color: 'white',
-    transform: 'translate(0, -50%)',
-    position:'absolute',
-    top: '50%',
-    left: '30px',
-    cursor: 'pointer',
-  }
-
-    const rightArrow = {
-    color: 'white',
+    color: '#D5BDAF',
     transform: 'translate(0, -50%)',
     position: 'absolute',
     top: '50%',
-    right: '30px',
+    left: '8px',
+    cursor: 'pointer',
+  }
+
+
+    const rightArrow = {
+    color: '#D5BDAF',
+    transform: 'translate(0, -50%)',
+    position: 'absolute',
+    top: '50%',
+    right: '8px',
     cursor: 'pointer',
   }
 
@@ -46,28 +89,40 @@ const Hero = () => {
  }
 
  const isActive = {
-   color: 'red'
+   color: 'purple',
+  
  }
 
+ const notActive = {
+   color: '#D5BDAF',
+ }
  
 
+
+
   return (    
-      <div className="container mx-auto mt-8">
-        <div>
-          <img src={`/images/${heroImg[currentIndex]}.jpeg`} className="heroBg absolute"/>
+      <div className="container flex justify-center mx-auto mt-10">
+        <div className="relative">
+            <img src={`/images/${heroImg[currentIndex]}.jpeg`} className="heroBg absolute rounded-lg"/>
+          <div className="absolute -translate-y-96 translate-x-12 md:translate-x-32 text-white bg-black p-4">
+            <div className="font-bold text-xl md:text-6xl xl:text-7xl">{headlines[currentIndex]}</div>
+           
+          </div>
+        <div className="relative -translate-y-96">
+          <FaChevronLeft style={leftArrow} onClick={prevImage} size="2rem"/>
+          <FaChevronRight style={rightArrow} onClick={nextImage} size="2rem"/>
         </div>
-        <div className="relative bottom-80">
-          <FaChevronLeft style={leftArrow} onClick={prevImage} size="3rem"/>
-          <FaChevronRight style={rightArrow} onClick={nextImage} size="3rem"/>
+        <div className="flex flex-row justify-center relative bottom-10">
+          <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
+            setCurrentIndex(0)}} />
+          <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {
+            setCurrentIndex(1)}} />
+          <RxDot size="2rem" style={currentIndex === 2 ? isActive : notActive} onClick={(e) => {
+            setCurrentIndex(2)}} />
+          <RxDot size="2rem" style={currentIndex === 3 ? isActive : notActive} onClick={(e) => {
+            setCurrentIndex(3)}} />
         </div>
-        <div className="flex flex-row justify-center">
-          <RxDot size="2rem" style={isActive}/>
-          <RxDot size="2rem"/>
-          <RxDot size="2rem"/>
-        </div>
-
-
-
+            </div>
       </div>
   );
 }
