@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":["require","RxFace"],"mappings":";;eAAmBA,OAAO,CAAC,gBAAD,C;IAAlBC,M,YAAAA,M;;AAERA,MAAM","sourcesContent":["const { RxFace } = require(\"react-icons/rx\");\n\nRxFace"],"file":"index.dev.js"}

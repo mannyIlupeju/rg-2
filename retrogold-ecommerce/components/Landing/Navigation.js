@@ -7,11 +7,11 @@ const Navigation = () => {
   
   return (
     <div className="container mx-auto flex justify-around">
-      <div className="self-center">
-        <p className="font-extrabold text-5xl">Retrogold</p>
+      <div className="self-end">
+        <p className="font-extrabold text-5xl text-gray-300">Retrogold</p>
       </div> 
-      <div>
-        <ul className="list-none flex gap-4 font-medium cursor-pointer">
+      <div className="mt-5">
+        <ul className="list-none flex gap-4 font-medium cursor-pointer items-center text-gray-300">
           <li className=" isActive nav-link">
           <Link href='/'>Home</Link>  
           </li>

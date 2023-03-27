@@ -7,6 +7,10 @@ exports.sanityClient = exports.urlFor = void 0;
 
 var _nextSanity = require("next-sanity");
 
+var _imageUrl = _interopRequireDefault(require("@sanity/image-url"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 var config = {
   /**
    * Find your project ID and dataset in `sanity.json` in your studio project.
@@ -30,9 +34,12 @@ var config = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
+// export const urlFor = (source) => createImageUrlBuilder(config).image(source)
+
+var builder = (0, _imageUrl["default"])(config);
 
 var urlFor = function urlFor(source) {
-  return (0, _nextSanity.createImageUrlBuilder)(config).image(source);
+  return builder.image(source);
 }; // Set up the client for fetching data in the getProps page functions
 
 

@@ -13,8 +13,10 @@ var _products = _interopRequireDefault(require("./products"));
 
 var _hero = _interopRequireDefault(require("./hero"));
 
+var _quote = _interopRequireDefault(require("./quote"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var schemaTypes = [_author["default"], _blog["default"], _products["default"], _hero["default"]];
+var schemaTypes = [_author["default"], _blog["default"], _products["default"], _hero["default"], _quote["default"]];
 exports.schemaTypes = schemaTypes;
 //# sourceMappingURL=index.dev.js.map

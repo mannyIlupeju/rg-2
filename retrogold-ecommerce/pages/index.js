@@ -1,9 +1,13 @@
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
-import Navigation from '/components/Navigation'
-import Hero from '/components/Hero'
+import Hero from '@/components/Hero/Hero'
+import Landing from '/components/Landing/Landing'
+import Quotes from '/components/Quotes/Quotes'
 
-export default function Home({hero}) {
+
+
+export default function Home({hero, quote}) {
+
   return (
     <>
       <Head>
@@ -12,9 +16,10 @@ export default function Home({hero}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-8">
-        <Navigation/>
-        <Hero hero={hero}/>
+      <main>
+          <Landing hero={hero}/>  
+          <Quotes quote={quote}/>
+          
       </main>
     </>
   )
@@ -23,17 +28,19 @@ export default function Home({hero}) {
 //fetch the data using GROQ query
 const blogQuery = `*[_type == "blog"]`
 const heroQuery = `*[_type == 'hero']`
+const quoteQuery = `*[_type == 'quote']`
+
 
 // getStaticProps works when rendering from a headless CMS
 export async function getStaticProps() {
   const blogs = await sanityClient.fetch(blogQuery)
-
   const hero = await sanityClient.fetch(heroQuery)
-  
+  const quote = await sanityClient.fetch(quoteQuery)
+
   return {
     props: {
-      blogs,
       hero,
+      quote,
     }
   }
 }

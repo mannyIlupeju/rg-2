@@ -8,26 +8,19 @@ exports["default"] = void 0;
 var _types = require("@sanity/types");
 
 var _default = (0, _types.defineType)({
-  name: 'hero',
-  title: 'Hero',
+  name: 'quote',
+  title: 'Quote',
   type: 'document',
-  of: [{
-    type: Array
-  }],
   fields: [(0, _types.defineField)({
-    name: 'images',
-    title: 'Images',
-    type: 'image'
-  }), (0, _types.defineField)({
-    name: 'headline',
-    title: 'Headline',
+    name: 'quote',
+    title: 'Quote',
     type: 'string'
   }), (0, _types.defineField)({
-    name: 'headstatement',
-    title: 'HeadStatement',
+    name: 'author',
+    title: 'Author',
     type: 'string'
   })]
 });
 
 exports["default"] = _default;
-//# sourceMappingURL=hero.dev.js.map
+//# sourceMappingURL=quote.dev.js.map

@@ -4,5 +4,9 @@
 var nextConfig = {
   reactStrictMode: true
 };
-module.exports = nextConfig;
+module.exports = {
+  images: {
+    remotePatterns: []
+  }
+}, nextConfig;
 //# sourceMappingURL=next.config.dev.js.map
