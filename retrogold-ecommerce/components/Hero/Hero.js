@@ -38,14 +38,14 @@ const Hero = ({hero}) => {
     if(currentIndex === 3) {
       setCurrentIndex(0)
     }
-  }, 2000);
+  }, 10000);
 
 
    
 
 
   return (    
-      <div className="container flex justify-center mx-auto mt-8">
+      <div className="container flex justify-center mx-auto mt-10">
         <div>
           <Image hero={hero} currentIndex={currentIndex}/>
           <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         

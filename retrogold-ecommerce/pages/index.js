@@ -3,11 +3,10 @@ import { sanityClient } from '/lib/sanity'
 import Hero from '@/components/Hero/Hero'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
-
+import Experience from '/components/Experience/experience'
 
 
 export default function Home({hero, quote}) {
-
   return (
     <>
       <Head>
@@ -16,9 +15,12 @@ export default function Home({hero, quote}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="h-screen">
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
+          <Experience/>
+          <Quotes quote={quote}/>
+
           
       </main>
     </>

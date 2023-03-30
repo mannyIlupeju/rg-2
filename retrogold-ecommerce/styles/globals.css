@@ -7,16 +7,18 @@
 
 body {
   font-family: 'Epilogue', sans-serif;
+  overflow-x: hidden;
 }
 
 
 .heroImages {
-  background-image: linear-gradient( rgba(2, 2, 2, 0.5), rgba(15, 15, 15, 0.5));
+  background-image: linear-gradient( rgba(5, 5, 5, 0.979), rgba(0, 0, 0, 0.5));
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   width: 55vw;
   background-position: center;
+  opacity: 80;
 }
 
 .heroBg {
@@ -24,11 +26,19 @@ body {
   background-image: linear-gradient( rgba(109, 110, 109, 0.5), rgba(15, 15, 15, 0.5)), url('/images/heropic2.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100vw;
 }
 
 .quoteBg {
-background: rgb(208,212,211);
-background: linear-gradient(167deg, rgba(208,212,211,1) 62%, rgba(41,59,47,1) 100%, rgba(78,79,79,1) 100%);
+background: rgb(166, 223, 208);
+background: linear-gradient(167deg, rgb(173, 196, 190) 62%, rgba(41,59,47,1) 100%, rgba(78,79,79,1) 100%);
+-webkit-box-shadow: 2px 5px 15px 2px #000000; 
+box-shadow: 2px 5px 15px 2px #000000;
+}
+
+.experienceBg {
+  background:#bb9885;
+  overflow: hidden;
 }
 
 .nav-link { 
@@ -37,7 +47,7 @@ background: linear-gradient(167deg, rgba(208,212,211,1) 62%, rgba(41,59,47,1) 10
 }
 
 .nav-link:hover {
-  background-color: #D5BDAF;
+  background-color: #bb9885;
   transition: background-color 0.2s ease-in;
   
 }
@@ -56,3 +66,41 @@ background: linear-gradient(167deg, rgba(208,212,211,1) 62%, rgba(41,59,47,1) 10
  
 } */
 
+.imageSize {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.imageBox {
+  width: 250px;
+  height:auto;
+}
+
+.experienceImage {
+  width: 800px;
+  height: auto;
+  max-width: 100%;
+  
+}
+.experienceBox {
+  width: 500px;
+  overflow-y: visible;
+  
+}
+
+/***Parallax setup**/
+.imageParallax1 {
+  transform: skewY(-10deg);
+  z-index: 0;
+  position: relative;
+  left: 15rem;
+  top: -8rem;
+  
+}
+
+.imageParallax2 {
+  transform: skewY(20deg);
+  z-index:0;
+  /* position: relative;
+  bottom: 30rem */
+}

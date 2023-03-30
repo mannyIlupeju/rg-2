@@ -4,6 +4,7 @@ import {RxDot} from 'react-icons/rx'
 import {RxDotFilled} from 'react-icons/rx'
 
 const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
+ 
 
    //Left arrow styling
   const leftArrow = {
@@ -11,7 +12,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     transform: 'translate(0, -50%)',
     position: 'absolute',
     left: '8px',
-    top:'-300px',
+    top:'-18.75rem',
     cursor: 'pointer',
   }
 
@@ -20,7 +21,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     color: '#D5BDAF',
     transform: 'translate(0, -50%)',
     position: 'absolute',
-    top:'-300px',
+    top:'-18.75rem',
     right: '8px',
     cursor: 'pointer',
   }
@@ -31,7 +32,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     setCurrentIndex(newSlide)
  }
 
- const prevImage = ({heroImg}) => {
+ const prevImage = () => {
     let firstSlide = currentIndex === 0
   const newSlides = firstSlide ? heroImg.length-1 : currentIndex - 1
     setCurrentIndex(newSlides)
@@ -50,11 +51,11 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative md:top-14 xl:top-20">
             <FaChevronLeft style={leftArrow} onClick={prevImage} size="2rem"/>
             <FaChevronRight style={rightArrow} onClick={nextImage} size="2rem"/>
           </div>
-          <div className="flex flex-row justify-center relative bottom-10">
+          <div className="flex flex-row justify-center">
             <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
               setCurrentIndex(0)}} />
             <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {
