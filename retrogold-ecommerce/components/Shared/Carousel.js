@@ -12,7 +12,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     transform: 'translate(0, -50%)',
     position: 'absolute',
     left: '8px',
-    top:'-18.75rem',
+    top:'50%',
     cursor: 'pointer',
   }
 
@@ -21,7 +21,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     color: '#D5BDAF',
     transform: 'translate(0, -50%)',
     position: 'absolute',
-    top:'-18.75rem',
+    top:'50%',
     right: '8px',
     cursor: 'pointer',
   }
@@ -50,12 +50,12 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
 
   return (
-    <div>
-      <div className="relative md:top-14 xl:top-20">
+    <>
+          <div>
             <FaChevronLeft style={leftArrow} onClick={prevImage} size="2rem"/>
             <FaChevronRight style={rightArrow} onClick={nextImage} size="2rem"/>
           </div>
-          <div className="flex flex-row justify-center">
+          <div className="flex flex-row justify-center relative bottom-20">
             <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
               setCurrentIndex(0)}} />
             <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {
@@ -65,7 +65,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
             <RxDot size="2rem" style={currentIndex === 3 ? isActive : notActive} onClick={(e) => {
               setCurrentIndex(3)}} />
           </div>
-    </div>
+    </>
   );
 }
 

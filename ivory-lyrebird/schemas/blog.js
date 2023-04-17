@@ -31,6 +31,12 @@ export default defineType ({
       to: [{type: 'author'}]
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [{type: 'block'}]
+    }),
+    defineField({
       name: 'post',
       title: 'Post',
       type: 'array',
@@ -53,6 +59,16 @@ export default defineType ({
           type: 'string',
         }
       ]
+    }),
+    defineField({
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{
+        name: 'image',
+        title: 'Image',
+        type: 'image'
+      }],
 
     }),
     defineField({

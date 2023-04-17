@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
+import Link from 'next/link'
 import { motion, useScroll, useSpring, useInView, useTransform } from 'framer-motion';
-import { viewport } from '@popperjs/core';
-import { duration } from 'moment';
+
 
 
 const Experience = () => {
@@ -12,8 +12,10 @@ const Experience = () => {
 
   //to set the animation on both boxes to give it the scroll animation 
   const {scrollYProgress, scrollY} = useScroll();
-  let x = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ['0', '200px', '-200px', '980px'])
-  let y= useTransform(scrollYProgress,[0, 0.2, 0.5, 1], ['0', '100px', '370px','-950px'])
+
+
+  let x = useTransform(scrollYProgress, [0,0.5,1], ['0','10px','20px'])
+  let y = useTransform(scrollYProgress, [0, 0.5,1], ['0','10px','20px'])
 
 
 
@@ -26,50 +28,66 @@ const Experience = () => {
   console.log(isInView)
 
 
-
-
-  const sectionAnimate = {
-    offscreen: {y:-400},
-    onScreen: {y:100,
-    transition: {duration:1}
+  const experienceVariant = {
+    offscreen: {y:-600},
+    onscreen: {y:40,
+    transition: {
+      duration: 3,
+      type: "spring"
+    },
+    }
   }
-  }
 
-  console.log(scrollYProgress)
+
  
 
   return (
-    <div className="container mx-auto experienceBg h-screen rounded-lg mb-40" >
-      <div className="p-20 mt-32 flex justify-center">
-        <div className="absolute z-10 ">
-          <h1 className="text-white text-7xl  font-semibold text-center">The Retrogold Experience</h1>
-        <div className="justify-center">
-          <p className="text-4xl leading-none text-center text-white">Take advantage of the items and services we are offering today.</p>
+    <div className="h-min relative experienceBg z-2">
+     
+
+      <motion.div 
+       className="p-12 flex justify-center" 
+       viewport={{once:false}}
+      >
+        <div className="absolute z-10 top-1">
+          <h1 className="text-zinc-800 text-4xl font-medium text-center">The Retrogold Experience</h1>
         </div>
-        </div>
-        <motion.div className="flex justify-center" 
-      
-          
+
+
+        <motion.div className="flex flex-col md:flex-row justify-center gap-20"
+            initial={"offscreen"}
+              whileInView={{y:40, 
+              transition: {
+                duration: 3,
+                type: "spring"
+              }}
+            }
         >
+        
+
           <motion.div style={{translateY:x}}
-          animate={
-            {transition: {duration: 3}}
-          }
+          className="p-3 cursor-pointer"
           >
-            <img src='/images/shop.png' alt="shop Image" className="experienceImage imageParallax1 justify-items-end" 
+            <img src='/images/shop.JPG' alt="shop Image" className="experienceImage imageParallax1 justify-items-end" 
             ref={imageElement1}
             />
-           
+            <div className="flex justify-center relative bottom-56">
+            <Link href='/shop' className="text-3xl p-2 text-zinc-800 experience-link cursor-pointer">Shop</Link>  
+            </div>
           </motion.div>
+
+
           <motion.div style={{translateY:y}}
-            animate={
-            {transition: {duration: 3}}
-          }>
-            <img src='/images/tarot.png' alt="shop Image" className="experienceImage imageParallax2" ref={imageElement2}/>
+          className="p-3 cursor-pointer"
+          >
+            <img src='/images/services.jpg' alt="shop Image" className="experienceImage imageParallax2" ref={imageElement2}/>
+            <div className="flex justify-center relative bottom-56">
+              <Link href="/services" className="text-3xl p-2 text-zinc-800 experience-link">Services</Link>  
+            </div>
           </motion.div>
         </motion.div>
         
-      </div>
+      </motion.div>
     
     </div>
   );
