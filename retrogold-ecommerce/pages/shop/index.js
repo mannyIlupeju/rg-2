@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 const Shop = ({shop}) => {
   const[isHovered, setIsHovered] = useState(null)
-
+  
   //Destructuring shop object
   const[a,b,c] = shop 
   const [...arr] = [a,b,c]
@@ -51,10 +51,11 @@ const Shop = ({shop}) => {
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
             
+         
             return (
 
               <>
-                <Link href={`/shop/${_id}`} key={_id}>
+                <Link href={`/shop/${slug.current}`} key={_id}>
                   <div className="text-zinc-700 cursor-pointer" key={_id} >
                     <div className="">
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id}>
