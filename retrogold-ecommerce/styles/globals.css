@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -139,7 +140,13 @@ box-shadow: 2px 5px 15px 2px #000000;
 
 }
 
+.productDetailFonts {
+  font-family: 'Montserrat', sans-serif;
+}
 
+.productName {
+  font-family: 'Cardo', serif;
+}
 
 
 .imageParallax2 {

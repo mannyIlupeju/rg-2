@@ -51,6 +51,12 @@ export default defineType({
       of: [{type: 'block'}]
     }),
     defineField({
+      name: 'shippingReturns',
+      title: 'Shipping & Returns',
+      type: 'array',
+      of: [{type: 'block'}]
+    }),
+    defineField({
       name:'mainImage',
       title: 'Main Image',
       type: 'image',

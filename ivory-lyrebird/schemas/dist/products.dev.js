@@ -16,6 +16,17 @@ var _default = (0, _types.defineType)({
     title: 'Product Name',
     type: 'string'
   }), (0, _types.defineField)({
+    name: 'slug',
+    title: 'Slug',
+    type: 'slug',
+    options: {
+      source: 'title'
+    }
+  }), (0, _types.defineField)({
+    name: 'brandName',
+    title: 'Brand Name',
+    type: 'string'
+  }), (0, _types.defineField)({
     name: 'price',
     title: "Price",
     type: 'number'
@@ -36,8 +47,22 @@ var _default = (0, _types.defineType)({
       }]
     }
   }), (0, _types.defineField)({
+    name: 'shortDescription',
+    title: 'Short Description',
+    type: 'array',
+    of: [{
+      type: 'block'
+    }]
+  }), (0, _types.defineField)({
     name: 'productDescription',
     title: 'Product Description',
+    type: 'array',
+    of: [{
+      type: 'block'
+    }]
+  }), (0, _types.defineField)({
+    name: 'shippingReturns',
+    title: 'Shipping & Returns',
     type: 'array',
     of: [{
       type: 'block'
@@ -50,9 +75,19 @@ var _default = (0, _types.defineType)({
       hotspot: true
     }
   }), (0, _types.defineField)({
+    name: 'mainImage2',
+    title: 'Main Image2',
+    type: 'image',
+    options: {
+      hotspot: true
+    }
+  }), (0, _types.defineField)({
     name: 'images',
     title: 'Images',
     type: 'array',
+    options: {
+      hotspot: true
+    },
     of: [{
       name: 'image',
       title: 'Image',

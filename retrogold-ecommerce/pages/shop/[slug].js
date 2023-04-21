@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
+import { urlFor } from '@/lib/sanity';
 import Footer from '@/components/Shared/Footer/footer'
+import Quantitycounter from '@/components/Shared/quantityCounter';
+import Addtocart from '@/components/Shared/AddtoCart';
+import Accordion from '@/components/Shared/Accordion'
 
 
 
@@ -10,8 +14,40 @@ import Footer from '@/components/Shared/Footer/footer'
 
 const productDetails = ({data}) => {
   const {productDetail} = data
-  console.log(productDetail)
+
+  //product Detail destructure
+  const desc = productDetail.productDescription.map((x)=> x.children[0].text)
+ 
+  //shipping Info destructure
+  const shipping = productDetail.shippingReturns[0].children
+  const shippingInfo = shipping.map((x)=>{
+    return (x.text)
+  })
   
+  //retrievve the keys
+  const keys = productDetail.images.map((x)=>{
+    return x._key
+  })
+
+  const {images} = productDetail
+
+
+  const sideProductImage = {
+    width: '180px',
+    height: '200px',
+    borderRadius: '0.5rem',
+    display: 'block'
+  }
+  
+  const mainProductImage = {
+    width: '400px',
+    height: 'auto',
+    borderRadius: '0.5rem',
+    display: 'block'
+  }
+  
+
+
   return (
     <>
       <Head>
@@ -23,9 +59,44 @@ const productDetails = ({data}) => {
       </Head>
       <Navigation/>
       <main>
-        <div className="container mx-auto bg-white h-screen">
-          <div className="grid grid-cols-2">
+        <div className="bg-white h-screen productDetailFonts">
+          <div className="container mx-auto grid grid-cols-2 gap-5 justify-center p-12">
+            <div className="flex justify-end gap-4 overflow-hidden">
+              <div className="flex flex-col w-fit gap-2" >
+                {images.map((x)=>{
+                return (
+                    <div style={sideProductImage}>
+                      <img src={urlFor(x.asset._ref)} alt=" " style={sideProductImage}/>
+                    </div>
+                    )
+                })}
+              </div>
+              <div>
+                <img src={urlFor(productDetail.mainImage.asset._ref)} alt=" "style={mainProductImage} />
+              </div>
+            </div>
+            <div className="container text-zinc-700">
+              <p className="font-bold">{productDetail.brandName}</p>
+              <h1 className="font-semibold text-4xl productName">{productDetail.productName}</h1>
+              <p className="font-semibold">CDN ${productDetail.price}</p>
 
+              <div className="border-t-2 border-gray-300 mt-8 w-fit">
+                <div className="mt-4">
+                  <p className="text-sm font-bold">Select Option</p>
+                  <div className="mt-4">
+                    <p>Quantity</p>
+                    <Quantitycounter/>
+                  </div>
+                  <Addtocart/>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-col gap-4">
+                <Accordion title="Product Description" content={desc}/>
+                <Accordion title="Shipping & Returns" content={shippingInfo} />
+              </div>
+             
+            </div>
           </div>
         </div>
       </main>
@@ -60,10 +131,12 @@ export async function getStaticPaths() {
 }
 
 
-const productDetailQuery = `*[_type == 'product']{
-  images,
+const productDetailQuery = `*[_type == 'product' && slug.current == $slug][0]{
+  images[],
+  brandName,
   mainImage,
-  productDescription[],
+  productDescription,
+  shippingReturns,
   productName,
   price, 
   slug,
