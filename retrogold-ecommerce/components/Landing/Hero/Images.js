@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { urlFor } from '/lib/sanity';
-import imageUrlBuilder from '@sanity/image-url'
+
 
 
 

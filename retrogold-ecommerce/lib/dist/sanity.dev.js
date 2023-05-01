@@ -34,7 +34,6 @@ var config = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-// export const urlFor = (source) => createImageUrlBuilder(config).image(source)
 
 var builder = (0, _imageUrl["default"])(config);
 

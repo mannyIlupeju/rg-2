@@ -84,6 +84,7 @@ export default defineType({
         title: 'Image',
         type: 'image'
       }]
+      
     })
   ]
 })

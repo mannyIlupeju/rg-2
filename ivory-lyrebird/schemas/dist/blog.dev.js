@@ -28,6 +28,10 @@ var _default = (0, _types.defineType)({
       maxLength: 90
     }
   }), (0, _types.defineField)({
+    name: 'tag',
+    title: 'Tag',
+    type: 'string'
+  }), (0, _types.defineField)({
     name: 'author',
     title: 'Author',
     type: 'reference',
@@ -77,7 +81,10 @@ var _default = (0, _types.defineType)({
   }), (0, _types.defineField)({
     name: 'published',
     title: 'Published At',
-    type: 'date'
+    type: 'datetime',
+    otpions: {
+      dateFormat: "YYYY-MM-DD"
+    }
   })]
 });
 

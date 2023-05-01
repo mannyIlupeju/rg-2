@@ -20,7 +20,6 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="w-screen">
-        <Navigation/>
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
           <Experience/>
@@ -34,7 +33,7 @@ export default function Home({hero, quote, blog, calltoAction}) {
 
 //fetch the data using GROQ query
 const blogQuery = `*[_type == "blog"]{
-  description, main_image
+  description, main_image, tag
 }`
 const heroQuery = `*[_type == 'hero']`
 const quoteQuery = `*[_type == 'quote']`

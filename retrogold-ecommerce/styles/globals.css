@@ -14,6 +14,7 @@
   --pink: #94778B;
   --fairyTale: #D5B2BB;
   --teaGreen: #C7D8A0;
+  --yellow: #efefbc;
 }
 
 * {
@@ -33,10 +34,24 @@ body {
 }
 
 .navigationStyle {
-background: rgba(239, 239, 188, 0.877);
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 2px );
--webkit-backdrop-filter: blur( 2px );
+display: flex;
+flex-direction: row;
+gap: 10rem;
+z-index: 10;
+padding: 2rem;
+position: absolute;
+cursor: pointer;
+color: var(--white);
+}
+
+.relatedProductImage {
+  width: 480px;
+  height: 12.7rem;
+  border-radius: 0.5rem;
+  
+}
+.relatedProductBlock {
+  width: 16rem;
 }
 
 
@@ -108,8 +123,8 @@ box-shadow: 2px 5px 15px 2px #000000;
 
 
 .imageSize {
-  max-width: 60%;
-  max-height: 80%;
+  max-width: 70%;
+  max-height: 40%;
 }
 
 .imageBox {
@@ -154,8 +169,46 @@ box-shadow: 2px 5px 15px 2px #000000;
 }
 
 
-
-
 input[type=email] {
   padding: 2px 10px
+}
+
+
+
+
+.sideProductImage  {
+    width: 10rem;
+    height: 9.8rem;
+    border-radius: 0.5rem;
+    display: block;
+  }
+
+.mainProductImage  {
+    width: 20rem;
+    height: 19.7rem;
+    border-radius: 0.5rem;
+    display: 'block'
+  }
+  
+
+.shopCarouselArrow {
+    color: var(--yellow);
+    opacity: 0.8;
+    background-color: var(--accent);
+    border-radius: 50%;
+    padding: 3px;
+}
+
+
+.sectionText {
+  font-size: 80px;
+}
+
+.list-style {
+  list-style: inside;
+}
+
+.image-Style {
+  width: 500px;
+  height: 500px;
 }

@@ -7,7 +7,7 @@ import {RxDotFilled} from 'react-icons/rx'
 import Image from './Images';
 import Carousel from '../../Shared/Carousel';
 import { images } from '@/next.config';
-
+import Navigation from '@/components/Shared/Navigation';
 
 //Carousel Component 
 const Hero = ({hero}) => {
@@ -15,6 +15,8 @@ const Hero = ({hero}) => {
   const heroOverlay = {
     background: '#4C5454'
   }
+
+
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -47,6 +49,7 @@ const Hero = ({hero}) => {
 
   return (    
       <div className="h-screen">
+        <Navigation/>
         <Image hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
         <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
       </div>

@@ -8,17 +8,23 @@ import Link from 'next/link'
 
 
 const Shop = ({shop}) => {
+  console.log(shop)
   const[isHovered, setIsHovered] = useState(null)
   
   //Destructuring shop object
-  const[a,b,c] = shop 
-  const [...arr] = [a,b,c]
+  const[a,b,c, d] = shop 
+  const [...arr] = [a,b,c,d]
  
 
   const shopImage = {
     width: '320px',
     height: '320px',
     borderRadius: '0.5rem'
+  }
+
+  const divSize = {
+    height: '420px',
+  
   }
 
 
@@ -47,17 +53,16 @@ const Shop = ({shop}) => {
       <Navigation/>
 
       <main>
-      <div className="bg-white flex flex-col md:flex-row gap-28 p-24 justify-center">
+      <div className="bg-white flex flex-col md:flex-row md:flex-wrap gap-28 md:justify-center md:gap-32 p-32 ">
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
             
          
             return (
-
               <>
                 <Link href={`/shop/${slug.current}`} key={_id}>
-                  <div className="text-zinc-700 cursor-pointer" key={_id} >
-                    <div className="">
+                  <div className="text-zinc-700 cursor-pointer " key={_id} >
+                    <div style={divSize}>
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id}>
                       <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="" style={shopImage}/> 
                       </div>
@@ -76,7 +81,6 @@ const Shop = ({shop}) => {
                         </div>
                       </div>
                     </div>
-                
                   </div>
                 </Link>
               </>

@@ -25,6 +25,12 @@ export default defineType ({
       },
     }),
     defineField({
+      name: 'tag',
+      title: 'Tag',
+      type: 'string',
+    }),
+
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
@@ -74,7 +80,10 @@ export default defineType ({
     defineField({
       name: 'published',
       title: 'Published At',
-      type: 'date'
+      type: 'datetime',
+      otpions: {
+        dateFormat: "YYYY-MM-DD"
+      }
     })
 
   ]
