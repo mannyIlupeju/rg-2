@@ -27,8 +27,8 @@ var _default = (0, _types.defineType)({
       hotspot: true
     }
   }), (0, _types.defineField)({
-    name: 'bio',
-    title: 'Bio',
+    name: 'post',
+    title: 'Post',
     type: 'array',
     of: [{
       title: 'Block',

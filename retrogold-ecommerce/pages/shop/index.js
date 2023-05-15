@@ -53,7 +53,8 @@ const Shop = ({shop}) => {
       <Navigation/>
 
       <main>
-      <div className="bg-white flex flex-col md:flex-row md:flex-wrap gap-28 md:justify-center md:gap-32 p-32 ">
+      <div className="bg-white w-screen justify-center flex flex-col flex-nowrap md:flex-row md:flex-wrap gap-28 md:gap-32 p-16 w-fit ">
+       
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
             

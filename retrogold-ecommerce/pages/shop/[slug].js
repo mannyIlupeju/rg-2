@@ -5,19 +5,24 @@ import Navigation from '@/components/Shared/Navigation'
 import { urlFor } from '@/lib/sanity';
 import Footer from '@/components/Shared/Footer/footer'
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
-import Quantitycounter from '@/components/Shared/quantityCounter';
-import Addtocart from '@/components/Shared/AddtoCart';
 import Accordion from '@/components/Shared/Accordion'
+import Quantitycounter from '@/components/Shared/quantityCounter';
+import AddtoCart from '@/components/Shared/AddtoCart';
 import Relatedproducts from '@/components/Shared/RelatedProducts';
+import { FaMinus, FaPlus } from 'react-icons/fa';
+import { useGlobalContext } from '@/ Context/context';
 
-
+// to-do-list
+// responsive design for the page
+// make quantity counter, carousel and add to cart reusable components
 
 
 
 
 const productDetails = ({data}) => {
+ 
+
   const {productDetail} = data
-  console.log(productDetail.productName)
   const {allProduct} = data
   
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -30,26 +35,12 @@ const productDetails = ({data}) => {
   const shippingInfo = shipping.map((x)=>{
     return (x.text)
   })
-  
-
- 
   const {images} = productDetail
   
 
 
-  const sideProductImage = {
-    width: '5rem',
-    height: '5.8rem',
-    borderRadius: '0.5rem',
-    display: 'block'
-  }
+ 
   
-  const mainProductImage = {
-    width: '27rem',
-    height: '25rem',
-    borderRadius: '0.5rem',
-    display: 'block'
-  }
 
   //Carousel Functions 
   const prevImage = () => { 
@@ -82,14 +73,14 @@ const productDetails = ({data}) => {
       <Navigation/>
       <main>
         <div className="bg-white productDetailFonts">
-          <div className="container mx-auto grid grid-cols-2 gap-16 justify-center p-36">
-            <div className="flex justify-end gap-16 overflow-hidden">
+          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 pb-20 ">
+            <div className="flex flex-col flex-col-reverse md:flex-row justify-end md:gap-4 overflow-hidden">
               <div>
-                <div className="flex flex-col gap-4 col-start-1">
+                <div className="flex md:flex-col items-center gap-4 col-start-1">
                     {images.map((x)=>{
                     return (
-                        <div style={sideProductImage} keys={productDetail._id}>
-                          <img src={urlFor(x.asset._ref)} alt=" " style={sideProductImage}/>
+                        <div className="sideProductImage" keys={productDetail._id}>
+                          <img src={urlFor(x.asset._ref)} alt=" " className="sideProductImage"/>
                         </div>
                       )
                     })}          
@@ -98,9 +89,9 @@ const productDetails = ({data}) => {
                 <div>
                   
              
-                  
+                {/* main image that has carousel function */}
                 <div>
-                  <img src={urlFor(images[currentIndex].asset._ref)} alt=" " style={mainProductImage} />
+                  <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} className="shopCarouselArrow" />
                     <FaChevronRight size="1.3rem" onClick={nextImage} className="shopCarouselArrow"/>
@@ -112,7 +103,7 @@ const productDetails = ({data}) => {
             </div>
 
             
-            <div className="container text-zinc-700 h-fit">
+            <div className="container text-zinc-700 h-fit row-start-2 lg:col-start-2 lg:row-start-1">
               <p className="font-bold text-sm">{productDetail.brandName}</p>
               <h1 className="font-semibold text-xl productName">{productDetail.productName}</h1>
               <p className="font-semibold">CDN ${productDetail.price}</p>
@@ -120,11 +111,10 @@ const productDetails = ({data}) => {
               <div className="border-t-2 border-gray-300 mt-8 w-fit">
                 <div className="mt-4">
                   <p className="text-sm font-bold">Select Option</p>
-                  <div className="mt-4">
-                    <p>Quantity</p>
-                    <Quantitycounter/>
-                  </div>
-                  <Addtocart/>
+
+                  <Quantitycounter/>
+                  <AddtoCart/>
+
                 </div>
               </div>
 
@@ -132,13 +122,13 @@ const productDetails = ({data}) => {
                 <Accordion title="Product Description" content={desc} id="productDesc"/>
                 <Accordion title="Shipping & Returns" content={shippingInfo} id="shippingInfo"/>
               </div>
-             
             </div>
 
 
-          <Relatedproducts data={data}/>
+
           </div>
 
+          <Relatedproducts data={data}/>
           
         </div>
       </main>

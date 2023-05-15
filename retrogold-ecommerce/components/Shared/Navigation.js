@@ -2,46 +2,78 @@ import React from 'react';
 import Link from 'next/link'
 import { FaSearch } from 'react-icons/fa';
 import styles from '@/styles/Home.module.css'
+import { usePathname } from 'next/navigation'
+import {FaShoppingCart} from 'react-icons/fa'
 
 
 const Navigation = () => {
+    const navLink = 
+    [
+      {
+        name: 'Home',
+        href: '/home',
+      },
+      {
+        name: 'Shop',
+        href: '/shop',
+      }, 
+      {
+        name: 'Blog',
+        href: '/blog',
+      }, 
+      {
+        name: 'About',
+        href: '/about',
+      }, 
+      {
+        name: 'Contact',
+        href: '/contact',
+      }
+    ]
+
+    
+
     return (
     
     <nav className="navigationStyle">
 
-      <div className="imageBox flex items-center">
-        <Link href='/'>
-        <img src = '/images/Retrogold (6) (1).png' alt="retrogoldlogo" className="imageSize"/>
+      <div className=" flex items-center">
+        <Link href='/home'>
+        <img src = '/images/Retrogold (6) (1).png' alt="retrogoldlogo" className="imageBox"/>
         </Link>
       </div>
-       
-      <div className="flex items-center bg-green-300 px-12 py-1 rounded-lg">
-        <ul className="list-none flex gap-2 text-sm text-zinc-600">
-          <li className=" isActive nav-link">
-          <Link href='/'>Home</Link>  
-          </li>
-          <li className="nav-link">
-          <Link href='/shop'>Shop</Link>
-          </li>
-          <li className="nav-link">
-          <Link href='/blog'>Blog</Link>
-          </li>
-          <li className="nav-link">
-          <Link href='/about'>About</Link>
-          </li>
-          <li className="nav-link">
-          <Link href='/contact'>Contact</Link>  
-          </li>
-        </ul>
-      </div>
 
-      <div className="flex items-center ">
-        <div>
-          <input type="search" id="search" className="rounded-lg bg-gray-300 p-1"/>
-        </div>
-          <div className="relative right-6">
+      <div className="flex gap-6 text-sm items-center text-zinc-700">
+      {navLink.map((link)=>{
+        const pathname = usePathname();
+        const isActive = pathname.startsWith(link.href);
+
+        return (
+          <Link
+          className= {isActive ? 'nav-Active' : 'nav-link'}
+          href={link.href}
+          // key={name}
+          >
+          {link.name}
+          </Link>
+        )
+      })}
+      </div>
+       
+      
+
+      <div className="flex flex-row items-center gap-4">
+        <div className="flex justify-end border-r-2 border-zinc-500">
+          <div>
+            <input type="search" id="search" className="rounded-lg bg-gray-300" />
+          </div>
+          <div className="relative right-5 -bottom-1">
             <FaSearch size="0.8rem" color="black"/>
           </div>
+        </div>
+        <div className="flex justify-end">
+          <FaShoppingCart size="1.5rem" color="green"/>
+        </div>
       </div>
     </nav>
    

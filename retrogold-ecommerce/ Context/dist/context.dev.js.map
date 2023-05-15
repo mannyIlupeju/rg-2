@@ -1,0 +1,1 @@
+{"version":3,"sources":["context.js"],"names":["GlobalContext","AppContext"],"mappings":";;AAAA;;AAEA,IAAMA,aAAa,GAAG,2BAAtB;;AAGA,IAAMC,UAAU,GAAG,SAAbA,UAAa,GAAM;AACvB;AACD,CAFD","sourcesContent":["import {createContext} from 'react';\n\nconst GlobalContext = createContext()\n\n\nconst AppContext = () => {\n  return \n}"],"file":"context.dev.js"}

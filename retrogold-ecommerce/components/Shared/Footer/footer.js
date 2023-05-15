@@ -3,20 +3,19 @@ import React from 'react';
 const Footer = () => {
   return (
     <>
-     <div className="flex gap-4 text-zinc-100 text-sm justify-center p-12">
-
-      <div className="flex gap-10">
-          <div className="flex flex-col gap-8">
+     <div className="flex flex-col md:flex-row gap-4 text-zinc-100 text-sm justify-center p-12">
+      <div className="flex flex-col md:flex-row gap-10">
+          <div className="flex flex-col lg:gap-8 md:gap-2">
             <div>
               <p>Company</p>
             </div>
             <ul>
-              <li><p>About Retrogold</p></li>
+              <li><p>About</p></li>
               <li>Policies</li>
             </ul>
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col lg:gap-8">
             <div>
               <p>Customer Service</p>
             </div>
@@ -30,7 +29,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col lg:gap-8">
             <div>
               <p>Explore</p>
             </div>
@@ -43,7 +42,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col lg:gap-8">
             <div>
               <p>Connect with Retrogold</p>
             </div>
@@ -58,13 +57,13 @@ const Footer = () => {
        
       </div>
 
-      <div className="border"></div>
+      <div className="lg:border md:border-0"></div>
 
-      <div className="w-1/4">
+      <div className="md:w-1/4 ">
          <div className="">
            <p>Subscribe to our newsletter</p>
          </div>
-         <div className="flex gap-4 mt-4">
+         <div className="flex flex-col md:flex-row gap-4 mt-4">
            <input type="email" id="email"/>
            <button>SIGN UP</button>
          </div>

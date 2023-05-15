@@ -4,6 +4,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 const Quantitycounter = () => {
   const [defaultAmount, setDefaultAmount] = useState(1)
 
+  console.log(defaultAmount)
   const increaseAmt = () => {
     setDefaultAmount((prev)=> prev + 1)
   }

@@ -19,13 +19,9 @@ const Experience = () => {
 
 
 
-
-
-
-
   //when element is in view, repeat animation when it is fully in view
   const isInView = useInView(experienceRef, {once:false}, {amount: 1})
-  console.log(isInView)
+
 
 
   const experienceVariant = {

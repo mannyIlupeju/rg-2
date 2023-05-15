@@ -7,11 +7,11 @@ import {RxDotFilled} from 'react-icons/rx'
 import Image from './Images';
 import Carousel from '../../Shared/Carousel';
 import { images } from '@/next.config';
-import Navigation from '@/components/Shared/Navigation';
 
 //Carousel Component 
 const Hero = ({hero}) => {
-
+ 
+  
   const heroOverlay = {
     background: '#4C5454'
   }
@@ -36,7 +36,6 @@ const Hero = ({hero}) => {
   useEffect(()=>{
     const intervalid = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % heroImg.length)
-      console.log((currentIndex + 1) % heroImg.length)
     },3000);
 
     return ()=> clearInterval(intervalid);
@@ -49,7 +48,6 @@ const Hero = ({hero}) => {
 
   return (    
       <div className="h-screen">
-        <Navigation/>
         <Image hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
         <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
       </div>

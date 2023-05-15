@@ -13,7 +13,8 @@ const Blog = ({blog}) => {
   const mainImageBlog = {
     width: '520px',
     height: 'auto',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    backgroundSize: 'cover'
   }
 
 
@@ -21,7 +22,8 @@ const Blog = ({blog}) => {
   const smallImageBlog = {
     width: '340px',
     height: '250px',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    backgroundSize: 'cover',
   }
 
 
@@ -34,34 +36,33 @@ const Blog = ({blog}) => {
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <Navigation/>
-    <main>
-      <div className="text-zinc-100 md:px-12  p-44 bg-white">
-        <div className="flex justify-start items-center">
-          <div className="text-zinc-700">
-            <h1 className="text-5xl ">Latest Stories</h1>
-            <p className="text-medium mt-2">Uplifting, motivating stories about Wellness and the Home </p>
-          </div>
+    <main className="bg-white">
+      <div className="container mx-auto text-zinc-100 xl:px-28 px-8 py-14">
+        <div className="text-zinc-700">
+          <h1 className="text-5xl">Latest Stories</h1>
+          <p className="text-medium mt-2">Uplifting, motivating stories about Wellness and the Home </p>
         </div>
+      
       
         <div className="grid grid-cols-3 mt-12">      
           <div className="col-span-3">
-
               <Link href={`/blog/${blog[0].slug.current}`}>
-              <div className="flex md:flex-row flex-col bg-red-400 p-4 items-center rounded-xl cursor-pointer">
-                <div className="ml-4">
-                <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
-                  <span>{blog[0].tag}</span>
-                </div>
+              <div className="flex md:flex-row flex-col justify-center bg-red-400 md:p-4 items-center rounded-xl cursor-pointer p-2">
+                <div className="md:ml-4 ">
+                  <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
+                    <span>{blog[0].tag}</span>
+                  </div>
                   <img src={urlFor(blog[0].main_image.asset._ref)} style={mainImageBlog}/>
                 </div>
 
-                <div>
-                  <div className="text-xl font-light flex flex-col items-start p-12" >
+                <div className="h-fit">
+                  <div className="text-xl items-start font-light flex flex-col items-start p-4" >
                     <div>
                     {blog[0].description[0].children[0].text}
                     </div>
-                    <div className="mt-24 cursor-pointer">
-                    <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
+
+                    <div className="flex justify-center mt-10 cursor-pointer">
+                      <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
                     </div>
                   </div>  
                 </div>
@@ -71,19 +72,20 @@ const Blog = ({blog}) => {
         </div>
       
        
-        <div className="flex flex-col items-center md:flex-row gap-6 mt-8">
-
-          <div className="w-fit md:w-2/6 bg-orange-200 p-4 rounded-lg cursor-pointer">
+        <div className="flex flex-col lg:flex-nowrap md:flex-wrap items-center lg:flex-row md:flex-col gap-6 mt-8">
+          <div className="w-fit lg:w-2/6 bg-orange-200 rounded-lg cursor-pointer p-2">
             <Link href={`/blog/${blog[1].slug.current}`}>
-              <div className="mb-2  bg-red-500 w-fit px-2 mb-4 rounded-lg">
-                <span className="text-sm">{blog[0].tag}</span>
+              <div className="mb-2  bg-red-500 w-fit px-2 rounded-lg">
+                <span className="text-sm">{blog[1].tag}</span>
               </div>
+              <div className="flex justify-center">
               <img src={urlFor(blog[1].main_image.asset._ref)} style={smallImageBlog}/>
+              </div>
               <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
                 {blog[1].description[0].children[0].text}
               </div>
 
-              <div className="flex justify-center mt-10 text-zinc-700 ">
+              <div className="flex justify-center mt-10 text-zinc-700 cursor-pointer ">
                 <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
               </div>
             </Link>
@@ -91,47 +93,44 @@ const Blog = ({blog}) => {
        
        
 
-          <div className="w-fit md:w-2/6 bg-green-200 p-4 rounded-lg cursor-pointer">
-          <Link href={`/blog/${blog[2].slug.current}`}>
-              <div className="mb-2 bg-red-500 w-fit px-2 rounded-lg">
-                <span className="text-sm">{blog[0].tag}</span>
+          <div className="w-fit lg:w-2/6 bg-green-200 rounded-lg cursor-pointer p-2">
+            <Link href={`/blog/${blog[2].slug.current}`}>
+                <div className="mb-2 bg-red-500 w-fit px-2 rounded-lg">
+                  <span className="text-sm">{blog[2].tag}</span>
+                </div>
+              <div className="flex justify-center">
+              <img src={urlFor(blog[2].main_image.asset._ref)} style={smallImageBlog}/>
               </div>
-            <img src={urlFor(blog[2].main_image.asset._ref)} style={smallImageBlog}/>
-              <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
-                {blog[2].description[0].children[0].text}
-              </div>
+                <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+                  {blog[2].description[0].children[0].text}
+                </div>
 
-              <div className="flex justify-center mt-16 text-zinc-700">
-                <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
-              </div>
-          </Link>
-          </div>
-        
-       
-
-       
-          <div className="w-fit md:w-2/6 bg-pink-200 p-4 rounded-lg cursor-pointer">
-            <Link href={`/blog/${blog[3].slug.current}`}>
-              <div className="mb-2 bg-red-500 w-fit px-2 rounded-lg">
-                <span className="text-sm">{blog[0].tag}</span>
-              </div>
-            <img src={urlFor(blog[3].main_image.asset._ref)} style={smallImageBlog}/>
-              <div className="text-sm font-light flex flex-col items-start mt-4 px-2 text-zinc-700">
-                {blog[3].description[0].children[0].text}
-              </div>
-
-                <div className="flex justify-center mt-6 text-zinc-700">
+                <div className="flex justify-center mt-16 text-zinc-700">
                   <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
                 </div>
             </Link>
           </div>
-               
-        
-      </div>
 
-       
 
-      
+          <div className="w-fit lg:w-2/6 bg-pink-200 rounded-lg cursor-pointer p-2">
+            <Link href={`/blog/${blog[3].slug.current}`}>
+                <div className="mb-2 bg-red-500 w-fit px-2 rounded-lg">
+                  <span className="text-sm">{blog[3].tag}</span>
+                </div>
+              <div className="flex justify-center">
+              <img src={urlFor(blog[3].main_image.asset._ref)} style={smallImageBlog}/>
+              </div>
+                <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+                  {blog[3].description[0].children[0].text}
+                </div>
+
+                <div className="flex justify-center mt-16 text-zinc-700">
+                  <span className="font-light text-sm bg-orange-400 rounded-lg px-2 py-1">Read more</span>
+                </div>
+            </Link>
+          </div>
+        </div>
+     
     </div>
     </main>
    <Footer/>

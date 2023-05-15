@@ -22,8 +22,8 @@ export default defineType({
       }
     }),
    defineField({
-     name: 'bio',
-     title: 'Bio',
+     name: 'post',
+     title: 'Post',
      type: 'array',
      of: [
        {

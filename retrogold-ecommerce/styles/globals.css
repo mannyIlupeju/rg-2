@@ -35,21 +35,21 @@ body {
 
 .navigationStyle {
 display: flex;
+justify-content:center;
+background: var(--yellow);
 flex-direction: row;
-gap: 10rem;
+gap: 4rem;
 z-index: 10;
-padding: 2rem;
-position: absolute;
 cursor: pointer;
 color: var(--white);
 }
 
-.relatedProductImage {
+/* .relatedProductImage {
   width: 480px;
   height: 12.7rem;
   border-radius: 0.5rem;
   
-}
+} */
 .relatedProductBlock {
   width: 16rem;
 }
@@ -90,12 +90,21 @@ box-shadow: 2px 5px 15px 2px #000000;
   padding: 0.8rem;
   border-radius: 15px 50px 30px;
   cursor: pointer;
+  transition: background-color 0.2s ease-in;
 }
 
 .nav-link:hover {
   background-color: var(--accent);
   transition: background-color 0.2s ease-in;
   
+}
+
+.nav-Active{
+  background-color: var(--purple);
+  padding: 0.8rem;
+  border-radius: 15px 50px 30px;
+  color: white;
+  transition: background-color 0.2s ease-in;
 }
 
 .experience-link {
@@ -122,14 +131,8 @@ box-shadow: 2px 5px 15px 2px #000000;
 }
 
 
-.imageSize {
-  max-width: 70%;
-  max-height: 40%;
-}
 
-.imageBox {
-  height: 100%;
-}
+
 
 .experienceImage {
   width: 400px;
@@ -173,19 +176,23 @@ input[type=email] {
   padding: 2px 10px
 }
 
-
+.imageBox {
+  width: 200px;
+  height: auto;
+  padding: 1rem;
+}
 
 
 .sideProductImage  {
-    width: 10rem;
-    height: 9.8rem;
+    width: 5rem;
+    height: 5.8rem;
     border-radius: 0.5rem;
     display: block;
   }
 
 .mainProductImage  {
     width: 20rem;
-    height: 19.7rem;
+    height: 20rem;
     border-radius: 0.5rem;
     display: 'block'
   }

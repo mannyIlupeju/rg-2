@@ -11,8 +11,6 @@ const Calltoaction = ({calltoAction}) => {
   }
   
 
-
-  console.log(calltoAction)
   return (
     <>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -20,10 +18,10 @@ const Calltoaction = ({calltoAction}) => {
     </svg>
     <div className="pb-24 calltoaction">
       <div className="flex flex-col gap-12 md:p-0 md:flex-row justify-center">
-        <div className="md:w-2/6 w-full mt-12">
+        <div className="md:w-2/6 w-full">
           <div className="text-zinc-700">
-            <h1 className="text-4xl">{calltoAction[0].headline}</h1>
-            <p className="text-xl mt-8">{calltoAction[0].sub_headline}</p>
+            <h1 className="text-4xl font-bold">{calltoAction[0].headline}</h1>
+            <p className="text-xl mt-8 font-semibold">{calltoAction[0].sub_headline}</p>
           </div>
 
           <div className="mt-2">
