@@ -16,13 +16,14 @@ const Blog = ({blog}) => {
   const smallImageBlog = {
     width: '340px',
     height: '250px',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    objectFit: 'cover'
   }
 
 
  
   return (
-    <div className="container mx-auto text-zinc-100 h-fit xl:px-28 md:px-2">
+    <div className="container mx-auto text-zinc-100 h-fit xl:px-28 md:px-2 p-2">
       <div className="flex justify-start items-center mt-32">
         <div>
           <h1 className="text-5xl">Latest Stories</h1>
@@ -33,8 +34,8 @@ const Blog = ({blog}) => {
 
       <div className="grid grid-cols-3 mt-12">
         <div className="col-span-3">          
-            <div className="flex md:flex-row flex-col bg-red-400 p-4 items-center rounded-xl">
-              <div className="">
+            <div className="flex md:flex-row flex-col bg-red-400 p-4 items-start rounded-xl">
+              <div className="mx-auto">
                 <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                   <span>{blog[0].tag}</span>
                 </div>
@@ -42,11 +43,11 @@ const Blog = ({blog}) => {
               </div>
 
               <div>
-                <div className="text-xl font-light flex flex-col items-start p-12" >
+                <div className="text-xl font-light flex flex-col items-start lg:p-8 p-3 lg:p-12" >
                   <div>
                   {blog[0].description[0].children[0].text}
                   </div>
-                  <div className="mt-24">
+                  <div className="lg:mt-24 flex justify-center mt-10 text-zinc-700">
                   <Link href={`/blog/${blog[0].slug.current}`} className="font-light text-sm bg-red-200 p-2 rounded-lg">Read more</Link>
                   </div>
                 </div>  
@@ -61,9 +62,9 @@ const Blog = ({blog}) => {
               <span className="text-sm">{blog[1].tag}</span>
             </div>
            <div className="flex justify-center">
-           <img src={urlFor(blog[1].main_image.asset._ref)} style={smallImageBlog}/>
+           <img src={urlFor(blog[1].main_image.asset._ref)} className="smallImageBlog"/>
            </div>
-            <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+            <div className="text-sm font-light flex items-start mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
               {blog[1].description[0].children[0].text}
             </div>
 
@@ -79,9 +80,9 @@ const Blog = ({blog}) => {
                 <span className="text-sm">{blog[2].tag}</span>
               </div>
               <div className="flex justify-center">
-                <img src={urlFor(blog[2].main_image.asset._ref)} style={smallImageBlog}/>
+                <img src={urlFor(blog[2].main_image.asset._ref)} className="smallImageBlog"/>
               </div>
-              <div className="text-sm font-light flex justify-center items-start mt-4 px-2 text-zinc-700">
+              <div className="text-sm font-light flex justify-center items-start mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
                 {blog[2].description[0].children[0].text}
               </div>
 
@@ -95,9 +96,9 @@ const Blog = ({blog}) => {
                 <span className="text-sm">{blog[3].tag}</span>
               </div>
               <div className="flex justify-center">
-                <img src={urlFor(blog[3].main_image.asset._ref)} style={smallImageBlog}/>
+                <img src={urlFor(blog[3].main_image.asset._ref)} className="smallImageBlog"/>
               </div>
-              <div className="text-sm font-light flex justify-center items-start mt-4 px-2 text-zinc-700">
+              <div className="text-sm font-light flex justify-center items-start mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
                 {blog[3].description[0].children[0].text}
               </div>
 

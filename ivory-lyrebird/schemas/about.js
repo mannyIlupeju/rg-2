@@ -9,9 +9,9 @@ export default defineType({
   //types = accepts an array of schema definition objects
   fields: [
     defineField({ 
-      name: 'aboutInfo',
+      name: 'aboutus',
+      title: 'About Us',
       type: 'string',
-      title: 'About Us'
     }),
     defineField({
       name: 'image',
@@ -25,14 +25,10 @@ export default defineType({
      name: 'post',
      title: 'Post',
      type: 'array',
-     of: [
-       {
-         title: 'Block',
-         type: 'block',
-         styles: [{title: 'Normal', value: 'normal'}],
-         lists: [{title: 'Bullet', value: 'bullet'}],
-       },
-     ],
+     of:  [{type: 'block'}, {type: 'image'}],
+     options: {
+        spellCheck: true,
+      }
      
    })
   ]

@@ -7,7 +7,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
   //Left arrow styling
   const leftArrow = {
-    color: '#D5BDAF',
+    color: '#8789C0',
     transform: 'translate(0, -50%)',
     position: 'absolute',
     left: '8px',
@@ -17,7 +17,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
   //Right arrow styling
   const rightArrow = {
-    color: '#D5BDAF',
+    color: '#8789C0',
     transform: 'translate(0, -50%)',
     position: 'absolute',
     top:'50%',
@@ -56,7 +56,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
             <FaChevronRight onClick={nextImage} size="2rem" style={rightArrow}/>
           </div>
           {heroImg && 
-          (<div className="flex flex-row justify-center relative bottom-36">
+          (<div className="flex flex-row justify-center relative bottom-52 lg:bottom-42">
             <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
               setCurrentIndex(0)}} />
             <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {

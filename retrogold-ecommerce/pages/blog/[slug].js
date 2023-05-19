@@ -13,17 +13,9 @@ const blogImage = {
   height: '100px',
 }
 
-
-
-
-
-
-
-
-
-
 const blogPost = ({data}) => {
   const{blogDetail} = data
+  console.log(blogDetail)
   const post = blogDetail.post
  
 
@@ -49,10 +41,12 @@ const blogPost = ({data}) => {
         </figure>
 
         <article className="text-zinc-700 mt-4 leading-loose">
-          
           <PortableTextComponent detail={blogDetail} />
-          
         </article>
+
+        <div>
+          
+        </div>
 
       </div>
     </main>

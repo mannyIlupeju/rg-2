@@ -16,9 +16,9 @@ var _default = (0, _types.defineType)({
   title: 'About Us',
   //types = accepts an array of schema definition objects
   fields: [(0, _types.defineField)({
-    name: 'aboutInfo',
-    type: 'string',
-    title: 'About Us'
+    name: 'aboutus',
+    title: 'About Us',
+    type: 'string'
   }), (0, _types.defineField)({
     name: 'image',
     type: 'image',
@@ -31,17 +31,13 @@ var _default = (0, _types.defineType)({
     title: 'Post',
     type: 'array',
     of: [{
-      title: 'Block',
-      type: 'block',
-      styles: [{
-        title: 'Normal',
-        value: 'normal'
-      }],
-      lists: [{
-        title: 'Bullet',
-        value: 'bullet'
-      }]
-    }]
+      type: 'block'
+    }, {
+      type: 'image'
+    }],
+    options: {
+      spellCheck: true
+    }
   })]
 });
 

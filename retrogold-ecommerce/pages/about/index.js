@@ -1,5 +1,5 @@
 import PortableTextComponent from '@/components/Shared/PortableTextComponent';
-import { sanityClient } from '@/lib/dist/sanity.dev';
+import { sanityClient, urlFor } from '@/lib/dist/sanity.dev';
 import React from 'react';
 import Navigation from '@/components/Shared/Navigation';
 import Head from 'next/head'
@@ -7,8 +7,9 @@ import Footer from '@/components/Shared/Footer/footer';
 
 const About = ({data}) => {
   const{about} = data
+  console.log(about[0].image.asset._ref)
+ 
   const [aboutUs] = about
-  console.log(aboutUs)
 
 
   return (
@@ -19,12 +20,31 @@ const About = ({data}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
     </Head>
+
     <Navigation/>
+
+
     <main>
-    <div className="p-32 h-screen leading-loose">
-      <PortableTextComponent detail={aboutUs}/>
+    <div className="p-24 flex flex-col gap-20 bg-violet-300">
+      <div className="p-20 w-fit border-8 border-zinc-700">
+        <span className="text-4xl text-zinc-700">{aboutUs.aboutus}</span>
+      </div>
+
+        
+      <div className="flex md:flex-row flex-col gap-48 lg:gap-24">
+        <article className=" leading-loose text-zinc-700 text-lg w-fit md:w-1/2  items-center">
+          <PortableTextComponent detail={aboutUs}/>
+        </article>
+        
+
+        <div className="relative bottom-44">
+          <img src={urlFor(about[0].image.asset._ref)} alt="" className="aboutImage"/>
+        </div>
+      </div>
     </div>
     </main>
+
+
     <Footer/>
     </>
   );
@@ -34,7 +54,11 @@ export default About;
 
 
 
-const aboutInfo = `*[_type == 'about']`
+const aboutInfo = `*[_type == 'about']{
+  image, 
+  post,
+  aboutus
+}`
 
 export async function getStaticProps() {
   const about = await sanityClient.fetch(aboutInfo)

@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 
 const Shop = ({shop}) => {
-  console.log(shop)
+  
   const[isHovered, setIsHovered] = useState(null)
   
   //Destructuring shop object
@@ -18,8 +18,12 @@ const Shop = ({shop}) => {
 
   const shopImage = {
     width: '320px',
-    height: '320px',
+    height: 'auto',
     borderRadius: '0.5rem'
+  }
+
+  const contentBox = {
+    width: '320px'
   }
 
   const divSize = {
@@ -52,20 +56,17 @@ const Shop = ({shop}) => {
       </Head>
       <Navigation/>
 
-      <main>
-      <div className="bg-white w-screen justify-center flex flex-col flex-nowrap md:flex-row md:flex-wrap gap-28 md:gap-32 p-16 w-fit ">
-       
+      <main className="bg-white">
+      <div className="container mx-auto justify-normal md:justify-center flex flex-row gap-x-48 gap-y-24 p-24 flex-wrap">
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
-            
-         
             return (
               <>
                 <Link href={`/shop/${slug.current}`} key={_id}>
                   <div className="text-zinc-700 cursor-pointer " key={_id} >
-                    <div style={divSize}>
+                    <div>
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id}>
-                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="" style={shopImage}/> 
+                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="" className="shopImage"/> 
                       </div>
 
                       <div className="mt-2">
@@ -73,8 +74,8 @@ const Shop = ({shop}) => {
                         <p className="font-bold">{productName}</p>
                         <p>${price}</p>
 
-                        <div style={shopImage} className="line-clamp-4 mt-4">
-                          <p className="text-sm text-bold">
+                        <div style={contentBox} className="line-clamp-4 mt-4" style={contentBox}>
+                          <p className="text-sm text-bold ">
                             {shortDescription.map((x)=>{
                               return x.children[0].text
                             })}
@@ -87,6 +88,7 @@ const Shop = ({shop}) => {
               </>
             )
           })}
+
       </div>
       </main>
       <Footer/>

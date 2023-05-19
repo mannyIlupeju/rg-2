@@ -17,11 +17,10 @@ const Relatedproducts = ({data}) => {
   console.log(filterProducts)
 
   return (
-    <div className="px-12 mb-4">
-      <div >
+    <div className="container mx-auto p-12 mb-4">
+      <div className="">
       <h2 className="text-zinc-800">Related Products</h2>
       </div>
-      <div className="">
         <div className="flex flex-col md:flex-row gap-10">
           {filterProducts.map((x)=>{
             const{mainImage, price, productName, brandName, shortDescription, slug, _id} = x
@@ -39,14 +38,14 @@ const Relatedproducts = ({data}) => {
                   <p>${price}</p>
                 </div>
         
-                <p className="text-zinc-500 text-sm">{shortDescription[0].children[0].text}</p>
+                <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p>
               </div>
               </Link>
               
             )
           })}
         </div>
-      </div>
+      
       
     </div>
   );

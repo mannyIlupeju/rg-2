@@ -14,7 +14,7 @@ import { useGlobalContext } from '@/ Context/context';
 
 // to-do-list
 // responsive design for the page
-// make quantity counter, carousel and add to cart reusable components
+// make quantity counter and add to cart reusable components
 
 
 
@@ -55,6 +55,27 @@ const productDetails = ({data}) => {
   }
 
 
+  //Left arrow styling
+  const leftArrow = {
+    color: '#D5BDAF',
+    transform: 'translate(0, -50%)',
+    position: 'absolute',
+    left: '8px',
+    top:'50%',
+    cursor: 'pointer',
+  }
+
+  //Right arrow styling
+  const rightArrow = {
+    color: '#D5BDAF',
+    transform: 'translate(0, -50%)',
+    position: 'absolute',
+    top:'50%',
+    right: '8px',
+    cursor: 'pointer',
+  }
+
+
 
 
 
@@ -73,8 +94,8 @@ const productDetails = ({data}) => {
       <Navigation/>
       <main>
         <div className="bg-white productDetailFonts">
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 pb-20 ">
-            <div className="flex flex-col flex-col-reverse md:flex-row justify-end md:gap-4 overflow-hidden">
+          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
+            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-4 overflow-hidden">
               <div>
                 <div className="flex md:flex-col items-center gap-4 col-start-1">
                     {images.map((x)=>{
@@ -93,8 +114,8 @@ const productDetails = ({data}) => {
                 <div>
                   <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
-                    <FaChevronLeft size="1.3rem" onClick={prevImage} className="shopCarouselArrow" />
-                    <FaChevronRight size="1.3rem" onClick={nextImage} className="shopCarouselArrow"/>
+                    <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
+                    <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
                   </div>
                 </div>
                
@@ -103,7 +124,7 @@ const productDetails = ({data}) => {
             </div>
 
             
-            <div className="container text-zinc-700 h-fit row-start-2 lg:col-start-2 lg:row-start-1">
+            <div className="container text-zinc-700 h-fit">
               <p className="font-bold text-sm">{productDetail.brandName}</p>
               <h1 className="font-semibold text-xl productName">{productDetail.productName}</h1>
               <p className="font-semibold">CDN ${productDetail.price}</p>

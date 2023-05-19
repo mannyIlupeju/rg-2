@@ -48,6 +48,7 @@ const Hero = ({hero}) => {
 
   return (    
       <div className="h-screen">
+
         <Image hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
         <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
       </div>
