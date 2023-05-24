@@ -16,11 +16,6 @@ const Shop = ({shop}) => {
   const [...arr] = [a,b,c,d]
  
 
-  const shopImage = {
-    width: '320px',
-    height: 'auto',
-    borderRadius: '0.5rem'
-  }
 
   const contentBox = {
     width: '320px'
@@ -65,8 +60,8 @@ const Shop = ({shop}) => {
                 <Link href={`/shop/${slug.current}`} key={_id}>
                   <div className="text-zinc-700 cursor-pointer " key={_id} >
                     <div>
-                      <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id}>
-                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="" className="shopImage"/> 
+                      <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id} className="shopImage">
+                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="plant-pots"apple  className="shopImage"/> 
                       </div>
 
                       <div className="mt-2">

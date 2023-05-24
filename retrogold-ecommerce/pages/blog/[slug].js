@@ -3,6 +3,7 @@ import Navigation from '@/components/Shared/Navigation'
 import { sanityClient, urlFor} from '@/lib/dist/sanity.dev'
 import PortableTextComponent from '@/components/Shared/PortableTextComponent'
 import Footer from '@/components/Shared/Footer/footer'
+import Breadcrumb from '/components/Shared/Breadcrumbs'
 
 
 
@@ -29,6 +30,7 @@ const blogPost = ({data}) => {
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <Navigation/>
+    <Breadcrumb item={blogDetail}/>
     <main>
       <div className="text-zinc-100 md:px-60 bg-white p-14">
         <div className="text-zinc-700 mb-12">
@@ -36,14 +38,20 @@ const blogPost = ({data}) => {
         <span className="text-sm">Written by: {blogDetail.author.name}</span>
         </div>
 
+        <div>
+        <div className="float-left mx-8 mb-4">
         <figure className="mt-3" >
           <img src= {urlFor(blogDetail.main_image.asset._ref)} alt=" " className="image-Style"/>
         </figure>
+        </div>
 
+        <div>
         <article className="text-zinc-700 mt-4 leading-loose">
           <PortableTextComponent detail={blogDetail} />
         </article>
+        </div>
 
+        </div>
         <div>
           
         </div>

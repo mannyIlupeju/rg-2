@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link'
 import { FaSearch } from 'react-icons/fa';
 import styles from '@/styles/Home.module.css'
 import { usePathname } from 'next/navigation'
 import {FaShoppingCart} from 'react-icons/fa'
 import {FaBars} from 'react-icons/fa'
-
+import {useInView} from 'react-intersection-observer'
 
 const Navigation = () => {
+  // const targetRef = useRef(null)
+  // const [showNavigation, setShowNavigation] = useState(false);
+  // const [ref, inView] = useInView({
+  //   threshold: 100, // Adjust this threshold as needed
+  // });
+
+  useState(()=>{
+    setShowNavigation(inView)
+  }, [inView])
+
     const navLink = 
     [
       {
@@ -36,7 +46,7 @@ const Navigation = () => {
 
     return (
     
-    <nav className="navigationStyle">
+    <nav className='navigationStyle'>
       <div className=" flex items-center">
         <Link href='/home'>
         <img src = '/images/Retrogold (6) (1).png' alt="retrogoldlogo" className="imageBox"/>

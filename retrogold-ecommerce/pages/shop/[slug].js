@@ -11,6 +11,7 @@ import AddtoCart from '@/components/Shared/AddtoCart';
 import Relatedproducts from '@/components/Shared/RelatedProducts';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useGlobalContext } from '@/ Context/context';
+import Breadcrumb from '/components/Shared/Breadcrumbs'
 
 // to-do-list
 // responsive design for the page
@@ -20,12 +21,14 @@ import { useGlobalContext } from '@/ Context/context';
 
 
 const productDetails = ({data}) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [imageId, setImageId] = useState(null)
  
 
   const {productDetail} = data
   const {allProduct} = data
   
-  const [currentIndex, setCurrentIndex] = useState(0)
+
 
   //product Detail destructure
   const desc = productDetail.productDescription.map((x)=> x.children[0].text)
@@ -36,6 +39,8 @@ const productDetails = ({data}) => {
     return (x.text)
   })
   const {images} = productDetail
+
+  console.log(images)
   
 
 
@@ -76,9 +81,14 @@ const productDetails = ({data}) => {
   }
 
 
+ 
+  const selectImage = (index) => {
+    setCurrentIndex(index)
+  }
+  console.log(imageId)
 
 
-
+  // console.log(urlFor(images[currentIndex].asset._ref)
 
 
 
@@ -92,17 +102,21 @@ const productDetails = ({data}) => {
 
       </Head>
       <Navigation/>
+      <Breadcrumb/>
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
             <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-4 overflow-hidden">
               <div>
                 <div className="flex md:flex-col items-center gap-4 col-start-1">
-                    {images.map((x)=>{
+                    {images.map((x, index)=>{
+                     console.log(imageId === x._key)
                     return (
-                        <div className="sideProductImage" keys={productDetail._id}>
+                      <div className="flex">
+                        <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)}>
                           <img src={urlFor(x.asset._ref)} alt=" " className="sideProductImage"/>
                         </div>
+                      </div>
                       )
                     })}          
                   </div>
@@ -112,7 +126,7 @@ const productDetails = ({data}) => {
              
                 {/* main image that has carousel function */}
                 <div>
-                  <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
+                   <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
