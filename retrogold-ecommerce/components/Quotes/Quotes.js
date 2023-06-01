@@ -37,10 +37,10 @@ const Quotes = ({quote}) => {
 
   return (
     <>
-    <div className="container mx-auto mt-32 p-2">
+    <div className="container mx-auto p-2">
       <div className="flex justify-center">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 quoteBg rounded-lg md:w-2/4" style={gridBackground}>
-          <div className="">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 quoteBg rounded-lg" style={gridBackground}>
+          <div className="flex justify-center">
             <img src='/images/image1.jpeg' alt="woman meditating" style={imageQuote}/>
           </div>
           <div className="self-center p-8 relative right-4 text-zinc-700">

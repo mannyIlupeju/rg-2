@@ -56,7 +56,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
             <FaChevronRight onClick={nextImage} size="2rem" style={rightArrow}/>
           </div>
           {heroImg && 
-          (<div className="flex flex-row justify-center relative bottom-52 lg:bottom-42">
+          (<div className="flex flex-row justify-center relative bottom-60 lg:bottom-42">
             <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
               setCurrentIndex(0)}} />
             <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {

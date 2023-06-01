@@ -4,8 +4,11 @@ import React from 'react';
 import Navigation from '@/components/Shared/Navigation';
 import Head from 'next/head'
 import Footer from '@/components/Shared/Footer/footer';
+import RespMenu from '@/components/responsiveMenu/RespMenu'
+import { useGlobalContext } from '@/ Context/context'
 
 const About = ({data}) => {
+  const {isOpenMenu} = useGlobalContext()
   const{about} = data
   console.log(about[0].image.asset._ref)
  
@@ -22,22 +25,17 @@ const About = ({data}) => {
     </Head>
 
     <Navigation/>
+    {isOpenMenu ? <RespMenu/> : ''} 
 
-
-    <main>
-    <div className="p-24 flex flex-col gap-20 bg-violet-300">
-      <div className="p-20 w-fit border-8 border-zinc-700">
-        <span className="text-4xl text-zinc-700">{aboutUs.aboutus}</span>
-      </div>
-
-        
-      <div className="flex md:flex-row flex-col gap-48 lg:gap-24">
-        <article className=" leading-loose text-zinc-700 text-lg w-fit md:w-1/2  items-center">
+    <main className="section-background">
+    <div className="p-24 flex flex-col gap-20">
+      <div className="flex md:flex-row flex-col gap-48 lg:gap-24 text-zinc-700 ">
+        <article className=" leading-loose text-lg w-fit md:w-1/2 items-center text-zinc-700">
           <PortableTextComponent detail={aboutUs}/>
         </article>
         
 
-        <div className="relative bottom-44">
+        <div className="">
           <img src={urlFor(about[0].image.asset._ref)} alt="" className="aboutImage"/>
         </div>
       </div>

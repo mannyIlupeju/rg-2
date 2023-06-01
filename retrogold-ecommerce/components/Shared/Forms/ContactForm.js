@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 
 
+
 const InputForm = () => {
   const [messageDetails, setMessageDetails] = useState(
     {
@@ -39,7 +40,7 @@ const InputForm = () => {
   
 
   return (
-    <div >
+    <div className="text-zinc-700">
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
         <div className="flex flex-row gap-4">
           <div>
@@ -67,23 +68,16 @@ const InputForm = () => {
           <label>Subject:</label><br/>
           <select value={messageDetails.selection} onChange={e => setMessageDetails({...messageDetails, selection:e.target.value})} required>
             <option value="Choose Subject">Choose Subject</option>
-            <option value="Health">Health</option>
-            <option value="Relationships">Relationships</option>
-            <option value="Finance">Finance</option>
+            <option value="Order Status">Order Status</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Product Question">Product Question</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div>
           <label>Message:</label><br/>
           <textarea name="message" rows="10" cols="50" required placeholder="Write something..." value={messageDetails.message} onChange={ e =>setMessageDetails({...messageDetails, message:e.target.value}) }></textarea>
-        </div>
-
-        <div>
-          <label>Donate:</label><br/>
-          <div className="flex flex-row gap-2">
-          <p className="text-2xl font-bold">$</p>
-          <input type="number" name="donate" value={messageDetails.donate} onChange={ e =>setMessageDetails({...messageDetails, donate:e.target.value}) } min="5"/>
-          </div>
         </div>
 
         <div>

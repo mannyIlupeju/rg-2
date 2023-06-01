@@ -7,10 +7,12 @@ import {RxDotFilled} from 'react-icons/rx'
 import Image from './Images';
 import Carousel from '../../Shared/Carousel';
 import { images } from '@/next.config';
+import { useGlobalContext } from '@/ Context/context';
 
 //Carousel Component 
 const Hero = ({hero}) => {
- 
+  const { currentIndex, setCurrentIndex } = useGlobalContext()
+
   
   const heroOverlay = {
     background: '#4C5454'
@@ -18,7 +20,6 @@ const Hero = ({hero}) => {
 
 
 
-  const [currentIndex, setCurrentIndex] = useState(0)
 
 
   //array hero reference
@@ -47,11 +48,10 @@ const Hero = ({hero}) => {
 
 
   return (    
-      <div className="h-screen">
-
+      <>
         <Image hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
         <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
-      </div>
+      </>
   );
 }
 

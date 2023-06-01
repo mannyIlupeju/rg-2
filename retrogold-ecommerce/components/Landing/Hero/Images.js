@@ -11,7 +11,7 @@ const Image = ({hero, currentIndex}) => {
        <>
          <img src={urlFor(hero[currentIndex].images.asset._ref)} className="heroImages"/>  
          <div className="flex flex-col gap-2 relative bottom-64 p-4 md:bottom-64 container mx-auto">
-           <h1 className="text-3xl lg:text-9xl font-extrabold text-white">{hero[currentIndex].headline} </h1>
+           <h1 className="text-6xl lg:text-7xl font-extrabold text-white">{hero[currentIndex].headline} </h1>
            <p className="text-lg lg:text-xl font-bold text-white">{hero[currentIndex].headstatement} </p>
          </div>
        </>

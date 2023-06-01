@@ -16,8 +16,7 @@ const blogImage = {
 
 const blogPost = ({data}) => {
   const{blogDetail} = data
-  console.log(blogDetail)
-  const post = blogDetail.post
+
  
 
 
@@ -32,7 +31,7 @@ const blogPost = ({data}) => {
     <Navigation/>
     <Breadcrumb item={blogDetail}/>
     <main>
-      <div className="text-zinc-100 md:px-60 bg-white p-14">
+      <div className="text-zinc-100 md:px-60 bg-white pb-36 pt-12">
         <div className="text-zinc-700 mb-12">
         <h1 className="text-4xl font-semibold mb-2">{blogDetail.title}</h1>
         <span className="text-sm">Written by: {blogDetail.author.name}</span>
@@ -46,7 +45,7 @@ const blogPost = ({data}) => {
         </div>
 
         <div>
-        <article className="text-zinc-700 mt-4 leading-loose">
+        <article className="text-zinc-700 mt-4 leading-loose flex flex-col">
           <PortableTextComponent detail={blogDetail} />
         </article>
         </div>

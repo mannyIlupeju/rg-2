@@ -5,10 +5,12 @@ import {urlFor} from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
 import Footer from '@/components/Shared/Footer/footer'
 import Link from 'next/link'
+import { useGlobalContext } from '@/ Context/context'
+import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 const Shop = ({shop}) => {
-  
+   const {isOpenMenu} = useGlobalContext()
   const[isHovered, setIsHovered] = useState(null)
   
   //Destructuring shop object
@@ -35,12 +37,6 @@ const Shop = ({shop}) => {
     setIsHovered(null)  
   }
 
-
-  
-
-  
-
-  
   return (
     <>
       <Head>
@@ -50,9 +46,11 @@ const Shop = ({shop}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation/>
+      {isOpenMenu && <RespMenu/> }
 
-      <main className="bg-white">
-      <div className="container mx-auto justify-normal md:justify-center flex flex-row gap-x-48 gap-y-24 p-24 flex-wrap">
+
+      <main className="section-background">
+      <div className="container mx-auto justify-center lg:justify-normal flex flex-row gap-x-48 gap-y-24 p-24 flex-wrap">
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
             return (
@@ -61,16 +59,16 @@ const Shop = ({shop}) => {
                   <div className="text-zinc-700 cursor-pointer " key={_id} >
                     <div>
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id} className="shopImage">
-                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="plant-pots"apple  className="shopImage"/> 
+                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="plant-pots" className="shopImage"/> 
                       </div>
 
                       <div className="mt-2">
                         <p className="text-sm">{brandName}</p>
-                        <p className="font-bold">{productName}</p>
+                        <p className="text-md font-bold">{productName}</p>
                         <p>${price}</p>
 
                         <div style={contentBox} className="line-clamp-4 mt-4" style={contentBox}>
-                          <p className="text-sm text-bold ">
+                          <p className="text-md text-bold ">
                             {shortDescription.map((x)=>{
                               return x.children[0].text
                             })}

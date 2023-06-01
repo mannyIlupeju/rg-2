@@ -4,10 +4,13 @@ import { motion, useScroll, useSpring, useInView, useTransform } from 'framer-mo
 
 
 
+
 const Experience = () => {
   const imageElement1 = useRef()
   const imageElement2 = useRef(null)
   const experienceRef = useRef(null)
+
+
 
 
   //to set the animation on both boxes to give it the scroll animation 

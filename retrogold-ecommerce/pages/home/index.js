@@ -8,10 +8,11 @@ import Blog from '/components/Blog/blog'
 import Footer from '@/components/Shared/Footer/footer'
 import Navigation from '@/components/Shared/Navigation'
 import Calltoaction from '@/components/CallToAction/calltoaction'
-
-
+import { useGlobalContext } from '@/ Context/context'
+import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 export default function Home({hero, quote, blog, calltoAction}) {
+  const {isOpenMenu} = useGlobalContext()
   return (
     <>
       <Head>
@@ -21,12 +22,15 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="w-screen">
+        <>
           <Navigation/>
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
           <Experience/>
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
+          {isOpenMenu ? <RespMenu/> : ''}
+        </>
       </main>
       <Footer/> 
     </>

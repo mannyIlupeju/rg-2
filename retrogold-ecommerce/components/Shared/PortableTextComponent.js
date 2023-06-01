@@ -52,7 +52,7 @@ const SampleImageComponent = ({value, isInline}) => {
 const components = {
   block: {
     // Ex. 1: customizing common block types
-    h1: ({children}) => <h1 className="text-4xl mb-4">{children}</h1>,
+    h1: ({children}) => <h1 className="text-4xl mb-8">{children}</h1>,
   
 
     // Ex. 2: rendering custom styles
@@ -60,10 +60,10 @@ const components = {
       <h3 className="text-3xl text-primary text-zinc-700 text-center">{children}</h3>
     ),
     h2: ({children}) => (
-      <h2 className="text-3xl text-primary text-zinc-700 my-8">{children}</h2>
+      <h2 className="text-xl text-primary my-8 text-zinc-700">{children}</h2>
     ),
     p: ({children}) => {
-      <p className="text-lg font-extrabold text-white">{children}</p>
+      <p className="text-xl font-extrabold text-zinc-700">{children}</p>
     }
   },
 

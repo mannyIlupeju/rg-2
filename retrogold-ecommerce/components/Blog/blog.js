@@ -1,10 +1,12 @@
 import React from 'react';
 import { urlFor} from '/lib/sanity';
 import Link from 'next/link'
+import { useGlobalContext } from '@/ Context/context';
 
 
 const Blog = ({blog}) => {
-  console.log(blog)
+  
+  
   const mainImageBlog = {
     width: '520px',
     height: 'auto',
@@ -23,8 +25,10 @@ const Blog = ({blog}) => {
 
  
   return (
-    <div className="container mx-auto text-zinc-100 h-fit xl:px-28 md:px-2 p-2">
-      <div className="flex justify-start items-center mt-32">
+  
+    
+    <div className="container mx-auto text-zinc-100 h-fit mt-32 xl:px-28 md:px-2 p-12">
+      <div className="flex justify-start items-center ">
         <div>
           <h1 className="text-5xl">Latest Stories</h1>
           <p className="text-medium mt-4">Uplifting, motivating stories about the world today</p>
@@ -119,6 +123,7 @@ const Blog = ({blog}) => {
 
       
     </div>
+ 
   );
 }
 

@@ -12,6 +12,7 @@ import Relatedproducts from '@/components/Shared/RelatedProducts';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useGlobalContext } from '@/ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
+import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 // to-do-list
 // responsive design for the page
@@ -21,7 +22,10 @@ import Breadcrumb from '/components/Shared/Breadcrumbs'
 
 
 const productDetails = ({data}) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
+
+
+  const {currentIndex, setCurrentIndex, isOpenMenu} = useGlobalContext()
+  
   const [imageId, setImageId] = useState(null)
  
 
@@ -40,7 +44,7 @@ const productDetails = ({data}) => {
   })
   const {images} = productDetail
 
-  console.log(images)
+
   
 
 
@@ -85,10 +89,10 @@ const productDetails = ({data}) => {
   const selectImage = (index) => {
     setCurrentIndex(index)
   }
-  console.log(imageId)
 
 
-  // console.log(urlFor(images[currentIndex].asset._ref)
+
+
 
 
 
@@ -102,13 +106,15 @@ const productDetails = ({data}) => {
 
       </Head>
       <Navigation/>
+      
       <Breadcrumb/>
+       {isOpenMenu ? <RespMenu/> : ''}
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
-            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-4 overflow-hidden">
+            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 overflow-hidden">
               <div>
-                <div className="flex md:flex-col items-center gap-4 col-start-1">
+                <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">
                     {images.map((x, index)=>{
                      console.log(imageId === x._key)
                     return (
@@ -125,7 +131,7 @@ const productDetails = ({data}) => {
                   
              
                 {/* main image that has carousel function */}
-                <div>
+                <div className="">
                    <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
@@ -141,7 +147,7 @@ const productDetails = ({data}) => {
             <div className="container text-zinc-700 h-fit">
               <p className="font-bold text-sm">{productDetail.brandName}</p>
               <h1 className="font-semibold text-xl productName">{productDetail.productName}</h1>
-              <p className="font-semibold">CDN ${productDetail.price}</p>
+              <p className="font-bold">CDN ${productDetail.price}</p>
 
               <div className="border-t-2 border-gray-300 mt-8 w-fit">
                 <div className="mt-4">

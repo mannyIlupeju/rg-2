@@ -6,9 +6,12 @@ import Head from 'next/head'
 import Footer from '@/components/Shared/Footer/footer';
 import Link from 'next/link'
 
+import RespMenu from '@/components/responsiveMenu/RespMenu'
+import { useGlobalContext } from '@/ Context/context'
+
 
 const Blog = ({blog}) => {
- 
+ const {isOpenMenu} = useGlobalContext()
 
   const mainImageBlog = {
     width: '520px',
@@ -19,12 +22,7 @@ const Blog = ({blog}) => {
 
 
 
-  const smallImageBlog = {
-    width: '340px',
-    height: '250px',
-    borderRadius: '0.5rem',
-    backgroundSize: 'cover',
-  }
+
 
 
   return (
@@ -36,15 +34,18 @@ const Blog = ({blog}) => {
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <Navigation/>
-    <main className="bg-white">
+    
+    {isOpenMenu ? <RespMenu/> : ''}
+
+    <main className="section-background">
       <div className="container mx-auto text-zinc-100 xl:px-28 px-8 py-14">
         <div className="text-zinc-700">
-          <h1 className="text-5xl">Latest Stories</h1>
-          <p className="text-medium mt-2">Uplifting, motivating stories about Wellness and the Home </p>
+          <h1 className="text-7xl font-bold">Latest Stories</h1>
+          <p className="text-lg mt-2">Uplifting, motivating stories about Wellness and the Home </p>
         </div>
       
       
-        <div className="grid grid-cols-3 mt-12">      
+        <div className="grid grid-cols-3 mt-12 ">      
           <div className="col-span-3">
               <Link href={`/blog/${blog[0].slug.current}`}>
               <div className="flex md:flex-row flex-col justify-center bg-red-400 md:p-4 items-center rounded-xl cursor-pointer p-2">
@@ -52,12 +53,12 @@ const Blog = ({blog}) => {
                   <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                     <span>{blog[0].tag}</span>
                   </div>
-                  <img src={urlFor(blog[0].main_image.asset._ref)} style={mainImageBlog}/>
+                  <img src={urlFor(blog[0].main_image.asset._ref)} className="smallImageBlog"/>
                 </div>
 
                 <div className="h-fit">
-                  <div className="text-xl items-start font-light flex flex-col items-start p-4" >
-                    <div>
+                  <div className=" items-start font-light flex flex-col md:gap-10 gap-20 items-start p-4" >
+                    <div className="text-2xl">
                     {blog[0].description[0].children[0].text}
                     </div>
 
@@ -79,9 +80,9 @@ const Blog = ({blog}) => {
                 <span className="text-sm">{blog[1].tag}</span>
               </div>
               <div className="flex justify-center">
-              <img src={urlFor(blog[1].main_image.asset._ref)} style={smallImageBlog}/>
+              <img src={urlFor(blog[1].main_image.asset._ref)} className="smallImageBlog"/>
               </div>
-              <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+              <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                 {blog[1].description[0].children[0].text}
               </div>
 
@@ -99,9 +100,9 @@ const Blog = ({blog}) => {
                   <span className="text-sm">{blog[2].tag}</span>
                 </div>
               <div className="flex justify-center">
-              <img src={urlFor(blog[2].main_image.asset._ref)} style={smallImageBlog}/>
+              <img src={urlFor(blog[2].main_image.asset._ref)} className="smallImageBlog"/>
               </div>
-                <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+                <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                   {blog[2].description[0].children[0].text}
                 </div>
 
@@ -118,9 +119,9 @@ const Blog = ({blog}) => {
                   <span className="text-sm">{blog[3].tag}</span>
                 </div>
               <div className="flex justify-center">
-              <img src={urlFor(blog[3].main_image.asset._ref)} style={smallImageBlog}/>
+              <img src={urlFor(blog[3].main_image.asset._ref)} className="smallImageBlog"/>
               </div>
-                <div className="text-sm font-light flex items-start mt-4 px-2 text-zinc-700">
+                <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                   {blog[3].description[0].children[0].text}
                 </div>
 

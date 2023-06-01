@@ -22,7 +22,8 @@ var config = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   apiVersion: '2022-12-22',
-  useCdn: false
+  useCdn: true,
+  token: process.env.NEXT_INVENTORY_TOKEN
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).
@@ -43,6 +44,35 @@ var urlFor = function urlFor(source) {
 
 
 exports.urlFor = urlFor;
-var sanityClient = (0, _nextSanity.createClient)(config);
+var sanityClient = (0, _nextSanity.createClient)(config); // // Retrieve a product with its inventory data
+
 exports.sanityClient = sanityClient;
+sanityClient.fetch('*[_type == "product"]{_id, inventory}').then(function (products) {
+  console.log(products); //product Id
+
+  var productId = products.map(function (item) {
+    return item._id;
+  });
+  console.log('productId:', productId); //Products - Inventory and Stock
+
+  var productInfo = products.map(function (item) {
+    return item;
+  });
+  var product = productInfo.map(function (items) {
+    return items.inventory;
+  });
+  console.log(product); //Inventory stock
+
+  var stock = product.map(function (x) {
+    return x.stockQuantity;
+  });
+  console.log('Stock Quantity:', stock); //In stock information
+
+  var inStock = product.map(function (x) {
+    return x.inStock;
+  });
+  console.log('In Stock:', inStock);
+})["catch"](function (error) {
+  console.error('Error retrieving product:', error);
+});
 //# sourceMappingURL=sanity.dev.js.map

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect} from 'react';
 import Link from 'next/link'
 import { FaSearch } from 'react-icons/fa';
 import styles from '@/styles/Home.module.css'
@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import {FaShoppingCart} from 'react-icons/fa'
 import {FaBars} from 'react-icons/fa'
 import {useInView} from 'react-intersection-observer'
+import { useGlobalContext } from '@/ Context/context';
 
 const Navigation = () => {
   // const targetRef = useRef(null)
@@ -14,9 +15,8 @@ const Navigation = () => {
   //   threshold: 100, // Adjust this threshold as needed
   // });
 
-  useState(()=>{
-    setShowNavigation(inView)
-  }, [inView])
+  const { isOpenMenu, setOpenMenu } = useGlobalContext()
+
 
     const navLink = 
     [
@@ -42,8 +42,13 @@ const Navigation = () => {
       }
     ]
 
-    
+  
 
+   
+
+    console.log(isOpenMenu)
+    
+  
     return (
     
     <nav className='navigationStyle'>
@@ -54,7 +59,7 @@ const Navigation = () => {
       </div>
 
      
-        <div className="lg:flex lg:gap-8 gap-2 text-sm lg:text-xl lg:items-center text-zinc-700 lg:block hidden">
+        <div className="lg:flex lg:gap-8 gap-2 text-sm font-bold lg:text-xl lg:items-center text-zinc-700 lg:block hidden">
         {navLink.map((link)=>{
           const pathname = usePathname();
           const isActive = pathname.startsWith(link.href);
@@ -87,9 +92,17 @@ const Navigation = () => {
           </div>
         </div>
 
-        <div className="flex items-center lg:hidden">
+
+
+        <div className="flex items-center lg:hidden" onClick={()=>{
+          setOpenMenu(true)
+          console.log('clicked')
+        }}>
           <FaBars color="black" size="1.5rem"/>
         </div>
+
+        
+         
     </nav>
    
   );

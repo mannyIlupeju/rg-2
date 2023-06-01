@@ -1,4 +1,4 @@
-import {createContext, useContext,  useState} from 'react';
+import {createContext, useContext,  useState, useEffect} from 'react';
 
 //set up createContext
 const GlobalContext = createContext()
@@ -9,10 +9,26 @@ export const useGlobalContext = () => useContext(GlobalContext)
 
 
 const AppContext = ({ children }) => {
-  const [name, setName] = useState('Peter');
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isOpenMenu, setOpenMenu] = useState(false)
+
+   useEffect(() => {
+      if (isOpenMenu) {
+        document.body.style.overflowY = "hidden";
+      }
+      if(!isOpenMenu){
+        document.body.style.overflowY = "scroll"
+      }
+    }, [isOpenMenu]);
+
 
   return (
-    <GlobalContext.Provider value={{ name, setName }}>
+    <GlobalContext.Provider value={{ 
+      currentIndex,
+      setCurrentIndex,
+      isOpenMenu,
+      setOpenMenu,
+      }}>
       {children}
     </GlobalContext.Provider>
   );
