@@ -11,7 +11,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     transform: 'translate(0, -50%)',
     position: 'absolute',
     left: '8px',
-    top:'50%',
+    bottom:'33rem',
     cursor: 'pointer',
   }
 
@@ -20,7 +20,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
     color: '#8789C0',
     transform: 'translate(0, -50%)',
     position: 'absolute',
-    top:'50%',
+    bottom:'33rem',
     right: '8px',
     cursor: 'pointer',
   }
@@ -51,7 +51,7 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
   return (
     <>
-          <div>
+          <div className="relative">
             <FaChevronLeft onClick={prevImage} size="2rem" style={leftArrow}/>
             <FaChevronRight onClick={nextImage} size="2rem" style={rightArrow}/>
           </div>

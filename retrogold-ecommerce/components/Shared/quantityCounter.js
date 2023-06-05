@@ -1,28 +1,32 @@
 import React, {useState} from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import { useGlobalContext } from '@/ Context/context';
 
 const Quantitycounter = () => {
-  const [defaultAmount, setDefaultAmount] = useState(1)
 
-  console.log(defaultAmount)
+const [quantity, setQuantity] = useState(1)
+  
+console.log(quantity)
+  
+  //Increase and Decrease Amount funcitonality
   const increaseAmt = () => {
-    setDefaultAmount((prev)=> prev + 1)
+    setQuantity((prev)=> prev + 1)
   }
 
   const decreaseAmt = () => {
-    if(defaultAmount === 1){
-      setDefaultAmount((prev)=> prev)
+    if(quantity === 1){
+      setQuantity((prev)=> prev)
     }
     else {
-      setDefaultAmount((prev)=> prev -1)
+      setQuantity((prev)=> prev - 1)
     }
   }
 
 
   return (
-    <div className="flex gap-5 border-2 w-fit border border-zinc-400 px-1 mt-2">
+    <div className="flex gap-5 w-fit  px-1 mt-2">
       <FaMinus className="flex self-center" onClick={decreaseAmt}/>
-        <span className="font-bold text-lg">{defaultAmount}</span>
+        <span className="font-bold text-lg">{quantity}</span>
       <FaPlus className="flex self-center" onClick={increaseAmt}/>
     </div>
   );

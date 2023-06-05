@@ -11,6 +11,17 @@ export const useGlobalContext = () => useContext(GlobalContext)
 const AppContext = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isOpenMenu, setOpenMenu] = useState(false)
+  const [cartInfo, setCartInfo] = useState([])
+
+
+ 
+
+  
+
+ 
+
+      
+
 
    useEffect(() => {
       if (isOpenMenu) {
@@ -28,6 +39,10 @@ const AppContext = ({ children }) => {
       setCurrentIndex,
       isOpenMenu,
       setOpenMenu,
+      cartInfo,
+      setCartInfo,
+  
+
       }}>
       {children}
     </GlobalContext.Provider>

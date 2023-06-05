@@ -1,23 +1,43 @@
 
 import React from 'react';
-import Quantitycounter from './quantityCounter';
+import { useGlobalContext } from '@/ Context/context';
 
-const Addtocart = () => {
- const submitItem = () => {
-    console.log({
-      brandName: productDetail.brandName,
-      name: productDetail.productName,
-      id: productDetail._id,
-      quantity: defaultAmount, 
-      price: (productDetail.price * defaultAmount),
-      image: images[currentIndex].asset._ref
-    })
-  }
+const Addtocart = ({productName, brandName, price, image, id}) => {
+
+ const {cartInfo, setCartInfo} = useGlobalContext()
+
+
+
+ //Add to cart to Cart functionality (with no checks)
+  const submitInfo = () => {
+  setCartInfo([
+    ...cartInfo,
+    {
+    brandName,
+    productName,
+    price,
+    image,
+    id,
+  }]
+  )
+ }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   return (
     <div className="mt-8">
-      <button className="bg-black px-20 py-2 text-sm uppercase text-white w-">Add to Cart</button>
+      <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={submitInfo}>Add to Cart</button>
     </div>
   );
 }

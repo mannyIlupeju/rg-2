@@ -23,13 +23,13 @@ export default function Home({hero, quote, blog, calltoAction}) {
       </Head>
       <main className="w-screen">
         <>
+          {isOpenMenu && <RespMenu/>}
           <Navigation/>
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
           <Experience/>
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
-          {isOpenMenu ? <RespMenu/> : ''}
         </>
       </main>
       <Footer/> 

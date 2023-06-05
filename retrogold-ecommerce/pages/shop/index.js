@@ -45,19 +45,20 @@ const Shop = ({shop}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation/>
       {isOpenMenu && <RespMenu/> }
+      <Navigation/>
 
 
       <main className="section-background">
       <div className="container mx-auto justify-center lg:justify-normal flex flex-row gap-x-48 gap-y-24 p-24 flex-wrap">
           {...arr.map((shopItems)=>{
             const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
+           
             return (
-              <>
+              <div key={_id}>
                 <Link href={`/shop/${slug.current}`} key={_id}>
                   <div className="text-zinc-700 cursor-pointer " key={_id} >
-                    <div>
+                    <div key={_id}>
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id} className="shopImage">
                       <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="plant-pots" className="shopImage"/> 
                       </div>
@@ -78,7 +79,7 @@ const Shop = ({shop}) => {
                     </div>
                   </div>
                 </Link>
-              </>
+              </div>
             )
           })}
 

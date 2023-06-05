@@ -87,9 +87,12 @@ const Navigation = () => {
               <FaSearch size="0.8rem" color="black"/>
             </div>
           </div>
-          <div className="flex justify-end">
+          
+          <Link href='/cart'>
+            <div className="flex justify-end">
             <FaShoppingCart size="1.5rem" color="green"/>
-          </div>
+             </div>
+          </Link>
         </div>
 
 

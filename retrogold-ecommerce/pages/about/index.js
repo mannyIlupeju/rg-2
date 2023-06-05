@@ -9,10 +9,13 @@ import { useGlobalContext } from '@/ Context/context'
 
 const About = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
+
   const{about} = data
+  console.log(about)
   console.log(about[0].image.asset._ref)
  
   const [aboutUs] = about
+  console.log(aboutUs)
 
 
   return (
@@ -24,12 +27,12 @@ const About = ({data}) => {
         <link rel="icon" href="/favicon.ico" />
     </Head>
 
+    {isOpenMenu && <RespMenu/> } 
     <Navigation/>
-    {isOpenMenu ? <RespMenu/> : ''} 
 
     <main className="section-background">
-    <div className="p-24 flex flex-col gap-20">
-      <div className="flex md:flex-row flex-col gap-48 lg:gap-24 text-zinc-700 ">
+    <div className="p-8 md:p-12 lg:p-24 flex flex-col gap-20">
+      <div className="flex md:flex-row flex-col gap-20 text-zinc-700 ">
         <article className=" leading-loose text-lg w-fit md:w-1/2 items-center text-zinc-700">
           <PortableTextComponent detail={aboutUs}/>
         </article>

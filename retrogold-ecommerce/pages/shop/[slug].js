@@ -9,7 +9,6 @@ import Accordion from '@/components/Shared/Accordion'
 import Quantitycounter from '@/components/Shared/quantityCounter';
 import AddtoCart from '@/components/Shared/AddtoCart';
 import Relatedproducts from '@/components/Shared/RelatedProducts';
-import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useGlobalContext } from '@/ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
@@ -22,16 +21,15 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 const productDetails = ({data}) => {
-
-
   const {currentIndex, setCurrentIndex, isOpenMenu} = useGlobalContext()
-  
   const [imageId, setImageId] = useState(null)
- 
-
   const {productDetail} = data
   const {allProduct} = data
   
+
+  
+
+
 
 
   //product Detail destructure
@@ -43,6 +41,8 @@ const productDetails = ({data}) => {
     return (x.text)
   })
   const {images} = productDetail
+  
+
 
 
   
@@ -84,13 +84,13 @@ const productDetails = ({data}) => {
     cursor: 'pointer',
   }
 
-
- 
   const selectImage = (index) => {
     setCurrentIndex(index)
   }
 
-
+  
+  
+ 
 
 
 
@@ -105,10 +105,10 @@ const productDetails = ({data}) => {
         <link rel="icon" href="/favicon.ico" />
 
       </Head>
+       {isOpenMenu ? <RespMenu/> : ''}
       <Navigation/>
       
       <Breadcrumb/>
-       {isOpenMenu ? <RespMenu/> : ''}
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
@@ -116,10 +116,9 @@ const productDetails = ({data}) => {
               <div>
                 <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">
                     {images.map((x, index)=>{
-                     console.log(imageId === x._key)
                     return (
-                      <div className="flex">
-                        <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)}>
+                      <div className="flex" key={index}>
+                        <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
                           <img src={urlFor(x.asset._ref)} alt=" " className="sideProductImage"/>
                         </div>
                       </div>
@@ -137,25 +136,21 @@ const productDetails = ({data}) => {
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
                   </div>
-                </div>
-               
-                  
+                </div> 
               </div>
             </div>
 
             
-            <div className="container text-zinc-700 h-fit">
+            <div className="container text-zinc-700 h-fit mt-4">
               <p className="font-bold text-sm">{productDetail.brandName}</p>
               <h1 className="font-semibold text-xl productName">{productDetail.productName}</h1>
               <p className="font-bold">CDN ${productDetail.price}</p>
 
-              <div className="border-t-2 border-gray-300 mt-8 w-fit">
+              <div className="border-t-2 border-gray-300 w-fit">
                 <div className="mt-4">
                   <p className="text-sm font-bold">Select Option</p>
-
                   <Quantitycounter/>
-                  <AddtoCart/>
-
+                  <AddtoCart productName={productDetail.productName} brandName={productDetail.brandName} id={productDetail._id}  price={productDetail.price} image={images[currentIndex].asset._ref} />
                 </div>
               </div>
 

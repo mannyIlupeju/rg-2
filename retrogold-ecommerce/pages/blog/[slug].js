@@ -4,6 +4,8 @@ import { sanityClient, urlFor} from '@/lib/dist/sanity.dev'
 import PortableTextComponent from '@/components/Shared/PortableTextComponent'
 import Footer from '@/components/Shared/Footer/footer'
 import Breadcrumb from '/components/Shared/Breadcrumbs'
+import RespMenu from '@/components/responsiveMenu/RespMenu'
+import { useGlobalContext } from '@/ Context/context'
 
 
 
@@ -15,6 +17,7 @@ const blogImage = {
 }
 
 const blogPost = ({data}) => {
+  const {isOpenMenu} = useGlobalContext()
   const{blogDetail} = data
 
  
@@ -28,17 +31,18 @@ const blogPost = ({data}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
     </Head>
+    {isOpenMenu && <RespMenu/>}
     <Navigation/>
     <Breadcrumb item={blogDetail}/>
     <main>
-      <div className="text-zinc-100 md:px-60 bg-white pb-36 pt-12">
+      <div className="text-zinc-100 md:px-60 bg-white pb-36 px-4 pt-12">
         <div className="text-zinc-700 mb-12">
         <h1 className="text-4xl font-semibold mb-2">{blogDetail.title}</h1>
         <span className="text-sm">Written by: {blogDetail.author.name}</span>
         </div>
 
         <div>
-        <div className="float-left mx-8 mb-4">
+        <div className="flex flex-col md:float-left mx-8 mb-4">
         <figure className="mt-3" >
           <img src= {urlFor(blogDetail.main_image.asset._ref)} alt=" " className="image-Style"/>
         </figure>

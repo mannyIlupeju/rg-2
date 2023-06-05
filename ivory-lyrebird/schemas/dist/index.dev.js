@@ -19,8 +19,10 @@ var _quote = _interopRequireDefault(require("./quote"));
 
 var _callToAction = _interopRequireDefault(require("./callToAction"));
 
+var _privacy = _interopRequireDefault(require("./privacy"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var schemaTypes = [_author["default"], _blog["default"], _products["default"], _hero["default"], _quote["default"], _callToAction["default"], _about["default"]];
+var schemaTypes = [_author["default"], _blog["default"], _products["default"], _hero["default"], _quote["default"], _callToAction["default"], _about["default"], _privacy["default"]];
 exports.schemaTypes = schemaTypes;
 //# sourceMappingURL=index.dev.js.map

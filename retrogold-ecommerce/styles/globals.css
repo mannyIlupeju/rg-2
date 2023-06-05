@@ -29,7 +29,7 @@ html {
 body {
   font-family: 'Cardo', serif;
   overflow-x: hidden;
-  background: linear-gradient(180deg, rgba(40,41,39,1) 32%, rgba(135,137,192,1) 100%);
+  background: var(--white);
 }
 
 .section-background {
@@ -75,17 +75,21 @@ color: var(--white);
   width: 100vw;
 }
 
- .shopImage {
-    width: 20rem;
-    height: auto;
-    border-radius: 0.5rem;
-    aspect-ratio: 1/1;
-  }
+.shopImage {
+  width: 20rem;
+  height: auto;
+  border-radius: 0.5rem;
+  aspect-ratio: 1/1;
+}
 
-  .contentBox  {
-    width: 320px;
-  }
+.contentBox  {
+  width: 320px;
+}
 
+.cartImage {
+  width: 14rem;
+  height: auto;
+}
 
 .quoteBg {
 background: rgb(166, 223, 208);

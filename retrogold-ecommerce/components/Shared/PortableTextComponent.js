@@ -84,11 +84,10 @@ const components = {
 
 
 const PortableTextComponent = (props) => {
-  console.log(props.detail._type)
+  console.log(props)
   
   return (
     <>
-   
     <PortableText 
     value={props.detail.post}
     components={components}     

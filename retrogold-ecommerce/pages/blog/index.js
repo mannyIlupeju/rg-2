@@ -33,9 +33,9 @@ const Blog = ({blog}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
     </Head>
+    {isOpenMenu && <RespMenu/>}
     <Navigation/>
     
-    {isOpenMenu ? <RespMenu/> : ''}
 
     <main className="section-background">
       <div className="container mx-auto text-zinc-100 xl:px-28 px-8 py-14">

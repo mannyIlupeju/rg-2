@@ -6,7 +6,7 @@ import Link from 'next/link'
 const Relatedproducts = ({data}) => {
   const {productDetail} = data
   const {allProduct} = data
-  console.log(productDetail.slug)
+  
 
 
 
@@ -14,7 +14,7 @@ const Relatedproducts = ({data}) => {
     return x.productName !== productDetail.productName
   })
 
-  console.log(filterProducts)
+
 
   return (
     <div className="container mx-auto p-12 mb-4">
@@ -24,7 +24,7 @@ const Relatedproducts = ({data}) => {
         <div className="flex flex-col md:flex-row gap-10">
           {filterProducts.map((x)=>{
             const{mainImage, price, productName, brandName, shortDescription, slug, _id} = x
-          console.log(slug)
+        
             
             return (
               <Link href={`/shop/${slug.current}`} key={_id}>
