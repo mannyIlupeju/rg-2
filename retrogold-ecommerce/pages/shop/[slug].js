@@ -12,6 +12,7 @@ import Relatedproducts from '@/components/Shared/RelatedProducts';
 import { useGlobalContext } from '@/ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
 // to-do-list
 // responsive design for the page
@@ -21,11 +22,13 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 const productDetails = ({data}) => {
+  const [quantity, setQuantity] = useState(1)
   const {currentIndex, setCurrentIndex, isOpenMenu} = useGlobalContext()
   const [imageId, setImageId] = useState(null)
   const {productDetail} = data
   const {allProduct} = data
   
+  console.log(productDetail)
 
   
 
@@ -89,6 +92,19 @@ const productDetails = ({data}) => {
   }
 
   
+    //Increase and Decrease Amount funcitonality
+  const increaseAmt = () => {
+    setQuantity((prev)=> prev + 1)
+  }
+
+  const decreaseAmt = () => {
+    if(quantity === 1){
+      setQuantity((prev)=> prev)
+    }
+    else {
+      setQuantity((prev)=> prev - 1)
+    }
+  }
   
  
 
@@ -149,8 +165,12 @@ const productDetails = ({data}) => {
               <div className="border-t-2 border-gray-300 w-fit">
                 <div className="mt-4">
                   <p className="text-sm font-bold">Select Option</p>
-                  <Quantitycounter/>
-                  <AddtoCart productName={productDetail.productName} brandName={productDetail.brandName} id={productDetail._id}  price={productDetail.price} image={images[currentIndex].asset._ref} />
+                    <div className="flex gap-5 w-fit  px-1 mt-2">
+                      <FaMinus className="flex self-center" onClick={decreaseAmt}/>
+                      <span className="font-bold text-lg">{quantity}</span>
+                      <FaPlus className="flex self-center" onClick={increaseAmt}/>
+                    </div>
+                  <AddtoCart productName={productDetail.productName} quantity={quantity} brandName={productDetail.brandName} id={productDetail._id}  price={productDetail.price} image={images[currentIndex].asset._ref} />
                 </div>
               </div>
 

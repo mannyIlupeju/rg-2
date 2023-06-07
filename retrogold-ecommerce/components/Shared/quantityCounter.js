@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useGlobalContext } from '@/ Context/context';
 
-const Quantitycounter = () => {
+const Quantitycounter = ({quantity}) => {
 
-const [quantity, setQuantity] = useState(1)
   
 console.log(quantity)
   

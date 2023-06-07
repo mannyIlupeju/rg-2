@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGlobalContext } from '@/ Context/context';
 
-const Addtocart = ({productName, brandName, price, image, id}) => {
+const Addtocart = ({productName, brandName, price, image, id, quantity}) => {
 
  const {cartInfo, setCartInfo} = useGlobalContext()
 
@@ -18,10 +18,12 @@ const Addtocart = ({productName, brandName, price, image, id}) => {
     price,
     image,
     id,
+    quantity,
   }]
   )
  }
 
+ console.log(cartInfo)
 
 
 

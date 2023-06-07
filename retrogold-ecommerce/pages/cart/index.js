@@ -53,7 +53,8 @@ const Cart = () => {
 
                       <div className="flex gap-20">
                         <div>
-                          <Quantitycounter quantity={quantity}/>
+                        
+                        <Quantitycounter quantity={quantity}/>
                         </div>
 
                         <div>
