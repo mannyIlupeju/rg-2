@@ -15,9 +15,8 @@ const Navigation = () => {
   //   threshold: 100, // Adjust this threshold as needed
   // });
 
-  const { isOpenMenu, setOpenMenu } = useGlobalContext()
-
-
+  const { isOpenMenu, setOpenMenu, cartItems, totalQuantity } = useGlobalContext()
+ 
     const navLink = 
     [
       {
@@ -43,11 +42,6 @@ const Navigation = () => {
     ]
 
   
-
-   
-
-    console.log(isOpenMenu)
-    
   
     return (
     
@@ -90,8 +84,14 @@ const Navigation = () => {
           
           <Link href='/cart'>
             <div className="flex justify-end">
-            <FaShoppingCart size="1.5rem" color="green"/>
-             </div>
+              <FaShoppingCart size="3.5rem" color="green"/>
+              {
+                cartItems.length && 
+                <div className="relative right-2">
+                  <span className="bg-zinc-800 p-2 rounded-full text-sm">{totalQuantity}</span>
+                </div>
+              }
+            </div>
           </Link>
         </div>
 
@@ -99,7 +99,6 @@ const Navigation = () => {
 
         <div className="flex items-center lg:hidden" onClick={()=>{
           setOpenMenu(true)
-          console.log('clicked')
         }}>
           <FaBars color="black" size="1.5rem"/>
         </div>

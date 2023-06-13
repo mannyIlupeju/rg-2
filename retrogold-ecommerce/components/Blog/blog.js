@@ -29,7 +29,7 @@ const Blog = ({blog}) => {
     
     <div className="container mx-auto text-zinc-100 h-fit mt-32 xl:px-28 md:px-2 p-12">
       <div className="flex justify-start items-center ">
-        <div>
+        <div className="text-zinc-800">
           <h1 className="text-5xl">Latest Stories</h1>
           <p className="text-medium mt-4">Uplifting, motivating stories about the world today</p>
         </div>
@@ -117,8 +117,8 @@ const Blog = ({blog}) => {
          
       </div>
 
-      <div className="flex justify-center mt-12 cursor-pointer">
-      <Link href='/blog'>View more Stories</Link>
+      <div className="cursor-pointer flex justify-center mt-12">
+      <Link href='/blog' className=" bg-black p-3 rounded-2xl">View more Stories</Link>
       </div>
 
       

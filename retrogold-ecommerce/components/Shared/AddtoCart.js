@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGlobalContext } from '@/ Context/context';
 
-const Addtocart = ({productName, brandName, price, image, id, quantity}) => {
+const Addtocart = () => {
 
  const {cartInfo, setCartInfo} = useGlobalContext()
 

@@ -10,11 +10,13 @@ import Navigation from '@/components/Shared/Navigation'
 import Calltoaction from '@/components/CallToAction/calltoaction'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+import Cart from '@/components/Cart'
 
 
 
 export default function Home({hero, quote, blog, calltoAction}) {
     const {isOpenMenu} = useGlobalContext()
+    
   return (
     <>
       <Head>
@@ -31,6 +33,7 @@ export default function Home({hero, quote, blog, calltoAction}) {
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
           {isOpenMenu ? <RespMenu/> : ''}
+          
       </main>
       <Footer/> 
     </>

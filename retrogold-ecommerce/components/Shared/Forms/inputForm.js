@@ -87,7 +87,7 @@ const InputForm = () => {
         </div>
 
         <div>
-          <button className="btn">Submit</button>
+          <button className="btn">Add to Cart</button>
         </div>
 
 

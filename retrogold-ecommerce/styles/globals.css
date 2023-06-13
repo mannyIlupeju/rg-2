@@ -29,7 +29,7 @@ html {
 body {
   font-family: 'Cardo', serif;
   overflow-x: hidden;
-  background: var(--white);
+  background: var(--teaGreen);
 }
 
 .section-background {

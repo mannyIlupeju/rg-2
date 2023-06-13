@@ -13,6 +13,7 @@ import { useGlobalContext } from '@/ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import Cart from '@/components/Cart';
 
 // to-do-list
 // responsive design for the page
@@ -23,14 +24,14 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 
 const productDetails = ({data}) => {
   const [quantity, setQuantity] = useState(1)
-  const {currentIndex, setCurrentIndex, isOpenMenu} = useGlobalContext()
+  const {currentIndex, setCurrentIndex, isOpenMenu, totalQuantity, onAdd, isItemChosen} = useGlobalContext()
   const [imageId, setImageId] = useState(null)
   const {productDetail} = data
   const {allProduct} = data
   
   console.log(productDetail)
 
-  
+  console.log(isItemChosen)
 
 
 
@@ -105,6 +106,9 @@ const productDetails = ({data}) => {
       setQuantity((prev)=> prev - 1)
     }
   }
+
+  //Add to cart to Cart functionality (with no checks)
+  
   
  
 
@@ -125,6 +129,11 @@ const productDetails = ({data}) => {
       <Navigation/>
       
       <Breadcrumb/>
+
+      <div>
+      {isItemChosen &&  <Cart/> }
+      </div>
+
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
@@ -165,12 +174,18 @@ const productDetails = ({data}) => {
               <div className="border-t-2 border-gray-300 w-fit">
                 <div className="mt-4">
                   <p className="text-sm font-bold">Select Option</p>
-                    <div className="flex gap-5 w-fit  px-1 mt-2">
+                  
+                  <div className="flex gap-5 w-fit  px-1 mt-2">
                       <FaMinus className="flex self-center" onClick={decreaseAmt}/>
                       <span className="font-bold text-lg">{quantity}</span>
                       <FaPlus className="flex self-center" onClick={increaseAmt}/>
-                    </div>
-                  <AddtoCart productName={productDetail.productName} quantity={quantity} brandName={productDetail.brandName} id={productDetail._id}  price={productDetail.price} image={images[currentIndex].asset._ref} />
+                  </div>
+
+                 
+                  <div className="mt-8">
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(productDetail, quantity)}>Add to Cart</button>
+                  </div>
+                  
                 </div>
               </div>
 

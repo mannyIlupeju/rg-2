@@ -4,12 +4,12 @@ import { urlFor } from '@/lib/sanity';
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
-import Quantitycounter from '@/components/Shared/quantityCounter';
 import { useGlobalContext } from '@/ Context/context';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
 const Cart = () => {
-  const {cartInfo} = useGlobalContext()
- console.log(cartInfo)
+  const {cartItems, toggleCartItemQuantity, totalPrice, onRemove, totalQuantity} = useGlobalContext()
+
 
 
 
@@ -27,22 +27,24 @@ const Cart = () => {
 
       <main>
         <div className="container mx-auto p-24">
-          {cartInfo.length ? 
+          {cartItems.length ? 
             <>
-              <div className="flex flex-row gap-20 justify-end">
+              <div className="flex flex-row gap-20 text-zinc-700 justify-end mb-8 text-xl">
                 <p>Quantity</p>
                 <p>Price</p>
                 <p>Total</p>
               </div>
               <div className="flex flex-col gap-8 justify-center">
-                {cartInfo.map((items, index)=> {
-                  const{ brandName, productName, price, image, quantity, id } = items
+                {cartItems.map((items, index)=> {
+                  const{ brandName, productName, price, images, quantity, _id } = items
+                 
                   return (
-                    <div className="flex flex-row justify-between" key={index}>
+                   <div key={index}>
+                    <div className="flex flex-row justify-between text-zinc-700" >
                       <div>
                         <div className="flex gap-4">
                           <div>
-                            <img src={urlFor(image)} alt="" className="cartImage"/>
+                            <img src={urlFor(images[0])} alt="" className="cartImage"/>
                           </div>
                           <div className="flex flex-col gap-4">
                             <h1 className="text-lg">Brand Name: <span className="font-bold">{brandName}</span></h1>
@@ -52,9 +54,10 @@ const Cart = () => {
                       </div>
 
                       <div className="flex gap-20">
-                        <div>
-                        
-                        <Quantitycounter quantity={quantity}/>
+                        <div className="flex gap-4 ">
+                          <FaPlus className="" onClick={() => toggleCartItemQuantity(_id, 'inc') }/>
+                            <span className="font-bold text-lg">{quantity}</span>
+                          <FaMinus className="flex" onClick={() => toggleCartItemQuantity(_id, 'dec')}/>
                         </div>
 
                         <div>
@@ -65,11 +68,21 @@ const Cart = () => {
                           <h1 className="text-2xl font-bold">${price * quantity}</h1>
                         </div>
                       </div>
-                      
+
+                  
+                    </div> 
+                    <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
+                      <button onClick={()=> onRemove(_id, quantity)}><p>On Remove</p></button>
+                    </div>
                     </div>
                   )
                 })
+                
                 }
+                <div className="flex justify-between text-zinc-700">
+                  <h1 className="text-2xl">Subtotal</h1>
+                  <p className="text-2xl font-bold">${totalPrice}</p>
+                </div>
               </div>
             </>
           : 

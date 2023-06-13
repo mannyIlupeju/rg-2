@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '@/components/Shared/Navigation'
 import Head from 'next/head'
 import ContactForm from '../../components/Shared/Forms/ContactForm'
-import Footer from '../../components/shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/footer'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import { useGlobalContext } from '@/ Context/context';
 
