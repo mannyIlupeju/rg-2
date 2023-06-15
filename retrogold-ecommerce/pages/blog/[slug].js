@@ -48,10 +48,10 @@ const blogPost = ({data}) => {
         </figure>
         </div>
 
-        <div>
-        <article className="text-zinc-700 mt-4 leading-loose flex flex-col">
-          <PortableTextComponent detail={blogDetail} />
-        </article>
+        <div >
+          <article className="text-zinc-700 mt-4 leading-loose flex flex-col">
+            <PortableTextComponent detail={blogDetail} />
+          </article>
         </div>
 
         </div>

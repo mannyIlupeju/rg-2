@@ -5,9 +5,7 @@ import Navigation from '../Shared/Navigation';
 
 const Landing = ({hero}) => {
   return (
-    <>
     <Hero hero={hero}/>
-    </>
   );
 }
 

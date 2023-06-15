@@ -10,8 +10,8 @@ const Quotes = ({quote}) => {
   }
 
   const imageQuote = {
-    width: '460px',
-    height: 'auto',
+    width: '560px',
+    height: '420px',
     borderRadius: '0.5rem'
   }
 
@@ -37,7 +37,7 @@ const Quotes = ({quote}) => {
 
   return (
     <>
-    <div className="container mx-auto p-2">
+    <div className="container mx-auto">
       <div className="flex justify-center">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 quoteBg rounded-lg" style={gridBackground}>
           <div className="flex justify-center">

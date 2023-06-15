@@ -27,6 +27,7 @@ const Cart = () => {
 
       <main>
         <div className="container mx-auto p-24">
+          <h1 className="text-6xl font-bold text-zinc-700">Your Cart</h1>
           {cartItems.length ? 
             <>
               <div className="flex flex-row gap-20 text-zinc-700 justify-end mb-8 text-xl">

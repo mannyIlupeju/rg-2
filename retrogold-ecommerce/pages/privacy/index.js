@@ -20,8 +20,8 @@ const Privacy = ({data}) => {
 
       <Navigation/>
       <main className="bg-white">
-        <div>
-          <article className=" leading-loose text-lg w-fit md:w-1/2 items-center text-zinc-700">
+        <div className="container mx-auto p-12">
+          <article className=" leading-loose text-lg w-fit items-center text-zinc-700">
             <PortableTextComponent detail={privacyPolicy}/>
           </article>
         </div>

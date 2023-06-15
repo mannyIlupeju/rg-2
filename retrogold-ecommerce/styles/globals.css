@@ -36,6 +36,17 @@ body {
   background: linear-gradient(180deg, rgb(221, 221, 213) 32%, rgba(135,137,192,1) 100%);
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.295);
+  z-index: 3;
+}
+
+
 .navigationStyle {
 display: flex;
 justify-content:space-between;
@@ -58,13 +69,12 @@ color: var(--white);
 
 
 .heroImages {
-  background-color: linear-gradient( rgba(68, 67, 67, 0.979), rgba(0, 0, 0, 0.5));
-  background-size: cover;
+  background-color: linear-gradient(rgba(68, 67, 67, 0.979), rgba(0, 0, 0, 0.5));
   background-repeat: no-repeat;
   position: relative;
   width: 100vw;
   background-position: center;
-  height: 100vh
+  height: 80vh
   
 }
 
@@ -73,6 +83,7 @@ color: var(--white);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
+  
 }
 
 .shopImage {
@@ -90,6 +101,12 @@ color: var(--white);
   width: 14rem;
   height: auto;
 }
+.cartModalImage {
+  width: 8rem;
+  height: auto;
+}
+
+
 
 .quoteBg {
 background: rgb(166, 223, 208);
@@ -162,7 +179,14 @@ box-shadow: 2px 5px 15px 2px #000000;
   border-radius: 10px;
 }
 
-
+.heroText {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-items: center;
+ position: relative;
+ bottom: 39rem;
+}
 
 .experienceBox {
   width: 500px;
@@ -212,6 +236,9 @@ input[type=email] {
   color: white;
 }
 
+.footer-link:hover{
+  color: var(--purple)
+}
 
 .sideProductImage  {
   width: 6rem;
@@ -313,6 +340,29 @@ textarea {
   padding: 0.4rem;
 }
 
+.leftArrow  {
+    color: #8789C0;
+    transform: translate(0, 50%);
+    position: absolute;
+    left: 32px;
+    bottom: 50rem;
+    cursor: pointer;
+    background-color: var(--green);
+    border-radius: 50px;
+    padding: 10px;
+}
+
+ .rightArrow  {
+    color: #8789C0;
+    transform: translate(0, 50%);
+    position: absolute;
+    right: 32px;
+    bottom: 50rem;
+    cursor: pointer;
+    background-color: var(--green);
+    border-radius: 50px;
+    padding: 10px;
+  }
 
 /**Media Queries**/
 @media screen and (max-width: 323px) {
@@ -320,3 +370,21 @@ textarea {
     height: 283px;
   }
 }
+
+@media screen and (max-width: 1179px) {
+  .leftArrow  {
+    left: 32px;
+    bottom: 31rem;
+  }
+
+ .rightArrow  {
+    right: 32px;
+    bottom: 31rem;
+   
+  }
+  .heroText {
+    padding: 2rem;
+  }
+}
+
+

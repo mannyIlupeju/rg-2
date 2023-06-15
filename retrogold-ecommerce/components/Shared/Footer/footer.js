@@ -11,10 +11,8 @@ const Footer = () => {
               <img src = '/images/Retrogold (7) (1).png' alt="retrogoldlogo" className="footer-imageBox"/>
             </Link>
             <ul>
-              <li>
-              <p><Link href="/about">About</Link></p>
-              </li>
-              <p><Link href="/privacy">Policies</Link></p>
+             <Link href='/about'><li className="footer-link">About</li></Link>
+              <Link href='/privacy'><li className="footer-link">Privacy Policy</li></Link>
             </ul>
           </div>
 
@@ -22,13 +20,10 @@ const Footer = () => {
             <div>
               <p>Customer Service</p>
             </div>
-            <ul>
-              <li>
-                <p><Link href="/contact">Contact Us</Link></p>
-                <p>Track My Order</p>
-                <p>Shipping & Returns</p>
-                <p>FAQs</p>
-              </li>
+            <ul >
+              <Link href='/contact'><li className="footer-link">Contact</li></Link>
+              <Link href=''><li className="footer-link">Track My Order</li></Link>
+              <Link href=''><li className="footer-link">Shipping & Returns</li></Link>
             </ul>
           </div>
 
@@ -37,11 +32,9 @@ const Footer = () => {
               <p>Explore</p>
             </div>
             <ul>
-              <li>
-                <p><Link href='/shop'>Shop</Link></p>
-                <p><Link href='/services'>Service</Link></p>
-                <p><Link href='/blog'>Blog</Link></p>
-              </li>
+                <Link href='/shop'><li className="footer-link">Shop</li></Link>
+                <Link href='/services'><li className="footer-link">Services</li></Link>
+                <Link href='/blog'><li className="footer-link">Blog</li></Link>
             </ul>
           </div>
 
@@ -50,10 +43,8 @@ const Footer = () => {
               <p>Connect with Retrogold</p>
             </div>
             <ul>
-              <li>
-                <p>Instagram</p>
-                <p>Etsy</p>
-              </li>
+                <Link href=''><li className="footer-link">Instagram</li></Link>
+                <Link href=''><li className="footer-link">Etsy</li></Link>
             </ul>
           </div>
         

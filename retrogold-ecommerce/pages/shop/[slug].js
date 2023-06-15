@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
@@ -6,8 +6,6 @@ import { urlFor } from '@/lib/sanity';
 import Footer from '@/components/Shared/Footer/footer'
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
 import Accordion from '@/components/Shared/Accordion'
-import Quantitycounter from '@/components/Shared/quantityCounter';
-import AddtoCart from '@/components/Shared/AddtoCart';
 import Relatedproducts from '@/components/Shared/RelatedProducts';
 import { useGlobalContext } from '@/ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
@@ -15,23 +13,32 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import Cart from '@/components/Cart';
 
-// to-do-list
-// responsive design for the page
-// make quantity counter and add to cart reusable components
+
 
 
 
 
 const productDetails = ({data}) => {
-  const [quantity, setQuantity] = useState(1)
-  const {currentIndex, setCurrentIndex, isOpenMenu, totalQuantity, onAdd, isItemChosen} = useGlobalContext()
-  const [imageId, setImageId] = useState(null)
   const {productDetail} = data
   const {allProduct} = data
+  const {inStock, stockQuantity} = productDetail.inventory
+  console.log(inStock, stockQuantity)
   
-  console.log(productDetail)
+  const [quantity, setQuantity] = useState(1)
+  const {isOpenMenu, totalQuantity, onAdd, isItemChosen, stock, setStock} = useGlobalContext()
+  const [imageId, setImageId] = useState(null)
 
-  console.log(isItemChosen)
+  //this currentIndex is specifically for this component. 
+  const [currentIndex, setCurrentIndex] = useState(0)
+  
+  
+  useEffect(()=>{
+    setStock(stockQuantity)
+  },[stock])
+  
+
+
+
 
 
 
@@ -107,7 +114,6 @@ const productDetails = ({data}) => {
     }
   }
 
-  //Add to cart to Cart functionality (with no checks)
   
   
  
@@ -130,9 +136,9 @@ const productDetails = ({data}) => {
       
       <Breadcrumb/>
 
-      <div>
-      {isItemChosen &&  <Cart/> }
-      </div>
+      
+      {isItemChosen ? <Cart/> : '' }
+      
 
       <main>
         <div className="bg-white productDetailFonts">
@@ -244,6 +250,7 @@ const productDetailQuery = `*[_type == 'product' && slug.current == $slug][0]{
   price, 
   slug,
   _id,
+  inventory
 
 }`
 

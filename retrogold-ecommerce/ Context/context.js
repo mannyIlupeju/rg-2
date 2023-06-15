@@ -1,5 +1,5 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
-
+import { sanityClient } from '@/lib/sanity';
 //set up createContext
 const GlobalContext = createContext()
 
@@ -16,9 +16,12 @@ const AppContext = ({ children }) => {
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
+  const [stock, setStock] = useState(null)
+
+
  
 
-
+  //Navigation Modal functionality
   useEffect(() => {
     if (isOpenMenu) {
     document.body.style.overflowY = "hidden";
@@ -28,8 +31,19 @@ const AppContext = ({ children }) => {
     }
   }, [isOpenMenu]);
 
- 
 
+  //Cart Modal functionality
+  //Open Modal
+  const openCartModal = () => {
+    setItemChosen(!isItemChosen)
+    document.body.style.overflowY = "hidden"
+  }
+  //Close Modal
+    const closeCartModal = () =>{
+    setItemChosen(false)
+    document.body.style.overflowY = "scroll"
+    document.body.classList.remove('overlay')
+  }
 
 
 
@@ -55,9 +69,8 @@ const AppContext = ({ children }) => {
       setCartItems([...cartItems, { ...product }]);
     }
 
-    setItemChosen(true)
+    openCartModal()
 
-    
   } 
 
 
@@ -131,6 +144,9 @@ const AppContext = ({ children }) => {
       onRemove,
       isItemChosen,
       setItemChosen,
+      stock,
+      setStock,
+      closeCartModal
       }}
     >
       {children}

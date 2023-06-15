@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react';
-import styles from '@/styles/Home.module.css'
-import {useState} from 'react'
-import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
-import {RxDot} from 'react-icons/rx'
-import {RxDotFilled} from 'react-icons/rx'
+
+
 import Image from './Images';
 import Carousel from '../../Shared/Carousel';
 import { images } from '@/next.config';
@@ -18,10 +15,6 @@ const Hero = ({hero}) => {
     background: '#4C5454'
   }
 
-
-
-
-
   //array hero reference
   const heroImg = []
   const heroImage0 = hero[0].images.asset._ref
@@ -29,6 +22,8 @@ const Hero = ({hero}) => {
   const heroImage2= hero[2].images.asset._ref
   const heroImage3 = hero[3].images.asset._ref
   heroImg.push(heroImage0, heroImage1, heroImage2, heroImage3)
+
+
 
   
   
