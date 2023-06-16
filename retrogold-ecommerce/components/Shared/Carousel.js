@@ -32,12 +32,12 @@ const Carousel = ({currentIndex, setCurrentIndex, heroImg}) => {
 
   return (
     <>
-          <div className="relative lg:top-40">
+          <div className="relative top-40 lg:top-72">
             <FaChevronLeft onClick={prevImage} size="4rem"  className="leftArrow"/>
             <FaChevronRight onClick={nextImage} size="4rem"  className="rightArrow"/>
           </div>
            {heroImg && 
-          (<div className="flex flex-row justify-center relative bottom-96 lg:bottom-42">
+          (<div className="flex flex-row justify-center relative bottom-96 lg:bottom-60">
             <RxDot size="2rem" style={currentIndex === 0 ? isActive: notActive} onClick={(e) => {
               setCurrentIndex(0)}} />
             <RxDot size="2rem" style={currentIndex === 1 ? isActive : notActive}onClick={(e) => {

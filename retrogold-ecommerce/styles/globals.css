@@ -371,6 +371,12 @@ textarea {
   }
 }
 
+@media screen and (max-width: 400px) {
+.heroText {
+    padding: 2rem;
+  }
+}
+
 @media screen and (max-width: 1179px) {
   .leftArrow  {
     left: 32px;
@@ -387,4 +393,9 @@ textarea {
   }
 }
 
-
+@media screen and (min-width: 1024px) {
+  .heroText{
+    position: relative;
+    bottom: 30rem;
+  }
+}
