@@ -7,19 +7,24 @@ import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 
 const Cart = () => {
   const {cartItems, setItemChosen, isItemChosen, onRemove, toggleCartItemQuantity, totalPrice, closeCartModal} = useGlobalContext()
-  console.log(isItemChosen)
+ 
 
   //close cart modal functionality if cart items in modal is less than 1
   if(cartItems.length < 1) {
     closeCartModal()
   }
 
+  const closeOverlay = () => {
+    if(isItemChosen){
+      !isItemChosen
+    }
+  }
 
  
 
 
   return (
-    <div className={isItemChosen ? "overlay" : ""}>
+    <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>
         {(isItemChosen && cartItems.length) ?
           <div className="bg-gray-300 w-2/6 absolute z-2 right-0 top-0 p-8 h-screen">
               <div className="text-zinc-700 flex justify-between">
@@ -31,7 +36,6 @@ const Cart = () => {
                 {cartItems.map((item, index)=> {
                   const { brandName, productName, price, images, quantity, _id } = item
                   return (
-                    <>
                     <div className="border-t-4 border-gray-400" key={index}>
                       <div className="flex gap-5 mt-4 ">
                         <div>
@@ -58,7 +62,6 @@ const Cart = () => {
                         <button onClick={()=> onRemove(_id, quantity)}><p>On Remove</p></button>
                       </div>
                     </div>
-                    </>
                   )
                 })}
                     <div className="flex justify-between text-zinc-700 ">

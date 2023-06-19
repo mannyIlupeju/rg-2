@@ -35,7 +35,9 @@ const productDetails = ({data}) => {
   useEffect(()=>{
     setStock(stockQuantity)
   },[stock])
-  
+
+
+  console.log(stock)
 
 
 

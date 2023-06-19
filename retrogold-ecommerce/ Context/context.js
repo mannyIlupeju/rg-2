@@ -16,8 +16,9 @@ const AppContext = ({ children }) => {
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
-  const [stock, setStock] = useState(null)
+  const [stock, setStock] = useState({})
 
+  console.log(stock)
 
  
 
@@ -30,6 +31,11 @@ const AppContext = ({ children }) => {
     document.body.style.overflowY = "scroll"
     }
   }, [isOpenMenu]);
+
+
+  useEffect(()=>{
+    localStorage.setItem('cart', JSON.stringify(cartItems))
+  },[cartItems])
 
 
   //Cart Modal functionality
@@ -71,6 +77,8 @@ const AppContext = ({ children }) => {
 
     openCartModal()
 
+
+
   } 
 
 
@@ -91,6 +99,8 @@ const AppContext = ({ children }) => {
     });
     
     setCartItems(updatedCartItems);
+
+    
 
  
     // Calculate totalPrice and totalQuantities based on the updatedCartItems
