@@ -41,7 +41,12 @@ export default function Home({hero, quote, blog, calltoAction}) {
 const blogQuery = `*[_type == "blog"]{
   description, main_image, tag, slug
 }`
-const heroQuery = `*[_type == 'hero']`
+const heroQuery = `*[_type == 'hero']{
+  headline,
+  headstatement,
+  "heroImages":images.asset->url,
+  _id
+}`
 const quoteQuery = `*[_type == 'quote']`
 const calltoActionQuery = `*[_type ==  'callToAction']`
 

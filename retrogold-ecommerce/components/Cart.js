@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'
 import { useGlobalContext } from '@/ Context/context';
 import { urlFor } from '@/lib/sanity';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
@@ -7,6 +8,7 @@ import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 
 const Cart = () => {
   const {cartItems, setItemChosen, isItemChosen, onRemove, toggleCartItemQuantity, totalPrice, closeCartModal} = useGlobalContext()
+
  
 
   //close cart modal functionality if cart items in modal is less than 1
@@ -34,12 +36,12 @@ const Cart = () => {
               <div>
                 <div>
                 {cartItems.map((item, index)=> {
-                  const { brandName, productName, price, images, quantity, _id } = item
+                  const { brandName, productName, price, imageUrls, quantity, _id } = item
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
                       <div className="flex gap-5 mt-4 ">
                         <div>
-                          <img src={urlFor(images[0])} alt="" className="cartModalImage"/>
+                          <Image src={imageUrls[0]} alt={productName} width="200" height="200" className="cartModalImage"/>
                         </div>
                         
                         <div className="flex flex-col gap-4 text-zinc-700">

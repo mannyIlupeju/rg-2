@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import { urlFor } from '/lib/sanity';
+import Image from 'next/image';
 import {RxDot} from 'react-icons/rx'
 import {RxDotFilled} from 'react-icons/rx'
 
 
 
 
-const Image = ({hero, currentIndex}) => {
+const ImageRender = ({hero, currentIndex}) => {
   return (
        <>
-         <img src={urlFor(hero[currentIndex].images.asset._ref)} className="heroImages"/>  
+         <Image src={hero[currentIndex].heroImages} width="200" height="200" className="heroImages" unoptimized/>  
          <div className="container mx-auto heroText">
            <h1 className="lg:text-8xl md:text-8xl text-6xl font-extrabold text-white">{hero[currentIndex].headline} </h1>
            <p className="text-lg lg:text-xl font-bold text-white">{hero[currentIndex].headstatement} </p>
@@ -18,4 +18,4 @@ const Image = ({hero, currentIndex}) => {
   );
 }
 
-export default Image;
+export default ImageRender;

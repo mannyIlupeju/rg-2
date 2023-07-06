@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import { urlFor } from '@/lib/sanity';
+import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
@@ -37,7 +37,8 @@ const Cart = () => {
               </div>
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index)=> {
-                  const{ brandName, productName, price, images, quantity, _id } = items
+                  const{ brandName, productName, price, imageUrls, quantity, _id } = items
+            
                  
                   return (
                    <div key={index}>
@@ -45,7 +46,7 @@ const Cart = () => {
                       <div>
                         <div className="flex gap-4">
                           <div>
-                            <img src={urlFor(images[0])} alt="" className="cartImage"/>
+                            <Image src={imageUrls[0]} alt={productName} width="200" height="200" className="cartImage"/>
                           </div>
                           <div className="flex flex-col gap-4">
                             <h1 className="text-lg">Brand Name: <span className="font-bold">{brandName}</span></h1>

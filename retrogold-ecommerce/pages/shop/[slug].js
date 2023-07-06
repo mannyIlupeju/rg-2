@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Head from 'next/head'
+import Image from 'next/image'
 import { sanityClient } from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
 import { urlFor } from '@/lib/sanity';
@@ -19,7 +20,10 @@ import Cart from '@/components/Cart';
 
 
 const productDetails = ({data}) => {
+
   const {productDetail} = data
+  console.log(productDetail)
+
   const {allProduct} = data
   const {inStock, stockQuantity} = productDetail.inventory
   console.log(inStock, stockQuantity)
@@ -53,7 +57,9 @@ const productDetails = ({data}) => {
   const shippingInfo = shipping.map((x)=>{
     return (x.text)
   })
-  const {images} = productDetail
+
+  // const {images} = productDetail
+  const {imageUrls} = productDetail
   
 
 
@@ -67,11 +73,11 @@ const productDetails = ({data}) => {
   //Carousel Functions 
   const prevImage = () => { 
     let firstSlide = currentIndex === 0
-    const newSlides = firstSlide ? images.length-1 : currentIndex - 1
+    const newSlides = firstSlide ? imageUrls.length-1 : currentIndex - 1
     setCurrentIndex(newSlides)
   }
   const nextImage = () => {
-    let lastSlide = currentIndex === images.length - 1
+    let lastSlide = currentIndex === imageUrls.length - 1
     const newSlide = lastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newSlide)
   }
@@ -148,11 +154,11 @@ const productDetails = ({data}) => {
             <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 overflow-hidden">
               <div>
                 <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">
-                    {images.map((x, index)=>{
+                    {imageUrls.map((x, index)=>{
                     return (
                       <div className="flex" key={index}>
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
-                          <img src={urlFor(x.asset._ref)} alt=" " className="sideProductImage"/>
+                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="200" height="200"/>
                         </div>
                       </div>
                       )
@@ -164,7 +170,7 @@ const productDetails = ({data}) => {
              
                 {/* main image that has carousel function */}
                 <div className="">
-                   <img src={urlFor(images[currentIndex].asset._ref)} alt=" " className="mainProductImage" />
+                   <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" />
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
@@ -191,7 +197,7 @@ const productDetails = ({data}) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(productDetail, quantity)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(productDetail, quantity, stockQuantity)}>Add to Cart</button>
                   </div>
                   
                 </div>
@@ -243,7 +249,7 @@ export async function getStaticPaths() {
 
 
 const productDetailQuery = `*[_type == 'product' && slug.current == $slug][0]{
-  images[],
+  "imageUrls": images[].asset->url,
   brandName,
   mainImage,
   productDescription,

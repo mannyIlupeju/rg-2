@@ -1,6 +1,7 @@
 import PortableTextComponent from '@/components/Shared/PortableTextComponent';
-import { sanityClient, urlFor } from '@/lib/dist/sanity.dev';
+import { sanityClient } from '@/lib/dist/sanity.dev';
 import React from 'react';
+import Image from 'next/image'
 import Navigation from '@/components/Shared/Navigation';
 import Head from 'next/head'
 import Footer from '@/components/Shared/Footer/footer';
@@ -11,8 +12,8 @@ const About = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
 
   const{about} = data
-  console.log(about)
-  console.log(about[0].image.asset._ref)
+  console.log(about[0].aboutImage)
+
  
   const [aboutUs] = about
   console.log(aboutUs)
@@ -39,7 +40,7 @@ const About = ({data}) => {
         
 
         <div className="">
-          <img src={urlFor(about[0].image.asset._ref)} alt="" className="aboutImage"/>
+          <Image src={about[0].aboutImage} width="200" height="200" alt="" className="aboutImage" unoptimized/>
         </div>
       </div>
     </div>
@@ -56,7 +57,7 @@ export default About;
 
 
 const aboutInfo = `*[_type == 'about']{
-  image, 
+  "aboutImage":image.asset->url,
   post,
   aboutus
 }`

@@ -15,8 +15,12 @@ const Navigation = () => {
   //   threshold: 100, // Adjust this threshold as needed
   // });
 
-  const { isOpenMenu, setOpenMenu, cartItems, totalQuantity } = useGlobalContext()
- 
+  const { isOpenMenu, setOpenMenu, setCartItems, cartItems, totalQuantity } = useGlobalContext()
+
+
+
+
+
     const navLink = 
     [
       {

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import Navigation from '@/components/Shared/Navigation'
 import { sanityClient, urlFor} from '@/lib/dist/sanity.dev'
 import PortableTextComponent from '@/components/Shared/PortableTextComponent'
@@ -19,6 +20,7 @@ const blogImage = {
 const blogPost = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
   const{blogDetail} = data
+  console.log(blogDetail)
 
  
 
@@ -44,7 +46,7 @@ const blogPost = ({data}) => {
         <div>
         <div className="flex flex-col md:float-left mx-8 mb-4">
         <figure className="mt-3" >
-          <img src= {urlFor(blogDetail.main_image.asset._ref)} alt=" " className="image-Style"/>
+          <Image src= {blogDetail.mainImage} alt={blogDetail.title} width="200" height="200" className="image-Style" unoptimized/>
         </figure>
         </div>
 
@@ -77,7 +79,7 @@ const paramQuery = `*[_type == "blog" && defined(slug.current)]{
 
 const blogDetailQuery = `*[_type == 'blog' && slug.current == $slug][0] {
     title,
-    main_image,
+    "mainImage": main_image.asset->url,
     tag, 
     author->, 
     description[],

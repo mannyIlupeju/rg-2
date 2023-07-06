@@ -4,10 +4,7 @@ const nextConfig = {
 }
 
 module.exports = {
-
-  images : {
-    remotePatterns: [
-      
-    ]
-  }
+	images: {
+		domains: ['cdn.sanity.io']
+  },
 }, nextConfig

@@ -75,7 +75,7 @@ const InputForm = () => {
 
         <div>
           <label>Message:</label><br/>
-          <textarea name="message" rows="10" cols="50" required placeholder="Write something..." value={messageDetails.message} onChange={ e =>setMessageDetails({...messageDetails, message:e.target.value}) }></textarea>
+          <textarea name="message" maxlength="200" rows="10" cols="50" required placeholder="Write something..." value={messageDetails.message} onChange={ e =>setMessageDetails({...messageDetails, message:e.target.value}) }></textarea>
         </div>
 
         <div>

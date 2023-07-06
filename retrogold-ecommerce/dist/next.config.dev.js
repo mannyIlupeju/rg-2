@@ -6,7 +6,7 @@ var nextConfig = {
 };
 module.exports = {
   images: {
-    remotePatterns: []
+    domains: ['cdn.sanity.io']
   }
 }, nextConfig;
 //# sourceMappingURL=next.config.dev.js.map

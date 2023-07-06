@@ -1,5 +1,6 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
 import { sanityClient } from '@/lib/sanity';
+import { FaWindows } from 'react-icons/fa';
 //set up createContext
 const GlobalContext = createContext()
 
@@ -8,19 +9,22 @@ export const useGlobalContext = () => useContext(GlobalContext)
 
 
 
+
+
+
+
 const AppContext = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isOpenMenu, setOpenMenu] = useState(false)
   const [cartInfo, setCartInfo] = useState([]) //stores the unchecked items in the cart
-  const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
   const [stock, setStock] = useState({})
 
-  console.log(stock)
-
- 
+  const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
+  
+  console.log(cartItems)
 
   //Navigation Modal functionality
   useEffect(() => {
@@ -33,9 +37,20 @@ const AppContext = ({ children }) => {
   }, [isOpenMenu]);
 
 
-  useEffect(()=>{
-    localStorage.setItem('cart', JSON.stringify(cartItems))
-  },[cartItems])
+  
+
+  // useEffect(()=>{
+  // if(typeof window !== 'undefined' && window.localStorage) {
+  //     let value;
+  //     value = JSON.parse(localStorage.getItem('cart') || '[]')
+  //     setCartItems(value)
+  //   }
+  // },[cartItems])
+
+
+ 
+
+
 
 
   //Cart Modal functionality
@@ -54,7 +69,7 @@ const AppContext = ({ children }) => {
 
 
 
-  const onAdd = (product, quantity) => {
+  const onAdd = (product, quantity, stockQuantity) => {
     const checkProductInCart = cartItems.find((item) => item._id === product._id);
     setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
@@ -63,24 +78,32 @@ const AppContext = ({ children }) => {
       const updatedCartItems = cartItems.map((cartProduct) => {
         if(cartProduct.id === product.id) return {
           ...cartProduct,
-          quantity: cartProduct.quantity + quantity
+          quantity: cartProduct.quantity + quantity,
         }
       })
       
       setCartItems(updatedCartItems);
+      
+      
+     
     
     } else {
       product.quantity = quantity;
       
       setCartItems([...cartItems, { ...product }]);
     }
+    
 
+    
+    
     openCartModal()
-
-
-
+    
   } 
+  
+  
 
+
+  
 
   
   const toggleCartItemQuantity = (id, value) => {

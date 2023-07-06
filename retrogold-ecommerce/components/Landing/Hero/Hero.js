@@ -1,14 +1,19 @@
 import React, {useEffect} from 'react';
 
 
-import Image from './Images';
+import ImageRender from './Images';
 import Carousel from '../../Shared/Carousel';
 import { images } from '@/next.config';
 import { useGlobalContext } from '@/ Context/context';
 
 //Carousel Component 
 const Hero = ({hero}) => {
+  console.log(hero)
   const { currentIndex, setCurrentIndex } = useGlobalContext()
+
+  console.log(hero[0].headline)
+
+
 
   
   const heroOverlay = {
@@ -17,10 +22,10 @@ const Hero = ({hero}) => {
 
   //array hero reference
   const heroImg = []
-  const heroImage0 = hero[0].images.asset._ref
-  const heroImage1 = hero[1].images.asset._ref
-  const heroImage2= hero[2].images.asset._ref
-  const heroImage3 = hero[3].images.asset._ref
+  const heroImage0 = hero[0].heroImages
+  const heroImage1 = hero[1].heroImages
+  const heroImage2= hero[2].heroImages
+  const heroImage3 = hero[3].heroImages
   heroImg.push(heroImage0, heroImage1, heroImage2, heroImage3)
 
 
@@ -44,7 +49,7 @@ const Hero = ({hero}) => {
 
   return (    
       <>
-        <Image hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
+        <ImageRender hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
         <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
       </>
   );
