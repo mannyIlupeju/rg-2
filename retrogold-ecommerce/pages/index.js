@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
-import Hero from '@/components/Landing/Hero/Hero'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
@@ -10,7 +9,8 @@ import Navigation from '@/components/Shared/Navigation'
 import Calltoaction from '@/components/CallToAction/calltoaction'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
-import Cart from '@/components/Cart'
+
+
 
 
 
@@ -25,6 +25,8 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      
       <main className="w-screen">
           <Navigation/>
           <Landing hero={hero}/>  
@@ -33,8 +35,8 @@ export default function Home({hero, quote, blog, calltoAction}) {
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
           {isOpenMenu ? <RespMenu/> : ''}
-          
       </main>
+      
       <Footer/> 
     </>
   )
@@ -46,7 +48,7 @@ const blogQuery = `*[_type == "blog"]{
 }`
 const heroQuery = `*[_type == 'hero']`
 const quoteQuery = `*[_type == 'quote']`
-const calltoActionQuery = `*[_type ==  'callToAction']`
+const calltoActionQuery = `*[_type == 'callToAction']`
 
 
 // getStaticProps works when rendering from a headless CMS

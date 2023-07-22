@@ -23,8 +23,37 @@ const AppContext = ({ children }) => {
   const [stock, setStock] = useState({})
 
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
+
+  const [messageDetails, setMessageDetails] = useState(
+    {
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: '',
+      telephone: '',
+      message: '',
+      donate: '',
+      quantity: 1,
+      subject: '',
+    }
+  )
   
   console.log(cartItems)
+
+
+
+
+
+  useEffect(() => {
+    if(cartItems) {
+      if (typeof window !== 'undefined' && window.localStorage){
+        localStorage.setItem('cart', JSON.stringify(cartItems))
+      }
+    }
+  },[cartItems])
+
+
+
 
   //Navigation Modal functionality
   useEffect(() => {
@@ -36,23 +65,6 @@ const AppContext = ({ children }) => {
     }
   }, [isOpenMenu]);
 
-
-  
-
-  // useEffect(()=>{
-  // if(typeof window !== 'undefined' && window.localStorage) {
-  //     let value;
-  //     value = JSON.parse(localStorage.getItem('cart') || '[]')
-  //     setCartItems(value)
-  //   }
-  // },[cartItems])
-
-
- 
-
-
-
-
   //Cart Modal functionality
   //Open Modal
   const openCartModal = () => {
@@ -60,7 +72,7 @@ const AppContext = ({ children }) => {
     document.body.style.overflowY = "hidden"
   }
   //Close Modal
-    const closeCartModal = () =>{
+  const closeCartModal = () =>{
     setItemChosen(false)
     document.body.style.overflowY = "scroll"
     document.body.classList.remove('overlay')
@@ -70,6 +82,11 @@ const AppContext = ({ children }) => {
 
 
   const onAdd = (product, quantity, stockQuantity) => {
+    
+
+
+
+    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
     const checkProductInCart = cartItems.find((item) => item._id === product._id);
     setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
@@ -83,29 +100,15 @@ const AppContext = ({ children }) => {
       })
       
       setCartItems(updatedCartItems);
-      
-      
-     
-    
     } else {
       product.quantity = quantity;
-      
       setCartItems([...cartItems, { ...product }]);
     }
-    
-
-    
-    
+    /////////////////////////////////////////////////////////////////////////////////
     openCartModal()
-    
   } 
-  
-  
 
 
-  
-
-  
   const toggleCartItemQuantity = (id, value) => {
     const updatedCartItems = cartItems.map((item) => {
       if (item._id === id) {
@@ -175,6 +178,8 @@ const AppContext = ({ children }) => {
       setTotalQuantities,
       toggleCartItemQuantity,
       onRemove,
+      messageDetails,
+      setMessageDetails,
       isItemChosen,
       setItemChosen,
       stock,

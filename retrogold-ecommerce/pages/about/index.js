@@ -12,11 +12,9 @@ const About = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
 
   const{about} = data
-  console.log(about[0].aboutImage)
-
  
   const [aboutUs] = about
-  console.log(aboutUs)
+  
 
 
   return (
@@ -40,7 +38,7 @@ const About = ({data}) => {
         
 
         <div className="">
-          <Image src={about[0].aboutImage} width="200" height="200" alt="" className="aboutImage" unoptimized/>
+          <Image src={about[0].aboutImage} width="200" height="200" alt="" className="aboutImage" unoptimized priority/>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ const productDetails = ({data}) => {
 
   const {allProduct} = data
   const {inStock, stockQuantity} = productDetail.inventory
-  console.log(inStock, stockQuantity)
+  
   
   const [quantity, setQuantity] = useState(1)
   const {isOpenMenu, totalQuantity, onAdd, isItemChosen, stock, setStock} = useGlobalContext()
@@ -39,12 +39,6 @@ const productDetails = ({data}) => {
   useEffect(()=>{
     setStock(stockQuantity)
   },[stock])
-
-
-  console.log(stock)
-
-
-
 
 
 
@@ -62,13 +56,6 @@ const productDetails = ({data}) => {
   const {imageUrls} = productDetail
   
 
-
-
-  
-
-
- 
-  
 
   //Carousel Functions 
   const prevImage = () => { 
@@ -122,14 +109,6 @@ const productDetails = ({data}) => {
     }
   }
 
-  
-  
- 
-
-
-
-
-
   return (
     <>
       <Head>
@@ -170,7 +149,7 @@ const productDetails = ({data}) => {
              
                 {/* main image that has carousel function */}
                 <div className="">
-                   <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" />
+                   <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" priority/>
                   <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
@@ -259,7 +238,6 @@ const productDetailQuery = `*[_type == 'product' && slug.current == $slug][0]{
   slug,
   _id,
   inventory
-
 }`
 
 const allProductsQuery = `*[_type == 'product']{

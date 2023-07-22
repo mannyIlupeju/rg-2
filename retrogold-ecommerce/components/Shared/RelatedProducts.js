@@ -6,7 +6,7 @@ import Link from 'next/link'
 const Relatedproducts = ({data}) => {
   const {productDetail} = data
   const {allProduct} = data
-  
+ 
 
 
 
@@ -28,18 +28,18 @@ const Relatedproducts = ({data}) => {
             
             return (
               <Link href={`/shop/${slug.current}`} key={_id}>
-              <div className="relatedProductBlock">
-                <div className="my-2">
-                <img src={urlFor(mainImage.asset._ref)} alt="" className="relatedProductImage"/>
+                <div className="relatedProductBlock">
+                  <div className="my-2">
+                  <img src={urlFor(mainImage.asset._ref)} alt="" className="relatedProductImage"/>
+                  </div>
+                  <div className="text-zinc-700 mb-4">
+                    <p className="text-sm">{brandName}</p>
+                    <p className="font-semibold">{productName}</p>
+                    <p>${price}</p>
+                  </div>
+          
+                  <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p>
                 </div>
-                <div className="text-zinc-700 mb-4">
-                  <p className="text-sm">{brandName}</p>
-                  <p className="font-semibold">{productName}</p>
-                  <p>${price}</p>
-                </div>
-        
-                <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p>
-              </div>
               </Link>
               
             )

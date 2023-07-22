@@ -10,10 +10,6 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 const Cart = () => {
   const {cartItems, toggleCartItemQuantity, totalPrice, onRemove, totalQuantity} = useGlobalContext()
 
-
-
-
-
   return (
     <>
       <Head>

@@ -13,9 +13,6 @@ const Hero = ({hero}) => {
 
   console.log(hero[0].headline)
 
-
-
-  
   const heroOverlay = {
     background: '#4C5454'
   }

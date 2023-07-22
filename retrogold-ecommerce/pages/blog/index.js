@@ -11,10 +11,7 @@ import { useGlobalContext } from '@/ Context/context'
 
 
 const Blog = ({blog}) => {
-  console.log(blog)
  const {isOpenMenu} = useGlobalContext()
-
-
   const {mainImages, slugCurrent} = blog
 
 
@@ -49,7 +46,7 @@ const Blog = ({blog}) => {
                     <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                       <span>{blog[0].tag}</span>
                     </div>
-                    <Image src={blog[0].mainImage} width="200" height="200" className="smallImageBlog"/>
+                    <Image src={blog[0].mainImage} width="200" height="200" alt="blog-image" className="smallImageBlog" priority={true}/>
                   </div>
 
                   <div className="h-fit">
@@ -76,7 +73,7 @@ const Blog = ({blog}) => {
                 <span className="text-sm">{blog[1].tag}</span>
               </div>
               <div className="flex justify-center">
-                <Image src={blog[1].mainImage} width="200" height="200" className="smallImageBlog"/>
+                <Image src={blog[1].mainImage} width="200" height="200" alt="blog-image" className="smallImageBlog" priority={true}/>
               </div>
               <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                 {blog[1].description[0].children[0].text}
@@ -96,7 +93,7 @@ const Blog = ({blog}) => {
                   <span className="text-sm">{blog[2].tag}</span>
                 </div>
               <div className="flex justify-center">
-              <Image src={blog[2].mainImage} width="200" height="200" className="smallImageBlog"/>
+              <Image src={blog[2].mainImage} width="200" height="200" alt="blog-image" className="smallImageBlog" priority={true}/>
               </div>
                 <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                   {blog[2].description[0].children[0].text}
@@ -115,7 +112,7 @@ const Blog = ({blog}) => {
                   <span className="text-sm">{blog[3].tag}</span>
                 </div>
               <div className="flex justify-center">
-              <Image src={blog[3].mainImage} width="200" height="200" className="smallImageBlog"/>
+              <Image src={blog[3].mainImage} width="200" height="200" alt="blog-image" className="smallImageBlog" priority={true}/>
               </div>
                 <div className="text-md font-light flex items-start mt-4 px-2 text-zinc-700">
                   {blog[3].description[0].children[0].text}

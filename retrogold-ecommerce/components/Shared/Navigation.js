@@ -16,11 +16,6 @@ const Navigation = () => {
   // });
 
   const { isOpenMenu, setOpenMenu, setCartItems, cartItems, totalQuantity } = useGlobalContext()
-
-
-
-
-
     const navLink = 
     [
       {
@@ -30,6 +25,10 @@ const Navigation = () => {
       {
         name: 'Shop',
         href: '/shop',
+      }, 
+      {
+        name: 'Services',
+        href: '/services',
       }, 
       {
         name: 'Blog',
@@ -57,7 +56,7 @@ const Navigation = () => {
       </div>
 
      
-        <div className="lg:flex lg:gap-8 gap-2 text-sm font-bold lg:text-xl lg:items-center text-zinc-700 lg:block hidden">
+        <div className="lg:flex lg:gap-8 gap-2 text-md font-bold lg:text-lg lg:items-center text-zinc-700 lg:block hidden">
         {navLink.map((link)=>{
           const pathname = usePathname();
           const isActive = pathname.startsWith(link.href);
@@ -79,16 +78,16 @@ const Navigation = () => {
         <div className="lg:flex flex-row lg:items-center gap-4 lg:block hidden">
           <div className="flex justify-end border-r-2 border-zinc-500">
             <div>
-              <input type="search" id="search" className="rounded-lg bg-gray-300" />
+              <input type="search" id="search" className="rounded-lg bg-gray-300 p-1" />
             </div>
-            <div className="relative right-5 -bottom-1">
+            <div className="relative right-5 -bottom-2">
               <FaSearch size="0.8rem" color="black"/>
             </div>
           </div>
           
           <Link href='/cart'>
             <div className="flex justify-end">
-              <FaShoppingCart size="3.5rem" color="green"/>
+              <FaShoppingCart size="2.8rem" color="green"/>
               {
                 cartItems.length && 
                 <div className="relative right-2">
