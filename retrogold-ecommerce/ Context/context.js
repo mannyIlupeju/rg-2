@@ -20,7 +20,7 @@ const AppContext = ({ children }) => {
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
-  const [stock, setStock] = useState({})
+
 
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
 
@@ -38,7 +38,7 @@ const AppContext = ({ children }) => {
     }
   )
   
-  console.log(cartItems)
+
 
 
 
@@ -81,32 +81,7 @@ const AppContext = ({ children }) => {
 
 
 
-  const onAdd = (product, quantity, stockQuantity) => {
-    
 
-
-
-    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-    
-    if(checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if(cartProduct.id === product.id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity,
-        }
-      })
-      
-      setCartItems(updatedCartItems);
-    } else {
-      product.quantity = quantity;
-      setCartItems([...cartItems, { ...product }]);
-    }
-    /////////////////////////////////////////////////////////////////////////////////
-    openCartModal()
-  } 
 
 
   const toggleCartItemQuantity = (id, value) => {
@@ -172,18 +147,17 @@ const AppContext = ({ children }) => {
       setCartInfo,
       cartItems,
       setCartItems,
-      onAdd,
       totalPrice,
+      setTotalPrice,
       totalQuantity,
       setTotalQuantities,
       toggleCartItemQuantity,
       onRemove,
       messageDetails,
+      openCartModal,
       setMessageDetails,
       isItemChosen,
       setItemChosen,
-      stock,
-      setStock,
       closeCartModal
       }}
     >

@@ -20,7 +20,7 @@ var config = {
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'foypmm2m',
   apiVersion: '2022-12-22',
   useCdn: true,
   token: process.env.NEXT_INVENTORY_TOKEN

@@ -21,8 +21,8 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-    <AppContext>
     {isLoading && <Loading/>}
+    <AppContext>
       <Component {...pageProps} />
     </AppContext>
     </>

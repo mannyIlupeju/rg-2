@@ -19,26 +19,27 @@ import Cart from '@/components/Cart';
 
 
 
+
+
 const productDetails = ({data}) => {
 
   const {productDetail} = data
-  console.log(productDetail)
+
 
   const {allProduct} = data
-  const {inStock, stockQuantity} = productDetail.inventory
   
   
   const [quantity, setQuantity] = useState(1)
-  const {isOpenMenu, totalQuantity, onAdd, isItemChosen, stock, setStock} = useGlobalContext()
+  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
   const [imageId, setImageId] = useState(null)
-
+  const [stock, setStock] = useState(null)
   //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [fetchInventory, setFetchInventory] = useState(null)
   
-  
-  useEffect(()=>{
-    setStock(stockQuantity)
-  },[stock])
+
+ 
+  console.log(fetchInventory)
 
 
 
@@ -109,6 +110,80 @@ const productDetails = ({data}) => {
     }
   }
 
+
+  
+
+  const apiUrl = `https://foypmm2m.api.sanity.io/v2021-03-25/data/query/production?query=*%5B_type%20%3D%3D%20'product'%5D%7B%0A%20%20inventory%2C%20_id%0A%7D`
+
+  useEffect(()=> {
+    const onAddToCart = async() => {
+      try{
+        const response = await fetch(apiUrl)
+        const data = await response.json()
+        setFetchInventory(data.result)
+      } catch(error){
+        console.log('Error fetching data', error)
+      } 
+    }
+    onAddToCart()
+  },[])
+
+
+
+  const onAdd = async(product, quantity) => {
+    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
+    const checkProductInCart = cartItems.find((item) => item._id === product._id);
+    const selectedInventory = fetchInventory.find((item) => item._id === product._id);
+
+    if(selectedInventory) {
+      const updatedInventory = fetchInventory.map((item)=>{
+        const{stockQuantity} = item.inventory
+        if(item._id === product._id){
+          return { ...item, stockQuantity:stockQuantity - quantity }
+        }
+        return item;
+      })
+      setFetchInventory(updatedInventory)
+      
+      
+      try {
+        await fetch(apiUrl, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_SANITY_TOKEN}`
+          },
+          body: JSON.stringify(updatedInventory),
+        })
+        setFetchInventory(updatedInventory);
+        
+        
+        if(checkProductInCart) {
+          const updatedCartItems = cartItems.map((cartProduct) => {
+            if(cartProduct.id === product.id) return {
+              ...cartProduct,
+              quantity: cartProduct.quantity + quantity,
+              
+            }
+          })
+          setCartItems(updatedCartItems);
+        } else {
+          const updatedProduct = {...product, quantity: quantity}
+          setCartItems([...cartItems, updatedProduct]);
+        }
+      } catch(error) {
+        console.log('Error updating inventory', error)
+      }
+      
+    }
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+      setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
+    /////////////////////////////////////////////////////////////////////////////////
+
+    openCartModal()
+  } 
+
   return (
     <>
       <Head>
@@ -176,7 +251,7 @@ const productDetails = ({data}) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(productDetail, quantity, stockQuantity)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(productDetail, quantity)}>Add to Cart</button>
                   </div>
                   
                 </div>
@@ -237,7 +312,6 @@ const productDetailQuery = `*[_type == 'product' && slug.current == $slug][0]{
   price, 
   slug,
   _id,
-  inventory
 }`
 
 const allProductsQuery = `*[_type == 'product']{
