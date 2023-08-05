@@ -13,9 +13,9 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 
-
 export default function Home({hero, quote, blog, calltoAction}) {
-    const {isOpenMenu} = useGlobalContext()
+  const {isOpenMenu} = useGlobalContext()
+   
     
   return (
     <>
@@ -25,16 +25,15 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       
       <main className="w-screen">
+          {isOpenMenu ? <RespMenu/> : ''}
           <Navigation/>
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
           <Experience/>
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
-          {isOpenMenu ? <RespMenu/> : ''}
       </main>
       
       <Footer/> 
@@ -46,24 +45,28 @@ export default function Home({hero, quote, blog, calltoAction}) {
 const blogQuery = `*[_type == "blog"]{
   description, main_image, tag, slug
 }`
-const heroQuery = `*[_type == 'hero']`
+const heroQuery = `*[_type == 'hero']{
+  headline,
+  headstatement,
+  "heroImages":images.asset->url,
+  _id
+}`
 const quoteQuery = `*[_type == 'quote']`
 const calltoActionQuery = `*[_type == 'callToAction']`
 
 
-// getStaticProps works when rendering from a headless CMS
-export async function getStaticProps() {
-  const blog = await sanityClient.fetch(blogQuery)
-  const hero = await sanityClient.fetch(heroQuery)
-  const quote = await sanityClient.fetch(quoteQuery)
-  const calltoAction = await sanityClient.fetch(calltoActionQuery)
 
-  return {
-    props: {
-      hero,
-      quote,
+export async function getServerSideProps() {
+   const hero = await sanityClient.fetch(heroQuery)
+   const blog = await sanityClient.fetch(blogQuery)
+   const quote = await sanityClient.fetch(quoteQuery)
+   const calltoAction = await sanityClient.fetch(calltoActionQuery)
+   return {
+     props: {
+       hero,
+       quote,
       blog,
       calltoAction,
-    }
-  }
+     }
+   }
 }

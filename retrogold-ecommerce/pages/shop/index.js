@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Head from 'next/head'
+import Image from 'next/image';
 import { sanityClient } from '/lib/sanity'
 import {urlFor} from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
@@ -7,6 +8,7 @@ import Footer from '@/components/Shared/Footer/footer'
 import Link from 'next/link'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+
 
 
 const Shop = ({shop}) => {
@@ -17,8 +19,6 @@ const Shop = ({shop}) => {
   const[a,b,c, d] = shop 
   const [...arr] = [a,b,c,d]
  
-
-
   const contentBox = {
     width: '320px'
   }
@@ -52,7 +52,7 @@ const Shop = ({shop}) => {
       <main className="section-background">
       <div className="container mx-auto justify-center lg:justify-normal flex flex-row gap-x-48 gap-y-24 p-24 flex-wrap">
           {...arr.map((shopItems)=>{
-            const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, productDescription, shortDescription} = shopItems
+            const{brandName, _id, slug, images, mainImage, mainImage2, productName, price, shortDescription} = shopItems
            
             return (
               <div key={_id}>
@@ -60,7 +60,7 @@ const Shop = ({shop}) => {
                   <div className="text-zinc-700 cursor-pointer " key={_id} >
                     <div key={_id}>
                       <div onMouseEnter={()=> handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}  id={_id} className="shopImage">
-                      <img src={ isHovered === _id ? urlFor(mainImage2.asset._ref) : urlFor(mainImage.asset._ref)} alt="plant-pots" className="shopImage"/> 
+                      <Image src={ isHovered === _id ? mainImage2 : mainImage} width="200" height="200" alt="plant-pots" className="shopImage"/> 
                       </div>
 
                       <div className="mt-2">
@@ -99,8 +99,8 @@ const shopQuery = `*[_type == "product"]{
   _id,
   slug,
   images,
-  mainImage, 
-  mainImage2,
+  "mainImage":mainImage.asset->url, 
+  "mainImage2":mainImage2.asset->url,
   price, 
   productName,
   shortDescription,

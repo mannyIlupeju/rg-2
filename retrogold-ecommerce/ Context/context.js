@@ -1,16 +1,14 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
 import { sanityClient } from '@/lib/sanity';
 import { FaWindows } from 'react-icons/fa';
+import secureLocalStorage from 'react-secure-storage';
+
+
 //set up createContext
 const GlobalContext = createContext()
 
 //use the useContext to distribute the values gloablly 
 export const useGlobalContext = () => useContext(GlobalContext)
-
-
-
-
-
 
 
 const AppContext = ({ children }) => {
@@ -20,9 +18,20 @@ const AppContext = ({ children }) => {
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
+   const [cartNav, setCartNav]= useState([])
 
+  let savedCart = secureLocalStorage.getItem('cart')
+
+  const[newCart, setNewCart] = useState(savedCart)
 
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
+  
+
+  console.log(totalQuantity)
+
+ 
+
+
 
   const [messageDetails, setMessageDetails] = useState(
     {
@@ -42,15 +51,17 @@ const AppContext = ({ children }) => {
 
 
 
+  useEffect(()=>{
+  const cartNav = secureLocalStorage.getItem("cart")
+  if(cartNav){
+    setCartNav(cartNav)
+  }
+ },[cartNav]);
+
+  console.log(cartNav)
 
 
-  useEffect(() => {
-    if(cartItems) {
-      if (typeof window !== 'undefined' && window.localStorage){
-        localStorage.setItem('cart', JSON.stringify(cartItems))
-      }
-    }
-  },[cartItems])
+
 
 
 
@@ -77,11 +88,6 @@ const AppContext = ({ children }) => {
     document.body.style.overflowY = "scroll"
     document.body.classList.remove('overlay')
   }
-
-
-
-
-
 
 
   const toggleCartItemQuantity = (id, value) => {
@@ -158,7 +164,11 @@ const AppContext = ({ children }) => {
       setMessageDetails,
       isItemChosen,
       setItemChosen,
-      closeCartModal
+      closeCartModal,
+      savedCart,
+      newCart,
+      setNewCart,
+      cartNav
       }}
     >
       {children}

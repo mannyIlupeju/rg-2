@@ -1,15 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Image from 'next/image'
 import { useGlobalContext } from '@/ Context/context';
-import { urlFor } from '@/lib/sanity';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
-
+import secureLocalStorage from 'react-secure-storage';
 //Sidebar Cart view component
 
 const Cart = () => {
-  const {cartItems, setItemChosen, isItemChosen, onRemove, toggleCartItemQuantity, totalPrice, closeCartModal} = useGlobalContext()
+  const {isItemChosen, onRemove, cartItems, toggleCartItemQuantity, newCart, setNewCart, totalPrice, closeCartModal} = useGlobalContext()
 
- 
+  
 
   //close cart modal functionality if cart items in modal is less than 1
   if(cartItems.length < 1) {
@@ -22,8 +21,8 @@ const Cart = () => {
     }
   }
 
+  
  
-
 
   return (
     <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>

@@ -4,7 +4,7 @@ import { urlFor } from '/lib/sanity';
 
 const Calltoaction = ({calltoAction}) => {
     const mainImageBlog = {
-    width: '320px',
+    width: '520px',
     height: 'auto',
     borderRadius: '0.5rem',
     display: 'block'

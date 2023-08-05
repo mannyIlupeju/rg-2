@@ -6,11 +6,14 @@ import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
 import { useGlobalContext } from '@/ Context/context';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import secureLocalStorage from 'react-secure-storage';
 
 const Cart = () => {
-  const {cartItems, toggleCartItemQuantity, totalPrice, onRemove, totalQuantity} = useGlobalContext()
+  const {toggleCartItemQuantity, totalPrice, cartItems, savedCart, onRemove, totalQuantity} = useGlobalContext()
 
-  return (
+
+
+  return ( 
     <>
       <Head>
         <title>Cart</title>
@@ -97,13 +100,8 @@ const Cart = () => {
           </div>          
         }
         </div>
-      </main>
-       
-        
+      </main>      
      <Footer/>
-
-      
-
     </>
   );
 }

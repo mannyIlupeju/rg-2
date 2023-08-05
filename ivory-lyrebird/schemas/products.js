@@ -30,21 +30,9 @@ export default defineType({
     }),
 
     defineField({
-      name: 'inventory',
-      title: 'Inventory',
-      type: 'object',
-      fields: [
-      defineField({
-        name: 'stockQuantity',
-        title: "Stock Quantity",
-        type: 'number',
-      }),
-      defineField({
-        name: 'inStock',
-        title: "In Stock",
-        type: 'boolean',
-    }),
-      ]
+      name: 'stockQuantity',
+      title: 'StockQuantity',
+      type: 'number',
     }),
     
     defineField({

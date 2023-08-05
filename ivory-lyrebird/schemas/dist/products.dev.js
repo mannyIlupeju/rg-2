@@ -31,18 +31,9 @@ var _default = (0, _types.defineType)({
     title: "Price",
     type: 'number'
   }), (0, _types.defineField)({
-    name: 'inventory',
-    title: 'Inventory',
-    type: 'object',
-    fields: [(0, _types.defineField)({
-      name: 'stockQuantity',
-      title: "Stock Quantity",
-      type: 'number'
-    }), (0, _types.defineField)({
-      name: 'inStock',
-      title: "In Stock",
-      type: 'boolean'
-    })]
+    name: 'stockQuantity',
+    title: 'StockQuantity',
+    type: 'number'
   }), (0, _types.defineField)({
     name: 'size',
     title: 'Size',

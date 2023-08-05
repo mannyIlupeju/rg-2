@@ -1,31 +1,42 @@
 import '@/styles/globals.css'
 import AppContext from '@/ Context/context'
-import Router from 'next/router'
-import {useState} from 'react'
+import {useRouter} from 'next/router'
+import {useState, useEffect, StrictMode} from 'react'
 import Loading from '@/components/Loader/Loading'
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter()
   const [isLoading, setLoading] = useState(false)
 
-  setTimeout(()=>{
-    Router.events.on('routeChangeStart', (url)=>{
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      console.log('route change complete')
       setLoading(true)
-    }, 8000)
-  })
+    }
 
-  Router.events.on('routeChangeComplete', (url)=>{
-    console.log('Route change is complete..')
-    setLoading(false)
-  })
+    const handleRouteChangeComplete = () => {
+      setLoading(false)
+    }
 
+    router.events.on('routeChangeStart', handleRouteChange)
+    router.events.on('routeChangeComplete', handleRouteChangeComplete)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+      router.events.off('routeChangeComplete', handleRouteChangeComplete)
+    }
+  }, [router.events])
 
   return (
     <>
-    {isLoading && <Loading/>}
-    <AppContext>
-      <Component {...pageProps} />
-    </AppContext>
+      <StrictMode>
+      {isLoading ?
+      <Loading/>
+      : <AppContext>
+        <Component {...pageProps} />
+      </AppContext>
+      }
+      </StrictMode>
     </>
-  
   ) 
 }

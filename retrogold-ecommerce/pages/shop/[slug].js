@@ -13,6 +13,7 @@ import Breadcrumb from '/components/Shared/Breadcrumbs'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import Cart from '@/components/Cart';
+import secureLocalStorage from 'react-secure-storage';
 
 
 
@@ -22,27 +23,13 @@ import Cart from '@/components/Cart';
 
 
 const productDetails = ({data}) => {
-
   const {productDetail} = data
 
-
-  const {allProduct} = data
-  
-  
   const [quantity, setQuantity] = useState(1)
-  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
-  const [imageId, setImageId] = useState(null)
-  const [stock, setStock] = useState(null)
+  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, newCart, setNewCart, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
   //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [fetchInventory, setFetchInventory] = useState(null)
   
-
- 
-  console.log(fetchInventory)
-
-
-
 
   //product Detail destructure
   const desc = productDetail.productDescription.map((x)=> x.children[0].text)
@@ -111,78 +98,46 @@ const productDetails = ({data}) => {
   }
 
 
-  
 
-  const apiUrl = `https://foypmm2m.api.sanity.io/v2021-03-25/data/query/production?query=*%5B_type%20%3D%3D%20'product'%5D%7B%0A%20%20inventory%2C%20_id%0A%7D`
-
-  useEffect(()=> {
-    const onAddToCart = async() => {
-      try{
-        const response = await fetch(apiUrl)
-        const data = await response.json()
-        setFetchInventory(data.result)
-      } catch(error){
-        console.log('Error fetching data', error)
-      } 
-    }
-    onAddToCart()
-  },[])
+  const token = process.env.NEXT_PUBLIC_API_KEY
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 
+  useEffect(()=>{
+    secureLocalStorage.setItem('cart', cartItems)
+  },[cartItems])
+
+
+
+
+
+ 
 
   const onAdd = async(product, quantity) => {
     //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
     const checkProductInCart = cartItems.find((item) => item._id === product._id);
-    const selectedInventory = fetchInventory.find((item) => item._id === product._id);
-
-    if(selectedInventory) {
-      const updatedInventory = fetchInventory.map((item)=>{
-        const{stockQuantity} = item.inventory
-        if(item._id === product._id){
-          return { ...item, stockQuantity:stockQuantity - quantity }
+    if (checkProductInCart) {
+      const updatedCartItems = cartItems.map((cartProduct) => {
+        if (cartProduct.id === product.id) return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + quantity,
         }
-        return item;
       })
-      setFetchInventory(updatedInventory)
+      setCartItems(updatedCartItems);
       
-      
-      try {
-        await fetch(apiUrl, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.NEXT_SANITY_TOKEN}`
-          },
-          body: JSON.stringify(updatedInventory),
-        })
-        setFetchInventory(updatedInventory);
-        
-        
-        if(checkProductInCart) {
-          const updatedCartItems = cartItems.map((cartProduct) => {
-            if(cartProduct.id === product.id) return {
-              ...cartProduct,
-              quantity: cartProduct.quantity + quantity,
-              
-            }
-          })
-          setCartItems(updatedCartItems);
-        } else {
-          const updatedProduct = {...product, quantity: quantity}
-          setCartItems([...cartItems, updatedProduct]);
-        }
-      } catch(error) {
-        console.log('Error updating inventory', error)
-      }
-      
+
+    } else {
+      const updatedProduct = { ...product, quantity: quantity }
+      setCartItems([...cartItems, updatedProduct]);
     }
-      setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-      setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
-    /////////////////////////////////////////////////////////////////////////////////
-
+    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
     openCartModal()
-  } 
+  }
+
+
+
 
   return (
     <>
@@ -325,6 +280,8 @@ const allProductsQuery = `*[_type == 'product']{
 }`
 
 export async function getStaticProps({ params }) {
+
+
  const {slug} = params;
  const productDetail = await sanityClient.fetch(productDetailQuery, {slug})
 

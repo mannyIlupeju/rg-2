@@ -8,6 +8,8 @@ import Footer from '@/components/Shared/Footer/footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import { useGlobalContext } from '@/ Context/context'
 
+
+
 const About = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
 
@@ -38,7 +40,7 @@ const About = ({data}) => {
         
 
         <div className="">
-          <Image src={about[0].aboutImage} width="200" height="200" alt="" className="aboutImage" unoptimized priority/>
+          <Image src={about[0].aboutImage} width="200" height="200" alt="" className="aboutImage" unoptimized priority={true}/>
         </div>
       </div>
     </div>
@@ -65,7 +67,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: {about}
+      data: {about},
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import Link from 'next/link'
 import { FaSearch } from 'react-icons/fa';
 import styles from '@/styles/Home.module.css'
@@ -7,15 +7,17 @@ import {FaShoppingCart} from 'react-icons/fa'
 import {FaBars} from 'react-icons/fa'
 import {useInView} from 'react-intersection-observer'
 import { useGlobalContext } from '@/ Context/context';
+import secureLocalStorage from 'react-secure-storage';
+
 
 const Navigation = () => {
-  // const targetRef = useRef(null)
-  // const [showNavigation, setShowNavigation] = useState(false);
-  // const [ref, inView] = useInView({
-  //   threshold: 100, // Adjust this threshold as needed
-  // });
 
-  const { isOpenMenu, setOpenMenu, setCartItems, cartItems, totalQuantity } = useGlobalContext()
+
+  const { isOpenMenu, setOpenMenu, cartItems, cartNav, newCart, totalQuantity } = useGlobalContext()
+ 
+
+
+  
     const navLink = 
     [
       {
@@ -89,10 +91,12 @@ const Navigation = () => {
             <div className="flex justify-end">
               <FaShoppingCart size="2.8rem" color="green"/>
               {
-                cartItems.length && 
+                cartNav.length ? 
                 <div className="relative right-2">
                   <span className="bg-zinc-800 p-2 rounded-full text-sm">{totalQuantity}</span>
                 </div>
+                :
+                " "
               }
             </div>
           </Link>
