@@ -25,10 +25,22 @@ export default defineType ({
       },
     }),
     defineField({
+      name: 'tag',
+      title: 'Tag',
+      type: 'string',
+    }),
+
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: [{type: 'author'}]
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [{type: 'block'}]
     }),
     defineField({
       name: 'post',
@@ -53,12 +65,25 @@ export default defineType ({
           type: 'string',
         }
       ]
+    }),
+    defineField({
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{
+        name: 'image',
+        title: 'Image',
+        type: 'image'
+      }],
 
     }),
     defineField({
       name: 'published',
       title: 'Published At',
-      type: 'date'
+      type: 'datetime',
+      otpions: {
+        dateFormat: "YYYY-MM-DD"
+      }
     })
 
   ]

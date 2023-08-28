@@ -7,6 +7,10 @@ exports.sanityClient = exports.urlFor = void 0;
 
 var _nextSanity = require("next-sanity");
 
+var _imageUrl = _interopRequireDefault(require("@sanity/image-url"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 var config = {
   /**
    * Find your project ID and dataset in `sanity.json` in your studio project.
@@ -15,10 +19,11 @@ var config = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "production",
-  projectId: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'foypmm2m',
   apiVersion: '2022-12-22',
-  useCdn: false
+  useCdn: true,
+  token: process.env.NEXT_INVENTORY_TOKEN
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).
@@ -31,12 +36,36 @@ var config = {
  * Read more: https://www.sanity.io/docs/image-url
  **/
 
+var builder = (0, _imageUrl["default"])(config);
+
 var urlFor = function urlFor(source) {
-  return (0, _nextSanity.createImageUrlBuilder)(config).image(source);
+  return builder.image(source);
 }; // Set up the client for fetching data in the getProps page functions
 
 
 exports.urlFor = urlFor;
-var sanityClient = (0, _nextSanity.createClient)(config);
+var sanityClient = (0, _nextSanity.createClient)(config); // // // Retrieve a product with its inventory data
+//   sanityClient
+//   .fetch('*[_type == "product"]{_id, inventory}')
+//   .then((products) => {
+//     console.log(products)
+//     //product Id
+//     const productId = products.map((item) => item._id)
+//     console.log('productId:', productId);
+//     //Products - Inventory and Stock
+//     const productInfo = products.map((item) => item);
+//     const product = (productInfo.map((items)=> items.inventory))
+//     console.log(product)
+//     //Inventory stock
+//     const stock = product.map((x)=> x.stockQuantity)
+//     console.log('Stock Quantity:', stock);
+//     //In stock information
+//     const inStock = product.map((x)=> x.inStock)
+//     console.log('In Stock:', inStock);
+//   })
+//   .catch((error) => {
+//     console.error('Error retrieving product:', error);
+//   });
+
 exports.sanityClient = sanityClient;
 //# sourceMappingURL=sanity.dev.js.map

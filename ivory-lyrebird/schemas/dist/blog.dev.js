@@ -28,11 +28,22 @@ var _default = (0, _types.defineType)({
       maxLength: 90
     }
   }), (0, _types.defineField)({
+    name: 'tag',
+    title: 'Tag',
+    type: 'string'
+  }), (0, _types.defineField)({
     name: 'author',
     title: 'Author',
     type: 'reference',
     to: [{
       type: 'author'
+    }]
+  }), (0, _types.defineField)({
+    name: 'description',
+    title: 'Description',
+    type: 'array',
+    of: [{
+      type: 'block'
     }]
   }), (0, _types.defineField)({
     name: 'post',
@@ -59,9 +70,21 @@ var _default = (0, _types.defineType)({
       type: 'string'
     }]
   }), (0, _types.defineField)({
+    name: 'images',
+    title: 'Images',
+    type: 'array',
+    of: [{
+      name: 'image',
+      title: 'Image',
+      type: 'image'
+    }]
+  }), (0, _types.defineField)({
     name: 'published',
     title: 'Published At',
-    type: 'date'
+    type: 'datetime',
+    otpions: {
+      dateFormat: "YYYY-MM-DD"
+    }
   })]
 });
 

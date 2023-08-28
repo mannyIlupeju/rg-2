@@ -11,10 +11,30 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+      source: 'title',
+  }
+    }),
+    defineField({
+      name: 'brandName',
+      title: 'Brand Name',
+      type: 'string',
+    }),
+    defineField({
       name: 'price',
       title: "Price",
       type: 'number',
     }),
+
+    defineField({
+      name: 'stockQuantity',
+      title: 'StockQuantity',
+      type: 'number',
+    }),
+    
     defineField({
       name: 'size',
       title: 'Size',
@@ -25,8 +45,21 @@ export default defineType({
       }
     }),
     defineField({
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'array',
+      of: [{type: 'block'}]
+     
+    }),
+    defineField({
       name: 'productDescription',
       title: 'Product Description',
+      type: 'array',
+      of: [{type: 'block'}]
+    }),
+    defineField({
+      name: 'shippingReturns',
+      title: 'Shipping & Returns',
       type: 'array',
       of: [{type: 'block'}]
     }),
@@ -39,14 +72,26 @@ export default defineType({
       }
     }),
     defineField({
+      name:'mainImage2',
+      title: 'Main Image2',
+      type: 'image',
+      options: {
+        hotspot: true
+      }
+    }),
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',
+      options: {
+        hotspot: true,
+      },
       of: [{
         name: 'image',
         title: 'Image',
         type: 'image'
       }]
-    }),
+      
+    })
   ]
 })

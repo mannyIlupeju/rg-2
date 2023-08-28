@@ -7,8 +7,8 @@ export default defineType ({
   of: [{type: Array}],
   fields:[
     defineField({
-      name: 'hero',
-      title: 'Hero',
+      name: 'images',
+      title:'Images',
       type: 'image'
     }),
     defineField({

@@ -3,4 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname:'cdn.sanity.io',
+        port: '',
+        pathname: '/images/foypmm2m/production/**',
+        
+      }
+    ]
+  }
+}, nextConfig
