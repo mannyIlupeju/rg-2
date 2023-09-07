@@ -14,9 +14,6 @@ const InputForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
-    
-
     setMessageDetails(
       {
         firstName:messageDetails.firstName,
@@ -31,16 +28,8 @@ const InputForm = () => {
         id,
       }
     )
-
     onAddService(messageDetails)
-
-
-
   }
-
-
-  console.log(messageDetails)
-  
 
   
 

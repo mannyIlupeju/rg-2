@@ -9,7 +9,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import secureLocalStorage from 'react-secure-storage';
 
 const Cart = () => {
-  const {toggleCartItemQuantity, totalPrice, cartItems, savedCart, onRemove, totalQuantity} = useGlobalContext()
+  const {toggleCartItemQuantity, totalPrice, cartItems, cartNav, savedCart, onRemove, totalQuantity} = useGlobalContext()
 
 
 

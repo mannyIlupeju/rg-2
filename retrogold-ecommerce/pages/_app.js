@@ -29,14 +29,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <StrictMode>
+      {/* <StrictMode>
       {isLoading ?
       <Loading/>
       : <AppContext>
         <Component {...pageProps} />
       </AppContext>
       }
-      </StrictMode>
+      </StrictMode> */}
+
+      <AppContext>
+        <Component {...pageProps} />
+      </AppContext>
     </>
   ) 
 }

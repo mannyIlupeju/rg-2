@@ -13,23 +13,28 @@ export const useGlobalContext = () => useContext(GlobalContext)
 
 const AppContext = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
+
   const [isOpenMenu, setOpenMenu] = useState(false)
-  const [cartInfo, setCartInfo] = useState([]) //stores the unchecked items in the cart
+
+
   const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
+    // secureLocalStorage.getItem('quantity')
+
   const[totalPrice, setTotalPrice] = useState(0)
+
   const [isItemChosen, setItemChosen] = useState(false)
-   const [cartNav, setCartNav]= useState([])
 
-  let savedCart = secureLocalStorage.getItem('cart')
-
-  const[newCart, setNewCart] = useState(savedCart)
+  // const [cartNav, setCartNav]= useState()
 
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
   
+  const [cartNav, setCartNav] = useState([])
 
-  console.log(totalQuantity)
+  useEffect(()=>{
+  let cartNav = secureLocalStorage.getItem('cart')
+  setCartNav(cartNav)
+  },[cartNav])
 
- 
 
 
 
@@ -47,24 +52,6 @@ const AppContext = ({ children }) => {
     }
   )
   
-
-
-
-
-  useEffect(()=>{
-  const cartNav = secureLocalStorage.getItem("cart")
-  if(cartNav){
-    setCartNav(cartNav)
-  }
- },[cartNav]);
-
-  console.log(cartNav)
-
-
-
-
-
-
 
   //Navigation Modal functionality
   useEffect(() => {
@@ -87,6 +74,37 @@ const AppContext = ({ children }) => {
     setItemChosen(false)
     document.body.style.overflowY = "scroll"
     document.body.classList.remove('overlay')
+  }
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const token = process.env.NEXT_PUBLIC_API_KEY
+
+
+
+
+
+  const onAdd = async(product, quantity) => {
+    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
+    const checkProductInCart = cartItems.find((item) => item._id === product._id);
+
+    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
+
+    if (checkProductInCart) {
+      const updatedCartItems = cartItems.map((cartProduct) => {
+        if (cartProduct.id === product.id) return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + quantity,
+        }
+      })
+      setCartItems(updatedCartItems);
+
+    } else {
+      const updatedProduct = { ...product, quantity: quantity }
+      setCartItems([...cartItems, updatedProduct]);
+    }
+    openCartModal()
   }
 
 
@@ -122,7 +140,6 @@ const AppContext = ({ children }) => {
 
 
   const onRemove = (id, quantity) => {
-    console.log(quantity)
    const filteredProduct = cartItems.filter(item => item._id !== id)
   
    if(filteredProduct) {
@@ -136,12 +153,7 @@ const AppContext = ({ children }) => {
    setTotalQuantities(updatedQuantities)
   }
     
-   
-   
-        
-        
-        
-        
+
         
   return (
     <GlobalContext.Provider value={{ 
@@ -149,8 +161,6 @@ const AppContext = ({ children }) => {
       setCurrentIndex,
       isOpenMenu,
       setOpenMenu,
-      cartInfo,
-      setCartInfo,
       cartItems,
       setCartItems,
       totalPrice,
@@ -158,6 +168,7 @@ const AppContext = ({ children }) => {
       totalQuantity,
       setTotalQuantities,
       toggleCartItemQuantity,
+      onAdd,
       onRemove,
       messageDetails,
       openCartModal,
@@ -165,10 +176,6 @@ const AppContext = ({ children }) => {
       isItemChosen,
       setItemChosen,
       closeCartModal,
-      savedCart,
-      newCart,
-      setNewCart,
-      cartNav
       }}
     >
       {children}

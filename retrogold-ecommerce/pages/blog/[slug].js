@@ -20,7 +20,6 @@ const blogImage = {
 const blogPost = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
   const{blogDetail} = data
-  console.log(blogDetail)
 
  
 

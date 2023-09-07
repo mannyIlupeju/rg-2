@@ -1,0 +1,1 @@
+{"version":3,"sources":["stripe.js"],"names":["stripe","Stripe"],"mappings":";;AAAA;;;;AAEA,IAAMA,MAAM,GAAG,IAAIC,kBAAJ,EAAf","sourcesContent":["import Stripe from 'stripe'\n\nconst stripe = new Stripe();"],"file":"stripe.dev.js"}

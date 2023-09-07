@@ -22,7 +22,7 @@ const services = () => {
         <div className="w-screen">
           <img src='/images/tarotheadline.jpeg' alt="tarotcards" className="bg-zinc-700"/>
         </div>
-        <div className="container mx-auto flex flex-col md:flex-row gap-12 p-24">
+        <div className="container mx-auto flex justify-center flex-col lg:flex-row gap-12 lg:p-24 md:p-4 p-3">
           <div className="mainTarotBox">
             <img src="/images/sideTarotImage.jpeg" alt="sideTarotImage"/>
           </div>

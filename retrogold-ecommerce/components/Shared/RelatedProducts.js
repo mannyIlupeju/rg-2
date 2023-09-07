@@ -21,7 +21,7 @@ const Relatedproducts = ({data}) => {
       <div className="">
       <h2 className="text-zinc-800">Related Products</h2>
       </div>
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-10">
           {filterProducts.map((x)=>{
             const{mainImage, price, productName, brandName, shortDescription, slug, _id} = x
         

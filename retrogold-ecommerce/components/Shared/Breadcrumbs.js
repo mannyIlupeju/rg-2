@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import {useRouter} from 'next/router'
 
-
 const Breadcrumb = () => {
  
   const router = useRouter()

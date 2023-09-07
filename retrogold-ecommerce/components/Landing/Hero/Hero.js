@@ -8,10 +8,9 @@ import { useGlobalContext } from '@/ Context/context';
 
 //Carousel Component 
 const Hero = ({hero}) => {
-  console.log(hero)
+
   const { currentIndex, setCurrentIndex } = useGlobalContext()
 
-  console.log(hero[0].headline)
 
   const heroOverlay = {
     background: '#4C5454'
@@ -26,10 +25,6 @@ const Hero = ({hero}) => {
   heroImg.push(heroImage0, heroImage1, heroImage2, heroImage3)
 
 
-
-  
-  
-
   //Carousel Animation
   useEffect(()=>{
     const intervalid = setInterval(() => {
@@ -38,10 +33,6 @@ const Hero = ({hero}) => {
 
     return ()=> clearInterval(intervalid);
   },[currentIndex])
-
-
-
-   
 
 
   return (    

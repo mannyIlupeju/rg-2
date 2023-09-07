@@ -26,10 +26,23 @@ const productDetails = ({data}) => {
   const {productDetail} = data
 
   const [quantity, setQuantity] = useState(1)
-  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, newCart, setNewCart, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
+
+  const {
+    isOpenMenu,
+    totalQuantity, 
+    setTotalQuantities, 
+    totalPrice, 
+    cartNav, 
+    setTotalPrice, 
+    setCartItems, 
+    cartItems, 
+    onAdd,
+    isItemChosen, 
+    openCartModal
+  } = useGlobalContext()
+
   //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
-  
 
   //product Detail destructure
   const desc = productDetail.productDescription.map((x)=> x.children[0].text)
@@ -60,22 +73,22 @@ const productDetails = ({data}) => {
 
   //Left arrow styling
   const leftArrow = {
-    color: '#D5BDAF',
-    transform: 'translate(0, -50%)',
-    position: 'absolute',
-    left: '8px',
+    color:'#D5BDAF',
+    transform:'translate(0, -50%)',
+    position:'absolute',
+    left:'8px',
     top:'50%',
-    cursor: 'pointer',
+    cursor:'pointer',
   }
 
   //Right arrow styling
   const rightArrow = {
     color: '#D5BDAF',
-    transform: 'translate(0, -50%)',
+    transform: 'translate(-50%, -50%)',
     position: 'absolute',
     top:'50%',
-    right: '8px',
-    cursor: 'pointer',
+    right:'0',
+    cursor:'pointer',
   }
 
   const selectImage = (index) => {
@@ -96,48 +109,6 @@ const productDetails = ({data}) => {
       setQuantity((prev)=> prev - 1)
     }
   }
-
-
-
-  const token = process.env.NEXT_PUBLIC_API_KEY
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-
-  useEffect(()=>{
-    secureLocalStorage.setItem('cart', cartItems)
-  },[cartItems])
-
-
-
-
-
- 
-
-  const onAdd = async(product, quantity) => {
-    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
-    if (checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct.id === product.id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity,
-        }
-      })
-      setCartItems(updatedCartItems);
-      
-
-    } else {
-      const updatedProduct = { ...product, quantity: quantity }
-      setCartItems([...cartItems, updatedProduct]);
-    }
-
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-    openCartModal()
-  }
-
-
-
 
   return (
     <>
@@ -160,14 +131,14 @@ const productDetails = ({data}) => {
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
-            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 overflow-hidden">
+            <div className="flex flex-col flex-col-reverse justify-center md:gap-10 gap-4 overflow-hidden w-fit">
               <div>
-                <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">
+                <div className="flex md:flex-row flex-wrap items-center gap-4 col-start-1">
                     {imageUrls.map((x, index)=>{
                     return (
                       <div className="flex" key={index}>
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
-                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="200" height="200"/>
+                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="400" height="200" unoptimized/>
                         </div>
                       </div>
                       )
@@ -178,10 +149,10 @@ const productDetails = ({data}) => {
                   
              
                 {/* main image that has carousel function */}
-                <div className="">
-                   <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" priority/>
-                  <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
-                    <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
+                <div className="relative w-fit">
+                   <Image src={imageUrls[currentIndex]} width="100" height="200" alt=" " className="mainProductImage" priority unoptimized/>
+                  <div className="bottom-44 cursor-pointer">
+                    <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow}/>
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
                   </div>
                 </div> 
@@ -280,16 +251,9 @@ const allProductsQuery = `*[_type == 'product']{
 }`
 
 export async function getStaticProps({ params }) {
-
-
  const {slug} = params;
  const productDetail = await sanityClient.fetch(productDetailQuery, {slug})
-
  const allProduct = await sanityClient.fetch(allProductsQuery)
-
-
-
-
  return {
    props: {
      data: {productDetail, allProduct}
