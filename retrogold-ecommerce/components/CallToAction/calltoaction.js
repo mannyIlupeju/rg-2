@@ -1,14 +1,39 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { urlFor } from '/lib/sanity';
 
 
 const Calltoaction = ({calltoAction}) => {
-    const mainImageBlog = {
+
+  const inputRef = useRef(null)
+
+  async function handleSubmit(){
+    const userEmail = inputRef.current.value
+
+    try{
+      const response = await fetch('api/newsletter/newsletter', {
+        method:'POST',
+        headers: {
+          'Content-Type':"application/json"
+        },
+        body: JSON.stringify({email: userEmail}),
+      })
+
+      const data = await response.json();
+      
+    } catch(error) {
+      console.log('Error occurred', error)
+    }
+  }
+
+
+  const mainImageBlog = {
     width: '20rem',
     height: 'auto',
     borderRadius: '0.5rem',
     display: 'block'
   }
+
+
   
 
   return (
@@ -25,9 +50,9 @@ const Calltoaction = ({calltoAction}) => {
           </div>
 
           <div className="mt-2">
-            <input type="email" id='email' placeholder="Enter email address" size="20"/>
+            <input type="email" id='email' placeholder="Enter email address" size="20" ref={inputRef}/>
           </div>
-          <button className="mt-4 btn">Submit</button>
+          <button className="mt-4 btn" onClick={handleSubmit}>Submit</button>
         </div>
 
         <div className="flex justify-end inline-block" style={mainImageBlog}>

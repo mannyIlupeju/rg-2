@@ -1,1 +1,0 @@
-{"version":3,"sources":["shop.js"],"names":["handler","req","res"],"mappings":";;AACA,SAAeA,OAAf,CAAwBC,GAAxB,EAA6BC,GAA7B;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","sourcesContent":["\nasync function handler (req, res) {\n\n}"],"file":"shop.dev.js"}
