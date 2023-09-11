@@ -1,32 +1,108 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { useGlobalContext } from '@/ Context/context';
+import {FaTimes} from 'react-icons/fa'
 
 
 
 const Login = () => {
+  const [checkUserData, setcheckUserData] = useState({email: '', password: ''})
+  const [isLoading, setisLoading] = useState(false)
+  const [color, setColor] = useState('#ffffff')
+  const [hidePassword, sethidePassword] = useState(false)
+  const[registerUser, setRegisterUser] = useState(false)
+  
+  const {isSignIn, setIsSignIn, isUserRegistered, setIsUserRegistered, closeLoginModal, registerModal} = useGlobalContext()
+  
+
+
+
+  const modalRef = useRef();
+
+  useEffect(() => {
+    // Disable scrolling on the body element
+    document.body.style.overflow = 'hidden';
+
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        // Set isSignIn to false to close the modal (assuming you have a method to do this)
+        setIsSignIn(false);
+      }
+    };
+
+    // Listen for clicks on the document
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup the event listener and re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+ 
+
+ 
+
+
+
+  //Login submit functionality
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   dispatch(loginPost(checkUserData))
+  //   setisLoading(true)
+
+  //   setTimeout(() => {
+  //     const token = localStorage.getItem('token')
+  //     if(token){
+  //       setisLoading(false)
+  //       setisLogin(true)
+  //       setsuccessMessage(true)
+  //       navigate ('/', {replace: true})
+  //     }
+  //     else {
+  //       setErrorMessage(true)
+  //       setTimeout(() => {
+  //         setErrorMessage(false)
+  //         setisLoading(false)
+  //         clearLogin()
+  //       }, 1000);
+  //     }
+
+  //   }, 2000);
+  // }
+
+  //Clear fields login
+  const clearLogin= () => {
+    setcheckUserData({name: '', email: '', password:''})
+  }
+
+
+  //password hide/show functionality  
+  function closePassword() {
+    sethidePassword(true)
+  }
+  function showPassword() {
+    sethidePassword(false)
+  }
+
+
+
   return (
     <>
-    <div className="flex justify-center mx-auto p-24">
-      <div className="postBcground p-12 w-96">
+    <div className="flex items-center justify-center h-screen bg-gray-800 bg-opacity-75 fixed inset-0 z-40">
+      
+      <div className="loginStyle p-12 rounded-lg shadow-lg" ref={modalRef}>
+        <div className="relative bottom-8 left-64" onClick={closeLoginModal}>
+          <FaTimes size="1.8rem" className="cursor-pointer"/>
+        </div>
         <div className="text-center mb-4">
           <h1 className="uppercase text-2xl text-slate-900">Login</h1>
         </div>
-       
-        {successMessage &&
-          <div className="text-center mb-4 bg-slate-800 p-4 w-fit mx-auto">
-            <h4>User is now Logged in</h4>
-          </div> 
-
-        }
-        {errorMessage && 
-        <div className="text-center mb-4 bg-slate-800 p-4 w-fit mx-auto">
-            <h4>Email address or password is not correct</h4>
-          </div> 
-        }
-
           <div>
             <form className="flex flex-col gap-3">
               <div className="flex flex-col gap-3">
-              <label htmlFor="email" className="text-white">
+              <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
               <input type="text" name="email" id="email" value={checkUserData.email} onChange={(e)=>{
@@ -35,25 +111,23 @@ const Login = () => {
               }} required/>
               </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="password" className="text-white">
+              <div className="flex flex-col w-fit">
+                <label htmlFor="password" className="text-gray-800">
                     Password:
                 </label>
-                {!hidePassword ? <FaEye className="relative top-5 left-60" onClick={closePassword}/> : <FaEyeSlash className="relative top-5 left-60" onClick={showPassword}/>}
-                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" value={checkUserData.password} onChange={(e)=>{
+                {!hidePassword ? <FaEye className="relative top-6 left-56" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-56" onClick={showPassword}/>}
+                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="formInput"value={checkUserData.password} onChange={(e)=>{
                   e.preventDefault()
                   setcheckUserData({...checkUserData, password:e.target.value})
                 }}required/>  
               </div>
 
-              <button className="btn btn-primary mt-6" type="submit" onClick={handleSubmit}>
-                {isLoading ? <RiseLoader color="#ffffff" size={10}/> : 'Submit'}
-              </button>
+              <button className="btn btn-primary mt-6" type="submit">Login</button>
 
-              <div className="flex flex-row gap-1 justify-center text-sm mt-4">
-              <p className="text-white">Don't have an account?</p>
+              <div className="flex flex-row gap-1 justify-center text-lg mt-4">
+              <p className="text-gray-800">Don't have an account?</p>
               <div className="text-underline">
-              <Link className="text-black"to="/blog/register">Sign up</Link>
+                <p className="text-green-500 cursor-pointer"onClick={registerModal}>Sign Up!</p>
               </div>
               </div>
             </form>

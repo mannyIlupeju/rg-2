@@ -1,7 +1,37 @@
-import React from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import Link from 'next/link'
 
 const Footer = () => {
+  const [isMessage, setMessage] = useState('')
+  const inputRef = useRef(null)
+
+  async function handleSubmit(){
+    const userEmail = inputRef.current.value
+
+    try{
+      const response = await fetch('api/newsletter/newsletter', {
+        method:'POST',
+        headers: {
+          'Content-Type':"application/json"
+        },
+        body: JSON.stringify({email: userEmail}),
+      })
+
+      const data = await response.json();
+      setMessage(data.message)
+      
+    } catch(error) {
+      console.log('Error occurred', error)
+    }
+  }
+
+  useEffect(()=> {
+    setTimeout(() => {
+      setMessage(null)
+      
+    }, 6000);
+  }, [isMessage])
+
   return (
     <>
      <div className="flex flex-col md:flex-row gap-4 text-zinc-100 text-lg justify-center p-12 footer-section">
@@ -58,9 +88,12 @@ const Footer = () => {
            <p>Subscribe to our newsletter</p>
          </div>
          <div className="flex flex-col lg:flex-row gap-4 mt-4">
-           <input type="email" id="email" placeholder="Enter email address" className="text-zinc-700"/>
-           <button>SIGN UP</button>
+           <input type="email" id="email" placeholder="Enter email address" className="text-zinc-700" ref={inputRef}/>
+           <button onClick={handleSubmit}>SIGN UP</button>
          </div>
+         <div>
+           {isMessage}
+          </div>
          <div className="mt-12">
            <p className="text-sm">
              By clicking "submit" you agree to receive emails from Retrogold 

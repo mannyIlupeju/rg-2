@@ -10,7 +10,8 @@ import Search from './Search/Search'
 
 
 const Navigation = () => {
-	const { isOpenMenu, setOpenMenu, cartItems, cartNav, newCart, totalQuantity } = useGlobalContext();
+	const { isOpenMenu, setOpenMenu, cartItems, cartNav, newCart, totalQuantity, isSignIn, setIsSignIn } = useGlobalContext();
+
 
 	const navLink = [
 		{
@@ -39,6 +40,13 @@ const Navigation = () => {
 		}
 	];
 
+	function handleLogin() {
+		setIsSignIn(!isSignIn)
+		console.log(isSignIn)
+
+		
+	}
+
 	return (
 		<nav className='navigationStyle'>
 			<div className=' flex items-center'>
@@ -63,9 +71,11 @@ const Navigation = () => {
 			<div className='lg:flex flex-row lg:items-center gap-4 lg:block hidden'>
 
 				<Search/>
-
-				<IoPerson color='black' size='1.8rem'/>
 				
+				
+				<IoPerson onClick={handleLogin}color='black' size='1.8rem'/>
+				
+
 				<Link href='/cart'>
 					<div className='flex justify-end'>
 						<FaShoppingCart size='1.8rem' color='black'/>

@@ -1,7 +1,7 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
 import { sanityClient } from '@/lib/sanity';
 import { FaWindows } from 'react-icons/fa';
-import secureLocalStorage from 'react-secure-storage';
+
 
 
 //set up createContext
@@ -13,27 +13,14 @@ export const useGlobalContext = () => useContext(GlobalContext)
 
 const AppContext = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-
   const [isOpenMenu, setOpenMenu] = useState(false)
-
-
-  const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
-    // secureLocalStorage.getItem('quantity')
-
+  const[totalQuantity, setTotalQuantities] = useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
-
   const [isItemChosen, setItemChosen] = useState(false)
-
-  // const [cartNav, setCartNav]= useState()
-
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
-  
   const [cartNav, setCartNav] = useState([])
-
-  useEffect(()=>{
-  let cartNav = secureLocalStorage.getItem('cart')
-  setCartNav(cartNav)
-  },[cartNav])
+  const [isSignIn, setIsSignIn] = useState(false)
+  const [isUserRegistered, setIsUserRegistered] = useState(false)
 
 
 
@@ -76,13 +63,36 @@ const AppContext = ({ children }) => {
     document.body.classList.remove('overlay')
   }
 
+
+   function closeLoginModal() {
+    setIsSignIn(false)
+  }
+
+  function registerModal(){
+    setIsSignIn(false)
+    setIsUserRegistered(true)
+  }
+
+  function loginModal() {
+    setIsUserRegistered(!isUserRegistered)
+    setIsSignIn(true)
+  }
+  
+  function closeRegisterModal() {
+    setIsUserRegistered(false)
+  }
+
+
+
+
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const token = process.env.NEXT_PUBLIC_API_KEY
 
 
 
 
-
+  //Add item to cart
   const onAdd = async(product, quantity) => {
     //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
     const checkProductInCart = cartItems.find((item) => item._id === product._id);
@@ -125,9 +135,6 @@ const AppContext = ({ children }) => {
     
     setCartItems(updatedCartItems);
 
-    
-
- 
     // Calculate totalPrice and totalQuantities based on the updatedCartItems
     const newTotalPrice = updatedCartItems.reduce((total, item) =>  total + item.price * item.quantity, 0);
     const newTotalQuantities = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
@@ -138,7 +145,7 @@ const AppContext = ({ children }) => {
 
   }
 
-
+  //Remove item from Cart
   const onRemove = (id, quantity) => {
    const filteredProduct = cartItems.filter(item => item._id !== id)
   
@@ -161,6 +168,8 @@ const AppContext = ({ children }) => {
       setCurrentIndex,
       isOpenMenu,
       setOpenMenu,
+      isUserRegistered, 
+      setIsUserRegistered,
       cartItems,
       setCartItems,
       totalPrice,
@@ -176,6 +185,12 @@ const AppContext = ({ children }) => {
       isItemChosen,
       setItemChosen,
       closeCartModal,
+      isSignIn,
+      setIsSignIn,
+      loginModal,
+      closeLoginModal,
+      registerModal,
+      closeRegisterModal
       }}
     >
       {children}

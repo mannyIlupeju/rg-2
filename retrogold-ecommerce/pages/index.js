@@ -9,12 +9,16 @@ import Navigation from '@/components/Shared/Navigation'
 import Calltoaction from '@/components/CallToAction/calltoaction'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+import Login from '@/components/Authorization/Login'
+import Register from '@/components/Authorization/Register'
+
+
 
 
 
 
 export default function Home({hero, quote, blog, calltoAction}) {
-  const {isOpenMenu} = useGlobalContext()
+  const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
    
     
   return (
@@ -26,9 +30,11 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main className="w-screen">
+      <main>
           {isOpenMenu ? <RespMenu/> : ''}
           <Navigation/>
+          {isSignIn && <Login/>}
+          {isUserRegistered && <Register/>}
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>
           <Experience/>
