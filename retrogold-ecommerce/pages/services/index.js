@@ -2,11 +2,15 @@ import Navigation from '@/components/Shared/Navigation'
 import Head from 'next/head'
 import Footer from '@/components/Shared/Footer/footer'
 import InputForm from '@/components/Shared/Forms/inputForm'
-
+import Login from '@/components/Authorization/Login'
+import Register from '@/components/Authorization/Register'
+import { useGlobalContext } from '@/ Context/context'
 
 
 
 const services = () => {
+  const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
+
   return (
     <>
     <Head>
@@ -15,7 +19,10 @@ const services = () => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
+    {isOpenMenu && <RespMenu/>}
     <Navigation/>
+    {isSignIn && <Login/>}
+    {isUserRegistered && <Register/>}
 
     <main>
       <div className="bg-white">

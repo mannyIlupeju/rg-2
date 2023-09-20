@@ -1,7 +1,7 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
-import { sanityClient } from '@/lib/sanity';
+import { sanityClient } from '../lib/sanity';
 import { FaWindows } from 'react-icons/fa';
-import secureLocalStorage from 'react-secure-storage';
+
 
 
 //set up createContext
@@ -14,22 +14,15 @@ export const useGlobalContext = () => useContext(GlobalContext)
 const AppContext = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isOpenMenu, setOpenMenu] = useState(false)
-  const [cartInfo, setCartInfo] = useState([]) //stores the unchecked items in the cart
-  const[totalQuantity, setTotalQuantities] =useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
+  const[totalQuantity, setTotalQuantities] = useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
-   const [cartNav, setCartNav]= useState([])
-
-  let savedCart = secureLocalStorage.getItem('cart')
-
-  const[newCart, setNewCart] = useState(savedCart)
-
   const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
-  
+  const [cartNav, setCartNav] = useState([])
+  const [isSignIn, setIsSignIn] = useState(false)
+  const [isUserRegistered, setIsUserRegistered] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
-  console.log(totalQuantity)
-
- 
 
 
 
@@ -48,24 +41,6 @@ const AppContext = ({ children }) => {
   )
   
 
-
-
-
-  useEffect(()=>{
-  const cartNav = secureLocalStorage.getItem("cart")
-  if(cartNav){
-    setCartNav(cartNav)
-  }
- },[cartNav]);
-
-  console.log(cartNav)
-
-
-
-
-
-
-
   //Navigation Modal functionality
   useEffect(() => {
     if (isOpenMenu) {
@@ -78,15 +53,73 @@ const AppContext = ({ children }) => {
 
   //Cart Modal functionality
   //Open Modal
-  const openCartModal = () => {
+  function openCartModal(){
     setItemChosen(!isItemChosen)
     document.body.style.overflowY = "hidden"
   }
   //Close Modal
-  const closeCartModal = () =>{
+  function closeCartModal(){
     setItemChosen(false)
     document.body.style.overflowY = "scroll"
     document.body.classList.remove('overlay')
+  }
+
+  function handleLogin() {
+    console.log('clicked')
+		setIsSignIn(!isSignIn)
+	}
+
+  function closeLoginModal() {
+    setIsSignIn(false)
+  }
+
+  function registerModal(){
+    setIsSignIn(false)
+    setIsUserRegistered(true)
+  }
+
+  function loginModal() {
+    setIsUserRegistered(!isUserRegistered)
+    setIsSignIn(true)
+  }
+  
+  function closeRegisterModal() {
+    setIsUserRegistered(false)
+  }
+
+
+
+
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const token = process.env.NEXT_PUBLIC_API_KEY
+
+
+
+
+  //Add item to cart
+  const onAdd = async(product, quantity) => {
+    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
+    const checkProductInCart = cartItems.find((item) => item._id === product._id);
+
+    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
+
+    if (checkProductInCart) {
+      const updatedCartItems = cartItems.map((cartProduct) => {
+        if (cartProduct.id === product.id) return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + quantity,
+        }
+      })
+      setCartItems(updatedCartItems);
+
+    } else {
+      const updatedProduct = { ...product, quantity: quantity }
+      setCartItems([...cartItems, updatedProduct]);
+    }
+    openCartModal()
   }
 
 
@@ -107,9 +140,6 @@ const AppContext = ({ children }) => {
     
     setCartItems(updatedCartItems);
 
-    
-
- 
     // Calculate totalPrice and totalQuantities based on the updatedCartItems
     const newTotalPrice = updatedCartItems.reduce((total, item) =>  total + item.price * item.quantity, 0);
     const newTotalQuantities = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
@@ -120,9 +150,8 @@ const AppContext = ({ children }) => {
 
   }
 
-
+  //Remove item from Cart
   const onRemove = (id, quantity) => {
-    console.log(quantity)
    const filteredProduct = cartItems.filter(item => item._id !== id)
   
    if(filteredProduct) {
@@ -136,12 +165,7 @@ const AppContext = ({ children }) => {
    setTotalQuantities(updatedQuantities)
   }
     
-   
-   
-        
-        
-        
-        
+
         
   return (
     <GlobalContext.Provider value={{ 
@@ -149,8 +173,8 @@ const AppContext = ({ children }) => {
       setCurrentIndex,
       isOpenMenu,
       setOpenMenu,
-      cartInfo,
-      setCartInfo,
+      isUserRegistered, 
+      setIsUserRegistered,
       cartItems,
       setCartItems,
       totalPrice,
@@ -158,6 +182,7 @@ const AppContext = ({ children }) => {
       totalQuantity,
       setTotalQuantities,
       toggleCartItemQuantity,
+      onAdd,
       onRemove,
       messageDetails,
       openCartModal,
@@ -165,10 +190,15 @@ const AppContext = ({ children }) => {
       isItemChosen,
       setItemChosen,
       closeCartModal,
-      savedCart,
-      newCart,
-      setNewCart,
-      cartNav
+      isSignIn,
+      setIsSignIn,
+      handleLogin,
+      loginModal,
+      closeLoginModal,
+      registerModal,
+      closeRegisterModal,
+      isUserLoggedIn,
+      setIsUserLoggedIn,
       }}
     >
       {children}

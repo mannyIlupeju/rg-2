@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { sanityClient } from '/lib/sanity'
 import {urlFor} from '/lib/sanity'
 import Navigation from '@/components/Shared/Navigation'
+import Login from '@/components/Authorization/Login'
+import Register from '@/components/Authorization/Register'
 import Footer from '@/components/Shared/Footer/footer'
 import Link from 'next/link'
 import { useGlobalContext } from '@/ Context/context'
@@ -11,8 +13,9 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 
+
 const Shop = ({shop}) => {
-   const {isOpenMenu} = useGlobalContext()
+   const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
   const[isHovered, setIsHovered] = useState(null)
   
   //Destructuring shop object
@@ -45,8 +48,10 @@ const Shop = ({shop}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isOpenMenu && <RespMenu/> }
+      {isOpenMenu && <RespMenu/>}
       <Navigation/>
+      {isSignIn && <Login/>}
+      {isUserRegistered && <Register/>}
 
 
       <main className="section-background">

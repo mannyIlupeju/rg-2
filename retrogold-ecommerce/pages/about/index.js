@@ -3,15 +3,17 @@ import { sanityClient } from '@/lib/dist/sanity.dev';
 import React from 'react';
 import Image from 'next/image'
 import Navigation from '@/components/Shared/Navigation';
+import Login from '@/components/Authorization/Login';
+import Register from '@/components/Authorization/Register';
 import Head from 'next/head'
 import Footer from '@/components/Shared/Footer/footer';
-import RespMenu from '@/components/responsiveMenu/RespMenu'
+import RespMenu from '@/components/responsiveMenu/RespMenu';
 import { useGlobalContext } from '@/ Context/context'
 
 
 
 const About = ({data}) => {
-  const {isOpenMenu} = useGlobalContext()
+  const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
 
   const{about} = data
  
@@ -30,6 +32,8 @@ const About = ({data}) => {
 
     {isOpenMenu && <RespMenu/> } 
     <Navigation/>
+    {isSignIn && <Login/>}
+    {isUserRegistered && <Register/>}
 
     <main className="section-background">
     <div className="p-8 md:p-12 lg:p-24 flex flex-col gap-20">

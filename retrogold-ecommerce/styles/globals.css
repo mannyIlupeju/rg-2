@@ -20,10 +20,12 @@
 * {
   margin: 0;
   padding:0;
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior:smooth;
+  font-size: 16px;
 }
 
 body {
@@ -135,7 +137,6 @@ box-shadow: 2px 5px 15px 2px #000000;
 .nav-link:hover {
   background-color: var(--accent);
   transition: background-color 0.2s ease-in;
-  
 }
 
 .nav-Active{
@@ -145,6 +146,8 @@ box-shadow: 2px 5px 15px 2px #000000;
   color: white;
   transition: background-color 0.2s ease-in;
 }
+
+
 
 .experience-link {
   background-color: var(--accent);
@@ -185,7 +188,7 @@ box-shadow: 2px 5px 15px 2px #000000;
  align-items: center;
  justify-items: center;
  position: relative;
- bottom: 39rem;
+ bottom: 24rem;
 }
 
 .experienceBox {
@@ -222,6 +225,12 @@ input[type=email] {
 
 .imageBox {
   width: 200px;
+  height: auto;
+  padding: 1rem;
+}
+
+.productImageBox {
+  width: 500px;
   height: auto;
   padding: 1rem;
 }
@@ -302,7 +311,7 @@ input[type=email] {
 }
 
 .mainTarotBox {
-  width: 700px;
+  width: 40rem;
   height: auto;
   object-fit: cover;
 }
@@ -312,11 +321,13 @@ input[type=text],
 input[type=email],
 input[type=password],
 input[type=tel],
+input[type=search],
 input[type = number],
 input[type = date]{
   padding: 0.5rem;
   border-radius: 4rem;
-  background-color: var(--teaGreen)
+  background-color: var(--teaGreen);
+  color:rgba(0, 0, 0, 0.295)
 }
 
 input[type=text]:focus,
@@ -329,6 +340,10 @@ textarea:focus {
   background-color: var(--beige)
 }
 
+.formInput {
+  width: 17rem;
+}
+
 select {
   padding: 0.4rem;
   border-radius: 4rem;
@@ -339,6 +354,7 @@ textarea {
   border-radius: 1rem;
   background-color: var(--teaGreen);
   padding: 0.4rem;
+  width: 30rem;
 }
 
 .leftArrow  {
@@ -365,16 +381,76 @@ textarea {
     padding: 10px;
   }
 
+
+
+  .itemRightArrow {
+     color: '#D5BDAF';
+    transform: 'translate(-50%, -50%)';
+    position: 'absolute';
+    top:'50%';
+    right:'8rem';
+    cursor:'pointer';
+  }
+
+  .loginStyle {
+    background:var(--yellow);
+    color: 
+  }
+
 /**Media Queries**/
 @media screen and (max-width: 323px) {
   .experienceImage {
     height: 283px;
   }
+  .sideProductImage {
+    width: 2rem;
+  }
+
+  .mainTarotBox {
+    width: 20rem;
+  }
 }
 
-@media screen and (max-width: 400px) {
-.heroText {
+@media screen and (max-width: 600px) {
+  .heroText {
     padding: 2rem;
+    bottom: 24rem;
+  }
+
+  .mainTarotBox {
+    width: 20rem;
+  }
+
+
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  input[type=tel],
+  input[type = number],
+  input[type = date]{
+    width: 8rem;
+  }
+
+  textarea {
+  width: 20rem;
+}
+}
+
+
+@media screen and (max-width: 1024px) and (min-width: 800px){
+  .heroText {
+    bottom: 40rem
+  }
+}
+
+@media screen and (min-width: 728px) {
+.heroText{
+    position: relative;
+    bottom: 50rem;
+  }
+
+  .mainTarotBox {
+    width: 30rem;
   }
 }
 

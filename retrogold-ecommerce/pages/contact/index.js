@@ -4,10 +4,12 @@ import Head from 'next/head'
 import ContactForm from '../../components/Shared/Forms/ContactForm'
 import Footer from '@/components/Shared/Footer/footer'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+import Login from '@/components/Authorization/Login';
+import Register from '@/components/Authorization/Register'
 import { useGlobalContext } from '@/ Context/context';
 
 const Contact = () => {
-  const {isOpenMenu} = useGlobalContext()
+  const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
 
 
   return (
@@ -21,6 +23,8 @@ const Contact = () => {
     <Navigation/>
 
     {isOpenMenu && <RespMenu/> }
+    {isSignIn && <Login/>}
+    {isUserRegistered && <Register/>}
 
     <main className="section-background">
       <div className="py-28">
