@@ -26,7 +26,6 @@ const Login = () => {
 
   const modalRef = useRef();
 
-
   useEffect(() => {
     // Disable scrolling on the body element
     document.body.style.overflow = 'hidden';
@@ -57,11 +56,11 @@ const Login = () => {
     })
 
     const data = await response.json();
+    console.log(data)
     const{token, message} = data;
 
     if(token){ 
       setIsUserLoggedIn(!isUserLoggedIn)
-
       setTimeout(() => {
         setIsUserLoggedIn(false)
         closeLoginModal()

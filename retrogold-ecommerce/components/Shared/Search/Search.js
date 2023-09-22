@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+
 
 
 import { getFilteredProducts, getFilteredBlogs } from '/helpers/api-util';
@@ -8,6 +10,7 @@ const Search = () => {
 	const [inputValue, setInputValue] = useState('')
 	const [suggestion, setSuggestions] = useState([]);
 	const[returnedValue, setReturnedValue] = useState([])
+	const [searchBar, setSearchBar] = useState(false)
 
 
 	const handleInput = (e) => {
@@ -23,29 +26,32 @@ const Search = () => {
 
 	}
 
-	//this function should fetch the 
-	// async function handleSearch(userSearch){
-	// 	const response = await fetch('/api/search/search', {
-	// 		method: 'POST',
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ search: userSearch }),
-	// 	})
+	const activateSearch = (e) => {
+		e.preventDefault()
+		setSearchBar(!searchBar)
+	}
 
-	// 	const data = await response.json()
-	// 	return data
-	// }
-	
-	
+	const deactivateSearch = (e) => {
+		e.preventDefault()
+		setSearchBar(false)
+	}
+
 
 
 	return (
 		<div className='flex justify-end gap-2 border-zinc-500'>
-			<input type='text' id='text' className='rounded-lg bg-gray-300 p-1 border-black' value={inputValue} onChange={handleInput} autoComplete="off"/>
-			<div className='relative right-9 top-3'>
-				<FaSearch size='1rem' color='black' />
+			{searchBar ?
+			<div className='relative bottom-2 right-3'>
+			<FaSearch size='1.3rem' color='black' className='relative top-7 left-40' onClick={deactivateSearch}/>
+			<input 
+			  type='text' id='text' className='rounded-lg bg-gray-300 p-1 border-black' value={inputValue} onChange={handleInput} autoComplete="off"
+			/>
 			</div>
+			  :
+			<div className='relative right-3'>
+				<FaSearch size='1.5rem' color='black' onClick={activateSearch} />
+			</div>
+			}
 		</div>
 	);
 };

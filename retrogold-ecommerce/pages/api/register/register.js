@@ -1,5 +1,5 @@
-import {MongoClient} from 'mongodb'
-import bcrypt from 'bcrypt';
+import { MongoClient } from 'mongodb'
+import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer'
 import User from '../../../models/User';
 import connectDB from '../../../lib/mongoose'
@@ -23,42 +23,49 @@ connectDB();
 
 
 
-async function handler (req, res) {
-  if(req.method === "POST"){
-    const {email, name, password, retype} = req.body;
+async function handler(req, res) {
+  if (req.method === "POST") {
+    console.log(req.body)
+    const { email, name, password, retype } = req.body;
+    
 
     if (!name || typeof name !== 'string') {
       return res.status(422).json({ message: 'Please provide a valid name' });
     }
 
     const userEmail = email.toLowerCase().trim();
-    const userName = name.toLowerCase().trim()
+    const usersname = name.toLowerCase().trim();
 
+  
 
-   
     if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
       return res.status(422).json({ message: 'Please enter a correct email address' });
     }
 
-     if (password !== retype) {
+    if (password !== retype) {
       return res.status(422).json({ message: 'Passwords do not match' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-     try {
-        const existingUser = await User.findOne({ email: userEmail });
-        if (existingUser) {
-          return res.status(400).json({ success: false, message: 'User already exists' });
-        }
-    
-  
-          const user = await User.create({ name, email, password: hashedPassword, role: 'user' });
-          await sendVerificationEmail(userEmail, verificationCode);
-          res.status(201).json({success: true, data: user, message: 'Signed up! A verification email has been sent to your email address' });
-        } catch (error) {
-          res.status(500).json({ message: 'User not created', error: error.message });
-        }
+
+
+    try {
+      const existingUser = await User.findOne({ email: userEmail });
+      if (existingUser) {
+        return res.status(400).json({ success: false, message: 'User already exists' });
+      }
+
+      const user = await User.create({ name:usersname, email, password: hashedPassword, role: 'user' });
+
+      console.log(user)
+
+      await sendVerificationEmail(userEmail, verificationCode);
+
+      res.status(201).json({ success: true, data: user, message: 'Signed up! A verification email has been sent to your email address' });
+    } catch (error) {
+      res.status(500).json({ message: 'User not created', error: error.message });
+    }
   } else {
     res.status(405).json({ success: false, message: 'Method not allowed' })
   }

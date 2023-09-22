@@ -8,13 +8,7 @@ const Register = () => {
   const [userData, setUserData] = useState({name: '', email: '', password:'', retype: ''})
   const [hidePassword, sethidePassword] = useState(false)
 
-
-
   const {closeLoginModal, registerModal, closeRegisterModal, setIsUserRegistered, loginModal} = useGlobalContext()
-
-  console.log(userData)
-
-
 
   const modalRef = useRef();
 
@@ -49,7 +43,7 @@ const Register = () => {
  
 
   const clear = () => {
-    setUserData({name: '', email: '', password:'', retype: ''})
+    setUserData({name: '', email: '', username: '',  password:'', retype: ''})
   }
 
 
@@ -88,6 +82,13 @@ const Register = () => {
                 e.preventDefault()
                 setUserData({...userData, name: e.target.value})
               }} required/>
+              {/* <label htmlFor="name" className="text-gray-800 formInput">
+                Username:
+              </label>
+              <input type="text" name="username" id="username" className="formInput" value={userData.username} onChange={(e) => {
+              e.preventDefault()
+              setUserData({...userData, username: e.target.value})
+              }} required /> */}
               <label htmlFor="email" className="text-gray-800 formInput">
                   Email:
               </label>
