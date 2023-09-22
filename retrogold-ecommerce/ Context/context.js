@@ -22,6 +22,8 @@ const AppContext = ({ children }) => {
   const [isSignIn, setIsSignIn] = useState(false)
   const [isUserRegistered, setIsUserRegistered] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+  const [searchBar, setSearchBar] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
 
 
 
@@ -84,7 +86,7 @@ const AppContext = ({ children }) => {
   }
   
   function closeRegisterModal() {
-    setIsUserRegistered(false)
+    setIsUserRegistered(true)
   }
 
 
@@ -93,6 +95,19 @@ const AppContext = ({ children }) => {
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const token = process.env.NEXT_PUBLIC_API_KEY
+
+  const activateSearch = (e) => {
+    e.preventDefault()
+    setSearchBar(!searchBar)
+    setShowSearch(!showSearch)
+  }
+
+  const deactivateSearch = (e) => {
+    e.preventDefault()
+    setSearchBar(false)
+    setShowSearch(!showSearch)
+  }
+
 
 
 
@@ -199,6 +214,12 @@ const AppContext = ({ children }) => {
       closeRegisterModal,
       isUserLoggedIn,
       setIsUserLoggedIn,
+      searchBar,
+      setSearchBar,
+      activateSearch,
+      deactivateSearch,
+      showSearch,
+      setShowSearch
       }}
     >
       {children}
