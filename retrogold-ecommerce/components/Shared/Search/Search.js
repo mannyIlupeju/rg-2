@@ -12,11 +12,9 @@ const Search = () => {
 	const [suggestion, setSuggestions] = useState([]);
 	const[returnedValue, setReturnedValue] = useState([])
 	const [searchBar, setSearchBar] = useState(false)
-	
-	
+
 	const { activateSearch, showSearch, setShowSearch } = useGlobalContext()
 	
-
 	return (
 		<div className='flex justify-end gap-2 border-zinc-500'>
 			<div className='relative right-3'>

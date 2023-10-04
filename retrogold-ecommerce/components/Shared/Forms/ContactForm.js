@@ -45,11 +45,11 @@ const InputForm = () => {
         <div className="flex flex-row gap-4">
           <div>
             <label htmlFor="fname">First Name:</label><br/>
-            <input type="text" id="fname" name="fname" required value={messageDetails.firstName} onChange={e =>setMessageDetails({...messageDetails, firstName:e.target.value}) }></input><br/>
+            <input type="text" id="fname" name="fname" className="textInput"  required value={messageDetails.firstName} onChange={e =>setMessageDetails({...messageDetails, firstName:e.target.value}) }></input><br/>
           </div>
           <div>
             <label htmlFor="lname">Last Name:</label><br/>
-            <input type="text" id="lname" name="lname" required value={messageDetails.lastName} onChange={e =>setMessageDetails({...messageDetails, lastName:e.target.value}) }></input>
+            <input type="text" id="lname" name="lname" className="textInput" required value={messageDetails.lastName} onChange={e =>setMessageDetails({...messageDetails, lastName:e.target.value}) }></input>
           </div>
         </div>
 

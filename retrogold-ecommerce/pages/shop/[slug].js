@@ -44,8 +44,17 @@ const productDetails = ({data}) => {
   const {imageUrls} = productDetail
   
 
+ 
+
+
 
   //Carousel Functions 
+  const carouselContainer = {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative'
+  };
+
   const prevImage = () => { 
     let firstSlide = currentIndex === 0
     const newSlides = firstSlide ? imageUrls.length-1 : currentIndex - 1
@@ -154,37 +163,35 @@ const productDetails = ({data}) => {
       <Breadcrumb/>
 
       
-      {isItemChosen ? <Cart/> : '' }
+      {isItemChosen && <Cart/>}
       
 
       <main>
         <div className="bg-white productDetailFonts">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
-            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 overflow-hidden">
+            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 gap-5 overflow-hidden">
               <div>
                 <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">
                     {imageUrls.map((x, index)=>{
                     return (
                       <div className="flex" key={index}>
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
-                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="200" height="200"/>
+                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="50" height="50" priority/>
                         </div>
                       </div>
                       )
                     })}          
-                  </div>
-                  </div>
-                <div>
-                  
-             
+                </div>
+              </div>
+
+              <div> 
+
                 {/* main image that has carousel function */}
-                <div className="">
+                <div style={carouselContainer}>
+                  <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                    <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" priority/>
-                  <div className="flex justify-between p-2 relative bottom-44 cursor-pointer">
-                    <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
-                    <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
-                  </div>
-                </div> 
+                  <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
+                </div>
               </div>
             </div>
 

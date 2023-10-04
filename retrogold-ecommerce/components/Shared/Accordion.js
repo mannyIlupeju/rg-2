@@ -17,7 +17,7 @@ const Accordion = ({title, content, id}) => {
 
   return (
     <div>
-      <div onClick={toggleAccordion} className="flex gap-20 w-3/5 justify-between border-t-2 border-gray-300 mb-4">
+      <div onClick={toggleAccordion} className="flex gap-20 justify-between border-t-2 border-gray-300 mb-4">
         <h3>{title}</h3>  
         <div className="flex items-center">
         <p>{isOpen ? <FaCaretDown/> :<FaCaretUp/>}</p>
@@ -25,7 +25,7 @@ const Accordion = ({title, content, id}) => {
       </div> 
       <div>
       {isOpen && 
-        <div className="text-sm leading-loose w-3/5 ">
+        <div className="text-sm leading-loose">
           <p>{content}</p>
         </div> 
       }

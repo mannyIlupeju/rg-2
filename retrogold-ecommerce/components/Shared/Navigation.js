@@ -84,9 +84,9 @@ const Navigation = () => {
 			{searchBar ?
 				<div className="flex">
 				<div className='relative top-1 right-3'>
-					<FaSearch size='1.3rem' color='black' className='relative top-7 left-80' onClick={deactivateSearch} />
+					<FaSearch size='1.3rem' color='black' className='relative top-7 right-10' onClick={deactivateSearch} />
 					<input
-						type='text' id='text' className='bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off"
+						type='text' id='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off"
 					/>
 				</div>
 				<div>
