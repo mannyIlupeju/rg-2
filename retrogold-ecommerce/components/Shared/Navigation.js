@@ -17,43 +17,43 @@ const Navigation = () => {
 
 
 	const { isOpenMenu,
-		 setOpenMenu,
-		  cartItems, 
-		  cartNav, 
-		  newCart, 
-		  totalQuantity, 
-		  sSignIn, 
-		  setIsSignIn, 
-		  handleLogin, 
-		  activateSearch, 
-		  deactivateSearch,
-		  searchBar
-		} = useGlobalContext();
+		setOpenMenu,
+		cartItems,
+		cartNav,
+		newCart,
+		totalQuantity,
+		sSignIn,
+		setIsSignIn,
+		handleLogin,
+		activateSearch,
+		deactivateSearch,
+		searchBar
+	} = useGlobalContext();
 
 	const navLink = [
 		{
-			name : 'Home',
-			href : '/home'
+			name: 'Home',
+			href: '/home'
 		},
 		{
-			name : 'Shop',
-			href : '/shop'
+			name: 'Shop',
+			href: '/shop'
 		},
 		{
-			name : 'Services',
-			href : '/services'
+			name: 'Services',
+			href: '/services'
 		},
 		{
-			name : 'Blog',
-			href : '/blog'
+			name: 'Blog',
+			href: '/blog'
 		},
 		{
-			name : 'About',
-			href : '/about'
+			name: 'About',
+			href: '/about'
 		},
 		{
-			name : 'Contact',
-			href : '/contact'
+			name: 'Contact',
+			href: '/contact'
 		}
 	];
 
@@ -70,8 +70,8 @@ const Navigation = () => {
 
 	}
 
-	
-	
+
+
 
 	return (
 		<nav className='navigationStyle'>
@@ -83,22 +83,22 @@ const Navigation = () => {
 
 			{searchBar ?
 				<div className="flex">
-				<div className='relative top-1 right-3'>
-					<FaSearch size='1.3rem' color='black' className='relative top-7 right-10' onClick={deactivateSearch} />
-					<input
-						type='text' id='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off"
-					/>
+					<div className='relative top-1 right-3'>
+						<FaSearch size='1.3rem' color='black' className='relative top-7 right-10' onClick={deactivateSearch} />
+						<input
+							type='text' id='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off"
+						/>
+					</div>
+					<div>
+						<FaTimes size='1.6rem' color='black' className='relative top-8' onClick={deactivateSearch} />
+					</div>
 				</div>
-				<div>
-					<FaTimes size='1.6rem' color='black' className='relative top-8' onClick={deactivateSearch}/>
-				</div>
-				</div>
-				: 
+				:
 				<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center text-zinc-700 lg:block hidden'>
 					{navLink.map((link) => {
 						const pathname = usePathname();
 						const isActive = pathname.startsWith(link.href);
-						
+
 						return (
 							<Link className={isActive ? 'nav-Active' : 'nav-link'} href={link.href} key={link.name}>
 								{link.name}
@@ -106,16 +106,16 @@ const Navigation = () => {
 						);
 					})}
 				</div>
-				
+
 			}
 
 			<div className='lg:flex flex-row lg:items-center gap-4 lg:block hidden'>
-				<Search/>
-				<IoPerson onClick={ handleLogin } color='black' size='1.8rem'/>
+				<Search />
+				<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
 				<Link href='/cart'>
 					<div className='flex justify-end'>
-						<FaShoppingCart size='1.8rem' color='black'/>
-					
+						<FaShoppingCart size='1.8rem' color='black' />
+
 						{cartItems.length ? (
 							<div className='mx-2 text-zinc-800 font-semibold'>
 								<span>({totalQuantity})</span>
@@ -139,4 +139,4 @@ const Navigation = () => {
 	);
 };
 
-export default Navigation;
+export default Navigation

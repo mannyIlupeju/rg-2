@@ -168,7 +168,7 @@ const productDetails = ({data}) => {
 
       <main>
         <div className="bg-white productDetailFonts">
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
+          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-14 justify-center py-16  px-4 md:px-16">
             <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 gap-5 overflow-hidden">
               <div>
                 <div className="flex md:flex-col flex-wrap items-center gap-4 col-start-1">

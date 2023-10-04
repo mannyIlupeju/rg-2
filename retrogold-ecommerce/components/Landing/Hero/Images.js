@@ -2,26 +2,26 @@ import Image from 'next/image'
 
 const ImageRender = ({ hero, currentIndex }) => {
   return (
-    <>
+    <div className="relative h-screen">
       <Image
         src={hero[currentIndex].heroImages}
-        width="200"
-        height="200"
+        layout="fill"
+        objectFit="cover"
         className="heroImages"
         alt="hero Images"
         unoptimized
         priority
       />
-      <div className="container mx-auto heroText">
-        <h1 className="lg:text-8xl md:text-8xl text-4xl font-extrabold text-white">
-          {hero[currentIndex].headline}{' '}
+      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2">
+        <h1 className="text-center text-white font-extrabold text-4xl md:text-6xl lg:text-8xl">
+          {hero[currentIndex].headline}
         </h1>
-        <p className="text-lg lg:text-xl font-bold text-white">
-          {hero[currentIndex].headstatement}{' '}
+        <p className="text-center text-white font-bold text-lg lg:text-xl">
+          {hero[currentIndex].headstatement}
         </p>
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
 export default ImageRender

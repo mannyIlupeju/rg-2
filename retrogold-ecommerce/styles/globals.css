@@ -417,7 +417,7 @@ textarea {
 }
 
 /**Media Queries**/
-@media screen and (max-width: 323px) {
+/* @media screen and (max-width: 323px) {
   .experienceImage {
     height: 283px;
   }
@@ -484,14 +484,14 @@ textarea {
     bottom: 31rem;
    
   } */
-  .heroText {
+  /* .heroText {
     padding: 2rem;
   }
-}
+} */
 
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
   .heroText{
     position: relative;
     bottom: 30rem;
   }
-}
+} */ 
