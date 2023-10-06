@@ -41,19 +41,17 @@ const Experience = () => {
  
 
   return (
-    <div className="h-min relative experienceBg z-2">
-     
-
+    <section className="relative experienceBg z-2 h-min">
       <motion.div 
        className="p-12 flex justify-center" 
        viewport={{once:false}}
       >
-        <div className="absolute z-10 top-1">
+        <div className="absolute z-10">
           <h1 className="text-zinc-800 text-4xl font-medium text-center">The Retrogold Experience</h1>
         </div>
 
 
-        <motion.div className="flex flex-col md:flex-row justify-center gap-20"
+        <motion.div className="flex flex-col md:flex-row justify-center gap-20 mt-12"
             initial={"offscreen"}
               whileInView={{y:40, 
               transition: {
@@ -88,7 +86,7 @@ const Experience = () => {
         
       </motion.div>
     
-    </div>
+    </section>
   );
 }
 

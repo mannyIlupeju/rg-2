@@ -7,9 +7,6 @@ import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 const Cart = () => {
   const {isItemChosen, onRemove, cartItems, toggleCartItemQuantity, totalPrice, closeCartModal} = useGlobalContext()
 
-
-  
-
   //close cart modal functionality if cart items in modal is less than 1
   if(cartItems.length < 1) {
     closeCartModal()
@@ -20,11 +17,6 @@ const Cart = () => {
       !isItemChosen
     }
   }
-
-
-
-  
- 
 
   return (
     <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>

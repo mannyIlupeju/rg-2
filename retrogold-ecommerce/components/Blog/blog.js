@@ -27,7 +27,7 @@ const Blog = ({blog}) => {
   return (
   
     
-    <div className="container mx-auto text-zinc-100 h-fit mt-32 xl:px-28 md:px-2 p-12">
+    <div className="container mx-auto text-zinc-100 h-fit  xl:px-28 md:px-2 p-12">
       <div className="flex justify-start items-center ">
         <div className="text-zinc-800">
           <h1 className="text-5xl">Latest Stories</h1>
