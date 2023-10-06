@@ -26,7 +26,7 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
+      <main className="h-fit">
         <>
           {isOpenMenu && <RespMenu/>}
           <Navigation/>
