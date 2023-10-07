@@ -36,7 +36,7 @@ const Blog = ({blog}) => {
     <main className="section-background">
       <div className="container mx-auto text-zinc-100 xl:px-28 px-8 py-14">
         <div className="text-zinc-700">
-          <h1 className="text-5xl font-bold">Latest Stories</h1>
+          <h1 className="text-5xl font-bold">Latest Blog Posts</h1>
           <p className="text-xl mt-2">Uplifting, motivating stories about Wellness and the Home </p>
         </div>
       

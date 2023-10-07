@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 
 @tailwind base;
@@ -6,15 +6,20 @@
 @tailwind utilities;
 
 :root {
-  --white: #F7F7F2;
+  --white: #E8F0FF;
   --accent: #cca5a6;
   --green: #82caa4;
+ 
   --purple: #8789C0;
   --beige: #E4E6C3;
-  --pink: #94778B;
-  --fairyTale: #D5B2BB;
+  /* --pink: #94778B; */
+  --pink: #D40C4D;
+  --fairyTale: #FAC3DF;
+    /* --fairyTale: #D40C4D; */
+  /* --teaGreen: #48A9A6; */
   --teaGreen: #C7D8A0;
   --yellow: #efefbc;
+  --accent: #F4592F;
 }
 
 * {
@@ -29,9 +34,9 @@ html {
 }
 
 body {
-  font-family: 'Cardo', serif;
+  font-family: 'Manrope', serif;
   overflow-x: hidden;
-  background: var(--teaGreen);
+  background: var(--white);
 }
 
 .section-background {
@@ -53,7 +58,7 @@ body {
 display: flex;
 justify-content:space-between;
 padding: 0 4rem 0 4rem;
-background: var(--yellow);
+background: var(--white);
 flex-direction: row;
 gap: 2rem;
 z-index: 10;
@@ -118,7 +123,7 @@ box-shadow: 2px 5px 15px 2px #000000;
 }
 
 .experienceBg {
-  background: #efefbc;
+  background: var(--teaGreen);
   overflow: hidden;
 }
 
@@ -176,8 +181,8 @@ box-shadow: 2px 5px 15px 2px #000000;
 .experienceImage {
   width: 400px;
   height: 400px;
-  filter: drop-shadow(6px 5px 4px #000);
-  background-color: #C7D8A0;  
+  
+  background-color: var(--yellow);  
   padding: 10px;
   border-radius: 10px;
 }
