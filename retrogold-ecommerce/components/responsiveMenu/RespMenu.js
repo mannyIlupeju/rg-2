@@ -40,13 +40,13 @@ const RespMenu = () => {
     ]
 
   return (
-    <div className="bg-white flex flex-col relative top-0 w-screen h-screen">
+    <div className="bg-white flex flex-col absolute z-10 top-0 w-screen h-screen">
       <div className="absolute top-0 right-4" size="5px" onClick={closeMenu}>
         <FaTimes size="2rem" color="black"/>
       </div>
       {
         isOpenMenu && 
-            <div className="flex flex-col items-center mt-24 text-2xl gap-6 text-zinc-700">
+            <div className="flex flex-col items-center mt-24 text-2xl gap-12 text-zinc-700">
             {navLink.map((link)=>{
               const pathname = usePathname();
               const isActive = pathname.startsWith(link.href);

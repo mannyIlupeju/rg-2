@@ -37,8 +37,8 @@ const Carousel = ({ currentIndex, setCurrentIndex, heroImg }) => {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <FaChevronLeft onClick={prevImage} size="4rem" className="leftArrow" />
-        <FaChevronRight onClick={nextImage} size="4rem" className="rightArrow" />
+        <FaChevronLeft onClick={prevImage} size="4rem" className="leftArrow text-green-400" />
+        <FaChevronRight onClick={nextImage} size="4rem" className="rightArrow text-green-400" />
       </div>
       {heroImg && (
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-4">

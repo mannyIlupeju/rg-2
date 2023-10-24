@@ -46,7 +46,7 @@ async function handler(req, res) {
           httpOnly: true,
           secure: false,
           sameSite: 'strict',
-          maxAge: 3600, // Token expir ation time in seconds
+          maxAge: 3600, // Token expiration time in seconds
           path: '/',
       })
     

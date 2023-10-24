@@ -6,18 +6,21 @@ import {FaTimes} from 'react-icons/fa'
 const Register = () => {
   const [userCreated, setUserCreated] = useState(false)
   const [userData, setUserData] = useState({name: '', email: '', password:'', retype: ''})
-  const [hidePassword, sethidePassword] = useState(false)
+  const [hidePassword, setHidePassword] = useState({
+    password: true,
+    retype: true
+  });
 
   const {closeLoginModal, registerModal, closeRegisterModal, setIsUserRegistered, loginModal} = useGlobalContext()
 
   const modalRef = useRef();
 
   //password hide/show functions
-  function closePassword() {
-    sethidePassword(true)
-  }
-  function showPassword() {
-    sethidePassword(false)
+  function togglePasswordVisibility(field) {
+    setHidePassword(prevState => ({
+      ...prevState,
+      [field]: !prevState[field]
+    }))
   }
   
     useEffect(() => {
@@ -68,56 +71,57 @@ const Register = () => {
       <div className="flex items-center justify-center fixed bg-gray-800 bg-opacity-75 inset-0 z-40">
         <div className="loginStyle p-12 rounded-lg shadow-lg max-w-md h-fit" ref={modalRef}>
           <div className="relative left-64 bottom-8">
-          <FaTimes size="1.8rem" className="cursor-pointer" onClick={closeRegisterModal}/>
+          <FaTimes size="1.8rem" className="cursor-pointer text-gray-900" onClick={closeRegisterModal}/>
           </div>
-            <div className="text-center mb-2">
+            <div className="text-center">
             <h1 className="uppercase text-gray-900 text-2xl">Register</h1>
-            <p className="text-center text-sm">Create a Retrogold account for a quick checkout</p>
+            <p className="text-center text-sm text-gray-900">Create a Retrogold account for a quick checkout</p>
             </div>
-            <form className="flex flex-col gap-3 mt-8">
-              <label htmlFor="name" className="text-gray-800 formInput">
-                  Full Name:
-              </label>
-              <input type="text" name="name" id="name" className="formInput" value={userData.name} onChange={(e)=>{
-                e.preventDefault()
-                setUserData({...userData, name: e.target.value})
-              }} required/>
-              {/* <label htmlFor="name" className="text-gray-800 formInput">
-                Username:
-              </label>
-              <input type="text" name="username" id="username" className="formInput" value={userData.username} onChange={(e) => {
-              e.preventDefault()
-              setUserData({...userData, username: e.target.value})
-              }} required /> */}
-              <label htmlFor="email" className="text-gray-800 formInput">
+            <form className="flex flex-col mt-8 gap-6">
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-gray-800">
+                    Full Name:
+                </label>
+                <input type="text" name="name" id="name" className="p-2 formInput" value={userData.name} onChange={(e)=>{
+                  e.preventDefault()
+                  setUserData({...userData, name: e.target.value})
+                }} required/>
+              </div>
+            
+              <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
-              <input type="text" name="email" id="email" className="formInput" value={userData.email} onChange={(e)=>{
+              <input type="text" name="email" id="email" className="p-2 formInput" value={userData.email} onChange={(e)=>{
                 e.preventDefault()
                 setUserData({...userData, email: e.target.value})
               }}required/>
+              </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="name" className="text-gray-800 formInput">
+                <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-gray-800">
                     Password:
                 </label>
-                {!hidePassword ? <FaEye className="relative top-6 left-60" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-60" onClick={showPassword}/>}
-                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password1" className="formInput" value={userData.password} onChange={(e)=>{
-                  e.preventDefault()
-                  setUserData({...userData, password: e.target.value})
-                }} required/>
-              </div>
+              <input type={!hidePassword.password ? 'text' : 'password'} name="password" id="password1" className="p-2 formInput" value={userData.password} onChange={(e) => {
+                setUserData({ ...userData, password: e.target.value })
+              }} required />
+              {!hidePassword.password ? <FaEye className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('password')} />}
 
-              <div className="flex flex-col">
-              <label htmlFor="name" className="text-gray-800 formInput">
-                  Retype password:
-              </label>
-              {!hidePassword ? <FaEye className="relative top-6 left-60" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-60" onClick={showPassword}/>}
-              <input type={!hidePassword ? 'text' : 'password'} name="password" id="password2" className="" value={userData.retype} onChange={(e)=>{
-                e.preventDefault()
-                setUserData({...userData, retype: e.target.value})
-              }}required/>
+                </div>
+              
+
+              <div className="flex flex-col gap-2">
+               <label htmlFor="name" className="text-gray-800">
+                    Retype Password:
+                </label>
+           
+              <input type={!hidePassword.retype ? 'text' : 'password'} name="retype" id="password2" className="p-2 formInput" value={userData.retype} onChange={(e) => {
+                setUserData({ ...userData, retype: e.target.value })
+              }} required />
+              {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('retype')} /> : <FaEyeSlash className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('retype')} />}
               </div>
+          
 
               <button type="submit" className="btn mt-4 btn-primary" onClick={handleRegistration}>Register</button>
               

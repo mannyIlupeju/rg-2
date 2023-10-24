@@ -325,27 +325,7 @@ input[type=email] {
 
 
 
-input[type=email],
-input[type=password],
-input[type=tel],
-input[type=search],
-input[type = number],
-input[type = date]{
-  padding: 0.5rem;
-  border-radius: 4rem;
-  background-color: var(--teaGreen);
-  color:rgba(0, 0, 0, 0.295)
-}
 
-
-input[type=email]:focus,
-input[type=password]:focus,
-input[type=tel]:focus,
-input[type = number]:focus,
-select:focus,
-textarea:focus {
-  background-color: var(--beige)
-}
 
 .textInput{
   padding: 0.5rem;
@@ -364,9 +344,7 @@ textarea:focus {
   color:rgba(0, 0, 0, 0.295)
 }
 
-.formInput {
-  width: 17rem;
-}
+
 
 select {
   padding: 0.4rem;
@@ -381,29 +359,12 @@ textarea {
   width: 30rem;
 }
 
-/* .leftArrow  {
-    color: #8789C0;
-    transform: translate(0, 50%);
-    position: absolute;
-    left: 32px;
-    bottom: 50rem;
-    cursor: pointer;
-    background-color: var(--green);
-    border-radius: 50px;
-    padding: 10px;
+
+.formInput:focus {
+  background:var(--fairyTale);
+  color: black;
 }
 
-.rightArrow  {
-    color: #8789C0;
-    transform: translate(0, 50%);
-    position: absolute;
-    right: 32px;
-    bottom: 50rem;
-    cursor: pointer;
-    background-color: var(--green);
-    border-radius: 50px;
-    padding: 10px;
-} */
 
 
 
@@ -418,85 +379,5 @@ textarea {
 
 .loginStyle {
     background:var(--yellow);
-    color: black;
+    color: hsl(0, 17%, 95%);
 }
-
-/**Media Queries**/
-/* @media screen and (max-width: 323px) {
-  .experienceImage {
-    height: 283px;
-  }
-  .sideProductImage {
-    width: 2rem;
-  }
-
-  .mainTarotBox {
-    width: 20rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .heroText {
-    padding: 2rem;
-    bottom: 24rem;
-  }
-
-  .mainTarotBox {
-    width: 20rem;
-  }
-
-
-  input[type=text],
-  input[type=email],
-  input[type=password],
-  input[type=tel],
-  input[type = number],
-  input[type = date]{
-    width: 8rem;
-  }
-
-  textarea {
-    width: 20rem;
-  }
-}
-
-
-@media screen and (max-width: 1024px) and (min-width: 800px){
-  .heroText {
-    bottom: 40rem
-  }
-}
-
-@media screen and (min-width: 728px) {
-.heroText{
-    position: relative;
-    bottom: 50rem;
-  }
-
-  .mainTarotBox {
-    width: 30rem;
-  }
-}
-
-@media screen and (max-width: 1179px) {
-  /* .leftArrow  {
-    left: 32px;
-    bottom: 31rem;
-  }
-
- .rightArrow  {
-    right: 32px;
-    bottom: 31rem;
-   
-  } */
-  /* .heroText {
-    padding: 2rem;
-  }
-} */
-
-/* @media screen and (min-width: 1024px) {
-  .heroText{
-    position: relative;
-    bottom: 30rem;
-  }
-} */ 

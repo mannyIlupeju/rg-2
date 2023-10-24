@@ -16,10 +16,10 @@ const Quotes = ({ quote }) => {
 
   return (
     <>
-      <section className="container mx-auto relative top-28 h-max my-12 lg:my-24">
-        <div className="flex flex-col md:flex-row justify-center rounded-lg p-8 space-y-8 md:space-y-0 md:space-x-8 max-w-screen-lg mx-auto">
+      <section className="container mx-auto relative bottom-2 h-32 lg:my-24">
+        <div className="flex flex-col md:flex-row justify-center rounded-lg space-y-8 md:space-y-0 md:space-x-8 max-w-screen-lg mx-auto">
           <div className="flex justify-center w-full md:w-1/2">
-            <img src="/images/image1.jpeg" alt="woman meditating" className="w-full h-56 md:h-96 rounded-md object-cover"/>
+            <img src="/images/image1.jpeg" alt="woman meditating" className="w-full h-25 rounded-md object-cover"/>
           </div>
           <div className="flex flex-col justify-center w-full md:w-1/2 text-zinc-700 space-y-4">
             <p className="text-lg md:text-xl font-light text-gray-700">{quote[currentIndex].quote}</p>

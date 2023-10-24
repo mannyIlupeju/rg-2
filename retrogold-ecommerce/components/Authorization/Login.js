@@ -10,7 +10,9 @@ const Login = () => {
   const [checkUserData, setcheckUserData] = useState({email: '', password: ''})
   const [isLoading, setisLoading] = useState(false)
   const [color, setColor] = useState('#ffffff')
-  const [hidePassword, sethidePassword] = useState(false)
+  const [hidePassword, setHidePassword] = useState({
+    password:true
+  })
   const[registerUser, setRegisterUser] = useState(false)
   
   const {
@@ -21,10 +23,23 @@ const Login = () => {
     closeLoginModal, 
     registerModal,
     isUserLoggedIn,
-    setIsUserLoggedIn
+    setIsUserLoggedIn,
+    isToken,
+    setIsToken,
   } = useGlobalContext()
 
   const modalRef = useRef();
+
+
+  //password hide/show functions
+  function togglePasswordVisibility(field) {
+    setHidePassword(prevState => ({
+      ...prevState,
+      [field]: !prevState[field]
+    }))
+  }
+
+
 
   useEffect(() => {
     // Disable scrolling on the body element
@@ -60,6 +75,7 @@ const Login = () => {
     const{token, message} = data;
 
     if(token){ 
+      setIsToken(token)
       setIsUserLoggedIn(!isUserLoggedIn)
       setTimeout(() => {
         setIsUserLoggedIn(false)
@@ -69,8 +85,6 @@ const Login = () => {
     
 
   }
-
- 
 
 
   //Clear fields login
@@ -102,7 +116,7 @@ const Login = () => {
     </div>
     <div className="flex items-center justify-center h-screen bg-gray-800 bg-opacity-75 fixed inset-0 z-40">
       <div className="loginStyle p-12 rounded-lg shadow-lg" ref={modalRef}>
-        <div className="relative bottom-8 left-64" onClick={closeLoginModal}>
+        <div className="relative bottom-8 left-60 text-gray-900" onClick={closeLoginModal}>
           <FaTimes size="1.8rem" className="cursor-pointer"/>
         </div>
         <div className="text-center mb-4">
@@ -110,25 +124,25 @@ const Login = () => {
         </div>
           <div>
             <form className="flex flex-col gap-3" onSubmit={handleLogin}>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col">
               <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
-              <input type="text" name="email" id="email" value={checkUserData.email} onChange={(e)=>{
+              <input type="text" name="email" id="email" className="p-2 formInput text-gray-200" value={checkUserData.email} onChange={(e)=>{
                 e.preventDefault()
                 setcheckUserData({...checkUserData, email:e.target.value})
               }} required/>
               </div>
 
-              <div className="flex flex-col w-fit">
+              <div className="flex flex-col ">
                 <label htmlFor="password" className="text-gray-800">
                     Password:
                 </label>
-                {!hidePassword ? <FaEye className="relative top-6 left-56" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-56" onClick={showPassword}/>}
-                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="formInput"value={checkUserData.password} onChange={(e)=>{
+                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="p-2 formInput"value={checkUserData.password} onChange={(e)=>{
                   e.preventDefault()
                   setcheckUserData({...checkUserData, password:e.target.value})
                 }}required/>  
+                {!hidePassword.password ? <FaEye className="relative bottom-7 left-52" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-7 left-52" onClick={() => togglePasswordVisibility('password')} />}
               </div>
 
               <button className="btn btn-primary mt-6" type="submit">Login</button>

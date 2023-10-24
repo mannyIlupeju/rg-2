@@ -24,9 +24,9 @@ const AppContext = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
+  const [isToken, setIsToken] = useState(null)
 
-
-
+  
 
   const [messageDetails, setMessageDetails] = useState(
     {
@@ -77,7 +77,7 @@ const AppContext = ({ children }) => {
 
   function registerModal(){
     setIsSignIn(false)
-    setIsUserRegistered(true)
+    setIsUserRegistered(!isUserRegistered)
   }
 
   function loginModal() {
@@ -86,7 +86,7 @@ const AppContext = ({ children }) => {
   }
   
   function closeRegisterModal() {
-    setIsUserRegistered(true)
+    setIsUserRegistered(!isUserRegistered)
   }
 
 
@@ -219,7 +219,9 @@ const AppContext = ({ children }) => {
       activateSearch,
       deactivateSearch,
       showSearch,
-      setShowSearch
+      setShowSearch,
+      isToken,
+      setIsToken
       }}
     >
       {children}

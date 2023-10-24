@@ -25,7 +25,7 @@ const Contact = () => {
       {isSignIn && <Login />}
       {isUserRegistered && <Register />}
 
-      <main className="section-background">
+      <main className="section-background flex items-center justify-center min-h-screen">
         <div className="container mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8">
           <div className="lg:grid lg:grid-cols-3 lg:gap-12">
 
