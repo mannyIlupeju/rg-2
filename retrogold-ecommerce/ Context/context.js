@@ -21,7 +21,7 @@ const AppContext = ({ children }) => {
   const [cartNav, setCartNav] = useState([])
   const [isSignIn, setIsSignIn] = useState(false)
   const [isUserRegistered, setIsUserRegistered] = useState(false)
-<<<<<<< HEAD
+
 
 
 
@@ -268,12 +268,10 @@ const AppContext = ({ children }) => {
       closeCartModal,
       isSignIn,
       setIsSignIn,
-<<<<<<< HEAD
       loginModal,
       closeLoginModal,
       registerModal,
       closeRegisterModal
-=======
       handleLogin,
       loginModal,
       closeLoginModal,
@@ -289,7 +287,6 @@ const AppContext = ({ children }) => {
       setShowSearch,
       isToken,
       setIsToken
->>>>>>> origin/main
       }}
     >
       {children}
