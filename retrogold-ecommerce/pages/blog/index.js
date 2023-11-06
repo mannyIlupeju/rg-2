@@ -5,13 +5,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Footer from '@/components/Shared/Footer/footer';
 import Link from 'next/link'
-
 import RespMenu from '@/components/responsiveMenu/RespMenu'
+import Login from '@/components/Authorization/Login'
+import Register from '@/components/Authorization/Register'
 import { useGlobalContext } from '@/ Context/context'
 
 
 const Blog = ({blog}) => {
- const {isOpenMenu} = useGlobalContext()
+ const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
   const {mainImages, slugCurrent} = blog
 
 
@@ -27,18 +28,20 @@ const Blog = ({blog}) => {
         <link rel="icon" href="/favicon.ico" />
     </Head>
     {isOpenMenu && <RespMenu/>}
+
     <Navigation/>
-    
+    {isSignIn && <Login/>}
+     {isUserRegistered && <Register/>}
 
     <main className="section-background">
       <div className="container mx-auto text-zinc-100 xl:px-28 px-8 py-14">
         <div className="text-zinc-700">
-          <h1 className="text-5xl font-bold">Latest Stories</h1>
+          <h1 className="text-5xl font-bold">Latest Blog Posts</h1>
           <p className="text-xl mt-2">Uplifting, motivating stories about Wellness and the Home </p>
         </div>
       
       
-        <div className="grid grid-cols-3 mt-12 ">      
+        <div className="grid grid-cols-3 mt-12 ">
           <div className="col-span-3">
               <Link href={`/blog/${blog[0].slugCurrent}`}>
                 <div className="flex md:flex-row flex-col justify-center bg-red-400 md:p-4 items-center rounded-xl cursor-pointer p-2">

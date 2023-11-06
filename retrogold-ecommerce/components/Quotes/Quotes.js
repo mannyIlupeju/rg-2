@@ -1,60 +1,33 @@
 import autoprefixer from 'autoprefixer';
 import React, {useState, useEffect} from 'react';
 
-const Quotes = ({quote}) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
- 
-  const gridBackground = {
-    backgroundColor: 'linear-gradient(167deg, rgba(208,212,211,1) 62%, rgba(41,59,47,1) 100%, rgba(78,79,79,1) 100%)',
-    width: '900px'
-  }
+const Quotes = ({ quote }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const imageQuote = {
-    width: '560px',
-    height: '420px',
-    borderRadius: '0.5rem'
-  }
+  // Carousel Animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % quote.length);
+    }, 10000);
 
-
-  //Carousel Animation
-  setTimeout(() => {
-    if(currentIndex === 0) {
-      setCurrentIndex(1)
-    }
-    if(currentIndex === 1) {
-      setCurrentIndex(2)
-    }
-    if(currentIndex === 2) {
-      setCurrentIndex(3)
-    }
-    if(currentIndex === 3) {
-      setCurrentIndex(0)
-    }
-  }, 10000);
-
-
-
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
-    <div className="container mx-auto">
-      <div className="flex justify-center">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 quoteBg rounded-lg" style={gridBackground}>
-          <div className="flex justify-center">
-            <img src='/images/image1.jpeg' alt="woman meditating" style={imageQuote}/>
+      <section className="container mx-auto relative bottom-2 h-32 lg:my-24">
+        <div className="flex flex-col md:flex-row justify-center rounded-lg space-y-8 md:space-y-0 md:space-x-8 max-w-screen-lg mx-auto">
+          <div className="flex justify-center w-full md:w-1/2">
+            <img src="/images/image1.jpeg" alt="woman meditating" className="w-full h-25 rounded-md object-cover"/>
           </div>
-          <div className="self-center p-8 relative right-4 text-zinc-700">
-            <figure className="font-light text-medium">
-             <p>{quote[currentIndex].quote}</p>
-             <figcaption className="mt-2 flex justify-end"> - {quote[currentIndex].author}</figcaption>
-            </figure>
+          <div className="flex flex-col justify-center w-full md:w-1/2 text-zinc-700 space-y-4">
+            <p className="text-lg md:text-xl font-light text-gray-700">{quote[currentIndex].quote}</p>
+            <figcaption className="mt-2 self-end text-gray-700">- {quote[currentIndex].author}</figcaption>
           </div>
         </div>
-      </div>
-    </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#efefbc" fillOpacity="1" d="M0,224L48,234.7C96,245,192,267,288,272C384,277,480,267,576,240C672,213,768,171,864,160C960,149,1056,171,1152,165.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-      </svg>
+      </section>
+      
     </>
   );
 }

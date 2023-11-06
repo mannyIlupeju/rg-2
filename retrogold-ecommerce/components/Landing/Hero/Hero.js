@@ -3,8 +3,10 @@ import React, {useEffect} from 'react';
 
 import ImageRender from './Images';
 import Carousel from '../../Shared/Carousel';
-import { images } from '@/next.config';
-import { useGlobalContext } from '@/ Context/context';
+import { images } from '/next.config';
+import {useGlobalContext} from '@/ Context/context'
+
+
 
 //Carousel Component 
 const Hero = ({hero}) => {

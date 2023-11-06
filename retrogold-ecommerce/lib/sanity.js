@@ -13,8 +13,8 @@ const config = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'foypmm2m',
+  dataset: "production",
+  projectId: 'foypmm2m',
   apiVersion: '2022-12-22',
   useCdn: true,
   token: process.env.NEXT_INVENTORY_TOKEN,
@@ -42,6 +42,9 @@ export const urlFor = (source) => builder.image(source)
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient(config)
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> origin/main
 
   

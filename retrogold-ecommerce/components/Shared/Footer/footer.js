@@ -73,7 +73,7 @@ const Footer = () => {
               <p>Connect with Retrogold</p>
             </div>
             <ul>
-                <Link href=''><li className="footer-link">Instagram</li></Link>
+              <Link href='https://www.instagram.com/retrogoldlife'><li className="footer-link">Instagram</li></Link>
                 <Link href=''><li className="footer-link">Etsy</li></Link>
             </ul>
           </div>

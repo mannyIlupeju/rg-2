@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
+import Hero from '@/components/Landing/Hero/Hero'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
@@ -11,16 +12,22 @@ import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/main
 
 
 
 
 export default function Home({hero, quote, blog, calltoAction}) {
   const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
+<<<<<<< HEAD
    
     
+=======
+>>>>>>> origin/main
   return (
     <>
       <Head>
@@ -29,9 +36,15 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+<<<<<<< HEAD
       
       <main>
           {isOpenMenu ? <RespMenu/> : ''}
+=======
+      <main className="h-fit">
+        <>
+          {isOpenMenu && <RespMenu/>}
+>>>>>>> origin/main
           <Navigation/>
           {isSignIn && <Login/>}
           {isUserRegistered && <Register/>}
@@ -40,8 +53,8 @@ export default function Home({hero, quote, blog, calltoAction}) {
           <Experience/>
           <Blog blog={blog}/> 
           <Calltoaction calltoAction={calltoAction}/>
+        </>
       </main>
-      
       <Footer/> 
     </>
   )
@@ -58,21 +71,22 @@ const heroQuery = `*[_type == 'hero']{
   _id
 }`
 const quoteQuery = `*[_type == 'quote']`
-const calltoActionQuery = `*[_type == 'callToAction']`
+const calltoActionQuery = `*[_type ==  'callToAction']`
 
 
+// getStaticProps works when rendering from a headless CMS
+export async function getStaticProps() {
+  const blog = await sanityClient.fetch(blogQuery)
+  const hero = await sanityClient.fetch(heroQuery)
+  const quote = await sanityClient.fetch(quoteQuery)
+  const calltoAction = await sanityClient.fetch(calltoActionQuery)
 
-export async function getServerSideProps() {
-   const hero = await sanityClient.fetch(heroQuery)
-   const blog = await sanityClient.fetch(blogQuery)
-   const quote = await sanityClient.fetch(quoteQuery)
-   const calltoAction = await sanityClient.fetch(calltoActionQuery)
-   return {
-     props: {
-       hero,
-       quote,
+  return {
+    props: {
+      hero,
+      quote,
       blog,
       calltoAction,
-     }
-   }
+    }
+  }
 }

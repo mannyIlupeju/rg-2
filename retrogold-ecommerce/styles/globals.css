@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 
 @tailwind base;
@@ -6,15 +6,20 @@
 @tailwind utilities;
 
 :root {
-  --white: #F7F7F2;
+  --white: #E8F0FF;
   --accent: #cca5a6;
   --green: #82caa4;
+ 
   --purple: #8789C0;
   --beige: #E4E6C3;
-  --pink: #94778B;
-  --fairyTale: #D5B2BB;
+  /* --pink: #94778B; */
+  --pink: #D40C4D;
+  --fairyTale: #FAC3DF;
+    /* --fairyTale: #D40C4D; */
+  /* --teaGreen: #48A9A6; */
   --teaGreen: #C7D8A0;
   --yellow: #efefbc;
+  --accent: #F4592F;
 }
 
 * {
@@ -29,9 +34,9 @@ html {
 }
 
 body {
-  font-family: 'Cardo', serif;
+  font-family: 'Manrope', serif;
   overflow-x: hidden;
-  background: var(--teaGreen);
+  background: var(--white);
 }
 
 .section-background {
@@ -53,7 +58,7 @@ body {
 display: flex;
 justify-content:space-between;
 padding: 0 4rem 0 4rem;
-background: var(--yellow);
+background: var(--white);
 flex-direction: row;
 gap: 2rem;
 z-index: 10;
@@ -118,7 +123,7 @@ box-shadow: 2px 5px 15px 2px #000000;
 }
 
 .experienceBg {
-  background: #efefbc;
+  background: var(--teaGreen);
   overflow: hidden;
 }
 
@@ -176,8 +181,8 @@ box-shadow: 2px 5px 15px 2px #000000;
 .experienceImage {
   width: 400px;
   height: 400px;
-  filter: drop-shadow(6px 5px 4px #000);
-  background-color: #C7D8A0;  
+  
+  background-color: var(--yellow);  
   padding: 10px;
   border-radius: 10px;
 }
@@ -285,6 +290,8 @@ input[type=email] {
 }
 
 
+
+
 .sectionText {
   font-size: 80px;
 }
@@ -317,6 +324,7 @@ input[type=email] {
 }
 
 
+<<<<<<< HEAD
 input[type=text],
 input[type=email],
 input[type=password],
@@ -324,26 +332,37 @@ input[type=tel],
 input[type=search],
 input[type = number],
 input[type = date]{
+=======
+
+
+
+.textInput{
+>>>>>>> origin/main
   padding: 0.5rem;
   border-radius: 4rem;
   background-color: var(--teaGreen);
   color:rgba(0, 0, 0, 0.295)
 }
 
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=password]:focus,
-input[type=tel]:focus,
-input[type = number]:focus,
-select:focus,
-textarea:focus {
+.textInput:focus{
   background-color: var(--beige)
 }
 
+<<<<<<< HEAD
 .formInput {
   width: 17rem;
 }
 
+=======
+.searchInput {
+  padding: 0.5rem;
+  background-color: var(--teaGreen);
+  color:rgba(0, 0, 0, 0.295)
+}
+
+
+
+>>>>>>> origin/main
 select {
   padding: 0.4rem;
   border-radius: 4rem;
@@ -357,39 +376,32 @@ textarea {
   width: 30rem;
 }
 
-.leftArrow  {
-    color: #8789C0;
-    transform: translate(0, 50%);
-    position: absolute;
-    left: 32px;
-    bottom: 50rem;
-    cursor: pointer;
-    background-color: var(--green);
-    border-radius: 50px;
-    padding: 10px;
+
+.formInput:focus {
+  background:var(--fairyTale);
+  color: black;
 }
 
- .rightArrow  {
-    color: #8789C0;
-    transform: translate(0, 50%);
-    position: absolute;
-    right: 32px;
-    bottom: 50rem;
-    cursor: pointer;
-    background-color: var(--green);
-    border-radius: 50px;
-    padding: 10px;
-  }
+.formInput{
+  color:black;
+}
 
 
 
+<<<<<<< HEAD
   .itemRightArrow {
      color: '#D5BDAF';
+=======
+
+.itemRightArrow {
+    color: '#D5BDAF';
+>>>>>>> origin/main
     transform: 'translate(-50%, -50%)';
     position: 'absolute';
     top:'50%';
     right:'8rem';
     cursor:'pointer';
+<<<<<<< HEAD
   }
 
   .loginStyle {
@@ -401,6 +413,32 @@ textarea {
 @media screen and (max-width: 323px) {
   .experienceImage {
     height: 283px;
+=======
+}
+
+.loginStyle {
+    background:var(--yellow);
+    color: hsl(0, 17%, 95%);
+}
+
+
+/* Existing styles */
+
+/*... your existing styles here ...*/
+/* For mobile */
+.positioning-class {
+  bottom: 7px;
+  left: 90%;
+  /* Adjust according to the icon's placement */
+  position: absolute;
+}
+
+/* For tablet */
+@media only screen and (min-width: 768px) {
+  .positioning-class {
+    left: 90%;
+    /* you might want to adjust these as per the design on tablet */
+>>>>>>> origin/main
   }
   .sideProductImage {
     width: 2rem;
@@ -411,6 +449,7 @@ textarea {
   }
 }
 
+<<<<<<< HEAD
 @media screen and (max-width: 600px) {
   .heroText {
     padding: 2rem;
@@ -451,28 +490,35 @@ textarea {
 
   .mainTarotBox {
     width: 30rem;
+=======
+/* For desktop */
+@media only screen and (min-width: 1024px) {
+  .positioning-class {
+    left: 70%;
+    /* adjust for desktop */
+>>>>>>> origin/main
   }
 }
 
-@media screen and (max-width: 1179px) {
-  .leftArrow  {
-    left: 32px;
-    bottom: 31rem;
+/* Mobile devices */
+@media only screen and (max-width: 767px) {
+  .loginStyle {
+    width: 90%;
+    /* take up most of the screen width */
+    padding: 2rem 1rem;
+    /* reduce padding */
   }
 
- .rightArrow  {
-    right: 32px;
-    bottom: 31rem;
-   
-  }
-  .heroText {
-    padding: 2rem;
+  .btn.btn-primary {
+    width: 100%;
+    /* make the button full width for easier tapping */
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .heroText{
-    position: relative;
-    bottom: 30rem;
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .loginStyle {
+    width: 70%;
+    /* give a bit more margin on the sides */
   }
 }

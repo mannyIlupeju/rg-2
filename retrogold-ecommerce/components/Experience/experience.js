@@ -41,19 +41,23 @@ const Experience = () => {
  
 
   return (
-    <div className="h-min relative experienceBg z-2">
-     
-
+    <>
+      <div className="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#C7D8A0" fillOpacity="1" d="M0,224L48,234.7C96,245,192,267,288,272C384,277,480,267,576,240C672,213,768,171,864,160C960,149,1056,171,1152,165.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
+    <section className="relative experienceBg z-2">
       <motion.div 
        className="p-12 flex justify-center" 
        viewport={{once:false}}
       >
-        <div className="absolute z-10 top-1">
+        <div className="absolute z-10">
           <h1 className="text-zinc-800 text-4xl font-medium text-center">The Retrogold Experience</h1>
         </div>
 
 
-        <motion.div className="flex flex-col md:flex-row justify-center gap-20"
+        <motion.div className="flex flex-col md:flex-row justify-center gap-4 mt-12"
             initial={"offscreen"}
               whileInView={{y:40, 
               transition: {
@@ -65,7 +69,7 @@ const Experience = () => {
         
 
           <motion.div style={{translateY:x}}
-          className="p-3 cursor-pointer"
+              className="p-3 cursor-pointer"
           >
             <img src='/images/shop.JPG' alt="shop Image" className="experienceImage imageParallax1 justify-items-end" 
             ref={imageElement1}
@@ -88,7 +92,8 @@ const Experience = () => {
         
       </motion.div>
     
-    </div>
+    </section>
+    </>
   );
 }
 
