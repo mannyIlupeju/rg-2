@@ -69,7 +69,7 @@ const Experience = () => {
         
 
           <motion.div style={{translateY:x}}
-          className="p-3 cursor-pointer"
+              className="p-3 cursor-pointer"
           >
             <img src='/images/shop.JPG' alt="shop Image" className="experienceImage imageParallax1 justify-items-end" 
             ref={imageElement1}

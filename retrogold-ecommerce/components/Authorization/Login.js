@@ -42,22 +42,23 @@ const Login = () => {
 
 
   useEffect(() => {
-    // Disable scrolling on the body element
     document.body.style.overflow = 'hidden';
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        // Set isSignIn to false to close the modal (assuming you have a method to do this)
         setIsSignIn(false);
       }
     };
-    // Listen for clicks on the document
     document.addEventListener('mousedown', handleClickOutside);
-    // Cleanup the event listener and re-enable scrolling when component unmounts
     return () => {
       document.body.style.overflow = 'unset';
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+
+  if(isToken) {
+    console.log ('token is present')
+  }
 
 
   async function handleLogin(e){
@@ -86,14 +87,10 @@ const Login = () => {
 
   }
 
-
-  //Clear fields login
   const clearLogin= () => {
     setcheckUserData({name: '', email: '', password:''})
   }
 
-
-  //password hide/show functionality  
   function closePassword() {
     sethidePassword(true)
   }
@@ -138,11 +135,11 @@ const Login = () => {
                 <label htmlFor="password" className="text-gray-800">
                     Password:
                 </label>
-                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="p-2 formInput"value={checkUserData.password} onChange={(e)=>{
+                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="p-2 formInput text-gray-200" value={checkUserData.password} onChange={(e)=>{
                   e.preventDefault()
                   setcheckUserData({...checkUserData, password:e.target.value})
                 }}required/>  
-                {!hidePassword.password ? <FaEye className="relative bottom-7 left-52" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-7 left-52" onClick={() => togglePasswordVisibility('password')} />}
+                {!hidePassword.password ? <FaEye className="relative bottom-7 left-52 positioning-class cursor-pointer" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="positioning-class cursor-pointer relative bottom-7 left-52" onClick={() => togglePasswordVisibility('password')} />}
               </div>
 
               <button className="btn btn-primary mt-6" type="submit">Login</button>

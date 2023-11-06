@@ -83,7 +83,7 @@ const Register = () => {
                 <label htmlFor="name" className="text-gray-800">
                     Full Name:
                 </label>
-                <input type="text" name="name" id="name" className="p-2 formInput" value={userData.name} onChange={(e)=>{
+                <input type="text" name="name" id="name" className="p-2 formInput text-gray-800" value={userData.name} onChange={(e)=>{
                   e.preventDefault()
                   setUserData({...userData, name: e.target.value})
                 }} required/>
@@ -93,7 +93,7 @@ const Register = () => {
               <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
-              <input type="text" name="email" id="email" className="p-2 formInput" value={userData.email} onChange={(e)=>{
+              <input type="text" name="email" id="email" className="p-2 formInput text-gray-800" value={userData.email} onChange={(e)=>{
                 e.preventDefault()
                 setUserData({...userData, email: e.target.value})
               }}required/>
@@ -103,7 +103,7 @@ const Register = () => {
                 <label htmlFor="name" className="text-gray-800">
                     Password:
                 </label>
-              <input type={!hidePassword.password ? 'text' : 'password'} name="password" id="password1" className="p-2 formInput" value={userData.password} onChange={(e) => {
+              <input type={!hidePassword.password ? 'text' : 'password'} name="password" id="password1" className="p-2 formInput text-gray-800" value={userData.password} onChange={(e) => {
                 setUserData({ ...userData, password: e.target.value })
               }} required />
               {!hidePassword.password ? <FaEye className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('password')} />}
@@ -116,7 +116,7 @@ const Register = () => {
                     Retype Password:
                 </label>
            
-              <input type={!hidePassword.retype ? 'text' : 'password'} name="retype" id="password2" className="p-2 formInput" value={userData.retype} onChange={(e) => {
+              <input type={!hidePassword.retype ? 'text' : 'password'} name="retype" id="password2" className="p-2 formInput text-gray-800" value={userData.retype} onChange={(e) => {
                 setUserData({ ...userData, retype: e.target.value })
               }} required />
               {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('retype')} /> : <FaEyeSlash className="relative bottom-9 left-60" onClick={() => togglePasswordVisibility('retype')} />}

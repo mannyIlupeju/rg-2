@@ -365,11 +365,15 @@ textarea {
   color: black;
 }
 
+.formInput{
+  color:black;
+}
+
 
 
 
 .itemRightArrow {
-     color: '#D5BDAF';
+    color: '#D5BDAF';
     transform: 'translate(-50%, -50%)';
     position: 'absolute';
     top:'50%';
@@ -380,4 +384,55 @@ textarea {
 .loginStyle {
     background:var(--yellow);
     color: hsl(0, 17%, 95%);
+}
+
+
+/* Existing styles */
+
+/*... your existing styles here ...*/
+/* For mobile */
+.positioning-class {
+  bottom: 7px;
+  left: 90%;
+  /* Adjust according to the icon's placement */
+  position: absolute;
+}
+
+/* For tablet */
+@media only screen and (min-width: 768px) {
+  .positioning-class {
+    left: 90%;
+    /* you might want to adjust these as per the design on tablet */
+  }
+}
+
+/* For desktop */
+@media only screen and (min-width: 1024px) {
+  .positioning-class {
+    left: 70%;
+    /* adjust for desktop */
+  }
+}
+
+/* Mobile devices */
+@media only screen and (max-width: 767px) {
+  .loginStyle {
+    width: 90%;
+    /* take up most of the screen width */
+    padding: 2rem 1rem;
+    /* reduce padding */
+  }
+
+  .btn.btn-primary {
+    width: 100%;
+    /* make the button full width for easier tapping */
+  }
+}
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .loginStyle {
+    width: 70%;
+    /* give a bit more margin on the sides */
+  }
 }

@@ -61,11 +61,11 @@ const InputForm = () => {
         <div className="flex flex-row gap-4">
           <div>
             <label htmlFor="email">Email:</label><br/>
-            <input type="email" id="email" name="email" required value={messageDetails.email} onChange={e =>setMessageDetails({...messageDetails, email:e.target.value}) }/>
+            <input type="email" id="email" name="email" className="textInput" required value={messageDetails.email} onChange={e =>setMessageDetails({...messageDetails, email:e.target.value}) }/>
           </div>
           <div>
             <label htmlFor="phone">Phone:</label><br/>
-            <input type="tel" id="tel" name="tel" required value={messageDetails.telephone} onChange={e =>setMessageDetails({...messageDetails, telephone:e.target.value}) }/>
+            <input type="tel" id="tel" name="tel" className="textInput" required value={messageDetails.telephone} onChange={e =>setMessageDetails({...messageDetails, telephone:e.target.value}) }/>
           </div>
         </div>
 

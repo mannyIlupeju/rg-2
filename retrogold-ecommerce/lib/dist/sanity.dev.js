@@ -22,7 +22,7 @@ var config = {
   dataset: "production",
   projectId: 'foypmm2m',
   apiVersion: '2022-12-22',
-  useCdn: false,
+  useCdn: true,
   token: process.env.NEXT_INVENTORY_TOKEN
   /**
    * Set useCdn to `false` if your application require the freshest possible

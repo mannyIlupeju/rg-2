@@ -26,7 +26,7 @@ const productDetails = ({data}) => {
   const {productDetail} = data
 
   const [quantity, setQuantity] = useState(1)
-  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, newCart, setNewCart, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
+  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, newCart, onAdd, setNewCart, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
   //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
   
@@ -122,28 +122,28 @@ const productDetails = ({data}) => {
 
  
 
-  const onAdd = async(product, quantity) => {
-    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
-    if (checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct.id === product.id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity,
-        }
-      })
-      setCartItems(updatedCartItems);
+  // const onAdd = async(product, quantity) => {
+  //   //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
+  //   const checkProductInCart = cartItems.find((item) => item._id === product._id);
+  //   if (checkProductInCart) {
+  //     const updatedCartItems = cartItems.map((cartProduct) => {
+  //       if (cartProduct.id === product.id) return {
+  //         ...cartProduct,
+  //         quantity: cartProduct.quantity + quantity,
+  //       }
+  //     })
+  //     setCartItems(updatedCartItems);
       
 
-    } else {
-      const updatedProduct = { ...product, quantity: quantity }
-      setCartItems([...cartItems, updatedProduct]);
-    }
+  //   } else {
+  //     const updatedProduct = { ...product, quantity: quantity }
+  //     setCartItems([...cartItems, updatedProduct]);
+  //   }
 
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-    openCartModal()
-  }
+  //   setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+  //   setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+  //   openCartModal()
+  // }
 
 
 
@@ -287,15 +287,9 @@ const allProductsQuery = `*[_type == 'product']{
 }`
 
 export async function getStaticProps({ params }) {
-
-
  const {slug} = params;
  const productDetail = await sanityClient.fetch(productDetailQuery, {slug})
-
  const allProduct = await sanityClient.fetch(allProductsQuery)
-
-
-
 
  return {
    props: {

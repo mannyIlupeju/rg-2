@@ -27,7 +27,8 @@ const Navigation = () => {
 		handleLogin,
 		activateSearch,
 		deactivateSearch,
-		searchBar
+		searchBar,
+		isToken
 	} = useGlobalContext();
 
 	const navLink = [
@@ -94,7 +95,7 @@ const Navigation = () => {
 					</div>
 				</div>
 				:
-				<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center text-zinc-700 lg:block hidden'>
+				<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700 lg:block hidden'>
 					{navLink.map((link) => {
 						const pathname = usePathname();
 						const isActive = pathname.startsWith(link.href);
@@ -111,7 +112,7 @@ const Navigation = () => {
 
 			<div className='lg:flex flex-row lg:items-center gap-4 lg:block hidden'>
 				<Search />
-				<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
+				{isToken ? <span className="text-gray-800">Account</span> : <IoPerson onClick={handleLogin} color='black' size='1.8rem' />}
 				<Link href='/cart'>
 					<div className='flex justify-end'>
 						<FaShoppingCart size='1.8rem' color='black' />

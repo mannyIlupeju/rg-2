@@ -10,8 +10,6 @@ dotenv.config()
 connectDB();
 
 
-
-
 async function handler(req, res) {
   if(req.method === "POST") {
     try {

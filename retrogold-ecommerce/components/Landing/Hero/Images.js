@@ -2,13 +2,13 @@ import Image from 'next/image'
 
 const ImageRender = ({ hero, currentIndex }) => {
   return (
-    <div className="relative h-screen flex flex-col justify-center items-center">
+    <div className="relative h-screen flex flex-col justify-center items-center w-full h-full">
       <Image
         src={hero[currentIndex].heroImages}
-        layout="fill"
         objectFit="cover"
         className="heroImages"
         alt="hero Images"
+        fill={true}
         unoptimized
         priority
       />
