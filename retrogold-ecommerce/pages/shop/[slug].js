@@ -26,7 +26,7 @@ const productDetails = ({data}) => {
   const {productDetail} = data
 
   const [quantity, setQuantity] = useState(1)
-<<<<<<< HEAD
+
 
   const {
     isOpenMenu,
@@ -42,9 +42,7 @@ const productDetails = ({data}) => {
     openCartModal
   } = useGlobalContext()
 
-=======
-  const {isOpenMenu, totalQuantity, setTotalQuantities, totalPrice, newCart, onAdd, setNewCart, setTotalPrice, setCartItems, cartItems, isItemChosen, openCartModal} = useGlobalContext()
->>>>>>> origin/main
+
   //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -123,8 +121,7 @@ const productDetails = ({data}) => {
     }
   }
 
-<<<<<<< HEAD
-=======
+
 
 
   const token = process.env.NEXT_PUBLIC_API_KEY
@@ -167,7 +164,7 @@ const productDetails = ({data}) => {
 
 
 
->>>>>>> origin/main
+
   return (
     <>
       <Head>
@@ -188,24 +185,20 @@ const productDetails = ({data}) => {
 
       <main>
         <div className="bg-white productDetailFonts">
-<<<<<<< HEAD
+
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
             <div className="flex flex-col flex-col-reverse justify-center md:gap-10 gap-4 overflow-hidden w-fit">
-=======
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-14 justify-center py-16  px-4 md:px-16">
-            <div className="flex flex-col flex-col-reverse md:flex-row justify-center md:gap-14 gap-5 overflow-hidden">
->>>>>>> origin/main
+
               <div>
                 <div className="flex md:flex-row flex-wrap items-center gap-4 col-start-1">
                     {imageUrls.map((x, index)=>{
                     return (
                       <div className="flex" key={index}>
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
-<<<<<<< HEAD
+
                           <Image src={x} alt={productDetail.productName} className="sideProductImage" width="400" height="200" unoptimized/>
-=======
-                          <Image src={x} alt={productDetail.productName} className="sideProductImage" width="50" height="50" priority/>
->>>>>>> origin/main
+
+
                         </div>
                       </div>
                       )
@@ -216,7 +209,7 @@ const productDetails = ({data}) => {
               <div> 
 
                 {/* main image that has carousel function */}
-<<<<<<< HEAD
+
                 <div className="relative w-fit">
                    <Image src={imageUrls[currentIndex]} width="100" height="200" alt=" " className="mainProductImage" priority unoptimized/>
                   <div className="bottom-44 cursor-pointer">
@@ -224,13 +217,7 @@ const productDetails = ({data}) => {
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
                   </div>
                 </div> 
-=======
-                <div style={carouselContainer}>
-                  <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
-                   <Image src={imageUrls[currentIndex]} width="200" height="200" alt=" " className="mainProductImage" priority/>
-                  <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow}/>
-                </div>
->>>>>>> origin/main
+
               </div>
             </div>
 
@@ -329,10 +316,7 @@ export async function getStaticProps({ params }) {
  const {slug} = params;
  const productDetail = await sanityClient.fetch(productDetailQuery, {slug})
  const allProduct = await sanityClient.fetch(allProductsQuery)
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/main
  return {
    props: {
      data: {productDetail, allProduct}

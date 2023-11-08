@@ -12,22 +12,15 @@ import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/main
 
 
 
 
 export default function Home({hero, quote, blog, calltoAction}) {
   const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
-<<<<<<< HEAD
-   
-    
-=======
->>>>>>> origin/main
+
   return (
     <>
       <Head>
@@ -36,24 +29,16 @@ export default function Home({hero, quote, blog, calltoAction}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-<<<<<<< HEAD
-      
-      <main>
-          {isOpenMenu ? <RespMenu/> : ''}
-=======
       <main className="h-fit">
-        <>
-          {isOpenMenu && <RespMenu/>}
->>>>>>> origin/main
-          <Navigation/>
-          {isSignIn && <Login/>}
-          {isUserRegistered && <Register/>}
-          <Landing hero={hero}/>  
-          <Quotes quote={quote}/>
-          <Experience/>
-          <Blog blog={blog}/> 
-          <Calltoaction calltoAction={calltoAction}/>
-        </>
+        {isOpenMenu && <RespMenu/>}
+        <Navigation/>
+        {isSignIn && <Login/>}
+        {isUserRegistered && <Register/>}
+        <Landing hero={hero}/>  
+        <Quotes quote={quote}/>
+        <Experience/>
+        <Blog blog={blog}/> 
+        <Calltoaction calltoAction={calltoAction}/>
       </main>
       <Footer/> 
     </>

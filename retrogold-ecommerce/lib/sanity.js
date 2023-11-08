@@ -42,9 +42,5 @@ export const urlFor = (source) => builder.image(source)
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient(config)
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> origin/main
 
   

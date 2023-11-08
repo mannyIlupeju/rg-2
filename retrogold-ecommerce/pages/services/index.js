@@ -36,11 +36,11 @@ const services = () => {
             className="bg-zinc-700"
           />
         </div>
-<<<<<<< HEAD
-        <div className="container mx-auto flex justify-center flex-col lg:flex-row gap-12 lg:p-24 md:p-4 p-3">
+
+        {/* <div className="container mx-auto flex justify-center flex-col lg:flex-row gap-12 lg:p-24 md:p-4 p-3">
           <div className="mainTarotBox">
-            <img src="/images/sideTarotImage.jpeg" alt="sideTarotImage"/>
-=======
+            <img src="/images/sideTarotImage.jpeg" alt="sideTarotImage"/> */}
+
 
         <div className="container mx-auto flex flex-col md:flex-row gap-12 p-8 md:p-24">
           <div className="flex-1">
@@ -49,7 +49,7 @@ const services = () => {
               alt="sideTarotImage"
               className="w-full h-full object-cover rounded-lg"
             />
->>>>>>> origin/main
+
           </div>
 
           <div className="flex-1 flex flex-col gap-6 text-zinc-700">

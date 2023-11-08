@@ -324,20 +324,18 @@ input[type=email] {
 }
 
 
-<<<<<<< HEAD
+
 input[type=text],
 input[type=email],
 input[type=password],
 input[type=tel],
 input[type=search],
 input[type = number],
-input[type = date]{
-=======
+input[type = date]
 
 
 
 .textInput{
->>>>>>> origin/main
   padding: 0.5rem;
   border-radius: 4rem;
   background-color: var(--teaGreen);
@@ -348,12 +346,12 @@ input[type = date]{
   background-color: var(--beige)
 }
 
-<<<<<<< HEAD
+
 .formInput {
   width: 17rem;
 }
 
-=======
+
 .searchInput {
   padding: 0.5rem;
   background-color: var(--teaGreen);
@@ -362,7 +360,7 @@ input[type = date]{
 
 
 
->>>>>>> origin/main
+
 select {
   padding: 0.4rem;
   border-radius: 4rem;
@@ -388,20 +386,19 @@ textarea {
 
 
 
-<<<<<<< HEAD
+
   .itemRightArrow {
      color: '#D5BDAF';
-=======
+  }
 
 .itemRightArrow {
     color: '#D5BDAF';
->>>>>>> origin/main
     transform: 'translate(-50%, -50%)';
     position: 'absolute';
     top:'50%';
     right:'8rem';
     cursor:'pointer';
-<<<<<<< HEAD
+
   }
 
   .loginStyle {
@@ -412,8 +409,8 @@ textarea {
 /**Media Queries**/
 @media screen and (max-width: 323px) {
   .experienceImage {
-    height: 283px;
-=======
+    height: 283px
+  }
 }
 
 .loginStyle {
@@ -438,18 +435,11 @@ textarea {
   .positioning-class {
     left: 90%;
     /* you might want to adjust these as per the design on tablet */
->>>>>>> origin/main
-  }
-  .sideProductImage {
-    width: 2rem;
-  }
 
-  .mainTarotBox {
-    width: 20rem;
   }
 }
 
-<<<<<<< HEAD
+
 @media screen and (max-width: 600px) {
   .heroText {
     padding: 2rem;
@@ -490,15 +480,9 @@ textarea {
 
   .mainTarotBox {
     width: 30rem;
-=======
-/* For desktop */
-@media only screen and (min-width: 1024px) {
-  .positioning-class {
-    left: 70%;
-    /* adjust for desktop */
->>>>>>> origin/main
   }
 }
+
 
 /* Mobile devices */
 @media only screen and (max-width: 767px) {

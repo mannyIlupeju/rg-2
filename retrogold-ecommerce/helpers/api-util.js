@@ -1,8 +1,6 @@
-<<<<<<< HEAD
+
 import { sanityClient } from '@/lib/dist/sanity.dev';
-=======
-import { sanityClient } from '/lib/dist/sanity.dev';
->>>>>>> origin/main
+
 
 //Fetch Blog data from Sanity
 export async function getAllProducts() {

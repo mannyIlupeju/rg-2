@@ -26,7 +26,6 @@ const AppContext = ({ children }) => {
 
 
 
-=======
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
@@ -34,7 +33,7 @@ const AppContext = ({ children }) => {
 
   
 
->>>>>>> origin/main
+
   const [messageDetails, setMessageDetails] = useState(
     {
       firstName: '',
@@ -119,31 +118,6 @@ const AppContext = ({ children }) => {
 
 
 
-  //Add item to cart
-  const onAdd = async(product, quantity) => {
-    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
-
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-
-
-    if (checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct.id === product.id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity,
-        }
-      })
-      setCartItems(updatedCartItems);
-
-    } else {
-      const updatedProduct = { ...product, quantity: quantity }
-      setCartItems([...cartItems, updatedProduct]);
-    }
-    openCartModal()
-  }
-
 
    function closeLoginModal() {
     setIsSignIn(false)
@@ -162,13 +136,6 @@ const AppContext = ({ children }) => {
   function closeRegisterModal() {
     setIsUserRegistered(false)
   }
-
-
-
-
-
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-  const token = process.env.NEXT_PUBLIC_API_KEY
 
 
 
@@ -271,7 +238,7 @@ const AppContext = ({ children }) => {
       loginModal,
       closeLoginModal,
       registerModal,
-      closeRegisterModal
+      closeRegisterModal,
       handleLogin,
       loginModal,
       closeLoginModal,

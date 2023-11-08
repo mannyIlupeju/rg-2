@@ -94,7 +94,7 @@ const Login = () => {
       
       <div className="loginStyle p-12 rounded-lg shadow-lg" ref={modalRef}>
         <div className="relative bottom-8 left-64" onClick={closeLoginModal}>
-          <FaTimes size="1.8rem" className="cursor-pointer"/>
+          <FaTimes size="1.8rem" className="cursor-pointer text-gray-800"/>
         </div>
         <div className="text-center mb-4">
           <h1 className="uppercase text-2xl text-slate-900">Login</h1>
@@ -105,7 +105,7 @@ const Login = () => {
               <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
-              <input type="text" name="email" id="email" value={checkUserData.email} onChange={(e)=>{
+              <input type="text" name="email" id="email" value={checkUserData.email} className="text-zinc-800" onChange={(e)=>{
                 e.preventDefault()
                 setcheckUserData({...checkUserData, email:e.target.value})
               }} required/>
@@ -115,7 +115,7 @@ const Login = () => {
                 <label htmlFor="password" className="text-gray-800">
                     Password:
                 </label>
-                {!hidePassword ? <FaEye className="relative top-6 left-56" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-56" onClick={showPassword}/>}
+                {!hidePassword ? <FaEye className="relative top-6 left-56 text-zinc-800" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-56 text-zinc-800" onClick={showPassword}/>}
                 <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="formInput"value={checkUserData.password} onChange={(e)=>{
                   e.preventDefault()
                   setcheckUserData({...checkUserData, password:e.target.value})

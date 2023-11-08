@@ -47,7 +47,7 @@ const Experience = () => {
           <path fill="#C7D8A0" fillOpacity="1" d="M0,224L48,234.7C96,245,192,267,288,272C384,277,480,267,576,240C672,213,768,171,864,160C960,149,1056,171,1152,165.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
       </div>
-    <section className="relative experienceBg z-2">
+    <section className="relative experienceBg z-2 ">
       <motion.div 
        className="p-12 flex justify-center" 
        viewport={{once:false}}
