@@ -19,10 +19,21 @@ const Cart = () => {
   const totalPrice = useSelector((state)=> state.totalPrice)
   const dispatch = useDispatch();
 
+  console.log(cartItems)
+
+  
 
 
-  function handleRemove (_id, quantity){
-    dispatch(onRemove(_id, quantity));
+  function handleRemove(_id){
+    console.log(_id)
+    dispatch(onRemove({_id}))
+  }
+
+  function handleToggle(_id, value){
+    dispatch(toggleCartItemQuantity({
+      _id,
+      value
+    }))
   }
   
 
@@ -86,7 +97,9 @@ const Cart = () => {
                   
                     </div> 
                     <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                      <button onClick={()=> handleRemove(_id, quantity)}><p>On Remove</p></button>
+                      <button onClick={() => handleRemove(_id)}>
+                        <p>On Remove</p>
+                      </button>
                     </div>
                     </div>
                   )

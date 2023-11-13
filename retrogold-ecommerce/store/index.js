@@ -22,21 +22,35 @@ const cartSlice = createSlice({
         state.totalPrice = state.cart.reduce((total, item)=> total + (item.price * item.quantity), 0)
        },
        onRemove: (state, action) => {
-        const existingItem = state.cart.find(item => item._id === action.payload._id);
-        if(existingItem) {
-            state.totalPrice -= (existingItem.price * existingItem.quantity);
-            state.cart = state.cart.filter(item => item._id !== action.payload._id)
-        }
-        state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0)
+        const removingItem = state.cart.find(item => item._id === action.payload._id);
+        if(removingItem){
+           state.cart = state.cart.filter(item => item._id !== removingItem._id)
+           state.totalPrice = state.cart.reduce((total, item) => total + (item.price * item.quantity), 0)
+        } 
        },
-       toggleCartItemQuantity: (state, action) => {
-        const existingItem = state.cart.find((item)=> item._id === action.payload._id);
-        if(existingItem && action.payload.value === 'inc'){
-            state.totalQuantity++
-            existingItem.quantity++
+      toggleCartItemQuantity: (state, action) => {
+       const existingItemIndex = state.cart.findIndex((item) => item._id === action.payload._id);
+       if (existingItemIndex !== -1) {
+        const existingItem = state.cart[existingItemIndex];
+
+        // Increase or decrease quantity
+        if (action.payload.value === 'inc') {
+            existingItem.quantity++;
+        } else if (action.payload.value === 'dec') {
+            if (existingItem.quantity > 1) {
+                existingItem.quantity--;
+            } else {
+                // Remove item from cart if quantity is 1 and 'dec' is requested
+                state.cart.splice(existingItemIndex, 1);
+            }
         }
-    
+
+        // Update totalQuantity and totalPrice
+        state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0);
+        state.totalPrice = state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
        }
+      }
+
        
     },
 });
