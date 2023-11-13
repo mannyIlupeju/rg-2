@@ -141,72 +141,72 @@ const AppContext = ({ children }) => {
 
 
   //Add item to cart
-  const onAdd = async(product, quantity) => {
-    //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
+  // const onAdd = async(product, quantity) => {
+  //   //checking if item is already in cart, and if it is add an additional item, if it is not just add the item for the first time
+  //   const checkProductInCart = cartItems.find((item) => item._id === product._id);
 
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
-    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-
-
-    if (checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct.id === product.id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity,
-        }
-      })
-      setCartItems(updatedCartItems);
-
-    } else {
-      const updatedProduct = { ...product, quantity: quantity }
-      setCartItems([...cartItems, updatedProduct]);
-    }
-    openCartModal()
-  }
+  //   setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+  //   setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
 
-  const toggleCartItemQuantity = (id, value) => {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item._id === id) {
-        if (value === 'inc') {
-          return { 
-            ...item, quantity: item.quantity + 1 
-          };
-        } else if (value === 'dec' && item.quantity > 1) {
-          return { ...item, quantity: item.quantity - 1 };
-        }
-      }
-      return(item)
+  //   if (checkProductInCart) {
+  //     const updatedCartItems = cartItems.map((cartProduct) => {
+  //       if (cartProduct.id === product.id) return {
+  //         ...cartProduct,
+  //         quantity: cartProduct.quantity + quantity,
+  //       }
+  //     })
+  //     setCartItems(updatedCartItems);
+
+  //   } else {
+  //     const updatedProduct = { ...product, quantity: quantity }
+  //     setCartItems([...cartItems, updatedProduct]);
+  //   }
+  //   openCartModal()
+  // }
+
+
+  // const toggleCartItemQuantity = (id, value) => {
+  //   const updatedCartItems = cartItems.map((item) => {
+  //     if (item._id === id) {
+  //       if (value === 'inc') {
+  //         return { 
+  //           ...item, quantity: item.quantity + 1 
+  //         };
+  //       } else if (value === 'dec' && item.quantity > 1) {
+  //         return { ...item, quantity: item.quantity - 1 };
+  //       }
+  //     }
+  //     return(item)
       
-    });
+  //   });
     
-    setCartItems(updatedCartItems);
+  //   setCartItems(updatedCartItems);
 
-    // Calculate totalPrice and totalQuantities based on the updatedCartItems
-    const newTotalPrice = updatedCartItems.reduce((total, item) =>  total + item.price * item.quantity, 0);
-    const newTotalQuantities = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
+  //   // Calculate totalPrice and totalQuantities based on the updatedCartItems
+  //   const newTotalPrice = updatedCartItems.reduce((total, item) =>  total + item.price * item.quantity, 0);
+  //   const newTotalQuantities = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
     
-    setTotalPrice(newTotalPrice);
-    setTotalQuantities(newTotalQuantities);
+  //   setTotalPrice(newTotalPrice);
+  //   setTotalQuantities(newTotalQuantities);
 
 
-  }
+  // }
 
-  //Remove item from Cart
-  const onRemove = (id, quantity) => {
-   const filteredProduct = cartItems.filter(item => item._id !== id)
+  // //Remove item from Cart
+  // const onRemove = (id, quantity) => {
+  //  const filteredProduct = cartItems.filter(item => item._id !== id)
   
-   if(filteredProduct) {
-     setCartItems(filteredProduct)
-   }
+  //  if(filteredProduct) {
+  //    setCartItems(filteredProduct)
+  //  }
 
-   const updatedTotal = filteredProduct.reduce((total, item)=> total + item.price * item.quantity, 0)
-   const updatedQuantities = filteredProduct.reduce((total, item) => total + item.quantity, 0);
+  //  const updatedTotal = filteredProduct.reduce((total, item)=> total + item.price * item.quantity, 0)
+  //  const updatedQuantities = filteredProduct.reduce((total, item) => total + item.quantity, 0);
 
-   setTotalPrice(updatedTotal)
-   setTotalQuantities(updatedQuantities)
-  }
+  //  setTotalPrice(updatedTotal)
+  //  setTotalQuantities(updatedQuantities)
+  // }
     
 
         
@@ -224,9 +224,8 @@ const AppContext = ({ children }) => {
       setTotalPrice,
       totalQuantity,
       setTotalQuantities,
-      toggleCartItemQuantity,
-      onAdd,
-      onRemove,
+   
+    
       messageDetails,
       openCartModal,
       setMessageDetails,

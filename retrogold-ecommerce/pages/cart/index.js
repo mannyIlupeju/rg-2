@@ -5,13 +5,26 @@ import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
 import { useGlobalContext } from '@/ Context/context';
+import {useSelector, useDispatch} from 'react-redux'
+import { onRemove, toggleCartItemQuantity } from '../../store'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import secureLocalStorage from 'react-secure-storage';
 
 const Cart = () => {
-  const {toggleCartItemQuantity, totalPrice, cartItems, cartNav, savedCart, onRemove, totalQuantity} = useGlobalContext()
+  const { cartNav, savedCart, totalQuantity} = useGlobalContext()
+
+  const cartItems = useSelector((state) => state.cart)
+  const cartQuantity = useSelector((state)=> state.totalQuantity)
+  const quantity = useSelector((state)=> state.quantity)
+  const totalPrice = useSelector((state)=> state.totalPrice)
+  const dispatch = useDispatch();
 
 
+
+  function handleRemove (_id, quantity){
+    dispatch(onRemove(_id, quantity));
+  }
+  
 
   return ( 
     <>
@@ -56,9 +69,9 @@ const Cart = () => {
 
                       <div className="flex gap-20">
                         <div className="flex gap-4 ">
-                          <FaPlus className="" onClick={() => toggleCartItemQuantity(_id, 'inc') }/>
+                          <FaPlus className="" onClick={() => {handleToggle(_id, 'inc') }}/>
                             <span className="font-bold text-lg">{quantity}</span>
-                          <FaMinus className="flex" onClick={() => toggleCartItemQuantity(_id, 'dec')}/>
+                          <FaMinus className="flex" onClick={() => {handleToggle(_id, 'dec')}}/>
                         </div>
 
                         <div>
@@ -73,7 +86,7 @@ const Cart = () => {
                   
                     </div> 
                     <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                      <button onClick={()=> onRemove(_id, quantity)}><p>On Remove</p></button>
+                      <button onClick={()=> handleRemove(_id, quantity)}><p>On Remove</p></button>
                     </div>
                     </div>
                   )
