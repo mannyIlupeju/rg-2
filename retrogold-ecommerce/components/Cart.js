@@ -2,11 +2,16 @@ import React, {useState, useEffect} from 'react';
 import Image from 'next/image'
 import { useGlobalContext } from '@/ Context/context';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
+import { onRemove, toggleCartItemQuantity } from '../store'
+import {useSelector, useDispatch} from 'react-redux'
 //Sidebar Cart view component
 
 const Cart = () => {
-  const {isItemChosen, onRemove, cartItems, toggleCartItemQuantity, totalPrice, closeCartModal} = useGlobalContext()
+  const {isItemChosen, closeCartModal} = useGlobalContext()
+  const dispatch = useDispatch()
 
+  const cartItems = useSelector((state) => state.cart)
+  const totalPrice = useSelector((state) => state.totalPrice)
 
   //close cart modal functionality if cart items in modal is less than 1
   if(cartItems.length < 1) {
@@ -19,11 +24,23 @@ const Cart = () => {
     }
   }
 
+   function handleToggle(_id, value){
+    dispatch(toggleCartItemQuantity({
+      _id,
+      value
+    }))
+   }
+
+   function handleRemove(_id){
+    console.log(_id)
+    dispatch(onRemove({_id}))
+   }
+
 
   return (
     <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>
         {(isItemChosen && cartItems.length) ?
-          <div className="bg-gray-300 w-2/6 absolute z-9 right-0 top-0 p-8 h-screen">
+          <div className="bg-gray-300 w-2/6 absolute z-9 right-0 top-0 p-8 h-screen sideCart">
               <div className="text-zinc-700 flex justify-between">
                 <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
                 <FaTimes color="black" size="2rem" onClick={closeCartModal} className="cursor-pointer"/>
@@ -47,16 +64,16 @@ const Cart = () => {
                               <h1 className="text-xl font-bold">${price}</h1>
                             </div>
                             <div className="flex gap-4 mt-4">
-                              <FaPlus className="" onClick={() => toggleCartItemQuantity(_id, 'inc')}/>
+                              <FaPlus className="" onClick={() => handleToggle(_id, 'inc')}/>
                                 <span className="font-bold text-xl">{quantity}</span>
-                              <FaMinus className="flex" onClick={() => toggleCartItemQuantity(_id, 'dec')}/>
+                              <FaMinus className="flex" onClick={() => handleToggle(_id, 'dec')}/>
                             </div>
                             
                           </div>
                           </div>
                         </div>
                         <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                          <button onClick={()=> onRemove(_id, quantity)}><p>On Remove</p></button>
+                          <button onClick={()=> handleRemove(_id)}><p>On Remove</p></button>
                         </div>
                       </div>
                     )

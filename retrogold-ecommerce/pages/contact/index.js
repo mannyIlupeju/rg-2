@@ -29,8 +29,8 @@ const Contact = () => {
         <div className="container mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8">
           <div className="lg:grid lg:grid-cols-3 lg:gap-12">
 
-            <div className="lg:col-span-2 space-y-8">
-              <h1 className="text-4xl font-bold text-zinc-700 mb-4">Get in Touch</h1>
+            <div className="lg:col-span-2 space-y-8 text-zinc-700">
+              <h1 className="text-4xl font-bold  mb-4">Get in Touch</h1>
               <p>
                 We respond to each and every message as soon as possible; it may take 2-3 business days for us to get back to you via email. PS. We recommend adding info@retrogoldlife.com to your contacts to ensure our responses land in your inbox.
               </p>

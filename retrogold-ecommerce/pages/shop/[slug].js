@@ -33,7 +33,7 @@ const productDetails = ({data}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const dispatch = useDispatch()
-  // const quantity = useSelector((state) => state.quantity)
+
 
 
   const {
@@ -59,13 +59,6 @@ const productDetails = ({data}) => {
   const shippingInfo = shipping.map((x)=>{
     return (x.text)
   })
-
-  
-
-  
-
- 
-
 
 
   //Carousel Functions 
@@ -140,6 +133,7 @@ const productDetails = ({data}) => {
     }
     console.log(productAdded.brandName, productAdded.price);
     dispatch(addToCart(productAdded))
+    openCartModal()
     setQuantity(1)
   }
 

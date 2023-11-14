@@ -8,20 +8,23 @@ import { useGlobalContext } from '/ Context/context';
 import Search from './Search/Search'
 import { FaSearch } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux'
+
 
 
 
 const Navigation = () => {
 	const [inputValue, setInputValue] = useState('')
 
+	const cartItems = useSelector((state) => state.cart)
+	const totalQuantity = useSelector((state) => state.totalQuantity)
+
 
 
 	const { isOpenMenu,
 		setOpenMenu,
-		cartItems,
 		cartNav,
 		newCart,
-		totalQuantity,
 		sSignIn,
 		setIsSignIn,
 		handleLogin,

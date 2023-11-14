@@ -17,7 +17,7 @@ const Quotes = ({ quote }) => {
 
   return (
   
-   <section className="container mx-auto px-4 lg:px-0 lg:my-24 my-10 h-24">
+   <section className="container mx-auto px-4 lg:px-0 lg:my-24 mt-12 md:mb-96 h-24">
   <div className="flex flex-col md:flex-row justify-center items-center rounded-lg space-y-8 md:space-y-0 md:space-x-8 max-w-screen-lg mx-auto">
     <div className="flex justify-center w-full md:w-1/2">
     

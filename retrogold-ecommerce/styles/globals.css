@@ -331,9 +331,15 @@ input[type=password],
 input[type=tel],
 input[type=search],
 input[type = number],
-input[type = date]
 
 
+input[type=date]{
+  padding: 0.5rem;
+  border-radius: 4rem;
+  background-color: var(--teaGreen);
+  color:rgba(0, 0, 0, 0.295)
+  
+}
 
 .textInput{
   padding: 0.5rem;
@@ -387,9 +393,9 @@ textarea {
 
 
 
-  .itemRightArrow {
-     color: '#D5BDAF';
-  }
+.itemRightArrow {
+ color: '#D5BDAF';
+}
 
 .itemRightArrow {
     color: '#D5BDAF';
@@ -416,6 +422,11 @@ textarea {
 .loginStyle {
     background:var(--yellow);
     color: hsl(0, 17%, 95%);
+}
+
+.sideCart {
+  overflow-y: auto;
+
 }
 
 
@@ -463,6 +474,17 @@ textarea {
   textarea {
   width: 20rem;
 }
+
+.sideCart {
+        width: 100%; /* Full width on small screens */
+}
+.cartModalImage {
+        width: 100px;
+        height: 100px; /* Smaller images on small screens */
+}
+
+
+
 }
 
 
