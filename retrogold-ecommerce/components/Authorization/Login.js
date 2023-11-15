@@ -11,8 +11,9 @@ const Login = () => {
   const [color, setColor] = useState('#ffffff')
   const [hidePassword, sethidePassword] = useState(false)
   const[registerUser, setRegisterUser] = useState(false)
+  const[message, setMessage] = useState('')
   
-  const {isSignIn, setIsSignIn, isUserRegistered, setIsUserRegistered, closeLoginModal, registerModal} = useGlobalContext()
+  const {isSignIn, setIsSignIn, isToken, setIsToken, isUserRegistered, setIsUserRegistered, closeLoginModal, registerModal} = useGlobalContext()
   
 
 
@@ -72,6 +73,32 @@ const Login = () => {
   //   }, 2000);
   // }
 
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const response = await fetch('/api/login/login', {
+    method: 'POST',
+    headers: {
+      "Content-Type": 'application/json',
+    },
+    body: JSON.stringify(checkUserData)
+  })
+
+  const data = await response.json()
+  console.log(data)
+  if(data.message){
+    setMessage(data.message)
+    setTimeout(() => {
+      setMessage('')
+    }, 3000);
+  }
+  if(data.token){
+    setIsToken(data.token)
+  }
+
+ }
+
+
   //Clear fields login
   const clearLogin= () => {
     setcheckUserData({name: '', email: '', password:''})
@@ -91,11 +118,15 @@ const Login = () => {
   return (
     <>
     <div className="flex items-center justify-center h-screen bg-gray-800 bg-opacity-75 fixed inset-0 z-40">
-      
       <div className="loginStyle p-12 rounded-lg shadow-lg" ref={modalRef}>
         <div className="relative bottom-8 left-64" onClick={closeLoginModal}>
           <FaTimes size="1.8rem" className="cursor-pointer text-gray-800"/>
         </div>
+      <div className="text-center my-6">
+        <p className="text-zinc-800">
+        {message}
+       </p>
+      </div>
         <div className="text-center mb-4">
           <h1 className="uppercase text-2xl text-slate-900">Login</h1>
         </div>
@@ -122,7 +153,13 @@ const Login = () => {
                 }}required/>  
               </div>
 
-              <button className="btn btn-primary mt-6" type="submit">Login</button>
+              <button
+               className="btn btn-primary mt-6" 
+               type="submit" 
+               onClick={handleSubmit}
+              >
+                Login
+              </button>
 
               <div className="flex flex-row gap-1 justify-center text-lg mt-4">
               <p className="text-gray-800">Don't have an account?</p>

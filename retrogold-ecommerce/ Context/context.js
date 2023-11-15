@@ -112,13 +112,6 @@ const AppContext = ({ children }) => {
 
 
 
-
-
-
-  function closeLoginModal() {
-    setIsSignIn(false)
-  }
-
   function registerModal(){
     setIsSignIn(false)
     setIsUserRegistered(true)

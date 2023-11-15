@@ -14,6 +14,7 @@ async function handler(req, res) {
   if(req.method === "POST") {
     try {
       const {email, password} = req.body
+      console.log(email, password)
       const userEmail = email.toLowerCase().trim();
       
      //retrieve User from database if user is there

@@ -50,7 +50,7 @@ const Shop = ({ shop }) => {
                   <div className="mt-2">
                     <p className="text-sm">{brandName}</p>
                     <p className="text-md font-bold">{productName}</p>
-                    <p>${price}</p>
+                    <p className="text-zinc-800 font-bold">${price}</p>
                     <div className="line-clamp-4 mt-4">
                       <p className="text-md font-bold">
                         {shortDescription.map((x) => x.children[0].text)}
