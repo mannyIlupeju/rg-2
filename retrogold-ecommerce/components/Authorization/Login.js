@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect, useRef} from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useGlobalContext } from '@/ Context/context';
@@ -41,37 +42,14 @@ const Login = () => {
     };
   }, []);
 
+
+
+
+ useEffect(()=>{
+  localStorage.setItem('myToken', isToken);
+ }, [isToken])
  
 
- 
-
-
-
-  //Login submit functionality
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   dispatch(loginPost(checkUserData))
-  //   setisLoading(true)
-
-  //   setTimeout(() => {
-  //     const token = localStorage.getItem('token')
-  //     if(token){
-  //       setisLoading(false)
-  //       setisLogin(true)
-  //       setsuccessMessage(true)
-  //       navigate ('/', {replace: true})
-  //     }
-  //     else {
-  //       setErrorMessage(true)
-  //       setTimeout(() => {
-  //         setErrorMessage(false)
-  //         setisLoading(false)
-  //         clearLogin()
-  //       }, 1000);
-  //     }
-
-  //   }, 2000);
-  // }
 
  const handleSubmit = async (e) => {
   e.preventDefault();
@@ -84,18 +62,15 @@ const Login = () => {
     body: JSON.stringify(checkUserData)
   })
 
-  const data = await response.json()
-  console.log(data)
-  if(data.message){
+  if(response.ok){
+    const data = await response.json()
     setMessage(data.message)
     setTimeout(() => {
       setMessage('')
     }, 3000);
-  }
-  if(data.token){
+    document.cookie = `token=${data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
     setIsToken(data.token)
   }
-
  }
 
 

@@ -21,9 +21,7 @@ const blogPost = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
   const{blogDetail} = data
 
- 
-
-
+  
   return (
     <>
     <Head>

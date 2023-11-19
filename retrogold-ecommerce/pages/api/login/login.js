@@ -1,7 +1,10 @@
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../../models/User';
 import connectDB from '../../../lib/mongoose'
+
+
 import Cookies from 'cookies'; 
 import dotenv from 'dotenv';
 
@@ -42,7 +45,7 @@ async function handler(req, res) {
       
       const cookies = new Cookies(req, res)
       cookies.set('token', token, {
-          httpOnly: true,
+          httpOnly: false,
           secure: false,
           sameSite: 'strict',
           maxAge: 3600, // Token expiration time in seconds

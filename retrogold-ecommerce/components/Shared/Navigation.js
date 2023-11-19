@@ -34,8 +34,6 @@ const Navigation = () => {
 		isToken
 	} = useGlobalContext();
 
-	console.log(isToken)
-
 	const navLink = [
 		{
 			name: 'Home',
@@ -67,15 +65,12 @@ const Navigation = () => {
 	const handleInput = (e) => {
 		e.preventDefault()
 		const userSearch = e.target.value;
-
-
 		setInputValue(userSearch)
 		getFilteredProducts(userSearch)
 		getFilteredBlogs(userSearch)
-
-		// handleSearch(userSearch);
-
 	}
+
+
 
 
 
@@ -104,7 +99,7 @@ const Navigation = () => {
 				<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700 lg:block hidden'>
 					{navLink.map((link) => {
 						const pathname = usePathname();
-						const isActive = pathname.startsWith(link.href);
+						const isActive = pathname?.startsWith(link.href);
 
 						return (
 							<Link className={isActive ? 'nav-Active' : 'nav-link'} href={link.href} key={link.name}>
@@ -118,7 +113,17 @@ const Navigation = () => {
 
 			<div className='lg:flex flex-row lg:items-center gap-8 lg:block hidden'>
 				<Search />
-				{isToken ? <span className="text-gray-800">Account</span> : <IoPerson onClick={handleLogin} color='black' size='1.8rem' />}
+				{isToken ? 
+			    
+				<Link href= '/userAccount/account'>
+				<span className="text-gray-800">
+					Account
+				</span> 
+			    </Link>
+				
+				: 
+				<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
+				}
 				<Link href='/cart'>
 					<div className='flex justify-end'>
 						<FaShoppingCart size='1.8rem' color='black' />

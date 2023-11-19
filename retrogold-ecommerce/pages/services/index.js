@@ -32,15 +32,10 @@ const services = () => {
           <Image
             src="/images/tarotheadline.jpeg"
             alt="tarotcards"
-            layout="fill"
-            objectFit="cover"
+            fill={true}
             className="bg-zinc-700"
           />
         </div>
-
-        {/* <div className="container mx-auto flex justify-center flex-col lg:flex-row gap-12 lg:p-24 md:p-4 p-3">
-          <div className="mainTarotBox">
-            <img src="/images/sideTarotImage.jpeg" alt="sideTarotImage"/> */}
 
 
         <div className="container mx-auto flex flex-col md:flex-row gap-12 p-8 md:p-24">
