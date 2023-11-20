@@ -104,8 +104,7 @@ const Register = () => {
                 setUserData({ ...userData, password: e.target.value })
               }} required />
               {!hidePassword.password ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('password')} />}
-
-                </div>
+              </div>
               
 
               <div className="flex flex-col gap-2">

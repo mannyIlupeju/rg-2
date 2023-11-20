@@ -11,7 +11,7 @@ const ImageRender = ({ hero, currentIndex }) => {
         unoptimized
         priority
       />
-      <div className="absolute bottom-1/4 lg:bottom-1/2 text-center w-3/4 translate-x-1/5 text-white font-extrabold text-2xl md:text-6xl lg:text-7xl">
+      <div className="absolute bottom-1/4 lg:bottom-1/2 text-center w-3/5 translate-x-1/5 text-white font-extrabold text-2xl md:text-6xl lg:text-7xl">
         <h1 className="text-center text-white font-extrabold text-2xl md:text-6xl lg:text-6xl">
           {hero[currentIndex].headline}
         </h1>

@@ -5,6 +5,17 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  addresses: [{
+    street: String,
+    city: String,
+    zipCode: String,
+    country: String
+  }],
+  orders: [{
+    orderId: String,
+    orderDate: Date,
+    // other order details
+  }],
   role: {
     type: String,
     enum: ['user', 'admin'],

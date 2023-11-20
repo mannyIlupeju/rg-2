@@ -41,7 +41,7 @@ const Blog = ({blog}) => {
         </div>
       
       
-        <div className="grid grid-cols-3 mt-12 ">
+        <div className="grid grid-cols-3 ">
           <div className="col-span-3">
               <Link href={`/blog/${blog[0].slugCurrent}`}>
                 <div className="flex md:flex-row flex-col justify-center bg-red-400 md:p-4 items-center rounded-xl cursor-pointer p-2">

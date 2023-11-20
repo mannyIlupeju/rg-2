@@ -27,7 +27,7 @@ const services = () => {
       {isSignIn && <Login />}
       {isUserRegistered && <Register />}
 
-      <main className="bg-white">
+      <main className="section-background">
         <div className="relative w-full h-64 md:h-96">
           <Image
             src="/images/tarotheadline.jpeg"

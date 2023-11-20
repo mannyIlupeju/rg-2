@@ -31,9 +31,8 @@ async function handler(req, res) {
       const isValidPassword = await bcrypt.compare(password, user.password)
 
      // If the password is invalid, return a 401 Unauthorized status code
-      if (!isValidPassword) {
+      if (!isValidPassword && !user) {
         return res.status(401).json({ message: 'Incorrect email or password' });
-        
       }
       
       const token = jwt.sign(

@@ -1,5 +1,9 @@
+import {useState} from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation'
+import PersonalInfo from '@/components/AccountInformation/PersonalInfo'
+import SignInSecurity from '@/components/AccountInformation/SignInSecurity'
 import Footer from '@/components/Shared/Footer/footer'
 import { FaChevronRight } from "react-icons/fa";
 import { MongoClient } from 'mongodb';
@@ -13,7 +17,18 @@ dotenv.config()
 
 const Account = ({ user }) => {
   
-  console.log(user)
+  const [visibleComponent, setVisibleComponent] = useState(null)
+  const {name} = user
+  const splitName = name.split(' ')
+  const firstName = splitName[0]
+  
+  
+  const components = ['orders', 'address', 'personalInfo', 'signInSecurity']
+
+  const toggleSelection = (componentName) =>{
+    setVisibleComponent(prevComponent => 
+      prevComponent === componentName ? null : componentName)
+  }
     return (
       <>
         <Head>
@@ -22,24 +37,77 @@ const Account = ({ user }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Navigation/>
-        <main className="h-screen">
-          <div className="container mx-auto">
-            <div className="my-8 text-center">
-            <h1 className="text-zinc-800">Welcome to your Account, {user.name}</h1>
-            </div>
-
-            <div className="flex w-fit">
-              <nav className="flex flex-col gap-16 border-solid border-2 border-zinc-800 p-8">
-                <span className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer">Orders</span>
-                <span className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer">Addresses</span>
-                <span className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer">Personal Information</span>
-                <span className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer">Sign in & Security</span> 
+      <Navigation/>
+        <main className="h-screen section-background p-12">
+          <div className="text-center">
+          <h1 className="text-zinc-800">Welcome to your Account, {firstName}</h1>
+          </div>
+          <div className="container mx-auto flex justify-center my-12">
+            <div className="flex flex-row gap-32 h-fit">
+              <div className="h-fit">
+              <nav className="flex flex-col gap-10 p-8 border-solid border-2 border-zinc-800 justify-self-start">
+                <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
+                onClick={()=>toggleSelection('orders')}>
+                  <div className="flex flex-row gap-12 justify-between">
+                  Orders
+                  <FaChevronRight/>
+                  </div>
+                </button>  
+                <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
+                  onClick={()=>toggleSelection('addresses')}
+                >
+                  <div className="flex flex-row gap-12 justify-between">
+                  Addresses
+                  <FaChevronRight/>
+                  </div>
+                </button>
+                <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
+                onClick={()=>toggleSelection('personalInfo')}
+                >
+                <div className="flex flex-row gap-12 justify-between">
+                Personal Information
+                <FaChevronRight/>
+                </div>
+                </button>
+                <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
+                onClick={()=>toggleSelection('signInSecurity')}
+                >
+                  <div className="flex flex-row gap-12 justify-between">
+                  Sign In & Security
+                  <FaChevronRight/>
+                  </div>
+                </button> 
               </nav>
-
-              <div>
-
               </div>
+
+              { visibleComponent === 'personalInfo' && 
+              <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
+                <div>
+                <PersonalInfo/>
+                </div>
+              </div>
+              }
+              { visibleComponent === 'signInSecurity' && 
+              <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
+                <div>
+               <SignInSecurity user={user}/>
+                </div>
+              </div>
+              }
+              { visibleComponent === 'orders' && 
+              <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
+                <div>
+               <Orders/>
+                </div>
+              </div>
+              }
+              { visibleComponent === 'Addresses' && 
+              <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
+                <div>
+               <AddressInfo/>
+                </div>
+              </div>
+              }
             </div>
 
 
@@ -100,8 +168,6 @@ export async function getServerSideProps(context){
           password: user.password,
           role: user.role,
           vSign: user.__v
-          
-          // ... include other user fields you need
         }
       }
     } 
