@@ -67,6 +67,7 @@ const Login = () => {
     setMessage(data.message)
     setTimeout(() => {
       setMessage('')
+      closeLoginModal();
     }, 3000);
     document.cookie = `token=${data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
     setIsToken(data.token)

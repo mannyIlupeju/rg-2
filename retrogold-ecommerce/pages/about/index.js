@@ -28,7 +28,7 @@ const About = ({ data }) => {
 
       {isOpenMenu && <RespMenu />}
       <Navigation />
-      {isSignIn && <Login />}
+      {isSignIn && <Login/>}
       {isUserRegistered && <Register />}
 
       <main className="section-background">

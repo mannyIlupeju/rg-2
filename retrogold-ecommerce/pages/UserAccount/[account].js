@@ -45,37 +45,37 @@ const Account = ({ user }) => {
           <div className="container mx-auto flex justify-center my-12">
             <div className="flex flex-row gap-32 h-fit">
               <div className="h-fit">
-              <nav className="flex flex-col gap-10 p-8 border-solid border-2 border-zinc-800 justify-self-start">
+              <nav className="flex flex-col gap-10 p-8 justify-self-start">
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('orders')}>
-                  <div className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-12 justify-between">
                   Orders
                   <FaChevronRight/>
-                  </div>
+                  </span>
                 </button>  
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                   onClick={()=>toggleSelection('addresses')}
                 >
-                  <div className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-12 justify-between">
                   Addresses
                   <FaChevronRight/>
-                  </div>
+                  </span>
                 </button>
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('personalInfo')}
                 >
-                <div className="flex flex-row gap-12 justify-between">
+                <span className="flex flex-row gap-12 justify-between">
                 Personal Information
                 <FaChevronRight/>
-                </div>
+                </span>
                 </button>
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('signInSecurity')}
                 >
-                  <div className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-12 justify-between">
                   Sign In & Security
                   <FaChevronRight/>
-                  </div>
+                  </span>
                 </button> 
               </nav>
               </div>
