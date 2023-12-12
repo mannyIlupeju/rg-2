@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -79,7 +80,7 @@ const Navigation = () => {
 		<nav className='navigationStyle'>
 			<div className=' flex items-center'>
 				<Link href='/home'>
-					<img src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' />
+					<Image src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' width={250} height={250}/>
 				</Link>
 			</div>
 
@@ -96,7 +97,7 @@ const Navigation = () => {
 					</div>
 				</div>
 				:
-				<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700 lg:block hidden'>
+				<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700  hidden'>
 					{navLink.map((link) => {
 						const pathname = usePathname();
 						const isActive = pathname?.startsWith(link.href);
@@ -111,7 +112,7 @@ const Navigation = () => {
 
 			}
 
-			<div className='lg:flex flex-row lg:items-center gap-8 lg:block hidden'>
+			<div className='lg:flex flex-row lg:items-center gap-8  hidden'>
 				<Search />
 				{isToken ? 
 			    

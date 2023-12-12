@@ -159,12 +159,11 @@ const productDetails = ({data}) => {
 
       <main>
         <div className="bg-white productDetailFonts">
-
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
+          <div className=" container mx-auto w-fit grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
             <div className="flex flex-col flex-col-reverse justify-end md:gap-10 gap-4 overflow-hidden w-fit">
               <div>
                 <div className="flex md:flex-row flex-wrap items-center gap-4 col-start-1">
-                    {imageUrls.map((x, index)=>{
+                    {imageUrls.map((x, index) => {
                     return (
                       <div className="flex" key={index}>
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>

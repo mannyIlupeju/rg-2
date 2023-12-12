@@ -66,9 +66,7 @@ const Register = () => {
      <div className="flex items-center justify-center fixed bg-gray-800 bg-opacity-75 inset-0 z-40">
         <div className="loginStyle p-12 rounded-lg shadow-lg max-w-md h-fit" ref={modalRef}>
           <div className="relative left-64 bottom-8">
-          
-
-          <FaTimes size="1.8rem" className="cursor-pointer text-gray-900" onClick={closeRegisterModal}/>
+            <FaTimes size="1.8rem" className="cursor-pointer text-gray-900" onClick={closeRegisterModal}/>
           </div>
             <div className="text-center">
             <h1 className="uppercase text-gray-900 text-2xl">Register</h1>
@@ -115,7 +113,7 @@ const Register = () => {
               <input type={!hidePassword.retype ? 'text' : 'password'} name="retype" id="password2" className="p-2 formInput text-gray-800" value={userData.retype} onChange={(e) => {
                 setUserData({ ...userData, retype: e.target.value })
               }} required />
-              {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')} /> : <FaEyeSlash className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')} />}
+              {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')}/> : <FaEyeSlash className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')} />}
               </div>
           
 

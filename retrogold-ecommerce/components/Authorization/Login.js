@@ -61,14 +61,14 @@ const Login = () => {
     },
     body: JSON.stringify(checkUserData)
   })
+  const data = await response.json()
+  setMessage(data.message)
+  setTimeout(() => {
+    setMessage('')
+    closeLoginModal();
+  }, 3000);
 
   if(response.ok){
-    const data = await response.json()
-    setMessage(data.message)
-    setTimeout(() => {
-      setMessage('')
-      closeLoginModal();
-    }, 3000);
     document.cookie = `token=${data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
     setIsToken(data.token)
   }
@@ -99,7 +99,7 @@ const Login = () => {
           <FaTimes size="1.8rem" className="cursor-pointer text-gray-800"/>
         </div>
       <div className="text-center my-6">
-        <p className="text-zinc-800">
+        <p className="text-zinc-800 font-semibold">
         {message}
        </p>
       </div>
