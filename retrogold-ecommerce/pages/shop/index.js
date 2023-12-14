@@ -30,7 +30,7 @@ const Shop = ({ shop }) => {
   return (
     <>
       <Head>
-        // ( ... )
+ 
       </Head>
       {isOpenMenu && <RespMenu />}
       <Navigation />
@@ -41,8 +41,10 @@ const Shop = ({ shop }) => {
         <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {shop.map((shopItems) => {
             const { brandName, _id, slug, mainImage, mainImage2, productName, price, shortDescription } = shopItems;
+            console.log(slug)
             return (
-              <Link href={`/shop/${slug.current}`} key={_id}>
+            
+                <Link href={`/shop/${slug.current}`} key={_id}>
                 <div className="text-zinc-700 cursor-pointer">
                   <div onMouseEnter={() => handleMouseEnter(_id)} onMouseLeave={handleMouseLeave}>
                     <Image src={isHovered === _id ? mainImage2 : mainImage} width="200" height="200" alt="plant-pots" className="shopImage rounded transform transition hover:scale-105" />
@@ -58,7 +60,8 @@ const Shop = ({ shop }) => {
                     </div>
                   </div>
                 </div>
-              </Link>
+             </Link> 
+            
             );
           })}
         </div>
