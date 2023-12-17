@@ -49,10 +49,10 @@ const Cart = () => {
 
 
       <main>
-        <div className="container mx-auto p-24">
+        <div className="container mx-auto p-10 mb-12">
           {cartItems.length ? 
             <>
-              <h1 className="text-6xl font-bold text-zinc-700">Your Cart</h1>
+              <h1 className="text-3xl font-bold text-zinc-700">Your Cart</h1>
               <div className="flex flex-row gap-20 text-zinc-700 justify-end mb-8 text-xl">
                 <p>Quantity</p>
                 <p>Price</p>
@@ -60,7 +60,7 @@ const Cart = () => {
               </div>
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index)=> {
-                  const{ brandName, productName, price, imageUrls, quantity, _id } = items
+                  const{ vendor, title, price, images, quantity, _id } = items
             
                  
                   return (
@@ -69,11 +69,11 @@ const Cart = () => {
                       <div>
                         <div className="flex gap-4">
                           <div>
-                            <Image src={imageUrls[0]} alt={productName} width="200" height="200" className="cartImage"/>
+                            <Image src={images} alt={title} width="200" height="200" className="cartImage"/>
                           </div>
                           <div className="flex flex-col gap-4">
-                            <h1 className="text-lg">Brand Name: <span className="font-bold">{brandName}</span></h1>
-                            <p className="text-2xl ">Item: {productName}</p>
+                            <h1 className="text-lg">Brand Name: <span className="font-bold">{vendor}</span></h1>
+                            <p className="text-2xl ">Item: {title}</p>
                           </div>
                         </div>
                       </div>
@@ -111,11 +111,14 @@ const Cart = () => {
                   <p className="text-2xl font-bold">${totalPrice}</p>
                 </div>
               </div>
+              <div className="my-24 flex justify-end">
+                <button className="btn">Checkout</button>
+              </div>
             </>
           : 
           <div className="text-center">
             <div className="flex justify-center">
-              <img src='/images/shopping-cart-10925.png' alt='' width='120px' />
+              <Image src='/images/shopping-cart-10925.png'width={40} height={40} alt="shopping cart icon"/>
             </div>
             <div className="mt-4">
             <h1 className="text-6xl font-bold text-zinc-700">Cart is Empty</h1>

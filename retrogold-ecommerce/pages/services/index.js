@@ -10,7 +10,7 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 
 
 
-const services = () => {
+const Services = () => {
   const { isOpenMenu, isSignIn, isUserRegistered } = useGlobalContext();
 
   return (
@@ -40,10 +40,12 @@ const services = () => {
 
         <div className="container mx-auto flex flex-col md:flex-row gap-12 p-8 md:p-24">
           <div className="flex-1">
-            <img
+            <Image
               src="/images/sideTarotImage.jpeg"
-              alt="sideTarotImage"
+              alt="Tarot card image"
               className="w-full h-full object-cover rounded-lg"
+              width={200}
+              height={200}
             />
 
           </div>
@@ -64,4 +66,4 @@ const services = () => {
   );
 }
 
-export default services
+export default Services

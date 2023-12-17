@@ -13,6 +13,8 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart)
   const totalPrice = useSelector((state) => state.totalPrice)
 
+  console.log(cartItems)
+
   //close cart modal functionality if cart items in modal is less than 1
   if(cartItems.length < 1) {
     closeCartModal()
@@ -48,17 +50,17 @@ const Cart = () => {
               <div>
                 <div>
                   {cartItems.map((item, index)=> {
-                    const { brandName, productName, price, imageUrls, quantity, _id } = item
+                    const { vendor, title, price, images, quantity, _id } = item
                     return (
                       <div className="border-t-4 border-gray-400" key={index}>
                         <div className="flex gap-5 mt-4 ">
                           <div>
-                            <Image src={imageUrls[0]} alt={productName} width="200" height="200" className="cartModalImage"/>
+                            <Image src={images} alt={title} width="200" height="200" className="cartModalImage"/>
                           </div>
                           
                           <div className="flex flex-col gap-4 text-zinc-700">
-                            <h1 className="text-md">Brand Name: <span className="font-bold">{brandName}</span></h1>
-                            <p className="text-md">Item: {productName}</p>
+                            <h1 className="text-md">Brand Name: <span className="font-bold">{vendor}</span></h1>
+                            <p className="text-md">Item: {title}</p>
                             <div>
                             <div>
                               <h1 className="text-xl font-bold">${price}</h1>

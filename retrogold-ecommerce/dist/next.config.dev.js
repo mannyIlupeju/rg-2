@@ -11,7 +11,8 @@ module.exports = {
       hostname: 'cdn.sanity.io',
       port: '',
       pathname: '/images/foypmm2m/production/**'
-    }]
+    }],
+    domains: ["cdn.shopify.com"]
   }
 }, nextConfig;
 //# sourceMappingURL=next.config.dev.js.map

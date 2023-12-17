@@ -2,18 +2,13 @@ import React from 'react';
 import { sanityClient } from '/lib/sanity'
 import { urlFor } from '@/lib/sanity';
 import Link from 'next/link'
+import Image from 'next/image'
 
-const Relatedproducts = ({data}) => {
-  const {productDetail} = data
-  const {allProduct} = data
- 
+const Relatedproducts = ({ currentProduct, allProducts }) => {
 
-
-
-  const filterProducts = allProduct.filter((x)=>{
-    return x.productName !== productDetail.productName
+  const filterProducts = allProducts.filter((product)=>{
+    return product.id !== currentProduct.id
   })
-
 
 
   return (
@@ -22,23 +17,23 @@ const Relatedproducts = ({data}) => {
       <h2 className="text-zinc-800">Related Products</h2>
       </div>
         <div className="flex flex-col md:flex-row md:flex-wrap gap-10">
-          {filterProducts.map((x)=>{
-            const{mainImage, price, productName, brandName, shortDescription, slug, _id} = x
+          {filterProducts.map((items)=>{
+            const{images, priceRange, title, vendor, shortDescription, handle, id} = items
         
             
             return (
-              <Link href={`/shop/${slug.current}`} key={_id}>
+              <Link href={`/shop/${handle}`} key={id}>
                 <div className="relatedProductBlock">
                   <div className="my-2">
-                  <img src={urlFor(mainImage.asset._ref)} alt="" className="relatedProductImage"/>
+                  <Image src={images.edges[0].node.originalSrc} alt="" className="relatedProductImage" width="250" height="250"/>
                   </div>
                   <div className="text-zinc-700 mb-4">
-                    <p className="text-sm">{brandName}</p>
-                    <p className="font-semibold">{productName}</p>
-                    <p>${price}</p>
+                    <p className="text-sm">{vendor}</p>
+                    <p className="font-semibold">{title}</p>
+                    <p>${priceRange.minVariantPrice.amount}</p>
                   </div>
           
-                  <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p>
+                  {/* <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p> */}
                 </div>
               </Link>
               
@@ -54,23 +49,45 @@ const Relatedproducts = ({data}) => {
 export default Relatedproducts;
 
 
-const shopQuery = `*[_type == "product"]{
-  _id,
-  mainImage, 
-  price, 
-  productName,
-  brandName,
-  slug
-  shortDescription
-}`
-
-export async function getStaticProps() {
-  const shop = await sanityClient.fetch(shopQuery)
-
-  return {  
-    props: {
-      shop
+export async function getStaticProps(){
+  const productQuery = `
+  query {
+    products(first: 10) {
+      edges {
+        node {
+          id
+          title
+          handle
+          vendor
+          descriptionHtml
+          images(first: 4) {
+            edges {
+              node {
+                originalSrc
+                altText
+              }
+            }
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
     }
   }
+  `;
+  
+  const response = await client.request(productQuery);
+  const products = response.data.products.edges.map(edge => edge.node);
+  
+  return {
+    props: { 
+      products 
+    }, // Passed to the page component as props
+    revalidate: 60 // Optionally, set revalidation time in seconds
+  };
 }
 
