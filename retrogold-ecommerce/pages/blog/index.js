@@ -16,9 +16,6 @@ const Blog = ({blog}) => {
   const {mainImages, slugCurrent} = blog
 
 
-
-
-
   return (
     <>
     <Head>

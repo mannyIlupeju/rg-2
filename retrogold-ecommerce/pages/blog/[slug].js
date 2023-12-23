@@ -17,10 +17,10 @@ const blogImage = {
   height: '100px',
 }
 
-const blogPost = ({data}) => {
+const BlogPost = ({data}) => {
   const {isOpenMenu} = useGlobalContext()
   const{blogDetail} = data
-
+  console.log(blogDetail)
   
   return (
     <>
@@ -66,7 +66,7 @@ const blogPost = ({data}) => {
 
 }
 
-export default blogPost
+export default BlogPost
 
 const paramQuery = `*[_type == "blog" && defined(slug.current)]{
   "params": {

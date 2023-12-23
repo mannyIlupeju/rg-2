@@ -46,7 +46,7 @@ async function handler(req, res) {
       }
 
       const user = await User.create({ name: name, email: userEmail, password: hashedPassword, role: 'user' });
-      await sendVerificationEmail(userEmail, verificationCode);
+      // await sendVerificationEmail(userEmail, verificationCode);
       res.status(201).json({ success: true, data: user, message: 'Signed up! A verification email has been sent to your email address' });
     } catch (error) {
       res.status(500).json({ message: 'User not created', error: error.message });
@@ -56,19 +56,19 @@ async function handler(req, res) {
   }
 }
 
-async function sendVerificationEmail(email, verificationCode) {
-  try {
-    await transporter.sendMail({
-      from: '"Retrogold" <pelumiilupeju@gmail.com>',
-      to: email,
-      subject: 'Verify Your Email',
-      text: `Please click the link below to verify your email:\nhttp://your-app.com/verify-email?code=${verificationCode}`,
-      html: `<b>Please click the link below to verify your email:</b><br><a href="http://your-app.com/verify-email?code=${verificationCode}">Verify Email</a>`,
-    });
-    console.log('Verification email sent successfully');
-  } catch (error) {
-    console.error('Error sending verification email:', error);
-  }
-}
+// async function sendVerificationEmail(email, verificationCode) {
+//   try {
+//     await transporter.sendMail({
+//       from: '"Retrogold" <pelumiilupeju@gmail.com>',
+//       to: email,
+//       subject: 'Verify Your Email',
+//       text: `Please click the link below to verify your email:\nhttp://your-app.com/verify-email?code=${verificationCode}`,
+//       html: `<b>Please click the link below to verify your email:</b><br><a href="http://your-app.com/verify-email?code=${verificationCode}">Verify Email</a>`,
+//     });
+//     console.log('Verification email sent successfully');
+//   } catch (error) {
+//     console.error('Error sending verification email:', error);
+//   }
+// }
 
 export default handler;

@@ -13,6 +13,8 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@sanity/client": "^5.3.0",
     "@sanity/image-url": "^1.0.2",
+    "@shopify/shopify-api": "^8.1.1",
+    "@shopify/storefront-api-client": "^0.1.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",

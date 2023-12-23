@@ -17,7 +17,6 @@ async function handler(req, res) {
   if(req.method === "POST") {
     try {
       const {email, password} = req.body
-      console.log(email, password)
       const userEmail = email.toLowerCase().trim();
       
      //retrieve User from database if user is there
@@ -29,9 +28,10 @@ async function handler(req, res) {
 
       //retrieve password in the user info and confirm if it matches
       const isValidPassword = await bcrypt.compare(password, user.password)
+      console.log(isValidPassword)
 
      // If the password is invalid, return a 401 Unauthorized status code
-      if (!isValidPassword && !user) {
+      if (isValidPassword != true || !user) {
         return res.status(401).json({ message: 'Incorrect email or password' });
       }
       
@@ -53,7 +53,7 @@ async function handler(req, res) {
     
       res.status(200).json({ token: token, userId: user._id.toString(),  message: 'Login successful'  })
   
-      } catch(error){
+    } catch(error){
       console.log('Error saving token and storing in cookies', error)
       res.status(500).json({ message: 'An internal server error occurred' });
     }

@@ -1,12 +1,12 @@
 import React from 'react';
+import Image from 'next/image'
 import { urlFor} from '/lib/sanity';
 import Link from 'next/link'
 import { useGlobalContext } from '@/ Context/context';
 
 
+
 const Blog = ({blog}) => {
-  
-  
   const mainImageBlog = {
     width: '520px',
     height: 'auto',
@@ -43,11 +43,11 @@ const Blog = ({blog}) => {
               <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                 <span>{blog[0].tag}</span>
               </div>
-              <img src={urlFor(blog[0].main_image.asset._ref)} style={mainImageBlog} />
+              <Image src={blog[0].mainImage} alt="" style={mainImageBlog} width={250} height={250}/>
             </div>
 
             <div>
-              <div className="text-xl font-light flex flex-col items-start lg:p-8 p-3 lg:p-12" >
+              <div className="text-xl font-light flex flex-col items-start p-3 lg:p-12" >
                 <div>
                   {blog[0].description[0].children[0].text}
                 </div>
@@ -68,7 +68,7 @@ const Blog = ({blog}) => {
               <span className="text-sm">{blog[i + 1].tag}</span>
             </div>
             <div className="flex-grow flex flex-col justify-center items-center">
-              <img src={urlFor(blog[i + 1].main_image.asset._ref)} alt="Blog Image" className="smallImageBlog w-full h-auto md:w-auto" />
+              <Image src={blog[i + 1].mainImage} alt="Blog Image" className="smallImageBlog w-full h-auto md:w-auto" width={200} height={200}/>
               <div className="text-sm font-light mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
                 {blog[i + 1].description[0].children[0].text}
               </div>

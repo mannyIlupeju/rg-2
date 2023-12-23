@@ -4,7 +4,7 @@ import Hero from '@/components/Landing/Hero/Hero'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
-import Blog from '/components/Blog/blog'
+import Blog from '/components/Blog/Blog'
 import Footer from '@/components/Shared/Footer/footer'
 import Navigation from '@/components/Shared/Navigation'
 import Calltoaction from '@/components/CallToAction/calltoaction'
@@ -47,7 +47,10 @@ export default function Home({hero, quote, blog, calltoAction}) {
 
 //fetch the data using GROQ query
 const blogQuery = `*[_type == "blog"]{
-  description, main_image, tag, slug
+  description,
+  "mainImage": main_image.asset->url,
+  tag, 
+  slug
 }`
 const heroQuery = `*[_type == 'hero']{
   headline,
@@ -56,7 +59,11 @@ const heroQuery = `*[_type == 'hero']{
   _id
 }`
 const quoteQuery = `*[_type == 'quote']`
-const calltoActionQuery = `*[_type ==  'callToAction']`
+const calltoActionQuery = `*[_type ==  'callToAction']{
+  headline, 
+  sub_headline, 
+  "mainImage":image.asset->url
+}`
 
 
 // getStaticProps works when rendering from a headless CMS
