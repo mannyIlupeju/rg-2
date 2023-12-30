@@ -5,39 +5,36 @@ import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
 import { useGlobalContext } from '@/ Context/context';
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity } from '../../store'
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import secureLocalStorage from 'react-secure-storage';
+
 
 const Cart = () => {
-  const { cartNav, savedCart, totalQuantity} = useGlobalContext()
+
 
   const cartItems = useSelector((state) => state.cart)
-  const cartQuantity = useSelector((state)=> state.totalQuantity)
-  const quantity = useSelector((state)=> state.quantity)
-  const totalPrice = useSelector((state)=> state.totalPrice)
+  const cartQuantity = useSelector((state) => state.totalQuantity)
+  const quantity = useSelector((state) => state.quantity)
+  const totalPrice = useSelector((state) => state.totalPrice)
   const dispatch = useDispatch();
 
-  console.log(cartItems)
-
-  
 
 
-  function handleRemove(_id){
-    console.log(_id)
-    dispatch(onRemove({_id}))
+  function handleRemove(id) {
+    console.log(id)
+    dispatch(onRemove({ id }))
   }
 
-  function handleToggle(_id, value){
+  function handleToggle(id, value) {
     dispatch(toggleCartItemQuantity({
       _id,
       value
     }))
   }
-  
 
-  return ( 
+
+  return (
     <>
       <Head>
         <title>Cart</title>
@@ -45,12 +42,12 @@ const Cart = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation/>
+      <Navigation />
 
 
       <main>
         <div className="container mx-auto p-10 mb-12">
-          {cartItems.length ? 
+          {cartItems.length ?
             <>
               <h1 className="text-3xl font-bold text-zinc-700">Your Cart</h1>
               <div className="flex flex-row gap-20 text-zinc-700 justify-end mb-8 text-xl">
@@ -59,52 +56,52 @@ const Cart = () => {
                 <p>Total</p>
               </div>
               <div className="flex flex-col gap-8 justify-center">
-                {cartItems.map((items, index)=> {
-                  const{ vendor, title, price, images, quantity, _id } = items
-            
-                 
+                {cartItems.map((items, index) => {
+                  const { vendor, title, price, images, quantity, _id } = items
+
+
                   return (
-                   <div key={index}>
-                    <div className="flex flex-row justify-between text-zinc-700" >
-                      <div>
-                        <div className="flex gap-4">
-                          <div>
-                            <Image src={images} alt={title} width="200" height="200" className="cartImage"/>
-                          </div>
-                          <div className="flex flex-col gap-4">
-                            <h1 className="text-lg">Brand Name: <span className="font-bold">{vendor}</span></h1>
-                            <p className="text-2xl ">Item: {title}</p>
+                    <div key={index}>
+                      <div className="flex flex-row justify-between text-zinc-700" >
+                        <div>
+                          <div className="flex gap-4">
+                            <div>
+                              <Image src={images} alt={title} width="200" height="200" className="cartImage" />
+                            </div>
+                            <div className="flex flex-col gap-4">
+                              <h1 className="text-lg">Brand Name: <span className="font-bold">{vendor}</span></h1>
+                              <p className="text-2xl ">Item: {title}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="flex gap-20">
-                        <div className="flex gap-4 ">
-                          <FaPlus className="" onClick={() => {handleToggle(_id, 'inc') }}/>
+                        <div className="flex gap-20">
+                          <div className="flex gap-4 ">
+                            <FaPlus className="" onClick={() => { handleToggle(id, 'inc') }} />
                             <span className="font-bold text-lg">{quantity}</span>
-                          <FaMinus className="flex" onClick={() => {handleToggle(_id, 'dec')}}/>
+                            <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
+                          </div>
+
+                          <div>
+                            <h1 className="text-2xl font-bold">${price}</h1>
+                          </div>
+
+                          <div>
+                            <h1 className="text-2xl font-bold">${price * quantity}</h1>
+                          </div>
                         </div>
 
-                        <div>
-                          <h1 className="text-2xl font-bold">${price}</h1>
-                        </div>
 
-                        <div>
-                          <h1 className="text-2xl font-bold">${price * quantity}</h1>
-                        </div>
                       </div>
-
-                  
-                    </div> 
-                    <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                      <button onClick={() => handleRemove(_id)}>
-                        <p>On Remove</p>
-                      </button>
-                    </div>
+                      <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
+                        <button onClick={() => handleRemove(_id)}>
+                          <p>On Remove</p>
+                        </button>
+                      </div>
                     </div>
                   )
                 })
-                
+
                 }
                 <div className="flex justify-between text-zinc-700">
                   <h1 className="text-2xl">Subtotal</h1>
@@ -115,22 +112,22 @@ const Cart = () => {
                 <button className="btn">Checkout</button>
               </div>
             </>
-          : 
-          <div className="text-center">
-            <div className="flex justify-center">
-              <Image src='/images/shopping-cart-10925.png'width={40} height={40} alt="shopping cart icon"/>
+            :
+            <div className="text-center">
+              <div className="flex justify-center">
+                <Image src='/images/shopping-cart-10925.png' width={40} height={40} alt="shopping cart icon" />
+              </div>
+              <div className="mt-4">
+                <h1 className="text-6xl font-bold text-zinc-700">Cart is Empty</h1>
+              </div>
+              <div className="mt-24">
+                <button className="text-2xl btn"><Link href='/shop'>Back To Shop</Link></button>
+              </div>
             </div>
-            <div className="mt-4">
-            <h1 className="text-6xl font-bold text-zinc-700">Cart is Empty</h1>
-            </div>
-            <div className="mt-24">
-            <button className="text-2xl btn"><Link href='/shop'>Back To Shop</Link></button>
-            </div>
-          </div>          
-        }
+          }
         </div>
-      </main>      
-     <Footer/>
+      </main>
+      <Footer />
     </>
   );
 }

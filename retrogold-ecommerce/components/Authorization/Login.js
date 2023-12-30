@@ -7,6 +7,7 @@ import {FaTimes} from 'react-icons/fa'
 
 
 const Login = () => {
+
   const [checkUserData, setcheckUserData] = useState({email: '', password: ''})
   const [isLoading, setisLoading] = useState(false)
   const [color, setColor] = useState('#ffffff')
@@ -15,9 +16,6 @@ const Login = () => {
   const[message, setMessage] = useState('')
   
   const {isSignIn, setIsSignIn, isToken, setIsToken, isUserRegistered, setIsUserRegistered, closeLoginModal, registerModal} = useGlobalContext()
-  
-
-
 
   const modalRef = useRef();
 
@@ -43,34 +41,34 @@ const Login = () => {
   }, [setIsSignIn]);
 
 
-
-
- useEffect(()=>{
-  localStorage.setItem('myToken', isToken);
- }, [isToken])
- 
-
-
  const handleSubmit = async (e) => {
   e.preventDefault();
+  setisLoading(true);
 
-  const response = await fetch('/api/login/login', {
-    method: 'POST',
-    headers: {
-      "Content-Type": 'application/json',
-    },
-    body: JSON.stringify(checkUserData)
-  })
-  const data = await response.json()
-  setMessage(data.message)
-  setTimeout(() => {
-    setMessage('')
-    closeLoginModal();
-  }, 3000);
-
-  if(response.ok){
-    document.cookie = `token=${data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
-    setIsToken(data.token)
+  try {
+    const response = await fetch('/api/login/login', {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json',
+      },
+      body: JSON.stringify(checkUserData)
+    })
+    const data = await response.json()
+    setMessage(data.message)
+    setTimeout(() => {
+      setMessage('')
+      closeLoginModal();
+    }, 3000);
+    
+    if(response.ok){
+      setIsToken(data.token)
+      document.cookie = `token=${data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
+      closeLoginModal();
+    }
+  } catch(error) {
+    setMessage('An error occured. Please try again');
+  } finally {
+    setisLoading(false)
   }
  }
 
@@ -112,21 +110,42 @@ const Login = () => {
               <label htmlFor="email" className="text-gray-800">
                   Email:
               </label>
-              <input type="text" name="email" id="email" value={checkUserData.email} className="text-zinc-800" onChange={(e)=>{
+              <input 
+              type="text" 
+              name="email" 
+              id="email" 
+              value={checkUserData.email} 
+              className="text-zinc-800" 
+              onChange={(e)=>{
                 e.preventDefault()
                 setcheckUserData({...checkUserData, email:e.target.value})
-              }} required/>
+              }} required
+              />
               </div>
 
               <div className="flex flex-col w-fit">
                 <label htmlFor="password" className="text-gray-800">
                     Password:
                 </label>
-                {!hidePassword ? <FaEye className="relative top-6 left-56 text-zinc-800" onClick={closePassword}/> : <FaEyeSlash className="relative top-6 left-56 text-zinc-800" onClick={showPassword}/>}
-                <input type={!hidePassword ? 'text' : 'password'} name="password" id="password" className="formInput"value={checkUserData.password} onChange={(e)=>{
+                {!hidePassword ? 
+                <FaEye 
+                className="relative top-6 left-56 text-zinc-800" 
+                onClick={closePassword}/> : 
+                <FaEyeSlash 
+                className="relative top-6 left-56 text-zinc-800" 
+                onClick={showPassword}/>}
+                <input 
+                type={!hidePassword ? 'text' : 'password'} 
+                name="password" 
+                id="password" 
+                className="formInput"
+                value={checkUserData.password}
+                onChange={(e)=>{
                   e.preventDefault()
                   setcheckUserData({...checkUserData, password:e.target.value})
-                }}required/>  
+                }}
+                required
+                />  
               </div>
 
               <button
@@ -138,7 +157,7 @@ const Login = () => {
               </button>
 
               <div className="flex flex-row gap-1 justify-center text-lg mt-4">
-              <p className="text-gray-800">Don't have an account?</p>
+              <p className="text-gray-800">Dont have an account?</p>
               <div className="text-underline">
                 <p className="text-green-500 cursor-pointer"onClick={registerModal}>Sign Up!</p>
               </div>

@@ -13,12 +13,13 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart)
   const totalPrice = useSelector((state) => state.totalPrice)
 
-  console.log(cartItems)
 
   //close cart modal functionality if cart items in modal is less than 1
-  if(cartItems.length < 1) {
-    closeCartModal()
-  }
+  useEffect(() => {
+    if (cartItems.length < 1) {
+      closeCartModal();
+    }
+  }, [cartItems.length, closeCartModal]);
 
   const closeOverlay = () => {
     if(isItemChosen){
@@ -52,7 +53,7 @@ const Cart = () => {
                   {cartItems.map((item, index)=> {
                     const { vendor, title, price, images, quantity, _id } = item
                     return (
-                      <div className="border-t-4 border-gray-400" key={index}>
+                      <div className="border-t-4 border-gray-400" key={_id}>
                         <div className="flex gap-5 mt-4 ">
                           <div>
                             <Image src={images} alt={title} width="200" height="200" className="cartModalImage"/>

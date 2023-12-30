@@ -6,7 +6,6 @@ import { FaWindows } from 'react-icons/fa';
 
 //set up createContext
 const GlobalContext = createContext()
-
 //use the useContext to distribute the values gloablly 
 export const useGlobalContext = () => useContext(GlobalContext)
 
@@ -17,7 +16,6 @@ const AppContext = ({ children }) => {
   const[totalQuantity, setTotalQuantities] = useState(0) //this is the handler function for the cart quantity, so we can increase/decrease
   const[totalPrice, setTotalPrice] = useState(0)
   const [isItemChosen, setItemChosen] = useState(false)
-  const[cartItems, setCartItems] = useState([]) //handler function that will store the checked items in the cart
   const [cartNav, setCartNav] = useState([])
   const [isSignIn, setIsSignIn] = useState(false)
   const [isUserRegistered, setIsUserRegistered] = useState(false)
@@ -26,7 +24,7 @@ const AppContext = ({ children }) => {
   const [showSearch, setShowSearch] = useState(false)
   const [isToken, setIsToken] = useState(null)
 
-  
+  console.log(isToken)
 
 
   const [messageDetails, setMessageDetails] = useState(

@@ -2,7 +2,7 @@ import React from 'react'
 
 function OrdersComponent() {
   return (
-    <div>OrdersComponent</div>
+    <div>No orders yet</div>
   )
 }
 

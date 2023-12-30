@@ -1,155 +1,105 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaShoppingCart } from 'react-icons/fa';
-import { FaBars } from 'react-icons/fa';
+import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
-import { useGlobalContext } from '/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 import Search from './Search/Search'
-import { FaSearch } from 'react-icons/fa';
-import { FaTimes } from 'react-icons/fa';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+
+
+const NavLink = ({ name, href }) => {
+	const pathname = usePathname();
+	const isActive = pathname?.startsWith(href);
+	const className = isActive ? 'nav-Active' : 'nav-link';
+
+	return <Link className={className} href={href}>{name}</Link>;
+};
+
+const NavLinks = ({ links }) => (
+	<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700  hidden'>
+		{links.map(link => <NavLink key={link.name} {...link} />)}
+	</div>
+);
 
 
 
+// Define selectors outside the component
+const selectCartItems = state => state.cart;
+const selectTotalQuantity = state => state.totalQuantity;
 
+
+//Navigation component
 const Navigation = () => {
-	const [inputValue, setInputValue] = useState('')
-
-	const cartItems = useSelector((state) => state.cart)
-	const totalQuantity = useSelector((state) => state.totalQuantity)
+	const cartItems = useSelector(selectCartItems);
+	const totalQuantity = useSelector(selectTotalQuantity);
 
 
-
-	const { isOpenMenu,
-		setOpenMenu,
-		cartNav,
-		newCart,
-		sSignIn,
-		setIsSignIn,
-		handleLogin,
-		activateSearch,
-		deactivateSearch,
-		searchBar,
-		isToken
+	const [inputValue, setInputValue] = useState('');
+	const {
+		isOpenMenu, setOpenMenu, searchBar, deactivateSearch,
+		isToken, handleLogin,
 	} = useGlobalContext();
 
-	const navLink = [
-		{
-			name: 'Home',
-			href: '/home'
-		},
-		{
-			name: 'Shop',
-			href: '/shop'
-		},
-		{
-			name: 'Services',
-			href: '/services'
-		},
-		{
-			name: 'Blog',
-			href: '/blog'
-		},
-		{
-			name: 'About',
-			href: '/about'
-		},
-		{
-			name: 'Contact',
-			href: '/contact'
-		}
-	];
+	const navLinks = ['Home', 'Shop', 'Services', 'Blog', 'About', 'Contact'].map(name => ({
+		name, href: `/${name.toLowerCase()}`
+	}));
 
-
-	const handleInput = (e) => {
-		e.preventDefault()
+	const handleInput = e => {
 		const userSearch = e.target.value;
-		setInputValue(userSearch)
-		getFilteredProducts(userSearch)
-		getFilteredBlogs(userSearch)
-	}
-
-
-
-
-
+		setInputValue(userSearch);
+		// Assuming getFilteredProducts and getFilteredBlogs are defined elsewhere
+		getFilteredProducts(userSearch);
+		getFilteredBlogs(userSearch);
+	};
 
 	return (
 		<nav className='navigationStyle'>
 			<div className=' flex items-center'>
 				<Link href='/home'>
-					<Image src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' width={250} height={250}/>
+					<Image src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' width={250} height={250} />
 				</Link>
 			</div>
 
-			{searchBar ?
+			{searchBar ? (
 				<div className="flex">
 					<div className='relative top-1 right-3'>
 						<FaSearch size='1.3rem' color='black' className='relative top-7 right-10' onClick={deactivateSearch} />
-						<input
-							type='text' id='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off"
-						/>
+						<input type='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off" />
 					</div>
-					<div>
-						<FaTimes size='1.6rem' color='black' className='relative top-8' onClick={deactivateSearch} />
-					</div>
+					<FaTimes size='1.6rem' color='black' className='relative top-8' onClick={deactivateSearch} />
 				</div>
-				:
-				<div className='lg:flex lg:gap-4 gap-2 text-md font-light lg:text-lg lg:items-center text-zinc-700  hidden'>
-					{navLink.map((link) => {
-						const pathname = usePathname();
-						const isActive = pathname?.startsWith(link.href);
-
-						return (
-							<Link className={isActive ? 'nav-Active' : 'nav-link'} href={link.href} key={link.name}>
-								{link.name}
-							</Link>
-						);
-					})}
-				</div>
-
-			}
+			) : (
+				<NavLinks links={navLinks} />
+			)}
 
 			<div className='lg:flex flex-row lg:items-center gap-8  hidden'>
 				<Search />
-				{isToken ? 
-			    
-				<Link href= '/userAccount/account'>
-				<span className="text-gray-800">
-					Account
-				</span> 
-			    </Link>
-				
-				: 
-				<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
-				}
+				{isToken ? (
+					<Link href='/userAccount/account'>
+						<span className="text-gray-800">Account</span>
+					</Link>
+				) : (
+					<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
+				)}
 				<Link href='/cart'>
 					<div className='flex justify-end'>
 						<FaShoppingCart size='1.8rem' color='black' />
-
 						{cartItems.length ? (
 							<div className='mx-2 text-zinc-800 font-semibold'>
 								<span>({totalQuantity})</span>
 							</div>
-						) : (
-							' '
-						)}
+						) : null}
 					</div>
 				</Link>
 			</div>
 
-			<div
-				className='flex items-center lg:hidden'
-				onClick={() => {
-					setOpenMenu(true);
-				}}
-			>
+			<div className='flex items-center lg:hidden' onClick={() => setOpenMenu(true)}>
 				<FaBars color='black' size='1.5rem' />
 			</div>
 		</nav>
 	);
 };
 
-export default Navigation
+export default Navigation;

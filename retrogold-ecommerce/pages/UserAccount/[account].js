@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {useRouter} from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation'
@@ -10,6 +11,7 @@ import { FaChevronRight } from "react-icons/fa";
 import { MongoClient } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { useGlobalContext } from '@/ Context/context'
 
 
 dotenv.config()
@@ -17,7 +19,7 @@ dotenv.config()
 
 
 const Account = ({ user }) => {
-  
+  const {setIsToken} = useGlobalContext();
   const [visibleComponent, setVisibleComponent] = useState(null)
   const {name} = user
   const splitName = name.split(' ')
@@ -30,6 +32,18 @@ const Account = ({ user }) => {
     setVisibleComponent(prevComponent => 
       prevComponent === componentName ? null : componentName)
   }
+
+  const router = useRouter();
+
+  const SignOut = (e) => {
+    e.preventDefault();
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsToken(null);
+    router.push('/');
+
+  }
+
+
     return (
       <>
         <Head>
@@ -43,6 +57,7 @@ const Account = ({ user }) => {
           <div className="text-center">
           <h1 className="text-zinc-800">Welcome to your Account, {firstName}</h1>
           </div>
+          
           <div className="container mx-auto flex justify-center my-12">
             <div className="flex flex-row gap-32 h-fit">
               <div className="h-fit">
@@ -105,15 +120,21 @@ const Account = ({ user }) => {
               { visibleComponent === 'Addresses' && 
               <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
                 <div>
-               <AddressInfo/>
+               {/* <AddressInfo/> */}
                 </div>
               </div>
               }
             </div>
-
-
-
           </div>
+
+          <div className="flex justify-center my-32" >
+            <button 
+            className="text-zinc-700" 
+            onClick={SignOut} >
+              Sign Out
+            </button>
+          </div>
+          
         </main>
         <Footer/>
       </>

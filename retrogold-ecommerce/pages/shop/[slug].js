@@ -26,7 +26,7 @@ import { current } from '@reduxjs/toolkit';
 
 const ProductDetails = ({ product, allProducts }) => {
   const {id, images, descriptionHtml, handle, priceRange, title, vendor} = product
-
+ 
   const price = priceRange.minVariantPrice.amount;
 
 
@@ -34,9 +34,7 @@ const ProductDetails = ({ product, allProducts }) => {
   const match = idString.match(/\d+$/); // Matches digits at the end of the string
 
   const _id = match ? match[0] : null;
-  console.log(_id)
 
-  
 
 
   const [quantity, setQuantity] = useState(1)
@@ -51,23 +49,10 @@ const ProductDetails = ({ product, allProducts }) => {
     totalPrice, 
     cartNav, 
     setTotalPrice, 
-    setCartItems, 
-    cartItems, 
     isItemChosen, 
     openCartModal
   } = useGlobalContext()
 
-
-
-
-
-  
- 
-  // //shipping Info destructure
-  // const shipping = productDetail.shippingReturns[0].children
-  // const shippingInfo = shipping.map((x)=>{
-  //   return (x.text)
-  // })
 
 
   // //Carousel Functions 
@@ -128,23 +113,48 @@ const ProductDetails = ({ product, allProducts }) => {
     }
   }
 
- 
 
 
-  function onAdd(title, vendor, price, quantity, _id, images){
+
+  async function onAdd(title, vendor, price, quantity, _id, images){
     const productAdded = {
       title,
       price,
       quantity,
-      _id,
+      id,
       vendor,
       images
     }
-    console.log(productAdded);
-    dispatch(addToCart(productAdded))
-    openCartModal()
-    setQuantity(1)
+
+    try {
+      const response = await fetch('/api/shopifyCart/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productAdded)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to add product to cart')
+      } 
+      const cartData = await response.json();
+      console.log(cartData);
+
+      dispatch(addToCart(productAdded));
+      openCartModal();
+      setQuantity(1);
+
+      return cartData;
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      return null;
+    }
+    
   }
+
+
+
+  
 
   function stripHtml(htmlString) {
     return htmlString.replace(/<[^>]*>/g, '');
@@ -178,9 +188,8 @@ const ProductDetails = ({ product, allProducts }) => {
             <div className="flex flex-col justify-end md:gap-10 gap-4 overflow-hidden w-fit">
 
               <div>
-                {/* main image that has carousel function */}
                 <div className="relative w-fit">
-                  <Image src={images.edges[currentIndex].node.originalSrc} width="250" height="200" alt=" " className="mainProductImage" priority unoptimized />
+                  <Image src={images.edges[currentIndex].node.originalSrc} width="250" height="200" alt="main product image of the pot" className="mainProductImage" priority unoptimized />
                   <div className="bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow} />
@@ -197,11 +206,12 @@ const ProductDetails = ({ product, allProducts }) => {
                         <div className={`sideProductImage ${currentIndex === index ? 'active' : ''}`} onClick={()=> selectImage(index)} key={index}>
                           <Image 
                             src={image.node.originalSrc} 
-                            alt="" 
+                            alt="product image" 
                             className="sideProductImage" 
-                            width="400" 
-                            height="200" 
+                            width={400}
+                            height={200}
                             unoptimized
+                            priority
                           />
                         </div>
                       </div>
@@ -231,7 +241,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, _id, images.edges[0].node.originalSrc)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, id, images.edges[0].node.originalSrc)}>Add to Cart</button>
                   </div>
                   
                 </div>

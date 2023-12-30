@@ -5,6 +5,9 @@ import {useState, useEffect, StrictMode} from 'react'
 import { Provider } from 'react-redux'
 import store from '../store'
 import Loading from '@/components/Loader/Loading'
+import AuthenticationCheck from '../ Context/AuthenticationCheck'
+
+
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
@@ -30,19 +33,12 @@ export default function App({ Component, pageProps }) {
   }, [router.events])
 
   return (
-    <>
-      {/* <StrictMode>
-      {isLoading ?
-      <Loading/>
-      : <AppContext>
-        <Component {...pageProps} />
-      </AppContext>
-      }
-      </StrictMode> */}
-      
+    <>      
       <Provider store={store}>
       <AppContext>
-        <Component {...pageProps} />
+       <AuthenticationCheck>
+         <Component {...pageProps}/>
+       </AuthenticationCheck>
       </AppContext>
       </Provider>
     </>

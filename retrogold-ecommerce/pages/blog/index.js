@@ -12,6 +12,7 @@ import { useGlobalContext } from '@/ Context/context'
 
 
 const Blog = ({blog}) => {
+  console.log(blog)
  const {isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext()
   const {mainImages, slugCurrent} = blog
 

@@ -24,7 +24,7 @@ var cartSlice = (0, _toolkit.createSlice)({
   reducers: {
     addToCart: function addToCart(state, action) {
       var existingItem = state.cart.find(function (item) {
-        return item._id === action.payload._id;
+        return item.id === action.payload.id;
       });
 
       if (existingItem) {
@@ -44,12 +44,12 @@ var cartSlice = (0, _toolkit.createSlice)({
     },
     onRemove: function onRemove(state, action) {
       var removingItem = state.cart.find(function (item) {
-        return item._id === action.payload._id;
+        return item.id === action.payload.id;
       });
 
       if (removingItem) {
         state.cart = state.cart.filter(function (item) {
-          return item._id !== removingItem._id;
+          return item.id !== removingItem.id;
         });
         state.totalPrice = state.cart.reduce(function (total, item) {
           return total + item.price * item.quantity;
@@ -58,7 +58,7 @@ var cartSlice = (0, _toolkit.createSlice)({
     },
     toggleCartItemQuantity: function toggleCartItemQuantity(state, action) {
       var existingItemIndex = state.cart.findIndex(function (item) {
-        return item._id === action.payload._id;
+        return item.id === action.payload.id;
       });
 
       if (existingItemIndex !== -1) {

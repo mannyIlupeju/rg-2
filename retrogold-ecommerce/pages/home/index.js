@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { sanityClient } from '/lib/sanity'
-import Hero from '@/components/Landing/Hero/Hero'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
@@ -54,7 +53,6 @@ const blogQuery = `*[_type == "blog"]{
 }`
 const heroQuery = `*[_type == 'hero']{
   headline,
-  headstatement,
   "heroImages":images.asset->url,
   _id
 }`
