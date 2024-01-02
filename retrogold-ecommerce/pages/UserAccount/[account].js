@@ -19,12 +19,11 @@ dotenv.config()
 
 
 const Account = ({ user }) => {
-  const {setIsToken} = useGlobalContext();
+  const {setIsToken, SignOut} = useGlobalContext();
   const [visibleComponent, setVisibleComponent] = useState(null)
-  const {name} = user
-  const splitName = name.split(' ')
-  const firstName = splitName[0]
-  
+
+
+  const firstName = user?.name.split(' ')[0];
   
   const components = ['orders', 'address', 'personalInfo', 'signInSecurity']
 
@@ -35,13 +34,13 @@ const Account = ({ user }) => {
 
   const router = useRouter();
 
-  const SignOut = (e) => {
-    e.preventDefault();
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setIsToken(null);
-    router.push('/');
+  // const SignOut = (e) => {
+  //   e.preventDefault();
+  //   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  //   setIsToken(null);
+  //   router.push('/');
 
-  }
+  // }
 
 
     return (

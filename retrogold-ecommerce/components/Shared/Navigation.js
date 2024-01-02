@@ -38,8 +38,8 @@ const Navigation = () => {
 
 	const [inputValue, setInputValue] = useState('');
 	const {
-		isOpenMenu, setOpenMenu, searchBar, deactivateSearch,
-		isToken, handleLogin,
+	    searchBar, deactivateSearch, toggleRespMenu, toggleLoginModal,
+		isToken
 	} = useGlobalContext();
 
 	const navLinks = ['Home', 'Shop', 'Services', 'Blog', 'About', 'Contact'].map(name => ({
@@ -55,15 +55,15 @@ const Navigation = () => {
 	};
 
 	return (
-		<nav className='navigationStyle'>
-			<div className=' flex items-center'>
+		<nav className='flex justify-between flex-row gap-2 navigationStyle'>
+			<div className='flex justify-center order-2 lg:order-1'>
 				<Link href='/home'>
 					<Image src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' width={250} height={250} />
 				</Link>
 			</div>
 
 			{searchBar ? (
-				<div className="flex">
+				<div className="flex lg:order-2 ">
 					<div className='relative top-1 right-3'>
 						<FaSearch size='1.3rem' color='black' className='relative top-7 right-10' onClick={deactivateSearch} />
 						<input type='text' className='searchInput bg-gray-300 p-1 border-black w-96' value={inputValue} onChange={handleInput} autoComplete="off" />
@@ -71,33 +71,51 @@ const Navigation = () => {
 					<FaTimes size='1.6rem' color='black' className='relative top-8' onClick={deactivateSearch} />
 				</div>
 			) : (
-				<NavLinks links={navLinks} />
+				<div className="lg:order-2 lg:flex lg:items-center hidden">
+					<NavLinks links={navLinks} />
+				</div>
 			)}
 
-			<div className='lg:flex flex-row lg:items-center gap-8  hidden'>
+			<div className='lg:flex flex-row lg:items-center lg:order-3 gap-8 hidden'>
 				<Search />
+
 				{isToken ? (
 					<Link href='/userAccount/account'>
 						<span className="text-gray-800">Account</span>
 					</Link>
 				) : (
-					<IoPerson onClick={handleLogin} color='black' size='1.8rem' />
+					<IoPerson onClick={toggleLoginModal} color='black' size='1.8rem' />
 				)}
+
+				
+				<div className='flex justify-end'>
+					<Link href='/cart'>
+							<FaShoppingCart size='1.8rem' color='black' />
+							{cartItems.length ? (
+								<div className='mx-2 text-zinc-800 font-semibold'>
+									<span>({totalQuantity})</span>
+								</div>
+							) : null}
+					</Link>
+				</div>
+			</div>
+
+			<div className='flex items-center lg:hidden order-1'>
+				<FaBars color='black' size='1.5rem' onClick={toggleRespMenu} />
+			</div>
+
+
+			<div className='flex justify-end order-3 lg:hidden items-center'>
 				<Link href='/cart'>
-					<div className='flex justify-end'>
-						<FaShoppingCart size='1.8rem' color='black' />
-						{cartItems.length ? (
-							<div className='mx-2 text-zinc-800 font-semibold'>
-								<span>({totalQuantity})</span>
-							</div>
-						) : null}
-					</div>
+					<FaShoppingCart size='1.8rem' color='black' />
+					{cartItems.length ? (
+						<div className='mx-2 text-zinc-800 font-semibold'>
+							<span>({totalQuantity})</span>
+						</div>
+					) : null}
 				</Link>
 			</div>
 
-			<div className='flex items-center lg:hidden' onClick={() => setOpenMenu(true)}>
-				<FaBars color='black' size='1.5rem' />
-			</div>
 		</nav>
 	);
 };

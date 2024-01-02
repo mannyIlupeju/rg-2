@@ -29,9 +29,9 @@ export default function Home({ hero, quote, blog, calltoAction }) {
       <main className="h-min">
         <>
           {isOpenMenu && <RespMenu />}
-          <Navigation />
           {isSignIn && <Login />}
           {isUserRegistered && <Register />}
+          <Navigation />
           <Landing hero={hero} />
           <Quotes quote={quote} />
           <Experience />

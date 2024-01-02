@@ -256,8 +256,11 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
           </div> 
-
-            <Relatedproducts currentProduct={product} allProducts={allProducts}/>
+          
+          <div className="flex justify-center">
+          <Relatedproducts currentProduct={product} allProducts={allProducts}/>
+          </div>
+         
           
         </div>
       </main> 

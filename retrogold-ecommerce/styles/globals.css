@@ -55,11 +55,10 @@ body {
 
 
 .navigationStyle {
-display: flex;
-justify-content:space-between;
+
+/* justify-content:space-between; */
 padding: 0 4rem 0 4rem;
 background: var(--white);
-flex-direction: row;
 gap: 2rem;
 z-index: 10;
 cursor: pointer;
@@ -353,9 +352,7 @@ input[type=date]{
 }
 
 
-.formInput {
-  width: 17rem;
-}
+
 
 
 .searchInput {
@@ -387,6 +384,7 @@ textarea {
 }
 
 .formInput{
+  width: 22rem;
   color:black;
 }
 
@@ -409,7 +407,6 @@ textarea {
 
   .loginStyle {
     background:var(--yellow);
-    color: 
   }
 
 /**Media Queries**/
@@ -468,7 +465,7 @@ textarea {
   input[type=tel],
   input[type = number],
   input[type = date]{
-    width: 8rem;
+    width: 18rem;
   }
 
   textarea {
@@ -476,11 +473,11 @@ textarea {
 }
 
 .sideCart {
-        width: 100%; /* Full width on small screens */
+width: 100%; /* Full width on small screens */
 }
 .cartModalImage {
-        width: 100px;
-        height: 100px; /* Smaller images on small screens */
+  width: 100px;
+  height: 100px; /* Smaller images on small screens */
 }
 
 
@@ -509,10 +506,14 @@ textarea {
 /* Mobile devices */
 @media only screen and (max-width: 767px) {
   .loginStyle {
-    width: 90%;
+    width: 80%;
     /* take up most of the screen width */
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     /* reduce padding */
+  }
+
+  .formInput {
+    width: 20rem;
   }
 
   .btn.btn-primary {
@@ -524,7 +525,7 @@ textarea {
 /* Tablets */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .loginStyle {
-    width: 70%;
+    width: 80%;
     /* give a bit more margin on the sides */
   }
 }

@@ -12,7 +12,7 @@ const Relatedproducts = ({ currentProduct, allProducts }) => {
 
 
   return (
-    <div className="container mx-auto p-12 mb-4">
+    <div className="md:container-width mx-auto mb-4">
       <div className="">
       <h2 className="text-zinc-800">Related Products</h2>
       </div>

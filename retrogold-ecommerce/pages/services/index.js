@@ -38,7 +38,7 @@ const Services = () => {
         </div>
 
 
-        <div className="container mx-auto flex flex-col md:flex-row gap-12 p-8 md:p-24">
+        <div className="container mx-auto flex flex-col lg:flex-row gap-12 p-8 md:p-24">
           <div className="flex-1">
             <Image
               src="/images/sideTarotImage.jpeg"

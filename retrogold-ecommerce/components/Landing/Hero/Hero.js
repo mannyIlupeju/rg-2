@@ -40,7 +40,7 @@ const Hero = ({hero}) => {
   return (    
       <>
         <ImageRender hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
-        <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>         
+        {/* <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>          */}
       </>
   );
 }

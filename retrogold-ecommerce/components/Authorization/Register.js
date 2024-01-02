@@ -8,7 +8,7 @@ const Register = () => {
   const [userData, setUserData] = useState({ name: '', email: '', password: '', retype: '' });
   const [hidePassword, setHidePassword] = useState({ password: true, retype: true });
 
-  const { closeRegisterModal, setIsUserRegistered, loginModal } = useGlobalContext();
+  const { closeRegisterModal, setIsUserRegistered, loginModal, toggleRegisterModal, incrementOverflowHidden, decrementOverflowHidden } = useGlobalContext();
 
   const modalRef = useRef();
 
@@ -20,25 +20,34 @@ const Register = () => {
     }));
   };
 
+  // useEffect(() => {
+  //   // Disable scrolling on the body element
+  //   document.body.style.overflow = 'hidden';
+
+  //   const handleClickOutside = (event) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       setIsUserRegistered(false);
+  //     }
+  //   };
+
+  //   // Listen for clicks on the document
+  //   document.addEventListener('mousedown', handleClickOutside);
+
+  //   // Cleanup the event listener and re-enable scrolling when component unmounts
+  //   return () => {
+  //     document.body.style.overflow = 'unset';
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, [setIsUserRegistered]);
+
   useEffect(() => {
-    // Disable scrolling on the body element
-    document.body.style.overflow = 'hidden';
+    incrementOverflowHidden();
 
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsUserRegistered(false);
-      }
-    };
-
-    // Listen for clicks on the document
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Cleanup the event listener and re-enable scrolling when component unmounts
     return () => {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('mousedown', handleClickOutside);
+      decrementOverflowHidden();
     };
-  }, [setIsUserRegistered]);
+  }, []);
+
 
 
   const clear = () => {
@@ -65,8 +74,8 @@ const Register = () => {
     <>
      <div className="flex items-center justify-center fixed bg-gray-800 bg-opacity-75 inset-0 z-40">
         <div className="loginStyle p-12 rounded-lg shadow-lg max-w-md h-fit" ref={modalRef}>
-          <div className="relative left-64 bottom-8">
-            <FaTimes size="1.8rem" className="cursor-pointer text-gray-900" onClick={closeRegisterModal}/>
+          <div className="relative left-72 bottom-3">
+            <FaTimes size="1.8rem" className="cursor-pointer text-gray-900" onClick={toggleRegisterModal}/>
           </div>
             <div className="text-center">
             <h1 className="uppercase text-gray-900 text-2xl">Register</h1>
