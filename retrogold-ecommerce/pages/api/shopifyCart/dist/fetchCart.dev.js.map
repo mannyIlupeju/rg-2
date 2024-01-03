@@ -1,0 +1,1 @@
+{"version":3,"sources":["fetchCart.js"],"names":["handler","req","res"],"mappings":";;;;;;;AAAA;;;;AAGe,SAAeA,OAAf,CAAuBC,GAAvB,EAA4BC,GAA5B;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","sourcesContent":["import fetch from 'node-fetch'\n\n\nexport default async function handler(req, res){\n    \n}"],"file":"fetchCart.dev.js"}

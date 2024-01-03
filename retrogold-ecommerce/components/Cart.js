@@ -27,23 +27,23 @@ const Cart = () => {
     }
   }
 
-   function handleToggle(_id, value){
+   function handleToggle(id, value){
     dispatch(toggleCartItemQuantity({
-      _id,
+      id,
       value
     }))
    }
 
-   function handleRemove(_id){
-    console.log(_id)
-    dispatch(onRemove({_id}))
+   function handleRemove(id){
+    console.log(id)
+    dispatch(onRemove({id}))
    }
 
 
   return (
     <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>
         {(isItemChosen && cartItems.length) ?
-          <div className="bg-gray-300 w-2/6 absolute z-9 right-0 top-0 p-8 h-screen sideCart">
+        <div className="bg-gray-300 absolute z-9 right-0 top-0 p-8 h-screen sideCart lg:w-2/6 w-full">
               <div className="text-zinc-700 flex justify-between">
                 <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
                 <FaTimes color="black" size="2rem" onClick={closeCartModal} className="cursor-pointer"/>
@@ -51,9 +51,10 @@ const Cart = () => {
               <div>
                 <div>
                   {cartItems.map((item, index)=> {
-                    const { vendor, title, price, images, quantity, _id } = item
+                    const { vendor, title, price, images, quantity, id } = item
+                    console.log(id)
                     return (
-                      <div className="border-t-4 border-gray-400" key={_id}>
+                      <div className="border-t-4 border-gray-400" key={id}>
                         <div className="flex gap-5 mt-4 ">
                           <div>
                             <Image src={images} alt={title} width="200" height="200" className="cartModalImage"/>
@@ -67,9 +68,9 @@ const Cart = () => {
                               <h1 className="text-xl font-bold">${price}</h1>
                             </div>
                             <div className="flex gap-4 mt-4">
-                              <FaPlus className="" onClick={() => handleToggle(_id, 'inc')}/>
+                              <FaPlus className="" onClick={() => handleToggle(id, 'inc')}/>
                                 <span className="font-bold text-xl">{quantity}</span>
-                              <FaMinus className="flex" onClick={() => handleToggle(_id, 'dec')}/>
+                              <FaMinus className="flex" onClick={() => handleToggle(id, 'dec')}/>
                             </div>
                             
                           </div>

@@ -26,7 +26,7 @@ import { current } from '@reduxjs/toolkit';
 
 const ProductDetails = ({ product, allProducts }) => {
   const {id, images, descriptionHtml, handle, priceRange, title, vendor} = product
- 
+  console.log(id)
   const price = priceRange.minVariantPrice.amount;
 
 
@@ -116,7 +116,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
 
-  async function onAdd(title, vendor, price, quantity, _id, images){
+  async function onAdd(title, vendor, price, quantity, id, images){
     const productAdded = {
       title,
       price,
@@ -138,23 +138,57 @@ const ProductDetails = ({ product, allProducts }) => {
         throw new Error('Failed to add product to cart')
       } 
       const cartData = await response.json();
-      console.log(cartData);
+      const shopifyCartId = cartData.data.cartCreate.cart.id;
+      localStorage.setItem('cartId', shopifyCartId)
+      await addItemToCart(shopifyCartId, id, quantity)
 
       dispatch(addToCart(productAdded));
       openCartModal();
       setQuantity(1);
 
-      return cartData;
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error('Error creating to cart:', error);
       return null;
+    }
+
+    async function addItemToCart(cartId, id, quantity) {
+      if (cartId) {
+        console.log(cartId);
+        try {
+          const response = await fetch('/api/shopifyCart/addItemToCart', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              cartId,
+              id,
+              quantity
+            })
+
+          })
+
+          
+          if(!response.ok){
+            console.log('Failed to add item to cart')
+          }
+          
+          const data = await response.json();
+          return data;
+          
+
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          throw error;
+        }
+      }
     }
     
   }
 
 
+ 
 
-  
 
   function stripHtml(htmlString) {
     return htmlString.replace(/<[^>]*>/g, '');

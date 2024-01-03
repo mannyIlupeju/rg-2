@@ -1,13 +1,9 @@
 import fetch from 'node-fetch'
 
-
-
-
 export default async function handler(req, res) {
     if(req.method === "POST"){ 
         try {
             const {quantity, id, price} = req.body;
-            console.log(quantity, id);
             
             const lineItems = [{
                 merchandiseId: id,

@@ -88,8 +88,8 @@ const Navigation = () => {
 				)}
 
 				
-				<div className='flex justify-end'>
-					<Link href='/cart'>
+				<div className='flex flex-row justify-end'>
+					<Link href='/cart' className="flex flex-row">
 							<FaShoppingCart size='1.8rem' color='black' />
 							{cartItems.length ? (
 								<div className='mx-2 text-zinc-800 font-semibold'>

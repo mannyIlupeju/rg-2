@@ -20,26 +20,6 @@ const Register = () => {
     }));
   };
 
-  // useEffect(() => {
-  //   // Disable scrolling on the body element
-  //   document.body.style.overflow = 'hidden';
-
-  //   const handleClickOutside = (event) => {
-  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
-  //       setIsUserRegistered(false);
-  //     }
-  //   };
-
-  //   // Listen for clicks on the document
-  //   document.addEventListener('mousedown', handleClickOutside);
-
-  //   // Cleanup the event listener and re-enable scrolling when component unmounts
-  //   return () => {
-  //     document.body.style.overflow = 'unset';
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, [setIsUserRegistered]);
-
   useEffect(() => {
     incrementOverflowHidden();
 
@@ -67,7 +47,7 @@ const Register = () => {
     });
 
     const data = await response.json();
-    console.log(data);
+
   };
 
   return (

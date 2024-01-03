@@ -157,6 +157,7 @@ const AppContext = ({ children }) => {
       currentIndex,
       setCurrentIndex,
       isOpenMenu,
+      setOpenMenu,
       isUserRegistered, 
       setIsUserRegistered,
       incrementOverflowHidden, 

@@ -21,12 +21,12 @@ const Cart = () => {
 
 
 
-  function handleRemove(id) {
-    console.log(id)
-    dispatch(onRemove({ id }))
+  function handleRemove(_id) {
+    console.log(_id)
+    dispatch(onRemove({ _id }))
   }
 
-  function handleToggle(id, value) {
+  function handleToggle(_id, value) {
     dispatch(toggleCartItemQuantity({
       _id,
       value
@@ -46,57 +46,48 @@ const Cart = () => {
 
 
       <main>
-        <div className="container mx-auto p-10 mb-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           {cartItems.length ?
             <>
-              <h1 className="text-3xl font-bold text-zinc-700">Your Cart</h1>
-              <div className="flex flex-row gap-20 text-zinc-700 justify-end mb-8 text-xl">
-                <p>Quantity</p>
-                <p>Price</p>
-                <p>Total</p>
-              </div>
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
+            
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {
+                  console.log(cartItems)
                   const { vendor, title, price, images, quantity, _id } = items
 
 
                   return (
                     <div key={index}>
-                      <div className="flex flex-row justify-between text-zinc-700" >
+                      <div className="flex flex-col justify-between text-zinc-700" >
                         <div>
                           <div className="flex gap-4">
-                            <div>
-                              <Image src={images} alt={title} width="200" height="200" className="cartImage" />
-                            </div>
-                            <div className="flex flex-col gap-4">
-                              <h1 className="text-lg">Brand Name: <span className="font-bold">{vendor}</span></h1>
-                              <p className="text-2xl ">Item: {title}</p>
+                              <div>
+                                <Image src={images} alt={title} width="200" height="200" className="cartImage" />
+                              </div>
+                              <div className="flex flex-col gap-4">
+                                <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
+                                <p className="text-md ">Item: {title}</p>
+                              <div className="flex gap-4 ">
+                                <FaPlus className="" onClick={() => { handleToggle(_id, 'inc') }} />
+                                <span className="text-lg">{quantity}</span>
+                                <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
+                              </div>
+                              <div>
+                                <h1 className="text-xl">${price}</h1>
+                              </div>
+                              <div className=" text-zinc-700 font-bold underline">
+                                <button onClick={() => handleRemove(_id)}>
+                                  <p>On Remove</p>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        <div className="flex gap-20">
-                          <div className="flex gap-4 ">
-                            <FaPlus className="" onClick={() => { handleToggle(id, 'inc') }} />
-                            <span className="font-bold text-lg">{quantity}</span>
-                            <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
-                          </div>
-
-                          <div>
-                            <h1 className="text-2xl font-bold">${price}</h1>
-                          </div>
-
-                          <div>
-                            <h1 className="text-2xl font-bold">${price * quantity}</h1>
-                          </div>
-                        </div>
+                    
 
 
-                      </div>
-                      <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                        <button onClick={() => handleRemove(_id)}>
-                          <p>On Remove</p>
-                        </button>
                       </div>
                     </div>
                   )
