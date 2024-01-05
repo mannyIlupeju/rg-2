@@ -1,37 +1,60 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
+import Cookies from 'cookie';
 import { useGlobalContext } from '@/ Context/context';
 import { useSelector, useDispatch } from 'react-redux'
-import { onRemove, toggleCartItemQuantity } from '../../store'
+import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
+
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
 
-const Cart = () => {
-
+const Cart = ({ cartData }) => {  
 
   const cartItems = useSelector((state) => state.cart)
   const cartQuantity = useSelector((state) => state.totalQuantity)
   const quantity = useSelector((state) => state.quantity)
   const totalPrice = useSelector((state) => state.totalPrice)
+
   const dispatch = useDispatch();
 
 
 
-  function handleRemove(_id) {
-    console.log(_id)
-    dispatch(onRemove({ _id }))
+  console.log(cartItems);
+
+
+  
+  useEffect(() => {
+    if(cartData.data.cart.lines){
+      const fetchedCartData = cartData.data.cart.lines.edges
+      dispatch(initializeCart(fetchedCartData))
+    }
+  }, [cartData, dispatch])
+
+ 
+  function handleRemove(id) {
+    console.log(id)
+    dispatch(onRemove({ id }))
   }
 
-  function handleToggle(_id, value) {
+  function handleToggle(id, value) {
     dispatch(toggleCartItemQuantity({
-      _id,
+      id,
       value
     }))
   }
+
+ 
+
+  
+  
+
+ 
+
+
 
 
   return (
@@ -47,37 +70,36 @@ const Cart = () => {
 
       <main>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-          {cartItems.length ?
+          {cartItems?.length ?
             <>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
             
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {
-                  console.log(cartItems)
-                  const { vendor, title, price, images, quantity, _id } = items
-
-
+                  console.log(items.id.node)
+                  const{merchandise, quantity} = items.id.node
+                  console.log(merchandise, quantity);                  
                   return (
                     <div key={index}>
                       <div className="flex flex-col justify-between text-zinc-700" >
                         <div>
                           <div className="flex gap-4">
                               <div>
-                                <Image src={images} alt={title} width="200" height="200" className="cartImage" />
+                                <Image src={merchandise.image.src} alt='' width="200" height="200" className="cartImage" />
                               </div>
                               <div className="flex flex-col gap-4">
-                                <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
-                                <p className="text-md ">Item: {title}</p>
+                                <h1 className="text-lg"><span className="font-bold">{merchandise.product.vendor}</span></h1>
+                                <p className="text-md ">Item: {merchandise.product.title}</p>
                               <div className="flex gap-4 ">
-                                <FaPlus className="" onClick={() => { handleToggle(_id, 'inc') }} />
+                                <FaPlus className="" onClick={() => { handleToggle(id, 'inc') }} />
                                 <span className="text-lg">{quantity}</span>
                                 <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
                               </div>
                               <div>
-                                <h1 className="text-xl">${price}</h1>
+                                <h1 className="text-xl">${merchandise.priceV2.amount}</h1>
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
-                                <button onClick={() => handleRemove(_id)}>
+                                <button onClick={() => handleRemove(id)}>
                                   <p>On Remove</p>
                                 </button>
                               </div>
@@ -124,3 +146,118 @@ const Cart = () => {
 }
 
 export default Cart;
+
+
+
+
+
+export async function getServerSideProps(context){
+  const {req} = context;
+  const parsedCookies = Cookies.parse(req.headers.cookie || '');
+
+  const cartId = parsedCookies.cartId;
+  console.log(cartId);
+
+  if(!cartId) {
+    return { props: {cartData: null}}
+  }
+
+  try {
+    const query = `
+            query cartQuery($cartId: ID!) {
+              cart(id: $cartId) {
+                id
+                createdAt
+                updatedAt
+                checkoutUrl
+                lines(first: 10) {
+                  edges {
+                    node {
+                      id
+                      quantity
+                      merchandise {
+                        ... on ProductVariant {
+                          id
+                          image {
+                            src
+                            altText
+                          }
+                          priceV2 {
+                            amount
+                            currencyCode
+                          }
+                          product {
+                            vendor
+                            title
+                            handle
+                          }
+                        }
+                      }
+                      attributes {
+                        key
+                        value
+                      }
+                    }
+                  }
+                }
+                attributes {
+                  key
+                  value
+                }
+                cost {
+                  totalAmount {
+                    amount
+                    currencyCode
+                  }
+                  subtotalAmount {
+                    amount
+                    currencyCode
+                  }
+                  totalTaxAmount {
+                    amount
+                    currencyCode
+                  }
+                  totalDutyAmount {
+                    amount
+                    currencyCode
+                  }
+                }
+                buyerIdentity {
+                  email
+                  phone
+                  customer {
+                    id
+                  }
+                  countryCode
+                }
+              }
+            }
+        `;
+    // Replace 'your GraphQL query here' with your actual query.
+
+    const response = await fetch(`https://${process.env.SHOPIFY_DOMAIN}/api/2023-10/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB,
+      },
+      body: JSON.stringify({
+        query,
+        variables: { cartId },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const cartData = await response.json();
+    console.log(cartData);
+    return {
+      props: { cartData },
+    };
+  } catch (error) {
+    console.error('Error fetching cart data:', error);
+    return { props: { cartData: null } };
+  }
+}

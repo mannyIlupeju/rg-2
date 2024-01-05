@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Head from 'next/head'
 import Image from 'next/image'
 import { sanityClient } from '/lib/sanity'
+import Cookies from 'js-cookie'
 import Navigation from '@/components/Shared/Navigation'
 import { urlFor } from '@/lib/sanity';
 import Footer from '@/components/Shared/Footer/footer'
@@ -25,8 +26,10 @@ import { current } from '@reduxjs/toolkit';
 
 
 const ProductDetails = ({ product, allProducts }) => {
-  const {id, images, descriptionHtml, handle, priceRange, title, vendor} = product
-  console.log(id)
+  const {id, images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
+  const variant = variants.edges[0].node.id;
+  console.log(variants);
+
   const price = priceRange.minVariantPrice.amount;
 
 
@@ -34,6 +37,7 @@ const ProductDetails = ({ product, allProducts }) => {
   const match = idString.match(/\d+$/); // Matches digits at the end of the string
 
   const _id = match ? match[0] : null;
+
 
 
 
@@ -46,11 +50,9 @@ const ProductDetails = ({ product, allProducts }) => {
 
   const {
     isOpenMenu,
-    totalPrice, 
-    cartNav, 
-    setTotalPrice, 
     isItemChosen, 
-    openCartModal
+    openCartModal,
+  
   } = useGlobalContext()
 
 
@@ -116,31 +118,44 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
 
-  async function onAdd(title, vendor, price, quantity, id, images){
+  async function onAdd(title, vendor, price, quantity, variants, id, images) {
+    console.log(variants);
     const productAdded = {
       title,
       price,
       quantity,
       id,
       vendor,
-      images
+      images,
+      variants
     }
 
     try {
-      const response = await fetch('/api/shopifyCart/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(productAdded)
-      });
-      if (!response.ok) {
-        throw new Error('Failed to add product to cart')
-      } 
-      const cartData = await response.json();
-      const shopifyCartId = cartData.data.cartCreate.cart.id;
-      localStorage.setItem('cartId', shopifyCartId)
-      await addItemToCart(shopifyCartId, id, quantity)
+      let shopifyCartId = Cookies.get('cartId');
+
+      if(!shopifyCartId){
+        const response = await fetch('/api/shopifyCart/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(productAdded)
+        });
+        if (!response.ok) {
+          throw new Error('Failed to add product to cart')
+        }
+        const cartData = await response.json();
+        shopifyCartId = cartData.data.cartCreate.cart.id;
+        Cookies.set('cartId', shopifyCartId, { expires: 7 });
+      }
+      
+      // Prepare line items for each variant
+      const lineItems = variants.edges.map(edge => ({
+        merchandiseId: edge.node.id,
+        quantity: productAdded.quantity // Assuming each variant node has a quantity field
+      }));
+
+      await addItemToCart(shopifyCartId, lineItems);
 
       dispatch(addToCart(productAdded));
       openCartModal();
@@ -151,44 +166,30 @@ const ProductDetails = ({ product, allProducts }) => {
       return null;
     }
 
-    async function addItemToCart(cartId, id, quantity) {
-      if (cartId) {
-        console.log(cartId);
+    async function addItemToCart(cartId, lineItems) {
+      if (cartId && lineItems.length > 0) {
         try {
           const response = await fetch('/api/shopifyCart/addItemToCart', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              cartId,
-              id,
-              quantity
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cartId, lineItems })
+          });
 
-          })
-
-          
-          if(!response.ok){
-            console.log('Failed to add item to cart')
+          if (!response.ok) {
+            throw new Error('Failed to add item to cart');
           }
-          
+
           const data = await response.json();
           return data;
-          
 
         } catch (error) {
           console.error('Error adding to cart:', error);
           throw error;
         }
       }
-    }
-    
+
   }
-
-
- 
-
+}
 
   function stripHtml(htmlString) {
     return htmlString.replace(/<[^>]*>/g, '');
@@ -275,7 +276,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, id, images.edges[0].node.originalSrc)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, variants, images.edges[0].node.originalSrc)}>Add to Cart</button>
                   </div>
                   
                 </div>
@@ -301,9 +302,8 @@ const ProductDetails = ({ product, allProducts }) => {
       <Footer/>
     </>
   );
+
 }
-
-
 export default ProductDetails;
 
 
@@ -324,7 +324,7 @@ query {
 `;
 
 const productQuery = `
-query ProductByHandle($handle: String!) {
+query getProductByHandle($handle: String!) {
   productByHandle(handle: $handle) {
     id
     title
@@ -345,36 +345,72 @@ query ProductByHandle($handle: String!) {
         currencyCode
       }
     }
+    variants(first: 10) {
+      edges {
+        node {
+          id
+          title
+          sku
+          priceV2 {
+            amount
+            currencyCode
+          }
+          availableForSale
+          selectedOptions {
+            name
+            value
+          }
+        }
+      }
+    }
   }
 }
 `;
 
 const allProductsQuery = `
   query {
-    products(first: 10) {
-      edges {
-        node {
-          id
-          title
-          handle
-          vendor
-          images(first: 5) {
-            edges {
-              node {
-                originalSrc
-                altText
-              }
+     products(first: 10) {
+    edges {
+      node {
+        id
+        title
+        handle
+        vendor
+        images(first: 5) {
+          edges {
+            node {
+              originalSrc
+              altText
             }
           }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              sku
+              priceV2 {
+                amount
+                currencyCode
+              }
+              availableForSale
+              selectedOptions {
+                name
+                value
+              }
             }
           }
         }
       }
     }
+  }
   }`;
 
 

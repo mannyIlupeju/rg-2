@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.toggleCartItemQuantity = exports.onRemove = exports.addToCart = void 0;
+exports["default"] = exports.initializeCart = exports.toggleCartItemQuantity = exports.onRemove = exports.addToCart = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -17,11 +17,25 @@ var initialState = {
   cart: [],
   totalPrice: 0,
   totalQuantity: 1
-};
+}; //Create Slice and align it with the cart so it's specific to working on the Cart
+
 var cartSlice = (0, _toolkit.createSlice)({
   name: 'cart',
   initialState: initialState,
   reducers: {
+    initializeCart: function initializeCart(state, action) {
+      state.cart = action.payload.map(function (item) {
+        return {
+          id: item
+        };
+      });
+      state.totalQuantity = state.cart.reduce(function (total, item) {
+        return total + item.quantity;
+      }, 0);
+      state.totalPrice = state.cart.reduce(function (total, item) {
+        return total + item.price * item.quantity;
+      }, 0);
+    },
     addToCart: function addToCart(state, action) {
       var existingItem = state.cart.find(function (item) {
         return item.id === action.payload.id;
@@ -85,14 +99,17 @@ var cartSlice = (0, _toolkit.createSlice)({
       }
     }
   }
-});
+}); //Create the store
+
 var store = (0, _toolkit.configureStore)({
   reducer: cartSlice.reducer
 });
 var _cartSlice$actions = cartSlice.actions,
     addToCart = _cartSlice$actions.addToCart,
     onRemove = _cartSlice$actions.onRemove,
-    toggleCartItemQuantity = _cartSlice$actions.toggleCartItemQuantity;
+    toggleCartItemQuantity = _cartSlice$actions.toggleCartItemQuantity,
+    initializeCart = _cartSlice$actions.initializeCart;
+exports.initializeCart = initializeCart;
 exports.toggleCartItemQuantity = toggleCartItemQuantity;
 exports.onRemove = onRemove;
 exports.addToCart = addToCart;

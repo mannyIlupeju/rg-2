@@ -22,6 +22,8 @@ const AppContext = ({ children }) => {
   const [showSearch, setShowSearch] = useState(false)
   const [isToken, setIsToken] = useState(null)
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
+  const [shopifyCartID, setShopifyCartID] = useState(null)
+  const [cartItems, setCartItems] = useState(null)
 
 
 
@@ -188,7 +190,11 @@ const AppContext = ({ children }) => {
       setShowSearch,
       isToken,
       setIsToken,
-      SignOut
+      SignOut,
+      shopifyCartID,
+      setShopifyCartID,
+      cartItems,
+      setCartItems
       }}
     >
       {children}

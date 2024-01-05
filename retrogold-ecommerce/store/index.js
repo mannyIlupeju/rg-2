@@ -1,16 +1,24 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-
+//Set the state
 const initialState = {
     cart: [],
     totalPrice: 0,
     totalQuantity: 1
 };
 
+//Create Slice and align it with the cart so it's specific to working on the Cart
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        initializeCart: (state, action) => {
+            state.cart = action.payload.map(item => ({
+                id: item, 
+            }));
+            state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0);
+            state.totalPrice = state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        },
        addToCart: (state, action) => {
         const existingItem = state.cart.find(item => item.id === action.payload.id);
         if(existingItem){
@@ -55,8 +63,11 @@ const cartSlice = createSlice({
     },
 });
 
+
+//Create the store
 const store = configureStore({ reducer: cartSlice.reducer });
 
-export const { addToCart, onRemove, toggleCartItemQuantity } = cartSlice.actions;
+
+export const { addToCart, onRemove, toggleCartItemQuantity, initializeCart } = cartSlice.actions;
 
 export default store; 

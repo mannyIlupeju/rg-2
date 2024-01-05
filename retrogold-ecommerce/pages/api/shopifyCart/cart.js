@@ -1,15 +1,15 @@
 import fetch from 'node-fetch'
 
 export default async function handler(req, res) {
-    if(req.method === "POST"){ 
+    if (req.method === "POST") {
         try {
-            const {quantity, id, price} = req.body;
-            
-            const lineItems = [{
+            const { productAdded } = req.body; // `variants` is an array of variant IDs
+            console.log(productAdded);
+            // Construct line items using the same quantity for each variant
+            const lineItems = ({
                 merchandiseId: id,
-                quantity: quantity
-                
-            }];
+                quantity: quantity // Using the same quantity for each variant
+            });
 
             const query = `
                 mutation createCart($cartInput: CartInput) {
@@ -65,17 +65,18 @@ export default async function handler(req, res) {
                     'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB
                 },
                 body: JSON.stringify({
-                    query, 
-                    variables: {lineItems}
+                    query,
+                    variables: { cartInput: { lines: lineItems } }
                 })
             })
 
             const data = await response.json();
             res.status(200).json(data)
+            console.log(data);
 
         } catch (error) {
-            console.error (error);
-            res.status(500).json({error: 'Error creating cart'})
+            console.error(error);
+            res.status(500).json({ error: 'Error creating cart' })
         }
     } else {
         res.setHeader('Allow', ['POST']);

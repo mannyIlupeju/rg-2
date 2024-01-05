@@ -3,13 +3,8 @@ import fetch from 'node-fetch';
 export default async function handler(req, res) {
     if (req.method === "POST") {
         try {
-            const { cartId, id, quantity } = req.body;
-            console.log(quantity, id);
-
-            const lineItems = [{
-                merchandiseId: id,
-                quantity: quantity
-            }];
+            const { cartId, lineItems } = req.body;
+            console.log(cartId, lineItems);
 
             const query = `
                 mutation addCartLines($cartId: ID!, $lines: [CartLineInput!]!) {
@@ -67,8 +62,19 @@ export default async function handler(req, res) {
                 })
             })
 
+            
+            
             const data = await response.json();
             res.status(200).json(data)
+
+            // Check if cartLinesAdd is available and has userErrors
+            if (data.data && data.data.cartLinesAdd && data.data.cartLinesAdd.userErrors) {
+                if (data.data.cartLinesAdd.userErrors.length > 0) {
+                    console.error('User errors:', data.data.cartLinesAdd.userErrors);
+                }
+            } else {
+                console.error('Unexpected response structure:', data);
+            }
 
         } catch (error) {
             console.error(error);
