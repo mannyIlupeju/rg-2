@@ -28,22 +28,23 @@ import { current } from '@reduxjs/toolkit';
 const ProductDetails = ({ product, allProducts }) => {
   const {id, images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
   const variant = variants.edges[0].node.id;
-  console.log(variants);
-
+  const quantityAvailable = variants.edges[0].node.quantityAvailable;
+  console.log(quantityAvailable);
+  const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
-
 
   const idString = id;
   const match = idString.match(/\d+$/); // Matches digits at the end of the string
-
   const _id = match ? match[0] : null;
 
+  console.log(product);
 
 
 
   const [quantity, setQuantity] = useState(1)
   // //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [inStockMessage, setInStockMessage] = useState(false)
   const dispatch = useDispatch()
 
 
@@ -102,8 +103,16 @@ const ProductDetails = ({ product, allProducts }) => {
 
   
   // //Increase and Decrease Amount funcitonality
+  //add condition when quantityAvailable is less than 5
   const increaseAmt = () => {
-    setQuantity((prev)=> prev + 1)
+    if(quantityAvailable > quantity && availableForSale){
+      setQuantity((prev)=> prev + 1)
+    } else {  
+      setInStockMessage(true)
+      setTimeout(() => {
+        setInStockMessage(false)
+      }, 3000);
+    }
   }
 
   const decreaseAmt = () => {
@@ -117,9 +126,9 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
 
+  //Submit function 
 
   async function onAdd(title, vendor, price, quantity, variants, id, images) {
-    console.log(variants);
     const productAdded = {
       title,
       price,
@@ -134,7 +143,7 @@ const ProductDetails = ({ product, allProducts }) => {
       let shopifyCartId = Cookies.get('cartId');
 
       if(!shopifyCartId){
-        const response = await fetch('/api/shopifyCart/cart', {
+        const response = await fetch('/api/shopifyCart/createCart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -145,6 +154,7 @@ const ProductDetails = ({ product, allProducts }) => {
           throw new Error('Failed to add product to cart')
         }
         const cartData = await response.json();
+        
         shopifyCartId = cartData.data.cartCreate.cart.id;
         Cookies.set('cartId', shopifyCartId, { expires: 7 });
       }
@@ -157,7 +167,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
       await addItemToCart(shopifyCartId, lineItems);
 
-      dispatch(addToCart(productAdded));
+      
       openCartModal();
       setQuantity(1);
 
@@ -180,6 +190,15 @@ const ProductDetails = ({ product, allProducts }) => {
           }
 
           const data = await response.json();
+          console.log(data);
+          dispatch(addToCart({
+            title,
+            price,
+            quantity,
+            id,
+            vendor,
+            images,
+          }));
           return data;
 
         } catch (error) {
@@ -190,6 +209,8 @@ const ProductDetails = ({ product, allProducts }) => {
 
   }
 }
+
+
 
   function stripHtml(htmlString) {
     return htmlString.replace(/<[^>]*>/g, '');
@@ -210,10 +231,9 @@ const ProductDetails = ({ product, allProducts }) => {
       </Head>
        {isOpenMenu ? <RespMenu/> : ''}
       <Navigation/>
-      
+    
       <Breadcrumb/>
 
-      
       {isItemChosen && <Cart/>}
       
 
@@ -273,6 +293,7 @@ const ProductDetails = ({ product, allProducts }) => {
                       <span className="font-bold text-lg">{quantity}</span>
                       <FaPlus className="flex self-center" onClick={increaseAmt}/>
                   </div>
+                  <div>{inStockMessage && <span>Item is not in stock</span>}</div>
 
                  
                   <div className="mt-8">
@@ -356,6 +377,7 @@ query getProductByHandle($handle: String!) {
             currencyCode
           }
           availableForSale
+          quantityAvailable
           selectedOptions {
             name
             value
@@ -401,6 +423,7 @@ const allProductsQuery = `
                 currencyCode
               }
               availableForSale
+              quantityAvailable
               selectedOptions {
                 name
                 value

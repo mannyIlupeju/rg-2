@@ -96,6 +96,7 @@ const AppContext = ({ children }) => {
 
 
   const toggleRespMenu = (e) => {
+    console.log('resp menu should open');
     setOpenMenu(prevState => !prevState);
   };
 

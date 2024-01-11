@@ -4,10 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
+import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
-import { useGlobalContext } from '@/ Context/context';
 import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
+import { useGlobalContext } from '@/ Context/context'
 
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
@@ -19,11 +20,17 @@ const Cart = ({ cartData }) => {
   const quantity = useSelector((state) => state.quantity)
   const totalPrice = useSelector((state) => state.totalPrice)
 
+  const { isOpenMenu } = useGlobalContext()
+
+  const [totalAmount, setTotalAmount] = useState(null)
+
   const dispatch = useDispatch();
 
+  const total = cartData.data.cart.cost.totalAmount;
 
 
-  console.log(cartItems);
+  const cartId = cartData.data.cart.id;
+
 
 
   
@@ -34,13 +41,37 @@ const Cart = ({ cartData }) => {
     }
   }, [cartData, dispatch])
 
+
  
-  function handleRemove(id) {
-    console.log(id)
-    dispatch(onRemove({ id }))
+  async function handleRemove(lineId) {
+    try {
+      if(cartId){
+        const response = await fetch('/api/shopifyCart/removeCart', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ cartId, lineId})
+        })
+
+
+        if(response.ok){
+          const data = await response.json();
+          dispatch(onRemove({lineId}));
+          
+        }
+      }
+      
+    } catch (error){
+      console.error('Error sending info to shopify to remove item:', error)
+    }
   }
 
+
+
+
   function handleToggle(id, value) {
+   
     dispatch(toggleCartItemQuantity({
       id,
       value
@@ -48,14 +79,6 @@ const Cart = ({ cartData }) => {
   }
 
  
-
-  
-  
-
- 
-
-
-
 
   return (
     <>
@@ -65,38 +88,38 @@ const Cart = ({ cartData }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {isOpenMenu && <RespMenu />}
+
       <Navigation />
-
-
       <main>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12 h-screen">
           {cartItems?.length ?
             <>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
-            
               <div className="flex flex-col gap-8 justify-center">
-                {cartItems.map((items, index) => {
-                  console.log(items.id.node)
-                  const{merchandise, quantity} = items.id.node
-                  console.log(merchandise, quantity);                  
+                {cartItems.map((items, index) => {                  
+                  const {image, priceV2, product} = items.node.merchandise
+                  const {quantity, id} = items.node
+                  console.log(id);
                   return (
                     <div key={index}>
                       <div className="flex flex-col justify-between text-zinc-700" >
                         <div>
                           <div className="flex gap-4">
                               <div>
-                                <Image src={merchandise.image.src} alt='' width="200" height="200" className="cartImage" />
+                                <Image src={image.src} alt='' width="200" height="200" className="cartImage" />
                               </div>
                               <div className="flex flex-col gap-4">
-                                <h1 className="text-lg"><span className="font-bold">{merchandise.product.vendor}</span></h1>
-                                <p className="text-md ">Item: {merchandise.product.title}</p>
+                                <h1 className="text-lg"><span className="font-bold">{product.vendor}</span></h1>
+                                <p className="text-md ">Item: {product.title}</p>
                               <div className="flex gap-4 ">
                                 <FaPlus className="" onClick={() => { handleToggle(id, 'inc') }} />
                                 <span className="text-lg">{quantity}</span>
                                 <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
                               </div>
                               <div>
-                                <h1 className="text-xl">${merchandise.priceV2.amount}</h1>
+                                <h1 className="text-xl">${priceV2.amount}</h1>
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
                                 <button onClick={() => handleRemove(id)}>
@@ -106,10 +129,6 @@ const Cart = ({ cartData }) => {
                             </div>
                           </div>
                         </div>
-
-                    
-
-
                       </div>
                     </div>
                   )
@@ -118,7 +137,7 @@ const Cart = ({ cartData }) => {
                 }
                 <div className="flex justify-between text-zinc-700">
                   <h1 className="text-2xl">Subtotal</h1>
-                  <p className="text-2xl font-bold">${totalPrice}</p>
+                  <p className="text-2xl font-bold">${total.amount}</p>
                 </div>
               </div>
               <div className="my-24 flex justify-end">

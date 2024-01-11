@@ -14,6 +14,8 @@ const Cart = () => {
   const totalPrice = useSelector((state) => state.totalPrice)
 
 
+  console.log(cartItems);
+
   //close cart modal functionality if cart items in modal is less than 1
   useEffect(() => {
     if (cartItems.length < 1) {
@@ -35,9 +37,9 @@ const Cart = () => {
    }
 
    function handleRemove(id){
-    console.log(id)
     dispatch(onRemove({id}))
    }
+
 
 
   return (
@@ -50,38 +52,37 @@ const Cart = () => {
               </div>
               <div>
                 <div>
-                  {cartItems.map((item, index)=> {
-                    const { vendor, title, price, images, quantity, id } = item
-                    console.log(id)
-                    return (
-                      <div className="border-t-4 border-gray-400" key={id}>
-                        <div className="flex gap-5 mt-4 ">
-                          <div>
-                            <Image src={images} alt={title} width="200" height="200" className="cartModalImage"/>
-                          </div>
-                          
-                          <div className="flex flex-col gap-4 text-zinc-700">
-                            <h1 className="text-md">Brand Name: <span className="font-bold">{vendor}</span></h1>
-                            <p className="text-md">Item: {title}</p>
+              {cartItems.map((items, index) => {
+               
+                  const { merchandise, quantity } = items.node
+                  console.log(merchandise.id);
+                  return (
+                    <div className="border-t-4 border-gray-400" key={index}>
+                          <div className="flex gap-4 mt-4">
                             <div>
-                            <div>
-                              <h1 className="text-xl font-bold">${price}</h1>
+                              <Image src={merchandise.image.src} alt='' width="100" height="100" className="cartImage" unoptimized/>
                             </div>
-                            <div className="flex gap-4 mt-4">
-                              <FaPlus className="" onClick={() => handleToggle(id, 'inc')}/>
-                                <span className="font-bold text-xl">{quantity}</span>
-                              <FaMinus className="flex" onClick={() => handleToggle(id, 'dec')}/>
+                            <div className="flex flex-col gap-4 text-zinc-700">
+                              <h1 className="text-lg"><span className="font-bold">{merchandise.product.vendor}</span></h1>
+                              <p className="text-md ">Item: {merchandise.product.title}</p>
+                              <div className="flex gap-4 mt-4">
+                                <FaPlus className="" onClick={() => { handleToggle(merchandise.id, 'inc') }} />
+                                <span className="text-lg">{quantity}</span>
+                                <FaMinus className="flex" onClick={() => { handleToggle(merchandise.id, 'dec') }} />
+                              </div>
+                              <div>
+                                <h1 className="text-xl">${merchandise.priceV2.amount}</h1>
+                              </div>
+                              <div className=" text-zinc-700 font-bold underline">
+                                <button onClick={() => handleRemove(merchandise.id)}>
+                                  <p>On Remove</p>
+                                </button>
+                              </div>
                             </div>
-                            
                           </div>
-                          </div>
-                        </div>
-                        <div className="flex justify-end relative bottom-24 text-zinc-700 font-bold underline">
-                          <button onClick={()=> handleRemove(_id)}><p>On Remove</p></button>
-                        </div>
-                      </div>
-                    )
-                  })}
+                    </div>
+                  )
+              })}
                     <div className="flex justify-between text-zinc-700 ">
                       <h1 className="text-2xl">Subtotal</h1>
                       <p className="text-2xl font-bold">${totalPrice}</p>

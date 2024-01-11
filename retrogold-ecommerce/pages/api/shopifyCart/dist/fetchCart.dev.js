@@ -7,39 +7,25 @@ exports["default"] = handler;
 
 var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 
-var _cookie = _interopRequireDefault(require("cookie"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function handler(req, res) {
-  var parsedCookies, cartId, query, response, data;
+  var query, response, cartData;
   return regeneratorRuntime.async(function handler$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          if (!(req.method !== "POST")) {
-            _context.next = 3;
+          if (!(req.method === "POST")) {
+            _context.next = 19;
             break;
           }
 
-          res.setHeader('Allow', ['POST']);
-          return _context.abrupt("return", res.status(405).end("Method ".concat(req.method, " Not Allowed")));
+          _context.prev = 1;
+          query = "\n            query cartQuery($cartId: ID!) {\n              cart(id: $cartId) {\n                id\n                createdAt\n                updatedAt\n                checkoutUrl\n                lines(first: 10) {\n                  edges {\n                    node {\n                      id\n                      quantity\n                      merchandise {\n                        ... on ProductVariant {\n                          id\n                          image {\n                            src\n                            altText\n                          }\n                          priceV2 {\n                            amount\n                            currencyCode\n                          }\n                          product {\n                            vendor\n                            title\n                            handle\n                          }\n                        }\n                      }\n                      attributes {\n                        key\n                        value\n                      }\n                    }\n                  }\n                }\n                attributes {\n                  key\n                  value\n                }\n                cost {\n                  totalAmount {\n                    amount\n                    currencyCode\n                  }\n                  subtotalAmount {\n                    amount\n                    currencyCode\n                  }\n                  totalTaxAmount {\n                    amount\n                    currencyCode\n                  }\n                  totalDutyAmount {\n                    amount\n                    currencyCode\n                  }\n                }\n                buyerIdentity {\n                  email\n                  phone\n                  customer {\n                    id\n                  }\n                  countryCode\n                }\n              }\n            }\n        "; // Replace 'your GraphQL query here' with your actual query.
 
-        case 3:
-          parsedCookies = _cookie["default"].parse(req.headers.cookie || '');
-          cartId = parsedCookies.cartId;
-
-          if (!cartId) {
-            res.status(505).json({
-              message: 'No cart Id sent'
-            });
-          }
-
-          _context.prev = 6;
-          query = "\n            query cartQuery($cartId: ID!) {\n            cart(id: $cartId) {\n                id\n                createdAt\n                updatedAt\n                checkoutUrl\n                lines(first: 10) {\n                edges {\n                    node {\n                    id\n                    quantity\n                    merchandise {\n                        ... on ProductVariant {\n                        id\n                         image {\n                         src\n                         altText\n                         }\n                        }\n                    }\n                    attributes {\n                        key\n                        value\n                    }\n                    }\n                }\n                }\n                attributes {\n                key\n                value\n                }\n                cost {\n                totalAmount {\n                    amount\n                    currencyCode\n                }\n                subtotalAmount {\n                    amount\n                    currencyCode\n                }\n                totalTaxAmount {\n                    amount\n                    currencyCode\n                }\n                totalDutyAmount {\n                    amount\n                    currencyCode\n                }\n                }\n                buyerIdentity {\n                email\n                phone\n                customer {\n                    id\n                }\n                countryCode\n                }\n            }\n        }\n        ";
-          _context.next = 10;
-          return regeneratorRuntime.awrap((0, _nodeFetch["default"])("".concat(process.env.SHOPIFY_DOMAIN, "/api/2023-10/graphql.json"), {
-            method: "POST",
+          _context.next = 5;
+          return regeneratorRuntime.awrap((0, _nodeFetch["default"])("https://".concat(process.env.SHOPIFY_DOMAIN, "/api/2023-10/graphql.json"), {
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB
@@ -52,30 +38,44 @@ function handler(req, res) {
             })
           }));
 
-        case 10:
+        case 5:
           response = _context.sent;
-          _context.next = 13;
+
+          if (response.ok) {
+            _context.next = 8;
+            break;
+          }
+
+          throw new Error("HTTP error! Status: ".concat(response.status));
+
+        case 8:
+          _context.next = 10;
           return regeneratorRuntime.awrap(response.json());
 
-        case 13:
-          data = _context.sent;
-          res.status(200).json(data);
-          _context.next = 21;
-          break;
+        case 10:
+          cartData = _context.sent;
+          console.log(cartData);
+          return _context.abrupt("return", {
+            props: {
+              cartData: cartData
+            }
+          });
 
-        case 17:
-          _context.prev = 17;
-          _context.t0 = _context["catch"](6);
-          console.error(_context.t0);
-          return _context.abrupt("return", res.status(500).json({
-            message: 'Error fetching Cart'
-          }));
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](1);
+          console.error('Error fetching cart data:', _context.t0);
+          return _context.abrupt("return", {
+            props: {
+              cartData: null
+            }
+          });
 
-        case 21:
+        case 19:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[6, 17]]);
+  }, null, null, [[1, 15]]);
 }
 //# sourceMappingURL=fetchCart.dev.js.map

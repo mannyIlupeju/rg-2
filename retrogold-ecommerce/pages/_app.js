@@ -3,10 +3,10 @@ import AppContext from '@/ Context/context'
 import {useRouter} from 'next/router'
 import {useState, useEffect, StrictMode} from 'react'
 import { Provider } from 'react-redux'
-import store from '../store'
+import store, { persistor } from '../store'
 import Loading from '@/components/Loader/Loading'
 import AuthenticationCheck from '../ Context/AuthenticationCheck'
-
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 export default function App({ Component, pageProps }) {
@@ -35,11 +35,14 @@ export default function App({ Component, pageProps }) {
   return (
     <>      
       <Provider store={store}>
-      <AppContext>
-       <AuthenticationCheck>
-         <Component {...pageProps}/>
-       </AuthenticationCheck>
-      </AppContext>
+        <PersistGate persistor={persistor}>
+          <AppContext>
+            <AuthenticationCheck>
+              <Component {...pageProps} />
+            </AuthenticationCheck>
+          </AppContext>
+        </PersistGate>
+      
       </Provider>
     </>
   ) 

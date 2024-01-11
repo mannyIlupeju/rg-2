@@ -25,15 +25,12 @@ const NavLinks = ({ links }) => (
 
 
 
-// Define selectors outside the component
-const selectCartItems = state => state.cart;
-const selectTotalQuantity = state => state.totalQuantity;
-
 
 //Navigation component
 const Navigation = () => {
-	const cartItems = useSelector(selectCartItems);
-	const totalQuantity = useSelector(selectTotalQuantity);
+	const cartItems = useSelector(state => state.cart);
+	const totalQuantity = useSelector(state => state.totalQuantity);
+
 
 
 	const [inputValue, setInputValue] = useState('');
@@ -53,6 +50,8 @@ const Navigation = () => {
 		getFilteredProducts(userSearch);
 		getFilteredBlogs(userSearch);
 	};
+
+	console.log(cartItems);
 
 	return (
 		<nav className='flex justify-between flex-row gap-2 navigationStyle'>
@@ -91,7 +90,7 @@ const Navigation = () => {
 				<div className='flex flex-row justify-end'>
 					<Link href='/cart' className="flex flex-row">
 							<FaShoppingCart size='1.8rem' color='black' />
-							{cartItems.length ? (
+							{cartItems ? (
 								<div className='mx-2 text-zinc-800 font-semibold'>
 									<span>({totalQuantity})</span>
 								</div>
@@ -108,7 +107,7 @@ const Navigation = () => {
 			<div className='flex justify-end order-3 lg:hidden items-center'>
 				<Link href='/cart'>
 					<FaShoppingCart size='1.8rem' color='black' />
-					{cartItems.length ? (
+					{cartItems ? (
 						<div className='mx-2 text-zinc-800 font-semibold'>
 							<span>({totalQuantity})</span>
 						</div>

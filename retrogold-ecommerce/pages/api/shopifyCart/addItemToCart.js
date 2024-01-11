@@ -4,8 +4,6 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         try {
             const { cartId, lineItems } = req.body;
-            console.log(cartId, lineItems);
-
             const query = `
                 mutation addCartLines($cartId: ID!, $lines: [CartLineInput!]!) {
                     cartLinesAdd(cartId: $cartId, lines: $lines) {
@@ -14,7 +12,7 @@ export default async function handler(req, res) {
                             lines(first: 10) {
                                 edges {
                                     node {
-                                        quantity
+                                        id
                                         merchandise {
                                             ... on ProductVariant {
                                                 id

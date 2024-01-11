@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         try {
             const { productAdded } = req.body; // `variants` is an array of variant IDs
-            console.log(productAdded);
+            
             // Construct line items using the same quantity for each variant
             const lineItems = ({
                 merchandiseId: id,
