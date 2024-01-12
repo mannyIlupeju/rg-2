@@ -36,7 +36,8 @@ function handler(req, res) {
               variables: {
                 cartId: cartId,
                 lines: lineItems
-              }
+              },
+              message: "item added to cart"
             })
           }));
 

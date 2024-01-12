@@ -29,7 +29,7 @@ const ProductDetails = ({ product, allProducts }) => {
   const {id, images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
   const variant = variants.edges[0].node.id;
   const quantityAvailable = variants.edges[0].node.quantityAvailable;
-  console.log(quantityAvailable);
+
   const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
 
@@ -37,7 +37,7 @@ const ProductDetails = ({ product, allProducts }) => {
   const match = idString.match(/\d+$/); // Matches digits at the end of the string
   const _id = match ? match[0] : null;
 
-  console.log(product);
+
 
 
 
@@ -128,87 +128,94 @@ const ProductDetails = ({ product, allProducts }) => {
 
   //Submit function 
 
-  async function onAdd(title, vendor, price, quantity, variants, id, images) {
-    const productAdded = {
-      title,
-      price,
-      quantity,
-      id,
-      vendor,
-      images,
-      variants
-    }
+ 
 
-    try {
-      let shopifyCartId = Cookies.get('cartId');
-
-      if(!shopifyCartId){
-        const response = await fetch('/api/shopifyCart/createCart', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(productAdded)
-        });
-        if (!response.ok) {
-          throw new Error('Failed to add product to cart')
-        }
-        const cartData = await response.json();
-        
-        shopifyCartId = cartData.data.cartCreate.cart.id;
-        Cookies.set('cartId', shopifyCartId, { expires: 7 });
+    async function onAdd(title, vendor, price, quantity, variants, id, images) {
+      const productAdded = {
+        title,
+        price,
+        quantity,
+        id,
+        vendor,
+        images,
+        variants
       }
-      
-      // Prepare line items for each variant
-      const lineItems = variants.edges.map(edge => ({
-        merchandiseId: edge.node.id,
-        quantity: productAdded.quantity // Assuming each variant node has a quantity field
-      }));
 
-      await addItemToCart(shopifyCartId, lineItems);
+      try {
+        let shopifyCartId = Cookies.get('cartId');
 
-      
-      openCartModal();
-      setQuantity(1);
-
-    } catch (error) {
-      console.error('Error creating to cart:', error);
-      return null;
-    }
-
-    async function addItemToCart(cartId, lineItems) {
-      if (cartId && lineItems.length > 0) {
-        try {
-          const response = await fetch('/api/shopifyCart/addItemToCart', {
+        if(!shopifyCartId){
+          const response = await fetch('/api/shopifyCart/createCart', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cartId, lineItems })
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productAdded)
           });
 
           if (!response.ok) {
-            throw new Error('Failed to add item to cart');
+            throw new Error('Failed to add product to cart')
           }
 
-          const data = await response.json();
-          console.log(data);
-          dispatch(addToCart({
-            title,
-            price,
-            quantity,
-            id,
-            vendor,
-            images,
-          }));
-          return data;
 
-        } catch (error) {
-          console.error('Error adding to cart:', error);
-          throw error;
+          const cartData = await response.json();
+          
+          shopifyCartId = cartData.data.cartCreate.cart.id;
+          Cookies.set('cartId', shopifyCartId, { expires: 7 });
         }
+        
+        // Prepare line items for each variant
+        const lineItems = variants.edges.map(edge => ({
+          merchandiseId: edge.node.id,
+          quantity: productAdded.quantity // Assuming each variant node has a quantity field
+        }));
+
+    
+
+        await addItemToCart(shopifyCartId, lineItems);
+
+        
+        openCartModal();
+        setQuantity(1);
+
+      } catch (error) {
+        console.error('Error creating to cart:', error);
+        return null;
       }
 
+      async function addItemToCart(cartId, lineItems) {
+        if (cartId && lineItems.length > 0) {
+          try {
+            const response = await fetch('/api/shopifyCart/addItemToCart', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ cartId, lineItems })
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to add item to cart');
+            }
+
+            const data = await response.json();
+            console.log(data);
+            dispatch(addToCart({
+              title,
+              price,
+              quantity,
+              id,
+              vendor,
+              images,
+            }));
+            return data;
+
+          } catch (error) {
+            console.error('Error adding to cart:', error);
+            throw error;
+          }
+        }
+
+    }
   }
-}
 
 
 

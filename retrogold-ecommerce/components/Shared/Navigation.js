@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
+import { useSelector, useDispatch } from 'react-redux'
 import { useGlobalContext } from '../../ Context/context';
 import Search from './Search/Search'
-import { useSelector } from 'react-redux'
+
+
 
 
 const NavLink = ({ name, href }) => {
@@ -28,15 +30,12 @@ const NavLinks = ({ links }) => (
 
 //Navigation component
 const Navigation = () => {
-	const cartItems = useSelector(state => state.cart);
+	
 	const totalQuantity = useSelector(state => state.totalQuantity);
-
-
-
 	const [inputValue, setInputValue] = useState('');
 	const {
 	    searchBar, deactivateSearch, toggleRespMenu, toggleLoginModal,
-		isToken
+		isToken, cartItems
 	} = useGlobalContext();
 
 	const navLinks = ['Home', 'Shop', 'Services', 'Blog', 'About', 'Contact'].map(name => ({
@@ -50,8 +49,6 @@ const Navigation = () => {
 		getFilteredProducts(userSearch);
 		getFilteredBlogs(userSearch);
 	};
-
-	console.log(cartItems);
 
 	return (
 		<nav className='flex justify-between flex-row gap-2 navigationStyle'>
@@ -92,7 +89,7 @@ const Navigation = () => {
 							<FaShoppingCart size='1.8rem' color='black' />
 							{cartItems ? (
 								<div className='mx-2 text-zinc-800 font-semibold'>
-									<span>({totalQuantity})</span>
+									<span>{totalQuantity}</span>
 								</div>
 							) : null}
 					</Link>
@@ -109,7 +106,7 @@ const Navigation = () => {
 					<FaShoppingCart size='1.8rem' color='black' />
 					{cartItems ? (
 						<div className='mx-2 text-zinc-800 font-semibold'>
-							<span>({totalQuantity})</span>
+							<span>{totalQuantity}</span>
 						</div>
 					) : null}
 				</Link>

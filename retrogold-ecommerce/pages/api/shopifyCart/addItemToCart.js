@@ -56,7 +56,8 @@ export default async function handler(req, res) {
                 },
                 body: JSON.stringify({
                     query,
-                    variables: { cartId, lines: lineItems }
+                    variables: { cartId, lines: lineItems },
+                    message : "item added to cart"
                 })
             })
 

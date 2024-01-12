@@ -3,13 +3,12 @@ import fetch from 'node-fetch'
 export default async function handler(req, res) {
     if (req.method === "POST") {
         try {
-            const { productAdded } = req.body; // `variants` is an array of variant IDs
-            
+            const {variants, quantity} = req.body // `variants` is an array of variant IDs
             // Construct line items using the same quantity for each variant
-            const lineItems = ({
-                merchandiseId: id,
-                quantity: quantity // Using the same quantity for each variant
-            });
+             const lineItems = variants.edges.map(edge => ({
+              merchandiseId:edge.node.id,
+              quantity: quantity
+            }))
 
             const query = `
                 mutation createCart($cartInput: CartInput) {
@@ -70,9 +69,12 @@ export default async function handler(req, res) {
                 })
             })
 
+            if(!response.ok){
+                throw new Error(`HTTP error! Status: ${response.status}`)
+            }
             const data = await response.json();
-            res.status(200).json(data)
-            console.log(data);
+            res.send(200).json(data, {message:'Item added to cart'})
+            
 
         } catch (error) {
             console.error(error);

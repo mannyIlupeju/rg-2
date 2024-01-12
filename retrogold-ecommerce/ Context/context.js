@@ -2,7 +2,7 @@ import {createContext, useContext,  useState, useEffect} from 'react';
 import { sanityClient } from '../lib/sanity';
 import { FaWindows } from 'react-icons/fa';
 import { useRouter } from 'next/router'
-
+import { useSelector, useDispatch } from 'react-redux'
 
 
 //set up createContext
@@ -23,7 +23,8 @@ const AppContext = ({ children }) => {
   const [isToken, setIsToken] = useState(null)
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
   const [shopifyCartID, setShopifyCartID] = useState(null)
-  const [cartItems, setCartItems] = useState(null)
+  const cartItems = useSelector((state) => state.cart)
+  
 
 
 
@@ -195,7 +196,7 @@ const AppContext = ({ children }) => {
       shopifyCartID,
       setShopifyCartID,
       cartItems,
-      setCartItems
+     
       }}
     >
       {children}

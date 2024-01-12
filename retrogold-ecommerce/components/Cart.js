@@ -14,8 +14,6 @@ const Cart = () => {
   const totalPrice = useSelector((state) => state.totalPrice)
 
 
-  console.log(cartItems);
-
   //close cart modal functionality if cart items in modal is less than 1
   useEffect(() => {
     if (cartItems.length < 1) {
@@ -45,7 +43,7 @@ const Cart = () => {
   return (
     <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>
         {(isItemChosen && cartItems.length) ?
-        <div className="bg-gray-300 absolute z-9 right-0 top-0 p-8 h-screen sideCart lg:w-2/6 w-full">
+        <div className="bg-gray-300 absolute z-9 right-0 top-0 p-8 sideCart lg:w-2/6 w-full">
               <div className="text-zinc-700 flex justify-between">
                 <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
                 <FaTimes color="black" size="2rem" onClick={closeCartModal} className="cursor-pointer"/>
@@ -53,28 +51,26 @@ const Cart = () => {
               <div>
                 <div>
               {cartItems.map((items, index) => {
-               
-                  const { merchandise, quantity } = items.node
-                  console.log(merchandise.id);
+                  const {image, currency, lineId, merchandiseId, price, quantity, title, vendor} = items
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
                             <div>
-                              <Image src={merchandise.image.src} alt='' width="100" height="100" className="cartImage" unoptimized/>
+                              <Image src={image} alt='' width="100" height="100" className="cartImage" unoptimized/>
                             </div>
                             <div className="flex flex-col gap-4 text-zinc-700">
-                              <h1 className="text-lg"><span className="font-bold">{merchandise.product.vendor}</span></h1>
-                              <p className="text-md ">Item: {merchandise.product.title}</p>
+                              <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
+                              <p className="text-md ">Item: {title}</p>
                               <div className="flex gap-4 mt-4">
-                                <FaPlus className="" onClick={() => { handleToggle(merchandise.id, 'inc') }} />
+                                <FaPlus className="" onClick={() => { handleToggle(lineId, 'inc') }} />
                                 <span className="text-lg">{quantity}</span>
-                                <FaMinus className="flex" onClick={() => { handleToggle(merchandise.id, 'dec') }} />
+                                <FaMinus className="flex" onClick={() => { handleToggle(lineId, 'dec') }} />
                               </div>
                               <div>
-                                <h1 className="text-xl">${merchandise.priceV2.amount}</h1>
+                                <h1 className="text-xl">${price}</h1>
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
-                                <button onClick={() => handleRemove(merchandise.id)}>
+                                <button onClick={() => handleRemove(lineId)}>
                                   <p>On Remove</p>
                                 </button>
                               </div>

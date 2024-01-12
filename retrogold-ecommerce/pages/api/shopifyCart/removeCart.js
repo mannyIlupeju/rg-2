@@ -3,7 +3,8 @@ import fetch from 'node-fetch';
 export default async function handler(req, res){
     if(req.method === "POST"){
         try{
-            const {cartId, lineId} = req.body;
+            const {cartId, id:lineId} = req.body;
+            
             const query = `
             mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
                 cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
@@ -57,7 +58,7 @@ export default async function handler(req, res){
                 },
                 body: JSON.stringify({
                     query,
-                    variables: { cartId, lineIds: lineId}
+                    variables: { cartId, lineIds:[lineId]}
                 })
             })
 
@@ -72,10 +73,13 @@ export default async function handler(req, res){
             } else {
                 console.error('Unexpected response structure:', data);
             }
-        } catch{
-            res.setHeader('Allow', ['POST']);
-            res.status(405).end(`Method ${req.method} Not Allowed`);
+        } catch{(error)
+            console.error('Error processing request:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
         }
+    } else {
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
 

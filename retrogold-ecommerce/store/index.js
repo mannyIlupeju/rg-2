@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage';
 const initialState = {
     cart: [],
     totalPrice: 0,
-    totalQuantity: 1
+    totalQuantity: 0
 };
 
 //Create Slice and align it with the cart so it's specific to working on the Cart
@@ -18,12 +18,14 @@ const cartSlice = createSlice({
         initializeCart: (state, action) => {
             state.cart = action.payload.map(item => ({
                 ...item,
-               price: item.priceV2,
-               quantity: item.quantity || 0 
+               price: item.price,
+               quantity: item.quantity,
+               
             }));
-            state.totalQuantity = state.cart.reduce((total, item) => total + item.node.quantity, 0);
+            state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0);
             state.totalPrice = state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
         },
+
        addToCart: (state, action) => {
         const existingItemIndex = state.cart.findIndex(item => item.id === action.payload.id);
         if(existingItemIndex !== -1){
@@ -31,17 +33,16 @@ const cartSlice = createSlice({
         } else {
             state.cart.push({...action.payload, quantity: action.payload.quantity || 1})
         }
-        state.totalQuantity = state.cart.reduce((total, item) => total + item.node.quantity, 0)
+        state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0)
         state.totalPrice = state.cart.reduce((total, item)=> total + (item.price * item.quantity), 0)
        },
        
-       onRemove: (state, action) => {
-        const removingItem = state.cart.find(item => item.node.id === action.payload.id);
-        if(removingItem){
-           state.cart = state.cart.filter(item => item.node.id !== removingItem.node.id)
-           state.totalPrice = state.cart.reduce((total, item) => total + (item.node.price * item.node.quantity), 0)
-        } 
-       },
+      onRemove: (state, action) => {
+      const removingItemId = action.payload.id;
+      state.cart = state.cart.filter(item => item.id !== removingItemId);
+      state.totalQuantity = state.cart.reduce((total, item) => total + item.quantity, 0)
+      state.totalPrice = state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+      },
 
       toggleCartItemQuantity: (state, action) => {
        const existingItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
@@ -86,10 +87,16 @@ const persistedReducer = persistReducer(persistConfig, cartSlice.reducer);
 // const store = configureStore({ reducer: cartSlice.reducer });
 const store = configureStore({
     reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST'], // Ignore serialization check for persist/PERSIST action
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
-
+                  
 export const { addToCart, onRemove, toggleCartItemQuantity, initializeCart } = cartSlice.actions;
 
 export default store; 
