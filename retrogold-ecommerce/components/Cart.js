@@ -9,9 +9,8 @@ import {useSelector, useDispatch} from 'react-redux'
 const Cart = () => {
   const {isItemChosen, closeCartModal} = useGlobalContext()
   const dispatch = useDispatch()
-
-  const cartItems = useSelector((state) => state.cart)
   const totalPrice = useSelector((state) => state.totalPrice)
+  const cartItems = useSelector((state) => state.cart)
 
 
   //close cart modal functionality if cart items in modal is less than 1
@@ -20,6 +19,8 @@ const Cart = () => {
       closeCartModal();
     }
   }, [cartItems.length, closeCartModal]);
+
+
 
   const closeOverlay = () => {
     if(isItemChosen){
@@ -41,7 +42,7 @@ const Cart = () => {
 
 
   return (
-    <div className={isItemChosen ? "overlay" : ""} onClick={closeOverlay}>
+    <div className={`overflow-y-auto ${isItemChosen ? "overlay" : ""}`} onClick={closeOverlay}>
         {(isItemChosen && cartItems.length) ?
         <div className="bg-gray-300 absolute z-9 right-0 top-0 p-8 sideCart lg:w-2/6 w-full">
               <div className="text-zinc-700 flex justify-between">
@@ -56,7 +57,7 @@ const Cart = () => {
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
                             <div>
-                              <Image src={image} alt='' width="100" height="100" className="cartImage" unoptimized/>
+                              <Image src={image} alt='' width="40" height="40" className="cartImage" unoptimized/>
                             </div>
                             <div className="flex flex-col gap-4 text-zinc-700">
                               <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>

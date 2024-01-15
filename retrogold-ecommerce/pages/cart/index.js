@@ -26,17 +26,14 @@ const Cart = ({ cartData }) => {
 
   const dispatch = useDispatch();
 
-  // const total = cartData.data.cart.cost.totalAmount;
+
 
   let cartId = cartData.data.cart.id;
 
- 
   
   useEffect(() => {
     if(cartData.data.cart.lines){
       const fetchedCartData = cartData.data.cart.lines.edges
-      
-      console.log(fetchedCartData);
       const submittedData = fetchedCartData.map((item)=> ({
         merchandiseId: item.node.merchandise.id,
         price: item.node.merchandise.priceV2.amount,
@@ -63,7 +60,8 @@ const Cart = ({ cartData }) => {
           },
           body: JSON.stringify({ 
             cartId, 
-            id
+            id,
+            quantity
           })
         })
 
@@ -79,14 +77,74 @@ const Cart = ({ cartData }) => {
 
 
 
-  function handleToggle(id, value) {  
-    dispatch(toggleCartItemQuantity({
-      id,
-      value
-    }))
+  async function handleToggle(id, value, quantity) {  
+    const currentItem = cartItems.find((item) => item.id === id);
+    if(!currentItem){
+      console.error('Item not found in cart');
+      return;
+    }
+
+    let newQuantity = Number(currentItem.quantity);
+    if(value === 'inc'){
+      newQuantity++;
+    } else if(value === 'dec' && newQuantity > 1) {
+      newQuantity--;
+    }
+
+
+    try {
+      const response = await fetch('/api/shopifyCart/updateCartQty', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+          cartId,
+          id, 
+          quantity: newQuantity
+        })
+      })
+
+      const data = await response.json();
+      console.log(data);
+
+      if(response.ok){
+       dispatch(toggleCartItemQuantity({
+         id,
+         value
+       }));
+      } else {
+        console.error('Error updating quanityt in the cart:', data);
+      } 
+    } catch(error){
+        console.error('Error updating quantity in the cart:', error)
+    }
+  } 
+
+
+  async function handleCheckOut(){
+    if(cartId){
+      const response = await fetch('/api/checkout/checkout', {
+         method: "POST",
+         headers: {
+          'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({cartId})
+      })
+
+      const data = await response.json();
+      
+      if(data && data.cart){
+        window.location.href=data.cart.checkoutUrl;
+        
+      } else {
+        console.error("CheckOut URL not found")
+      }
+      
+    }
   }
 
- 
+
 
   return (
     <>
@@ -101,7 +159,7 @@ const Cart = ({ cartData }) => {
 
       <Navigation />
       <main>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12 h-screen">
+        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 mb-12 ${cartItems.length ? "" : "h-screen"}`}>
           {cartItems.length ?
             <>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
@@ -122,9 +180,9 @@ const Cart = ({ cartData }) => {
                                 <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
                                 <p className="text-md ">Item: {title}</p>
                               <div className="flex gap-4 ">
-                                <FaPlus className="" onClick={() => { handleToggle(id, 'inc') }} />
+                                <FaPlus className="" onClick={() => { handleToggle(id, 'inc', quantity) }} />
                                 <span className="text-lg">{quantity}</span>
-                                <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec') }} />
+                                <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec', quantity) }} />
                               </div>
                               <div>
                                 <h1 className="text-xl">${price}</h1>
@@ -149,7 +207,7 @@ const Cart = ({ cartData }) => {
                 </div>
               </div>
               <div className="my-24 flex justify-end">
-                <button className="btn">Checkout</button>
+                <button className="btn" onClick={handleCheckOut}>Checkout</button>
               </div>
             </>
             :

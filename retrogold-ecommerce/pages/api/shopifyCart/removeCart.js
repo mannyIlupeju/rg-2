@@ -4,7 +4,6 @@ export default async function handler(req, res){
     if(req.method === "POST"){
         try{
             const {cartId, id:lineId} = req.body;
-            
             const query = `
             mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
                 cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {

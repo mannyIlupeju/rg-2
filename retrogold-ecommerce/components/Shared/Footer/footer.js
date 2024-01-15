@@ -33,7 +33,7 @@ const Footer = () => {
   }, [isMessage])
 
   return (
-    <>
+  
      <div className="flex flex-col md:flex-row gap-4 text-zinc-100 text-lg justify-center p-12 footer-section">
       <div className="flex flex-col md:flex-row gap-20">
           <div className="flex flex-col lg:gap-8 md:gap-2">
@@ -103,8 +103,6 @@ const Footer = () => {
          </div>
        </div>
       </div> 
-
-    </>
   );
 }
 
