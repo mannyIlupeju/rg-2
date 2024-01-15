@@ -133,13 +133,11 @@ const Cart = ({ cartData }) => {
       })
 
       const data = await response.json();
-      
-      if(data && data.cart){
-        window.location.href=data.cart.checkoutUrl;
-        
-      } else {
-        console.error("CheckOut URL not found")
+      const fetchedData = data;
+      if(fetchedData.data.cart){
+        window.location.href = fetchedData.data.cart.checkoutUrl
       }
+    
       
     }
   }
