@@ -140,6 +140,30 @@ const ProductDetails = ({ product, allProducts }) => {
         images,
         variants
       }
+          // const response = await fetch('/api/shopifyCart/createCart', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify(productAdded)
+          // });
+
+          // if (!response.ok) {
+          //   throw new Error('Failed to add product to cart')
+          // }
+
+          
+          //   const cartData = await response.json();
+          //   console.log(cartData);
+          //   const shopifyCartId = cartData.data.cartCreate.cart.id;
+          //   console.log(shopifyCartId);
+          //   Cookies.set('cartId', shopifyCartId, { expires: 7 });
+          
+          
+        
+
+      
+      
 
       try {
         let shopifyCartId = Cookies.get('cartId');
@@ -157,11 +181,13 @@ const ProductDetails = ({ product, allProducts }) => {
             throw new Error('Failed to add product to cart')
           }
 
-
-          const cartData = await response.json();
+          if(response.ok){
+            const cartData = await response.json();
+            shopifyCartId = cartData.data.cartCreate.cart.id;
+            console.log(shopifyCartId);
+            Cookies.set('cartId', shopifyCartId, { expires: 7 });
+          }
           
-          shopifyCartId = cartData.data.cartCreate.cart.id;
-          Cookies.set('cartId', shopifyCartId, { expires: 7 });
         }
         
         // Prepare line items for each variant
@@ -184,6 +210,7 @@ const ProductDetails = ({ product, allProducts }) => {
       }
 
       async function addItemToCart(cartId, lineItems) {
+        console.log(cartId);
         if (cartId && lineItems.length > 0) {
           try {
             const response = await fetch('/api/shopifyCart/addItemToCart', {

@@ -72,8 +72,9 @@ export default async function handler(req, res) {
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`)
             }
-            const data = await response.json();
-            res.send(200).json(data, {message:'Item added to cart'})
+            const newData = await response.json();
+            const {data} = newData
+            res.status(200).json({data, message:'Item added to cart'})
             
 
         } catch (error) {

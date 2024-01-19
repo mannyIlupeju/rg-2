@@ -27,8 +27,9 @@ const Cart = ({ cartData }) => {
   const dispatch = useDispatch();
 
 
-
-  let cartId = cartData.data.cart.id;
+  if(cartData){
+    let cartId = cartData.data.cart.id;
+  }
 
   
   useEffect(() => {
