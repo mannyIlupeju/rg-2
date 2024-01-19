@@ -8,6 +8,7 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
+import {handleToggle, handleRemove} from '../../util/cartFunctions/functions'
 import { useGlobalContext } from '@/ Context/context'
 
 import { FaMinus, FaPlus } from 'react-icons/fa';
@@ -27,15 +28,17 @@ const Cart = ({ cartData }) => {
   const dispatch = useDispatch();
 
 
-  if(cartData){
-    let cartId = cartData.data.cart.id;
-  }
+
+  let cartId = cartData.data.cart.id;
+
+
 
   
   useEffect(() => {
     if(cartData.data.cart.lines){
       const fetchedCartData = cartData.data.cart.lines.edges
       const submittedData = fetchedCartData.map((item)=> ({
+        
         merchandiseId: item.node.merchandise.id,
         price: item.node.merchandise.priceV2.amount,
         currency: item.node.merchandise.priceV2.currencyCode,
@@ -52,75 +55,18 @@ const Cart = ({ cartData }) => {
 
 
  
-  async function handleRemove(id) {
-    try {  
-        const response = await fetch('/api/shopifyCart/removeCart', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ 
-            cartId, 
-            id,
-            quantity
-          })
-        })
 
-        if(response.ok){
-          dispatch(onRemove({id}));  
-        }
+   function onRemoveCallback(id){
+     dispatch(onRemove({id}));
+   }
 
-    } catch (error){
-      console.error('Error sending info to shopify to remove item:', error)
-    }
-  }
+   function onToggleCallback(id, value){
+    dispatch(toggleCartItemQuantity({id,value}));
+   }
 
 
 
 
-  async function handleToggle(id, value, quantity) {  
-    const currentItem = cartItems.find((item) => item.id === id);
-    if(!currentItem){
-      console.error('Item not found in cart');
-      return;
-    }
-
-    let newQuantity = Number(currentItem.quantity);
-    if(value === 'inc'){
-      newQuantity++;
-    } else if(value === 'dec' && newQuantity > 1) {
-      newQuantity--;
-    }
-
-
-    try {
-      const response = await fetch('/api/shopifyCart/updateCartQty', {
-        method: "POST",
-        headers: {
-          'Content-Type': "application/json"
-        },
-        body: JSON.stringify({
-          cartId,
-          id, 
-          quantity: newQuantity
-        })
-      })
-
-      const data = await response.json();
-      console.log(data);
-
-      if(response.ok){
-       dispatch(toggleCartItemQuantity({
-         id,
-         value
-       }));
-      } else {
-        console.error('Error updating quanityt in the cart:', data);
-      } 
-    } catch(error){
-        console.error('Error updating quantity in the cart:', error)
-    }
-  } 
 
 
   async function handleCheckOut(){
@@ -179,15 +125,15 @@ const Cart = ({ cartData }) => {
                                 <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
                                 <p className="text-md ">Item: {title}</p>
                               <div className="flex gap-4 ">
-                                <FaPlus className="" onClick={() => { handleToggle(id, 'inc', quantity) }} />
+                                <FaPlus className="" onClick={()=> {handleToggle(cartItems, id, 'inc', quantity, onToggleCallback, cartId)} } />
                                 <span className="text-lg">{quantity}</span>
-                                <FaMinus className="flex" onClick={() => { handleToggle(id, 'dec', quantity) }} />
+                                <FaMinus className="flex" onClick={()=> {handleToggle(cartItems, id, 'dec', quantity, onToggleCallback, cartId)} } />
                               </div>
                               <div>
                                 <h1 className="text-xl">${price}</h1>
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
-                                <button onClick={() => handleRemove(id)}>
+                                <button onClick={() => handleRemove(id, cartId, quantity, onRemoveCallback)}>
                                   <p>On Remove</p>
                                 </button>
                               </div>
@@ -206,7 +152,7 @@ const Cart = ({ cartData }) => {
                 </div>
               </div>
               <div className="my-24 flex justify-end">
-                <button className="btn" onClick={handleCheckOut}>Checkout</button>
+                <button className="btn" onClick={() => {handleCheckOut(cartId)}}>Checkout</button>
               </div>
             </>
             :

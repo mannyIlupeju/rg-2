@@ -53,7 +53,7 @@ const Cart = () => {
                 <div>
               {cartItems.map((items, index) => {
                   const {image, currency, lineId, merchandiseId, price, quantity, title, vendor} = items
-                  console.log(image);
+                
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
