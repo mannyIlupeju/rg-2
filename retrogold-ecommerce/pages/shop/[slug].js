@@ -30,17 +30,15 @@ const ProductDetails = ({ product, allProducts }) => {
   const variant = variants.edges[0].node.id;
   const quantityAvailable = variants.edges[0].node.quantityAvailable;
 
+  const productImage =images.edges[0].node.originalSrc;
+
   const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
 
   const idString = id;
   const match = idString.match(/\d+$/); // Matches digits at the end of the string
   const _id = match ? match[0] : null;
-
-
-
-
-
+  
   const [quantity, setQuantity] = useState(1)
   // //this currentIndex is specifically for this component. 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -53,6 +51,8 @@ const ProductDetails = ({ product, allProducts }) => {
     isOpenMenu,
     isItemChosen, 
     openCartModal,
+    shopifyCartID,
+    setShopifyCartID
   
   } = useGlobalContext()
 
@@ -127,43 +127,17 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
   //Submit function 
-
- 
-
-    async function onAdd(title, vendor, price, quantity, variants, id, images) {
+    async function onAdd(title, vendor, price, quantity, variants, id, productImage) {
       const productAdded = {
         title,
         price,
         quantity,
         id,
         vendor,
-        images,
+        productImage,
         variants
       }
-          // const response = await fetch('/api/shopifyCart/createCart', {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify(productAdded)
-          // });
-
-          // if (!response.ok) {
-          //   throw new Error('Failed to add product to cart')
-          // }
-
-          
-          //   const cartData = await response.json();
-          //   console.log(cartData);
-          //   const shopifyCartId = cartData.data.cartCreate.cart.id;
-          //   console.log(shopifyCartId);
-          //   Cookies.set('cartId', shopifyCartId, { expires: 7 });
-          
-          
-        
-
-      
-      
+    
 
       try {
         let shopifyCartId = Cookies.get('cartId');
@@ -176,7 +150,7 @@ const ProductDetails = ({ product, allProducts }) => {
             },
             body: JSON.stringify(productAdded)
           });
-
+          
           if (!response.ok) {
             throw new Error('Failed to add product to cart')
           }
@@ -184,7 +158,7 @@ const ProductDetails = ({ product, allProducts }) => {
           if(response.ok){
             const cartData = await response.json();
             shopifyCartId = cartData.data.cartCreate.cart.id;
-            console.log(shopifyCartId);
+        
             Cookies.set('cartId', shopifyCartId, { expires: 7 });
           }
           
@@ -210,7 +184,6 @@ const ProductDetails = ({ product, allProducts }) => {
       }
 
       async function addItemToCart(cartId, lineItems) {
-        console.log(cartId);
         if (cartId && lineItems.length > 0) {
           try {
             const response = await fetch('/api/shopifyCart/addItemToCart', {
@@ -223,9 +196,10 @@ const ProductDetails = ({ product, allProducts }) => {
               throw new Error('Failed to add item to cart');
             }
 
-            const data = await response.json();
-            console.log(data);
-            dispatch(addToCart({
+          const { data: { cartLinesAdd: { cart, userErrors } } } = await response.json();
+          console.log(cart.id, userErrors);
+          setShopifyCartID(cart.id)
+           dispatch(addToCart({
               title,
               price,
               quantity,
@@ -233,7 +207,9 @@ const ProductDetails = ({ product, allProducts }) => {
               vendor,
               images,
             }));
-            return data;
+
+       
+          return cart, userErrors;
 
           } catch (error) {
             console.error('Error adding to cart:', error);
@@ -278,7 +254,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
               <div>
                 <div className="relative w-fit">
-                  <Image src={images.edges[currentIndex].node.originalSrc} width="250" height="200" alt="main product image of the pot" className="mainProductImage" priority unoptimized />
+                  <Image src={productImage} width="250" height="200" alt="main product image of the pot" className="mainProductImage" priority unoptimized />
                   <div className="bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow} />
@@ -331,7 +307,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, variants, images.edges[0].node.originalSrc)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, variants, productImage)}>Add to Cart</button>
                   </div>
                   
                 </div>

@@ -17,7 +17,7 @@ import client from '../../util/shopify/shopifyClient'
 
 
 const Shop = ({ products }) => {
-  const { isOpenMenu, isSignIn, isUserRegistered } = useGlobalContext();
+  const { isOpenMenu, isSignIn, isUserRegistered} = useGlobalContext();
   const [isHovered, setIsHovered] = useState(null);
 
   const handleMouseEnter = (_id) => {
@@ -27,7 +27,6 @@ const Shop = ({ products }) => {
   const handleMouseLeave = () => {
     setIsHovered(null);
   };
-
 
 
   return (

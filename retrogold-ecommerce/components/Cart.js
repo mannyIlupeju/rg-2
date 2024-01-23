@@ -4,21 +4,23 @@ import { useGlobalContext } from '@/ Context/context';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 import { onRemove, toggleCartItemQuantity } from '../store'
 import {useSelector, useDispatch} from 'react-redux'
+import {handleToggle, handleRemove} from '../util/cartFunctions/functions'
 //Sidebar Cart view component
 
-const Cart = () => {
+const Cart = ({ cartId }) => {
   const {isItemChosen, closeCartModal} = useGlobalContext()
   const dispatch = useDispatch()
   const totalPrice = useSelector((state) => state.totalPrice)
-  const cartItems = useSelector((state) => state.cart)
+  const cartItems = useSelector((state)=> state.cart)
 
-
+  
   //close cart modal functionality if cart items in modal is less than 1
   useEffect(() => {
     if (cartItems.length < 1) {
       closeCartModal();
     }
   }, [cartItems.length, closeCartModal]);
+
 
 
 
@@ -39,11 +41,12 @@ const Cart = () => {
     dispatch(onRemove({id}))
    }
 
+   console.log(cartItems)
 
 
   return (
     <div className={`overflow-y-auto ${isItemChosen ? "overlay" : ""}`} onClick={closeOverlay}>
-        {(isItemChosen && cartItems.length) ?
+        {(isItemChosen) ?
         <div className="bg-gray-300 absolute z-9 right-0 top-0 p-8 sideCart lg:w-2/6 w-full">
               <div className="text-zinc-700 flex justify-between">
                 <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
@@ -52,13 +55,13 @@ const Cart = () => {
               <div>
                 <div>
               {cartItems.map((items, index) => {
-                  const {image, currency, lineId, merchandiseId, price, quantity, title, vendor} = items
+                  const {images, currency, lineId, merchandiseId, price, quantity, title, vendor} = items
                 
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
                             <div>
-                              <Image src={image} alt='' width="40" height="40" className="cartImage" unoptimized/>
+                              <Image src={images.edges[0].node.originalSrc} alt='' width="40" height="40" className="cartImage" unoptimized/>
                             </div>
                             <div className="flex flex-col gap-4 text-zinc-700">
                               <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
@@ -102,3 +105,18 @@ const Cart = () => {
 }
 
 export default Cart;
+
+
+
+export async function getServerSideProps(context) {
+     const {req} = context;
+     const parsedCookies = Cookies.parse(req.headers.cookie || '');
+
+     const cartId = parsedCookies.cartId;
+     console.log(cartId);// Retrieve the cookie
+     return {
+      props: {
+        cartId
+      }
+     }
+}

@@ -2,6 +2,7 @@ import {createContext, useContext,  useState, useEffect} from 'react';
 import { sanityClient } from '../lib/sanity';
 import { FaWindows } from 'react-icons/fa';
 import { useRouter } from 'next/router'
+ import { initializeCart } from '../store'
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -23,8 +24,12 @@ const AppContext = ({ children }) => {
   const [isToken, setIsToken] = useState(null)
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
   const [shopifyCartID, setShopifyCartID] = useState(null)
-  const cartItems = useSelector((state) => state.cart)
-  
+  const [cartData, setCartData] = useState({})
+
+ 
+  const dispatch = useDispatch();
+
+  console.log(shopifyCartID);
 
 
 
@@ -40,6 +45,61 @@ const AppContext = ({ children }) => {
     document.body.style.overflow = overflowHiddenCount > 0 ? 'hidden' : 'unset';
   }, [overflowHiddenCount]);
 
+
+  //Adding Items to the initializeCart State
+  useEffect(() => {
+    if(cartData.data?.cart.lines){
+      const fetchedCartData = cartData.data.cart.lines.edges
+      const submittedData = fetchedCartData.map((item)=> ({
+        
+        merchandiseId: item.node.merchandise.id,
+        price: item.node.merchandise.priceV2.amount,
+        currency: item.node.merchandise.priceV2.currencyCode,
+        quantity: item.node.quantity,
+        image: item.node.merchandise.image.src,
+        title: item.node.merchandise.product.title,
+        vendor: item.node.merchandise.product.vendor,
+        id: item.node.id
+        
+      }));
+      dispatch(initializeCart(submittedData))
+    }
+  }, [cartData, dispatch])
+
+
+   async function fetchData(){
+    console.log(shopifyCartID);
+    if(shopifyCartID){
+      try{
+        const response = await fetch('/api/shopifyCart/fetchCart', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({shopifyCartID})
+        })
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch items from cart');
+        }
+        
+        const data = await response.json();
+        console.log(data);
+        setCartData(data);
+        
+      } catch(error){
+         console.error('Error fetching items from cart:', error);
+         throw error;
+      }
+    }
+  }
+  
+   useEffect(() => {
+    fetchData(); 
+  }, [shopifyCartID]); 
+
+
+  
  
 
   const [messageDetails, setMessageDetails] = useState(
@@ -194,9 +254,9 @@ const AppContext = ({ children }) => {
       setIsToken,
       SignOut,
       shopifyCartID,
-      setShopifyCartID,
-      cartItems,
-     
+      setShopifyCartID,     
+      cartData,
+      setCartData
       }}
     >
       {children}

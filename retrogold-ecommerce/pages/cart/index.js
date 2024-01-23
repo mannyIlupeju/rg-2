@@ -8,54 +8,28 @@ import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
-import {handleToggle, handleRemove} from '../../util/cartFunctions/functions'
+import {handleToggle, handleRemove, handleCheckOut} from '../../util/cartFunctions/functions'
 import { useGlobalContext } from '@/ Context/context'
 
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
 
-const Cart = ({ cartData }) => {  
+const Cart = ({ cartId }) => {  
 
   const cartItems = useSelector((state) => state.cart)
   const cartQuantity = useSelector((state) => state.totalQuantity)
   const quantity = useSelector((state) => state.quantity)
   const totalPrice = useSelector((state) => state.totalPrice)
-
-  const { isOpenMenu } = useGlobalContext()
-
-  const [totalAmount, setTotalAmount] = useState(null)
-
-  const dispatch = useDispatch();
-
-
-
-  let cartId = cartData.data.cart.id;
-
-
-
   
-  useEffect(() => {
-    if(cartData.data.cart.lines){
-      const fetchedCartData = cartData.data.cart.lines.edges
-      const submittedData = fetchedCartData.map((item)=> ({
-        
-        merchandiseId: item.node.merchandise.id,
-        price: item.node.merchandise.priceV2.amount,
-        currency: item.node.merchandise.priceV2.currencyCode,
-        quantity: item.node.quantity,
-        image: item.node.merchandise.image.src,
-        title: item.node.merchandise.product.title,
-        vendor: item.node.merchandise.product.vendor,
-        id: item.node.id
-        
-      }));
-      dispatch(initializeCart(submittedData))
-    }
-  }, [cartData, dispatch])
 
+  const { isOpenMenu, cartData, setCartData } = useGlobalContext()
+  const [totalAmount, setTotalAmount] = useState(null)
+  const dispatch = useDispatch()
 
  
 
+ 
+  
    function onRemoveCallback(id){
      dispatch(onRemove({id}));
    }
@@ -66,28 +40,7 @@ const Cart = ({ cartData }) => {
 
 
 
-
-
-
-  async function handleCheckOut(){
-    if(cartId){
-      const response = await fetch('/api/checkout/checkout', {
-         method: "POST",
-         headers: {
-          'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({cartId})
-      })
-
-      const data = await response.json();
-      const fetchedData = data;
-      if(fetchedData.data.cart){
-        window.location.href = fetchedData.data.cart.checkoutUrl
-      }
-    
-      
-    }
-  }
+ 
 
 
 
@@ -110,16 +63,16 @@ const Cart = ({ cartData }) => {
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {       
-                            
-                  const {image, currency, id, merchandiseId, price, quantity, title, vendor} = items
-                 
+                  
+                  const {images, currency, id, merchandiseId, price, quantity, title, vendor} = items
+                  
                   return (
                     <div key={index}>
                       <div className="flex flex-col justify-between text-zinc-700" >
                         <div>
                           <div className="flex gap-4">
                               <div>
-                                <Image src={image} alt='' width="200" height="200" className="cartImage" />
+                                <Image src={images.edges[0].node.originalSrc} alt='' width="200" height="200" className="cartImage" priority />
                               </div>
                               <div className="flex flex-col gap-4">
                                 <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
@@ -182,112 +135,18 @@ export default Cart;
 
 
 export async function getServerSideProps(context){
-  const {req} = context;
-  const parsedCookies = Cookies.parse(req.headers.cookie || '');
+  try{
 
-  const cartId = parsedCookies.cartId;
-  console.log(cartId);
-
-  if(!cartId) {
-    return { props: {cartData: null}}
-  }
-
-  try {
-    const query = `
-            query cartQuery($cartId: ID!) {
-              cart(id: $cartId) {
-                id
-                createdAt
-                updatedAt
-                checkoutUrl
-                lines(first: 10) {
-                  edges {
-                    node {
-                      id
-                      quantity
-                      merchandise {
-                        ... on ProductVariant {
-                          id
-                          image {
-                            src
-                            altText
-                          }
-                          priceV2 {
-                            amount
-                            currencyCode
-                          }
-                          product {
-                            vendor
-                            title
-                            handle
-                          }
-                        }
-                      }
-                      attributes {
-                        key
-                        value
-                      }
-                    }
-                  }
-                }
-                attributes {
-                  key
-                  value
-                }
-                cost {
-                  totalAmount {
-                    amount
-                    currencyCode
-                  }
-                  subtotalAmount {
-                    amount
-                    currencyCode
-                  }
-                  totalTaxAmount {
-                    amount
-                    currencyCode
-                  }
-                  totalDutyAmount {
-                    amount
-                    currencyCode
-                  }
-                }
-                buyerIdentity {
-                  email
-                  phone
-                  customer {
-                    id
-                  }
-                  countryCode
-                }
-              }
-            }
-        `;
-    // Replace 'your GraphQL query here' with your actual query.
-
-    const response = await fetch(`https://${process.env.SHOPIFY_DOMAIN}/api/2023-10/graphql.json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB,
-      },
-      body: JSON.stringify({
-        query,
-        variables: { cartId },
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const cartData = await response.json();
-    console.log(cartData);
+    const {req} = context;
+    const parsedCookies = Cookies.parse(req.headers.cookie || '');
+    
+    const cartId = parsedCookies.cartId;
+    console.log(cartId);
+    
     return {
-      props: { cartData },
-    };
-  } catch (error) {
-    console.error('Error fetching cart data:', error);
-    return { props: { cartData: null } };
+      props: {cartId}
+    }
+  }catch(error){
+    console.error('Error fetching cartId', error);
   }
 }

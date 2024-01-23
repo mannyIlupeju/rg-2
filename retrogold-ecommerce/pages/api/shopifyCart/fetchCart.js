@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 
 export default async function handler (req, res){
     if(req.method === "POST"){
+      const{cartId} = req.body
         try {
             
             const query = `
@@ -92,11 +93,8 @@ export default async function handler (req, res){
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            const cartData = await response.json();
-            console.log(cartData);
-            return {
-                props: { cartData },
-            };
+            const data = await response.json();
+            res.status(200).json(data)
         } catch (error) {
             console.error('Error fetching cart data:', error);
             return { props: { cartData: null } };

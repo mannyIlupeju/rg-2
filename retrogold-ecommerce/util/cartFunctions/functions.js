@@ -25,9 +25,7 @@
 
 
   export async function handleToggle(itemData, id, value, quantity, onToggleCallback, cartId) {  
-
   const cartItems = itemData
-  console.log(cartItems);
     const currentItem = cartItems.find((item) => item.id === id);
     if(!currentItem){
       console.error('Item not found in cart');
@@ -69,7 +67,7 @@
   } 
 
 
-  export async function handleCheckOut(id){
+  export async function handleCheckOut(cartId){
     if(cartId){
       const response = await fetch('/api/checkout/checkout', {
          method: "POST",

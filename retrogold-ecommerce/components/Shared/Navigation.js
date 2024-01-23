@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
+import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";
-import { useSelector, useDispatch } from 'react-redux'
 import { useGlobalContext } from '../../ Context/context';
 import Search from './Search/Search'
 
@@ -35,8 +35,12 @@ const Navigation = () => {
 	const [inputValue, setInputValue] = useState('');
 	const {
 	    searchBar, deactivateSearch, toggleRespMenu, toggleLoginModal,
-		isToken, cartItems
+		isToken, 
 	} = useGlobalContext();
+
+	const cartItems = useSelector((state)=> state.cart)
+
+	
 
 	const navLinks = ['Home', 'Shop', 'Services', 'Blog', 'About', 'Contact'].map(name => ({
 		name, href: `/${name.toLowerCase()}`

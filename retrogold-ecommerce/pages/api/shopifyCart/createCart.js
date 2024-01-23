@@ -4,6 +4,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         try {
             const {variants, quantity} = req.body // `variants` is an array of variant IDs
+            
             // Construct line items using the same quantity for each variant
              const lineItems = variants.edges.map(edge => ({
               merchandiseId:edge.node.id,
