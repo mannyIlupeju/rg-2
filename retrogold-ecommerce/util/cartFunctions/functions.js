@@ -24,7 +24,8 @@
 
 
 
-  export async function handleToggle(itemData, id, value, quantity, onToggleCallback, cartId) {  
+  export async function handleToggle(itemData, id, value, quantity, onToggleCallback, cartId) { 
+    console.log('clicked'); 
   const cartItems = itemData
     const currentItem = cartItems.find((item) => item.id === id);
     if(!currentItem){

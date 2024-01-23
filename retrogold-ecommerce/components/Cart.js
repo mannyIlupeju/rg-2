@@ -7,7 +7,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import {handleToggle, handleRemove} from '../util/cartFunctions/functions'
 //Sidebar Cart view component
 
-const Cart = ({ cartId }) => {
+const Cart = ({cartId}) => {
+  
   const {isItemChosen, closeCartModal, } = useGlobalContext()
   const dispatch = useDispatch()
   const totalPrice = useSelector((state) => state.totalPrice)
@@ -30,20 +31,19 @@ const Cart = ({ cartId }) => {
     }
   }
 
-   function handleToggle(id, value){
-    dispatch(toggleCartItemQuantity({
-      id,
-      value
-    }))
+  function onRemoveCallback(id){
+     dispatch(onRemove({id}));
    }
 
-   function handleRemove(id){
-    dispatch(onRemove({id}))
+   function onToggleCallback(id, value){
+    dispatch(toggleCartItemQuantity({id,value}));
    }
 
-    console.log(cartItems);
+    
+   console.log(cartItems);
 
 
+   console.log(cartId);
 
 
   return (
@@ -57,8 +57,8 @@ const Cart = ({ cartId }) => {
               <div>
                 <div>
               {cartItems.map((items, index) => {
-                const {image, currency, lineId, merchandiseId, price, quantity, title, vendor, productImage} = items
-                
+                const {image, currency, id, merchandiseId, price, quantity, title, vendor, productImage} = items
+                console.log(id);
                 const imageUrl = image || productImage
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
@@ -70,9 +70,9 @@ const Cart = ({ cartId }) => {
                               <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
                               <p className="text-md ">Item: {title}</p>
                               <div className="flex gap-4 mt-4">
-                                <FaPlus className="" onClick={() => { handleToggle(lineId, 'inc') }} />
+                                <FaPlus className="" onClick={() => { handleToggle(cartItems,id, 'inc', quantity, onToggleCallback, cartId) }} />
                                 <span className="text-lg">{quantity}</span>
-                                <FaMinus className="flex" onClick={() => { handleToggle(lineId, 'dec') }} />
+                                <FaMinus className="flex" onClick={() => { handleToggle(cartItems, id, 'dec', quantity, onToggleCallback, cartId) }} />
                               </div>
                               <div>
                                 <h1 className="text-xl">${price}</h1>
@@ -113,10 +113,11 @@ export default Cart;
 
 export async function getServerSideProps(context) {
      const {req} = context;
+     console.log(req.headers.cookie);
      const parsedCookies = Cookies.parse(req.headers.cookie || '');
 
-     const cartId = parsedCookies.cartId;
-     console.log(cartId);// Retrieve the cookie
+     const cartId = parsedCookies.cartId || null;
+    
      return {
       props: {
         cartId

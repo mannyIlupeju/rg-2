@@ -67,12 +67,6 @@ const AppContext = ({ children }) => {
   }, [cartData, dispatch])
 
 
-   
-
-
-  
- 
-
   const [messageDetails, setMessageDetails] = useState(
     {
       firstName: '',

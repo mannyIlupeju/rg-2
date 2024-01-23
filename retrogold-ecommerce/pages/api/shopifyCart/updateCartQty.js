@@ -4,7 +4,7 @@ export default async function handler(req, res){
     if(req.method === "POST"){
         try {
           const {cartId, id, quantity} = req.body;
-          console.log(quantity);
+         
             
           const lines = [{
              id:id,

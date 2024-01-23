@@ -28,13 +28,8 @@ import { current } from '@reduxjs/toolkit';
 const ProductDetails = ({ product, allProducts }) => {
   const {images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
   const id = variants.edges[0].node.id;
-  console.log(id);
- 
   const quantityAvailable = variants.edges[0].node.quantityAvailable;
-
   const productImage =images.edges[0].node.originalSrc;
-
-
   const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
 
@@ -203,7 +198,7 @@ const ProductDetails = ({ product, allProducts }) => {
             }
 
           const { data: { cartLinesAdd: { cart, userErrors } } } = await response.json();
-          
+          console.log(cart.lines.edges[0].node.id);
           setShopifyCartID(cart.id)
           
            dispatch(addToCart({
