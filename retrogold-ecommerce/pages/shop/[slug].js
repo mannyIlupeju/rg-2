@@ -26,18 +26,19 @@ import { current } from '@reduxjs/toolkit';
 
 
 const ProductDetails = ({ product, allProducts }) => {
-  const {id, images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
-  const variant = variants.edges[0].node.id;
+  const {images, descriptionHtml, handle, priceRange, title, vendor, variants} = product
+  const id = variants.edges[0].node.id;
+  console.log(id);
+ 
   const quantityAvailable = variants.edges[0].node.quantityAvailable;
 
   const productImage =images.edges[0].node.originalSrc;
 
+
   const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
 
-  const idString = id;
-  const match = idString.match(/\d+$/); // Matches digits at the end of the string
-  const _id = match ? match[0] : null;
+  
   
   const [quantity, setQuantity] = useState(1)
   // //this currentIndex is specifically for this component. 
@@ -124,19 +125,22 @@ const ProductDetails = ({ product, allProducts }) => {
     }
   }
 
+ 
 
 
   //Submit function 
-    async function onAdd(title, vendor, price, quantity, variants, id, productImage) {
+    async function onAdd(title, vendor, price, quantity, id, variants, productImage) {
+   
       const productAdded = {
         title,
+        vendor, 
         price,
         quantity,
         id,
-        vendor,
-        productImage,
-        variants
+        variants,
+        productImage
       }
+      console.log(productAdded);
     
 
       try {
@@ -173,6 +177,7 @@ const ProductDetails = ({ product, allProducts }) => {
     
 
         await addItemToCart(shopifyCartId, lineItems);
+        
 
         
         openCartModal();
@@ -184,6 +189,7 @@ const ProductDetails = ({ product, allProducts }) => {
       }
 
       async function addItemToCart(cartId, lineItems) {
+        
         if (cartId && lineItems.length > 0) {
           try {
             const response = await fetch('/api/shopifyCart/addItemToCart', {
@@ -197,15 +203,16 @@ const ProductDetails = ({ product, allProducts }) => {
             }
 
           const { data: { cartLinesAdd: { cart, userErrors } } } = await response.json();
-          console.log(cart.id, userErrors);
+          
           setShopifyCartID(cart.id)
+          
            dispatch(addToCart({
               title,
+              vendor, 
               price,
               quantity,
-              id,
-              vendor,
-              images,
+              id:cart.lines.edges[0].node.id,
+              productImage,
             }));
 
        
@@ -307,7 +314,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
                  
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, variants, productImage)}>Add to Cart</button>
+                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={()=> onAdd(title, vendor, price, quantity, id, variants, productImage)}>Add to Cart</button>
                   </div>
                   
                 </div>

@@ -22,7 +22,7 @@ const Cart = ({ cartId }) => {
   const totalPrice = useSelector((state) => state.totalPrice)
   
 
-  const { isOpenMenu, cartData, setCartData } = useGlobalContext()
+  const { isOpenMenu, cartData, setCartData, shopifyCartID } = useGlobalContext()
   const [totalAmount, setTotalAmount] = useState(null)
   const dispatch = useDispatch()
 
@@ -38,6 +38,39 @@ const Cart = ({ cartId }) => {
     dispatch(toggleCartItemQuantity({id,value}));
    }
 
+
+  
+ 
+   async function fetchData(){
+  
+    if(cartId){
+      try{
+        const response = await fetch('/api/shopifyCart/fetchCart', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({cartId})
+        })
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch items from cart');
+        }
+        
+        const data = await response.json();
+       
+        setCartData(data);
+        
+      } catch(error){
+         console.error('Error fetching items from cart:', error);
+         throw error;
+      }
+    }
+  }
+  
+   useEffect(() => {
+    fetchData(); 
+  }, [cartId]); 
 
 
  
@@ -64,7 +97,7 @@ const Cart = ({ cartId }) => {
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {       
                   
-                  const {images, currency, id, merchandiseId, price, quantity, title, vendor} = items
+                  const {image, currency, id, merchandiseId, price, quantity, title, vendor} = items
                   
                   return (
                     <div key={index}>
@@ -72,7 +105,7 @@ const Cart = ({ cartId }) => {
                         <div>
                           <div className="flex gap-4">
                               <div>
-                                <Image src={images.edges[0].node.originalSrc} alt='' width="200" height="200" className="cartImage" priority />
+                                <Image src={image} alt='' width="200" height="200" className="cartImage" priority />
                               </div>
                               <div className="flex flex-col gap-4">
                                 <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>

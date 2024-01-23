@@ -8,7 +8,7 @@ import {handleToggle, handleRemove} from '../util/cartFunctions/functions'
 //Sidebar Cart view component
 
 const Cart = ({ cartId }) => {
-  const {isItemChosen, closeCartModal} = useGlobalContext()
+  const {isItemChosen, closeCartModal, } = useGlobalContext()
   const dispatch = useDispatch()
   const totalPrice = useSelector((state) => state.totalPrice)
   const cartItems = useSelector((state)=> state.cart)
@@ -41,7 +41,9 @@ const Cart = ({ cartId }) => {
     dispatch(onRemove({id}))
    }
 
-   console.log(cartItems)
+    console.log(cartItems);
+
+
 
 
   return (
@@ -55,13 +57,14 @@ const Cart = ({ cartId }) => {
               <div>
                 <div>
               {cartItems.map((items, index) => {
-                  const {images, currency, lineId, merchandiseId, price, quantity, title, vendor} = items
+                const {image, currency, lineId, merchandiseId, price, quantity, title, vendor, productImage} = items
                 
+                const imageUrl = image || productImage
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
                             <div>
-                              <Image src={images.edges[0].node.originalSrc} alt='' width="40" height="40" className="cartImage" unoptimized/>
+                              {imageUrl && <Image src={imageUrl} alt={title} width="40" height="40" className="cartImage" unoptimized />}
                             </div>
                             <div className="flex flex-col gap-4 text-zinc-700">
                               <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>

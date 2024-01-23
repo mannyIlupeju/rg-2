@@ -29,7 +29,7 @@ const AppContext = ({ children }) => {
  
   const dispatch = useDispatch();
 
-  console.log(shopifyCartID);
+
 
 
 
@@ -67,36 +67,7 @@ const AppContext = ({ children }) => {
   }, [cartData, dispatch])
 
 
-   async function fetchData(){
-    console.log(shopifyCartID);
-    if(shopifyCartID){
-      try{
-        const response = await fetch('/api/shopifyCart/fetchCart', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({shopifyCartID})
-        })
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch items from cart');
-        }
-        
-        const data = await response.json();
-        console.log(data);
-        setCartData(data);
-        
-      } catch(error){
-         console.error('Error fetching items from cart:', error);
-         throw error;
-      }
-    }
-  }
-  
-   useEffect(() => {
-    fetchData(); 
-  }, [shopifyCartID]); 
+   
 
 
   
@@ -256,7 +227,8 @@ const AppContext = ({ children }) => {
       shopifyCartID,
       setShopifyCartID,     
       cartData,
-      setCartData
+      setCartData,
+      
       }}
     >
       {children}
