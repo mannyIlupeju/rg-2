@@ -256,7 +256,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
               <div>
                 <div className="relative w-fit">
-                  <Image src={productImage} width="250" height="200" alt="main product image of the pot" className="mainProductImage" priority unoptimized />
+                  <Image src={images.edges[currentIndex].node.originalSrc} width="250" height="200" alt="main product image of the pot" className="mainProductImage" priority unoptimized />
                   <div className="bottom-44 cursor-pointer">
                     <FaChevronLeft size="1.3rem" onClick={prevImage} style={leftArrow} />
                     <FaChevronRight size="1.3rem" onClick={nextImage} style={rightArrow} />

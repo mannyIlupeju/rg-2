@@ -40,7 +40,7 @@ const Shop = ({ products }) => {
       {isUserRegistered && <Register />}
 
       <main className="section-background">
-        <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-12  w-fit">
+        <div className="container mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-12  w-fit">
           {products.map((shopItems) => {
             const { vendor, id, handle, images, title, priceRange, shortDescription } = shopItems;
             const str = id;
@@ -68,9 +68,6 @@ const Shop = ({ products }) => {
                     <p className="text-md font-bold">{title}</p>
                     <p className="text-zinc-800 font-bold">${priceRange.minVariantPrice.amount}</p>
                     <div className="line-clamp-4 mt-4">
-                    {/* <p className="text-md font-bold">
-                       {plainTextDescription}
-                    </p> */}
                     </div>
                   </div>
                 </div>

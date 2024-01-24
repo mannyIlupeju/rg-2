@@ -90,7 +90,7 @@ const Cart = ({ cartId }) => {
 
       <Navigation />
       <main>
-        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 mb-12 ${cartItems.length ? "" : "h-screen"}`}>
+        <div className={`container mx-auto px-4 sm:px-6 py-24 lg:px-8 mb-12 ${cartItems.length ? "" : "h-screen"}`}>
           {cartItems.length ?
             <>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
