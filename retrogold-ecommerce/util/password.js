@@ -14,9 +14,9 @@ const PasswordInput = ({ id, label, value, onChange, hidePassword, toggleVisibil
         required
       />
       {hidePassword ? (
-        <FaEyeSlash className="absolute top-3 left-60 text-zinc-800" onClick={toggleVisibility} />
+        <FaEyeSlash className="absolute top-3 right-10 text-zinc-800" onClick={toggleVisibility} />
       ) : (
-        <FaEye className="absolute top-3 left-60 text-zinc-800" onClick={toggleVisibility} />
+        <FaEye className="absolute top-3 right-10 text-zinc-800" onClick={toggleVisibility} />
       )}
     </div>
   </div>

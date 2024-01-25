@@ -52,18 +52,18 @@ const Account = ({ user }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation/>
-        <main className="h-screen section-background p-12">
+        <main className="h-screen section-background p-4 md:p-12">
           <div className="text-center">
-          <h1 className="text-zinc-800">Welcome to your Account, {firstName}</h1>
+          <h1 className="text-lg md:text-xl text-zinc-800">Welcome to your Account, {firstName}</h1>
           </div>
           
-          <div className="container mx-auto flex justify-center my-12">
-            <div className="flex flex-row gap-32 h-fit">
+          <div className="container mx-auto flex justify-center my-6 md:my-12">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-32 h-fit">
               <div className="h-fit">
               <nav className="flex flex-col gap-10 p-8 justify-self-start">
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('orders')}>
-                  <span className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-8 justify-between">
                   Orders
                   <FaChevronRight/>
                   </span>
@@ -71,7 +71,7 @@ const Account = ({ user }) => {
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                   onClick={()=>toggleSelection('addresses')}
                 >
-                  <span className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-8 justify-between">
                   Addresses
                   <FaChevronRight/>
                   </span>
@@ -79,7 +79,7 @@ const Account = ({ user }) => {
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('personalInfo')}
                 >
-                <span className="flex flex-row gap-12 justify-between">
+                <span className="flex flex-row gap-8 justify-between">
                 Personal Information
                 <FaChevronRight/>
                 </span>
@@ -87,7 +87,7 @@ const Account = ({ user }) => {
                 <button className="text-zinc-900 hover:underline underline-offset-8 cursor-pointer"
                 onClick={()=>toggleSelection('signInSecurity')}
                 >
-                  <span className="flex flex-row gap-12 justify-between">
+                  <span className="flex flex-row gap-8 justify-between">
                   Sign In & Security
                   <FaChevronRight/>
                   </span>
@@ -117,7 +117,7 @@ const Account = ({ user }) => {
               </div>
               }
               { visibleComponent === 'Addresses' && 
-              <div className='border-solid border-2 border-zinc-800 p-8 justify-end'>
+              <div className='border-solid border-2 border-zinc-800 p-4 md:p-8 justify-end'>
                 <div>
                {/* <AddressInfo/> */}
                 </div>
@@ -126,7 +126,7 @@ const Account = ({ user }) => {
             </div>
           </div>
 
-          <div className="flex justify-center my-32" >
+          <div className="flex justify-center my-16 md:my-32" >
             <button 
             className="text-zinc-700" 
             onClick={SignOut} >
