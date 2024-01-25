@@ -89,11 +89,11 @@ const Cart = ({ cartId }) => {
       {isOpenMenu && <RespMenu />}
 
       <Navigation />
-      <main>
-        <div className={`container mx-auto px-4 sm:px-6 py-24 lg:px-8 mb-12 ${cartItems.length ? "" : "h-screen"}`}>
+      <main className="">
+        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${cartItems.length ? "" : "h-screen"}`}>
           {cartItems.length ?
             <>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700">Your Cart</h1>
+              <h1 className="flex justify-center text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700 pt-14">Your Cart</h1>
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {       
                   

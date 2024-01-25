@@ -17,18 +17,7 @@ const Experience = () => {
   let x = useTransform(scrollYProgress, [0,0.5,1], ['0','10px','20px'])
   let y = useTransform(scrollYProgress, [0, 0.5,1], ['0','10px','20px'])
 
-  //when element is in view, repeat animation when it is fully in view
-  const isInView = useInView(experienceRef, {once:false}, {amount: 1})
 
-  const experienceVariant = {
-    offscreen: {y:-600},
-    onscreen: {y:40,
-    transition: {
-      duration: 3,
-      type: "spring"
-    },
-    }
-  }
 
 
  
@@ -44,14 +33,14 @@ const Experience = () => {
        className="p-12 flex justify-center" 
        viewport={{once:false}}
       >
-        <div className="absolute z-10">
+        <div className="absolute z-10 mb-8">
           <h1 className="text-zinc-800 text-4xl font-medium text-center">The Retrogold Experience</h1>
         </div>
 
 
         <motion.div className="flex flex-col md:flex-row justify-center gap-4"
             initial={"offscreen"}
-              whileInView={{y:40, 
+              whileInView={{y:80, 
               transition: {
                 duration: 3,
                 type: "spring"

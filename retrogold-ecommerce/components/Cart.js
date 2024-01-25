@@ -40,10 +40,6 @@ const Cart = ({cartId}) => {
    }
 
     
-   console.log(cartItems);
-
-
-   console.log(cartId);
 
 
   return (
@@ -58,7 +54,7 @@ const Cart = ({cartId}) => {
                 <div>
               {cartItems.map((items, index) => {
                 const {image, currency, id, merchandiseId, price, quantity, title, vendor, productImage} = items
-                console.log(id);
+                
                 const imageUrl = image || productImage
                   return (
                     <div className="border-t-4 border-gray-400" key={index}>
