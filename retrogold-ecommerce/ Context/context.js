@@ -22,6 +22,10 @@ const AppContext = ({ children }) => {
   const [searchBar, setSearchBar] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [isToken, setIsToken] = useState(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isProfileHovered, setIsProfileHovered] = useState(false)
+  const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
   const [shopifyCartID, setShopifyCartID] = useState(null)
   const [cartData, setCartData] = useState({})
@@ -139,9 +143,42 @@ const AppContext = ({ children }) => {
 
 
 
+  /*** Drop Down Feature ***/
+  const displayWelcomeModal = () => {
+   console.log('hovered');
+		 clearTimeout(hoverTimeout); // Clear any existing timeout
+    setIsHovered(true);
+	}
+
+	const removeWelcomeModal = () => {
+		 // Start a delay before hiding the dropdown
+    const timeout = setTimeout(() => {
+        setIsHovered(false);
+    }, 300); // Delay of 300ms, adjust as needed
+    setHoverTimeout(timeout);
+	}
+
+  const handleDropDownMouseEnter = () => {
+    console.log('dropdown hovered');
+    clearTimeout(hoverTimeout); // Clear the timeout when entering the dropdown
+    setIsDropdownHovered(true);
+  }
+
+  const handleDropDownMouseLeave = () => {
+   setIsDropdownHovered(false);
+    setIsHovered(false);
+  }
+/******************************************* */
 
 
 
+
+
+
+
+
+
+/*********************** */
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const token = process.env.NEXT_PUBLIC_API_KEY
@@ -222,6 +259,14 @@ const AppContext = ({ children }) => {
       setShopifyCartID,     
       cartData,
       setCartData,
+      isHovered,
+      setIsHovered,
+      displayWelcomeModal,
+      removeWelcomeModal,
+      isDropdownHovered,
+      setIsDropdownHovered,
+      handleDropDownMouseEnter,
+      handleDropDownMouseLeave,
       
       }}
     >

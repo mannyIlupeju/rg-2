@@ -6,6 +6,8 @@ import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";
 import { useGlobalContext } from '../../ Context/context';
+import WelcomeDrop from '../Dropdown/WelcomeDrop'
+import {getFilteredBlogs, getFilteredProducts} from '../../helpers/api-util'
 import Search from './Search/Search'
 
 
@@ -35,8 +37,9 @@ const Navigation = () => {
 	const [inputValue, setInputValue] = useState('');
 	const {
 	    searchBar, deactivateSearch, toggleRespMenu, toggleLoginModal,
-		isToken, 
+		isToken, displayWelcomeModal, removeWelcomeModal, isHovered, setIsHovered, displayProfileModal, removeProfileModal
 	} = useGlobalContext();
+	
 
 	const cartItems = useSelector((state)=> state.cart)
 
@@ -81,10 +84,22 @@ const Navigation = () => {
 
 				{isToken ? (
 					<Link href='/userAccount/account'>
-						<span className="text-gray-800">Account</span>
+						<span 
+						className="text-gray-800"
+						onMouseEnter={displayProfileModal}
+						onMouseLeave={removeProfileModal}
+						>
+							Account
+						</span>
 					</Link>
-				) : (
-					<IoPerson onClick={toggleLoginModal} color='black' size='1.8rem' />
+				) : (	
+					<IoPerson 
+					className="relative" 
+					color='black' 
+					size='1.8rem' 
+					onMouseEnter={displayWelcomeModal} 
+					onMouseLeave={removeWelcomeModal}
+					/>	
 				)}
 
 				
@@ -115,6 +130,8 @@ const Navigation = () => {
 					) : null}
 				</Link>
 			</div>
+
+          
 
 		</nav>
 	);
