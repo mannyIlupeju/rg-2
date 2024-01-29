@@ -23,10 +23,15 @@ export default function Home({hero, quote, blog, calltoAction}) {
      isSignIn, 
      isUserRegistered, 
      isHovered,  
-     isDropdownHovered
+     isDropdownHovered,
+     isProfileDropdownHovered,
+     isProfileHovered
   } = useGlobalContext()
 
+  
+
   const shouldShowDropdown = isHovered || isDropdownHovered
+  const shouldProfileShowDropdown = isProfileHovered || isProfileDropdownHovered
  
 
   return (
@@ -45,6 +50,7 @@ export default function Home({hero, quote, blog, calltoAction}) {
           {isSignIn && <Login/>}
           {isUserRegistered && <Register/>}
           {shouldShowDropdown && <WelcomeDrop/>}
+          {shouldProfileShowDropdown && <ProfileDrop/>}
           
           <Landing hero={hero}/>  
           <Quotes quote={quote}/>

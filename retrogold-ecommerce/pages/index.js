@@ -18,9 +18,21 @@ import Register from '@/components/Authorization/Register'
 
 
 export default function Home({ hero, quote, blog, calltoAction }) {
-  const { isOpenMenu, isSignIn, isUserRegistered, isHovered, isDropdownHovered} = useGlobalContext()
+  const { 
+    isOpenMenu, 
+    isSignIn, 
+    isUserRegistered, 
+    isHovered, 
+    isDropdownHovered, 
+    isProfileHovered, 
+    isProfileDropdownHovered
+  } = useGlobalContext()
 
   const shouldShowDropdown = isHovered || isDropdownHovered
+  const shouldProfileShowDropdown = isProfileHovered
+  
+ 
+  
 
   return (
     <>
@@ -33,12 +45,12 @@ export default function Home({ hero, quote, blog, calltoAction }) {
 
       <main className="h-min">
         <>
+          <Navigation />
           {isOpenMenu && <RespMenu />}
           {isSignIn && <Login />}
           {isUserRegistered && <Register />}
           {shouldShowDropdown && <WelcomeDrop/>}
-          
-          <Navigation />
+          {shouldProfileShowDropdown && <ProfileDrop/>}
           <Landing hero={hero} />
           <Quotes quote={quote} />
           <Experience />

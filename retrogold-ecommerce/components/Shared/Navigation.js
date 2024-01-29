@@ -83,11 +83,15 @@ const Navigation = () => {
 				<Search />
 
 				{isToken ? (
-					<Link href='/userAccount/account'>
+					<Link 
+					href='/userAccount/account'
+					
+					
+					>
 						<span 
 						className="text-gray-800"
 						onMouseEnter={displayProfileModal}
-						onMouseLeave={removeProfileModal}
+				        onMouseLeave={removeProfileModal}
 						>
 							Account
 						</span>

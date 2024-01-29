@@ -1,17 +1,49 @@
 import React from 'react'
+import Dropdown from './Dropdown'
+import Link from 'next/link'
 import { useGlobalContext } from '@/ Context/context';
 
 const ProfileDrop = () => {
 
-    return (
-   <div className="container w-1/5 bg-white rounded-lg p-4 flex flex-col gap-4 absolute top-16 right-24 z-10 text-zinc-800">
-      <div>
-      <h1 className="text-xl">Welcome back</h1>
-      <div className="">
-        Sign Out 
-      </div>
-      </div>  
+const { 
+  isProfileHovered, 
+  isProfileDropdownHovered, 
+  handleProfileDropDownMouseEnter, 
+  handleProfileDropDownMouseLeave, 
+  toggleLoginModal, 
+  toggleRegisterModal,
+  
+  SignOut
+} = useGlobalContext()
+
+
+
+
+const content = (
+   <>
+   <h1 className="text-xl">Welcome back</h1>
+   <div>
+     <Link href='/userAccount/account'> 
+       View Profile
+     </Link>
     </div>
+    </>
+)
+
+const shouldProfileShowDropdown = isProfileHovered || isProfileDropdownHovered
+const primaryLabel = "Sign Out"
+const styleClass = "w-1/3 bg-white rounded-lg p-4 flex flex-col gap-2 absolute top-16 right-24 z-10 text-zinc-800"
+
+  return (
+    <Dropdown
+      isVisible={shouldProfileShowDropdown}
+      onMouseEnter={handleProfileDropDownMouseEnter}
+      onMouseLeave={handleProfileDropDownMouseLeave}
+      onPrimaryAction={SignOut}
+      primaryLabel={primaryLabel}
+      content={content} 
+      styleClass="w-1/5 bg-white rounded-lg p-4 flex flex-col gap-4 absolute top-16 right-24 z-10 text-zinc-800"
+    />
   )
 }
 

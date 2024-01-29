@@ -23,8 +23,9 @@ const AppContext = ({ children }) => {
   const [showSearch, setShowSearch] = useState(false)
   const [isToken, setIsToken] = useState(null)
   const [isHovered, setIsHovered] = useState(false)
-  const [isProfileHovered, setIsProfileHovered] = useState(false)
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+  const [isProfileHovered, setIsProfileHovered] = useState(false)
+  const [isProfileDropdownHovered, setIsProfileDropdownHovered] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
   const [shopifyCartID, setShopifyCartID] = useState(null)
@@ -33,7 +34,7 @@ const AppContext = ({ children }) => {
  
   const dispatch = useDispatch();
 
-
+ console.log(isProfileHovered);
 
 
 
@@ -148,6 +149,7 @@ const AppContext = ({ children }) => {
    console.log('hovered');
 		 clearTimeout(hoverTimeout); // Clear any existing timeout
     setIsHovered(true);
+    console.log(isHovered);
 	}
 
 	const removeWelcomeModal = () => {
@@ -168,8 +170,39 @@ const AppContext = ({ children }) => {
    setIsDropdownHovered(false);
     setIsHovered(false);
   }
+
+
+
 /******************************************* */
 
+
+
+/*****Profile Modal  */
+
+const displayProfileModal = () => {
+  setIsProfileHovered(true);
+		clearTimeout(hoverTimeout); // Clear any existing timeout
+}
+
+const removeProfileModal = () => {
+  console.log('remove hovered profile');
+   // Start a delay before hiding the dropdown
+    const timeout = setTimeout(() => {
+        setIsProfileHovered(false);
+    }, 300); // Delay of 300ms, adjust as needed
+    setHoverTimeout(timeout);
+}
+
+const handleProfileDropDownMouseEnter = () => {
+    clearTimeout(hoverTimeout); // Clear the timeout when entering the dropdown
+    setIsProfileDropdownHovered(true);
+}
+
+const handleProfileDropDownMouseLeave = () => {
+  console.log('dropdown left')
+    setIsProfileDropdownHovered(false);
+    setIsProfileHovered(false);
+}
 
 
 
@@ -263,10 +296,15 @@ const AppContext = ({ children }) => {
       setIsHovered,
       displayWelcomeModal,
       removeWelcomeModal,
+      isProfileHovered,
       isDropdownHovered,
       setIsDropdownHovered,
       handleDropDownMouseEnter,
       handleDropDownMouseLeave,
+      displayProfileModal,
+      removeProfileModal,
+      handleProfileDropDownMouseEnter,
+      handleProfileDropDownMouseLeave
       
       }}
     >
