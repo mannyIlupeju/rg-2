@@ -34,10 +34,6 @@ const AppContext = ({ children }) => {
  
   const dispatch = useDispatch();
 
- console.log(isProfileHovered);
-
-
-
   const incrementOverflowHidden = () => {
     setOverflowHiddenCount(prevCount => prevCount + 1);
   };

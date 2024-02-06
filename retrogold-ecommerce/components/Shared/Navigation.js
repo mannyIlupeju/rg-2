@@ -85,8 +85,6 @@ const Navigation = () => {
 				{isToken ? (
 					<Link 
 					href='/userAccount/account'
-					
-					
 					>
 						<span 
 						className="text-gray-800"

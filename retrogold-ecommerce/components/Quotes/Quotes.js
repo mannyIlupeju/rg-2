@@ -14,7 +14,7 @@ const Quotes = ({ quote }) => {
 
     // Clear the interval when the component unmounts
     return () => clearInterval(interval);
-  }, []);
+  }, [quote.length]);
 
   return (
    <section className="container mx-auto p-20">

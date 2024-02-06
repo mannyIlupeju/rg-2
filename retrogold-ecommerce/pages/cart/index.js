@@ -73,10 +73,6 @@ const Cart = ({ cartId }) => {
   }, [cartId]); 
 
 
- 
-
-
-
   return (
     <>
       <Head>
@@ -89,6 +85,7 @@ const Cart = ({ cartId }) => {
       {isOpenMenu && <RespMenu />}
 
       <Navigation />
+
       <main className="">
         <div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${cartItems.length ? "" : "h-screen"}`}>
           {cartItems.length ?

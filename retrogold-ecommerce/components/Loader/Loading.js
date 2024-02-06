@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from '../../styles/Loader.module.css'
+import Image from 'next/image'
 
 const Loading = () => {
   return (
     <div className={styles.loaderContainer}>
-      <img src='/images/Trianglespx.svg' alt="loading symbol"/>
+      <Image src='/images/Trianglespx.svg' alt="loading symbol" width={200} height={200} unoptimized/>
     </div>
   );
 }

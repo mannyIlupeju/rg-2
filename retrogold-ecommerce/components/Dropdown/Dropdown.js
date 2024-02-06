@@ -19,14 +19,6 @@ const Dropdown = ({ isVisible, onMouseEnter, onMouseLeave, onPrimaryAction, onSe
             {secondaryLabel}
           </button>  )
         }
-        {/* {onSignOut && 
-        (
-          <button className="btn" onClick={onSignOut}>
-            {signOutLabel}
-          </button>
-        )
-        } */}
-
         </div>
       </div>  
     </div>

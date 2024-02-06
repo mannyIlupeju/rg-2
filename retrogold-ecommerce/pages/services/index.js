@@ -7,7 +7,7 @@ import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
-
+import BookAppointment from '@/components/CalendarBooking/cal-com'
 
 
 const Services = () => {
@@ -34,6 +34,8 @@ const Services = () => {
             alt="tarotcards"
             fill={true}
             className="bg-zinc-700"
+            unoptimized
+            priority
           />
         </div>
 
@@ -48,6 +50,7 @@ const Services = () => {
               height={200}
               priority
               unoptimized
+          
             />
 
           </div>
@@ -57,8 +60,7 @@ const Services = () => {
             <p className="text-base md:text-lg">
               Make an appointment today, to discuss your concerns with our resident psychic today.
             </p>
-
-            <InputForm />
+            <BookAppointment/>
           </div>
         </div>
       </main>

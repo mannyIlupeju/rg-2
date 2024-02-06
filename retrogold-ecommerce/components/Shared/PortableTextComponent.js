@@ -3,6 +3,7 @@ import React from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import {PortableText} from '@portabletext/react'
 import {getImageDimensions} from '@sanity/asset-utils'
+import Image from 'next/image'
 // import urlBuilder from '@sanity/image-url';
 
 
@@ -33,10 +34,9 @@ const SampleImageComponent = ({value, isInline}) => {
   const {width, height} = getImageDimensions(value)
   return (
     <div className="">
-    <img src= {urlFor(value).image(value).width(500).url()}
+    <Image src= {urlFor(value).image(value).width(500).url()}
       alt=" "
       loading="lazy"
-
       style={{
         // Display alongside text if image appears inside a block text span
         display: isInline ? 'inline-block' : 'block',

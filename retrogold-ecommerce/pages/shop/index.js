@@ -53,7 +53,7 @@ const Shop = ({ products }) => {
                      {images.edges[0] && (
                          <Image 
                          key={_id}
-                         src={isHovered === _id ? images.edges[1].node.originalSrc : images.edges[0].node.originalSrc} 
+                         src={isHovered === _id ? images.edges[1]?.node.originalSrc : images.edges[0]?.node.originalSrc} 
                          width={250} 
                          height={250} 
                          alt="Product Image"

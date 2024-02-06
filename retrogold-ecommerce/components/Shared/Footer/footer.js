@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Footer = () => {
   const [isMessage, setMessage] = useState('')
@@ -38,7 +39,14 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row gap-20">
           <div className="flex flex-col lg:gap-8 md:gap-2">
             <Link href='/home'>
-              <img src = '/images/Retrogold (7) (1).png' alt="retrogoldlogo" className="footer-imageBox"/>
+              <Image 
+              src = '/images/Retrogold (7) (1).png' 
+              alt="retrogoldlogo" 
+              className="footer-imageBox" 
+              width={200} 
+              height={200} 
+              unoptimized
+              />
             </Link>
             <ul>
              <Link href='/about'><li className="footer-link">About</li></Link>
@@ -96,7 +104,7 @@ const Footer = () => {
           </div>
          <div className="mt-12">
            <p className="text-sm">
-             By clicking "submit" you agree to receive emails from Retrogold 
+             By clicking submit you agree to receive emails from Retrogold 
              and accept our web terms of use and privacy and cookie apply. 
              Terms apply
             </p>
