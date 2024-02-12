@@ -37,9 +37,17 @@ const AppContext = ({ children }) => {
 
 
   
-  useEffect(() => {
-    setIsSearchValue(!!searchValues && searchValues.length > 0);
-    }, [searchValues]);
+  // useEffect(() => {
+  //   setIsSearchValue(!!searchValues && searchValues.length > 0);
+  //   }, [searchValues]);
+
+    useEffect(()=> {
+      if(searchValues != null){
+        setIsSearchValue(!!searchValues && searchValues.length > 0);
+      }else if(searchValues == null ){
+        setIsSearchValue(false)
+      }
+    }, [searchValues])
 
 
 
@@ -241,6 +249,7 @@ const handleProfileDropDownMouseLeave = () => {
     e.preventDefault()
     setSearchBar(false)
     setShowSearch(!showSearch)
+    hideDropdown();
   }
 
 

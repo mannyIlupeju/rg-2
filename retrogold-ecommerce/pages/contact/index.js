@@ -25,9 +25,9 @@ const Contact = () => {
       {isSignIn && <Login />}
       {isUserRegistered && <Register />}
 
-      <main className="section-background flex items-center justify-center min-h-screen">
-        <div className="container mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8">
-          <div className="lg:grid lg:grid-cols-3 lg:gap-12">
+      <main className="container mx-auto min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full py-12 px-4 sm:px-6 lg:py-24 lg:px-8">
+          <div className="lg:grid lg:grid-cols-3 lg:gap-12 w-full max-w-5xl">
 
             <div className="lg:col-span-1 space-y-8 text-zinc-700">
               <h1 className="text-4xl font-bold  mb-4">Get in Touch</h1>
@@ -46,7 +46,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="lg:mt-0 lg:col-span-1 space-y-6">
+            <div className="lg:mt-0 lg:col-span-1 space-y-6 mt-12">
               <h1 className="text-3xl font-medium text-zinc-700">Contact Us</h1>
               <ContactForm />
             </div>

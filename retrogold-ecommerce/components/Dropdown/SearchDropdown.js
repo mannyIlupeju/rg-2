@@ -6,6 +6,7 @@ import Link from 'next/link'
 export default function SearchDropdown() {
 
   const { searchValues, isSearchValue, hideDropdown} = useGlobalContext()
+  console.log();
 
   const content = (
     <>

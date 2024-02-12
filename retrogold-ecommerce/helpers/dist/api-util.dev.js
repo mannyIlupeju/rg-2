@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllProducts = getAllProducts;
 exports.getAllBlogs = getAllBlogs;
-exports.getFilteredProducts = getFilteredProducts;
-exports.getFilteredBlogs = getFilteredBlogs;
 exports.searchSanity = searchSanity;
 
 var _sanity = require("@/lib/dist/sanity.dev");
@@ -61,74 +59,27 @@ function getAllBlogs() {
       }
     }
   });
-} //Extract the user input and check if it matches with the filterBlog slug
-
-
-function getFilteredProducts(userSearch) {
-  var slugifiedSearch, productSearch, filteredProduct;
-  return regeneratorRuntime.async(function getFilteredProducts$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          slugifiedSearch = userSearch.toLowerCase().replaceAll(' ', '-');
-          _context3.next = 3;
-          return regeneratorRuntime.awrap(getAllProducts());
-
-        case 3:
-          productSearch = _context3.sent;
-          filteredProduct = productSearch.filter(function (product) {
-            return slugifiedSearch === product.slugCurrent;
-          });
-          return _context3.abrupt("return", filteredProduct);
-
-        case 6:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  });
-} //api endpoint to fetch the filteredBlog Array 
-
-
-function getFilteredBlogs(userSearch) {
-  var slugifiedSearch, blogSearch, filteredBlog;
-  return regeneratorRuntime.async(function getFilteredBlogs$(_context4) {
-    while (1) {
-      switch (_context4.prev = _context4.next) {
-        case 0:
-          slugifiedSearch = userSearch.toLowerCase().replaceAll(' ', '-');
-          _context4.next = 3;
-          return regeneratorRuntime.awrap(getAllBlogs());
-
-        case 3:
-          blogSearch = _context4.sent;
-          filteredBlog = blogSearch.filter(function (blog) {
-            return slugifiedSearch === blog.slugCurrent;
-          });
-          return _context4.abrupt("return", filteredBlog);
-
-        case 6:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  });
 } //Fetch Search Results from Sanity 
 
 
 function searchSanity(query) {
   var sanityQuery, results;
-  return regeneratorRuntime.async(function searchSanity$(_context5) {
+  return regeneratorRuntime.async(function searchSanity$(_context3) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          sanityQuery = "*[_type == \"blog\" && title match \"".concat(query, "*\"]{\n   title,\n   slug,\n   tag\n  }");
-          _context5.next = 3;
+          if (query.toLowerCase() === "blog") {
+            sanityQuery = "*[_type == \"blog\"]{\n      title,\n      slug,\n      tag\n    }";
+          } else {
+            sanityQuery = "*[_type == \"blog\" && title match \"".concat(query, "*\"]{\n      title,\n      slug,\n      tag\n    }");
+          }
+
+          _context3.next = 3;
           return regeneratorRuntime.awrap(_sanity.sanityClient.fetch(sanityQuery));
 
         case 3:
-          results = _context5.sent;
-          return _context5.abrupt("return", results.map(function (post) {
+          results = _context3.sent;
+          return _context3.abrupt("return", results.map(function (post) {
             return _objectSpread({
               type: 'blogPost'
             }, post);
@@ -136,7 +87,7 @@ function searchSanity(query) {
 
         case 5:
         case "end":
-          return _context5.stop();
+          return _context3.stop();
       }
     }
   });

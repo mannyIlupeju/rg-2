@@ -22,34 +22,23 @@ export async function getAllBlogs() {
 
 
 
-
-//Extract the user input and check if it matches with the filterBlog slug
-export async function getFilteredProducts(userSearch) {
-  const slugifiedSearch = userSearch.toLowerCase().replaceAll(' ', '-')
-  const productSearch = await getAllProducts();
-  const filteredProduct = productSearch.filter((product) => slugifiedSearch === product.slugCurrent)
-
-  return filteredProduct;
-}
-
-//api endpoint to fetch the filteredBlog Array 
-export async function getFilteredBlogs(userSearch) {
-  const slugifiedSearch = userSearch.toLowerCase().replaceAll(' ', '-')
-  const blogSearch = await getAllBlogs();
-  
-
-  const filteredBlog= blogSearch.filter((blog) => slugifiedSearch === blog.slugCurrent)
-  return filteredBlog;
-}
-
-
 //Fetch Search Results from Sanity 
 export async function searchSanity(query){
-  const sanityQuery = `*[_type == "blog" && title match "${query}*"]{
-   title,
-   slug,
-   tag
-  }`
+  let sanityQuery;
+
+  if(query.toLowerCase() === "blog"){
+    sanityQuery = `*[_type == "blog"]{
+      title,
+      slug,
+      tag
+    }`
+  } else {
+    sanityQuery = `*[_type == "blog" && title match "${query}*"]{
+      title,
+      slug,
+      tag
+    }`
+  }
 
   const results = await sanityClient.fetch(sanityQuery);
   return results.map((post) => ({
@@ -58,3 +47,4 @@ export async function searchSanity(query){
   }));
 
 }
+

@@ -41,9 +41,9 @@ const InputForm = () => {
 
   return (
     <div className="text-zinc-700">
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-        <div className="flex flex-row gap-4">
-          <div>
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1">
             <label htmlFor="fname">First Name:</label><br />
             <input 
               type="text" 
@@ -70,13 +70,14 @@ const InputForm = () => {
           </div>
         </div>
 
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <div>
             <label htmlFor="email">Email:</label><br />
             <input 
               type="email" 
               id="email" 
               name="email" 
+              className="form-input mt-1 block w-full"
               required 
               value={messageDetails.email} 
               onChange={e => setMessageDetails({ ...messageDetails, email: e.target.value })}>
@@ -88,6 +89,7 @@ const InputForm = () => {
               type="tel" 
               id="tel" 
               name="tel" 
+              className="form-input mt-1 block w-full"
               required 
               value={messageDetails.telephone} 
               onChange={e => setMessageDetails({ ...messageDetails, telephone: e.target.value })}>
@@ -99,6 +101,7 @@ const InputForm = () => {
           <label>Subject:</label><br />
           <select 
             value={messageDetails.selection} 
+            className="form-select mt-1 block w-full"
             onChange={e => setMessageDetails({ ...messageDetails, selection: e.target.value })} 
             required
           >

@@ -6,7 +6,6 @@ import { useGlobalContext } from '@/ Context/context';
 import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";
-import {getFilteredBlogs, getFilteredProducts} from '../../../helpers/api-util'
 import { debounce } from '../../../helpers/debounce'
 import Search from '../Search/Search'
 
@@ -69,6 +68,7 @@ const Navigation = () => {
 			});
 			
 			const data = await response.json();
+			console.log(data);
 			setSearchValues(data)
 
 		} catch (error) {
