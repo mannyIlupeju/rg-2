@@ -7,8 +7,15 @@ exports.getAllProducts = getAllProducts;
 exports.getAllBlogs = getAllBlogs;
 exports.getFilteredProducts = getFilteredProducts;
 exports.getFilteredBlogs = getFilteredBlogs;
+exports.searchSanity = searchSanity;
 
 var _sanity = require("@/lib/dist/sanity.dev");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //Fetch Blog data from Sanity
 function getAllProducts() {
@@ -80,7 +87,8 @@ function getFilteredProducts(userSearch) {
       }
     }
   });
-}
+} //api endpoint to fetch the filteredBlog Array 
+
 
 function getFilteredBlogs(userSearch) {
   var slugifiedSearch, blogSearch, filteredBlog;
@@ -102,6 +110,33 @@ function getFilteredBlogs(userSearch) {
         case 6:
         case "end":
           return _context4.stop();
+      }
+    }
+  });
+} //Fetch Search Results from Sanity 
+
+
+function searchSanity(query) {
+  var sanityQuery, results;
+  return regeneratorRuntime.async(function searchSanity$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          sanityQuery = "*[_type == \"blog\" && title match \"".concat(query, "*\"]{\n   title,\n   slug,\n   tag\n  }");
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(_sanity.sanityClient.fetch(sanityQuery));
+
+        case 3:
+          results = _context5.sent;
+          return _context5.abrupt("return", results.map(function (post) {
+            return _objectSpread({
+              type: 'blogPost'
+            }, post);
+          }));
+
+        case 5:
+        case "end":
+          return _context5.stop();
       }
     }
   });

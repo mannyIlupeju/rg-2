@@ -4,8 +4,10 @@ import Image from 'next/image'
 
 const Loading = () => {
   return (
+    <div className="">
     <div className={styles.loaderContainer}>
-      <Image src='/images/Trianglespx.svg' alt="loading symbol" width={200} height={200} unoptimized/>
+      <Image src='/images/loading.svg' alt="Loading..." width={1000} height={1000} unoptimized/>
+    </div>
     </div>
   );
 }

@@ -1,11 +1,21 @@
 import React from 'react'
 
-const Dropdown = ({ isVisible, onMouseEnter, onMouseLeave, onPrimaryAction, onSecondaryAction, content, primaryLabel, secondaryLabel, styleClass }) => {
+const Dropdown = ({ 
+  isVisible, 
+  onMouseEnter, 
+  onMouseLeave,
+  onClick, 
+  onPrimaryAction, 
+  onSecondaryAction, 
+  content, 
+  primaryLabel, 
+  secondaryLabel, 
+  styleClass }) => {
    if (!isVisible) {
     return null;
   }
   return (
-     <div className={`container ${styleClass}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+     <div className={`container ${styleClass}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick}>
       <div>
         {content}
         <div className="flex gap-3 mt-6">

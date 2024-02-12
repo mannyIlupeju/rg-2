@@ -2,7 +2,7 @@ import PortableTextComponent from '@/components/Shared/PortableTextComponent';
 import { sanityClient } from '@/lib/dist/sanity.dev';
 import React from 'react';
 import Image from 'next/image'
-import Navigation from '@/components/Shared/Navigation';
+import Navigation from '@/components/Shared/Navigation/Navigation';
 import Login from '@/components/Authorization/Login';
 import Register from '@/components/Authorization/Register';
 import Head from 'next/head'
@@ -28,17 +28,17 @@ const About = ({ data }) => {
 
       {isOpenMenu && <RespMenu />}
       <Navigation />
-      {isSignIn && <Login/>}
+      {isSignIn && <Login />}
       {isUserRegistered && <Register />}
 
-      <main className="section-background">
+      <main>
         <div className="container mx-auto p-8 md:p-12 py-24 lg:p-24 flex flex-col gap-10">
           <div className="flex flex-col md:flex-row gap-10 items-center text-zinc-700">
             <article className="flex-1 leading-relaxed text-lg">
               <PortableTextComponent detail={aboutUs} />
             </article>
             <div className="flex-shrink-0">
-              <Image src={about[0].aboutImage} width="400" height="400" alt="About Image" className="rounded shadow-lg" unoptimized priority={true} />
+              <Image src={about[0].aboutImage} width="400" height="400" alt="About Image" className="rounded shadow-lg" loading='lazy' />
             </div>
           </div>
         </div>
@@ -65,8 +65,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: {about},
-    }
+      data: { about },
+    },
+    revalidate: 60,
   }
 }
 

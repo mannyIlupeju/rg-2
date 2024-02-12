@@ -16,7 +16,7 @@ var _image = _interopRequireDefault(require("next/image"));
 
 var _link = _interopRequireDefault(require("next/link"));
 
-var _Navigation = _interopRequireDefault(require("@/components/Shared/Navigation"));
+var _Navigation = _interopRequireDefault(require("@/components/Shared/Navigation/Navigation"));
 
 var _footer = _interopRequireDefault(require("@/components/Shared/Footer/footer"));
 

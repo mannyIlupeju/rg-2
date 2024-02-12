@@ -15,7 +15,7 @@ const Cart = ({cartId}) => {
   const cartItems = useSelector((state)=> state.cart)
 
   
-  //close cart modal functionality if cart items in modal is less than 1
+
   useEffect(() => {
     if (cartItems.length < 1) {
       closeCartModal();
@@ -53,7 +53,7 @@ const Cart = ({cartId}) => {
               <div>
                 <div>
               {cartItems.map((items, index) => {
-                const {image, currency, id, merchandiseId, price, quantity, title, vendor, productImage} = items
+                const {image, id, price, quantity, title, vendor, productImage} = items
                 
                 const imageUrl = image || productImage
                   return (
@@ -83,12 +83,12 @@ const Cart = ({cartId}) => {
                     </div>
                   )
               })}
-                    <div className="flex justify-between text-zinc-700 ">
+                    <div className="flex justify-between text-zinc-700 mt-12">
                       <h1 className="text-2xl">Subtotal</h1>
                       <p className="text-2xl font-bold">${totalPrice}</p>
                     </div>
 
-                    <div>
+                    <div className="mt-4">
                       <button className="btn">Checkout</button>
                     </div>
               </div>

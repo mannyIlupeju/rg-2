@@ -1,76 +1,76 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import Navigation from '@/components/Shared/Navigation';
+import Navigation from '@/components/Shared/Navigation/Navigation';
 import Footer from '@/components/Shared/Footer/footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
-import {handleToggle, handleRemove, handleCheckOut} from '../../util/cartFunctions/functions'
+import { handleToggle, handleRemove, handleCheckOut } from '../../util/cartFunctions/functions'
 import { useGlobalContext } from '@/ Context/context'
 
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
 
-const Cart = ({ cartId }) => {  
+const Cart = ({ cartId }) => {
 
   const cartItems = useSelector((state) => state.cart)
   const cartQuantity = useSelector((state) => state.totalQuantity)
   const quantity = useSelector((state) => state.quantity)
   const totalPrice = useSelector((state) => state.totalPrice)
-  
+
 
   const { isOpenMenu, cartData, setCartData, shopifyCartID } = useGlobalContext()
   const [totalAmount, setTotalAmount] = useState(null)
   const dispatch = useDispatch()
 
- 
-
- 
-  
-   function onRemoveCallback(id){
-     dispatch(onRemove({id}));
-   }
-
-   function onToggleCallback(id, value){
-    dispatch(toggleCartItemQuantity({id,value}));
-   }
 
 
-  
- 
-   async function fetchData(){
-  
-    if(cartId){
-      try{
+
+
+  function onRemoveCallback(id) {
+    dispatch(onRemove({ id }));
+  }
+
+  function onToggleCallback(id, value) {
+    dispatch(toggleCartItemQuantity({ id, value }));
+  }
+
+
+
+
+  async function fetchData() {
+
+    if (cartId) {
+      try {
         const response = await fetch('/api/shopifyCart/fetchCart', {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({cartId})
+          body: JSON.stringify({ cartId })
         })
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch items from cart');
         }
-        
+
         const data = await response.json();
-       
+
         setCartData(data);
-        
-      } catch(error){
-         console.error('Error fetching items from cart:', error);
-         throw error;
+
+      } catch (error) {
+        console.error('Error fetching items from cart:', error);
+        throw error;
       }
     }
   }
-  
-   useEffect(() => {
-    fetchData(); 
-  }, [cartId]); 
+
+  useEffect(() => {
+    fetchData();
+  }, [cartId]);
 
 
   return (
@@ -92,25 +92,25 @@ const Cart = ({ cartId }) => {
             <>
               <h1 className="flex justify-center text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700 pt-14">Your Cart</h1>
               <div className="flex flex-col gap-8 justify-center">
-                {cartItems.map((items, index) => {       
-                  
-                  const {image, currency, id, merchandiseId, price, quantity, title, vendor} = items
-                  
+                {cartItems.map((items, index) => {
+
+                  const { image, currency, id, merchandiseId, price, quantity, title, vendor } = items
+
                   return (
                     <div key={index}>
                       <div className="flex flex-col justify-between text-zinc-700" >
                         <div>
                           <div className="flex gap-4">
-                              <div>
-                                <Image src={image} alt='' width="200" height="200" className="cartImage" priority />
-                              </div>
-                              <div className="flex flex-col gap-4">
-                                <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
-                                <p className="text-md ">Item: {title}</p>
+                            <div>
+                              <Image src={image} alt='' width="200" height="200" className="cartImage" priority />
+                            </div>
+                            <div className="flex flex-col gap-4">
+                              <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
+                              <p className="text-md ">Item: {title}</p>
                               <div className="flex gap-4 ">
-                                <FaPlus className="" onClick={()=> {handleToggle(cartItems, id, 'inc', quantity, onToggleCallback, cartId)} } />
+                                <FaPlus className="" onClick={() => { handleToggle(cartItems, id, 'inc', quantity, onToggleCallback, cartId) }} />
                                 <span className="text-lg">{quantity}</span>
-                                <FaMinus className="flex" onClick={()=> {handleToggle(cartItems, id, 'dec', quantity, onToggleCallback, cartId)} } />
+                                <FaMinus className="flex" onClick={() => { handleToggle(cartItems, id, 'dec', quantity, onToggleCallback, cartId) }} />
                               </div>
                               <div>
                                 <h1 className="text-xl">${price}</h1>
@@ -135,7 +135,7 @@ const Cart = ({ cartId }) => {
                 </div>
               </div>
               <div className="my-24 flex justify-end">
-                <button className="btn" onClick={() => {handleCheckOut(cartId)}}>Checkout</button>
+                <button className="btn" onClick={() => { handleCheckOut(cartId) }}>Checkout</button>
               </div>
             </>
             :
@@ -164,19 +164,19 @@ export default Cart;
 
 
 
-export async function getServerSideProps(context){
-  try{
+export async function getServerSideProps(context) {
+  try {
 
-    const {req} = context;
+    const { req } = context;
     const parsedCookies = Cookies.parse(req.headers.cookie || '');
-    
+
     const cartId = parsedCookies.cartId;
     console.log(cartId);
-    
+
     return {
-      props: {cartId}
+      props: { cartId }
     }
-  }catch(error){
+  } catch (error) {
     console.error('Error fetching cartId', error);
   }
 }

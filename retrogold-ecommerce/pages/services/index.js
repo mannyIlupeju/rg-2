@@ -1,8 +1,9 @@
-import Navigation from '@/components/Shared/Navigation'
+import Navigation from '@/components/Shared/Navigation/Navigation'
 import Head from 'next/head'
 import Image from 'next/image'
 import Footer from '@/components/Shared/Footer/footer'
-import InputForm from '@/components/Shared/Forms/inputForm'
+import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
+import ProfileDrop from '@/components/Dropdown/ProfileDrop'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
 import { useGlobalContext } from '@/ Context/context'
@@ -11,7 +12,18 @@ import BookAppointment from '@/components/CalendarBooking/cal-com'
 
 
 const Services = () => {
-  const { isOpenMenu, isSignIn, isUserRegistered } = useGlobalContext();
+  const {
+    isOpenMenu,
+    isSignIn,
+    isUserRegistered,
+    isHovered,
+    isDropdownHovered,
+    isProfileHovered,
+    isProfileDropdownHovered
+  } = useGlobalContext();
+
+  const shouldShowDropdown = isHovered || isDropdownHovered
+  const shouldProfileShowDropdown = isProfileHovered
 
   return (
     <>
@@ -26,6 +38,8 @@ const Services = () => {
       <Navigation />
       {isSignIn && <Login />}
       {isUserRegistered && <Register />}
+      {shouldShowDropdown && <WelcomeDrop />}
+      {shouldProfileShowDropdown && <ProfileDrop />}
 
       <main className="section-background">
         <div className="relative w-full h-64 md:h-96">
@@ -50,17 +64,17 @@ const Services = () => {
               height={200}
               priority
               unoptimized
-          
+
             />
 
           </div>
 
-          <div className="flex-1 flex flex-col gap-6 text-zinc-700">
+          <div className="flex-1 flex flex-col gap-6 text-zinc-700 my-12">
             <h1 className="text-2xl md:text-3xl font-bold">Book a Session Today</h1>
             <p className="text-base md:text-lg">
               Make an appointment today, to discuss your concerns with our resident psychic today.
             </p>
-            <BookAppointment/>
+            <BookAppointment />
           </div>
         </div>
       </main>

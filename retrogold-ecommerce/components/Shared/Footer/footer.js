@@ -96,7 +96,7 @@ const Footer = () => {
            <p>Subscribe to our newsletter</p>
          </div>
          <div className="flex flex-col lg:flex-row gap-4 mt-4">
-           <input type="email" id="email" placeholder="Enter email address" className="text-zinc-700" ref={inputRef}/>
+           <input type="email" id="email" placeholder="Enter email address" className="text-zinc-800" ref={inputRef}/>
            <button onClick={handleSubmit}>SIGN UP</button>
          </div>
          <div>

@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import PortableTextComponent from '@/components/Shared/PortableTextComponent';
-import Navigation from '@/components/Shared/Navigation'
+import Navigation from '@/components/Shared/Navigation/Navigation'
 import Footer from '@/components/Shared/Footer/footer'
 import { sanityClient } from '/lib/sanity'
 
-const Privacy = ({data}) => {
-  const{privacy} = data
+const Privacy = ({ data }) => {
+  const { privacy } = data
   const [privacyPolicy] = privacy
 
 
@@ -18,15 +18,15 @@ const Privacy = ({data}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navigation/>
+      <Navigation />
       <main className="bg-white">
         <div className="container mx-auto p-12">
           <article className=" leading-loose text-lg w-fit items-center text-zinc-700">
-            <PortableTextComponent detail={privacyPolicy}/>
+            <PortableTextComponent detail={privacyPolicy} />
           </article>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 }
@@ -39,7 +39,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: {privacy}
+      data: { privacy }
     }
   }
 }

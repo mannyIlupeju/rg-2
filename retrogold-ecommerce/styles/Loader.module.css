@@ -1,7 +1,9 @@
 .loaderContainer {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  position: absolute;
+  z-index: 999;
+  height: 100%;
   width: 100%;
   position: fixed;
   z-index: 1;

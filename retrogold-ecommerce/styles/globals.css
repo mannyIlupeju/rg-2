@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -10,7 +10,7 @@
   --accent: #cca5a6;
   --green: #82caa4;
  
-  --purple: #8789C0;
+  --purple: #6164c8;
   --beige: #E4E6C3;
   /* --pink: #94778B; */
   --pink: #D40C4D;
@@ -55,7 +55,6 @@ body {
 
 
 .navigationStyle {
-
 /* justify-content:space-between; */
 padding: 0 4rem 0 4rem;
 background: var(--white);
@@ -330,14 +329,12 @@ input[type=password],
 input[type=tel],
 input[type=search],
 input[type = number],
-
-
 input[type=date]{
   padding: 0.5rem;
   border-radius: 4rem;
   background-color: var(--teaGreen);
   color:rgba(0, 0, 0, 0.295)
-  
+
 }
 
 .textInput{
@@ -351,17 +348,15 @@ input[type=date]{
   background-color: var(--beige)
 }
 
-
-
-
+input::placeholder{
+  color:#000000;
+}
 
 .searchInput {
   padding: 0.5rem;
   background-color: var(--teaGreen);
   color:rgba(0, 0, 0, 0.295)
 }
-
-
 
 
 select {
@@ -387,9 +382,6 @@ textarea {
   width: 22rem;
   color:black;
 }
-
-
-
 
 .itemRightArrow {
  color: '#D5BDAF';

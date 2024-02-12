@@ -1,8 +1,7 @@
 import React from 'react';
 import Image from 'next/image'
-import { urlFor} from '/lib/sanity';
 import Link from 'next/link'
-import { useGlobalContext } from '@/ Context/context';
+
 
 
 
@@ -43,7 +42,7 @@ const Blog = ({blog}) => {
               <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                 <span>{blog[0].tag}</span>
               </div>
-              <Image src={blog[0].mainImage} alt="" style={mainImageBlog} width={250} height={250}/>
+              <Image src={blog[0].mainImage} alt="Intro to candle magic" style={mainImageBlog} width={250} height={250}/>
             </div>
 
             <div>
@@ -68,7 +67,14 @@ const Blog = ({blog}) => {
               <span className="text-sm">{blog[i + 1].tag}</span>
             </div>
             <div className="flex-grow flex flex-col justify-center items-center">
-              <Image src={blog[i + 1].mainImage} alt="Blog Image" className="smallImageBlog w-full h-auto md:w-auto" width={200} height={200}/>
+              <Image 
+              src={blog[i + 1].mainImage} 
+              alt='Intro to candle magic' 
+              className="smallImageBlog w-full h-auto md:w-auto" 
+              width={200} 
+              height={200} 
+              loading='lazy'
+              />
               <div className="text-sm font-light mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
                 {blog[i + 1].description[0].children[0].text}
               </div>
@@ -81,7 +87,7 @@ const Blog = ({blog}) => {
       </div>
 
       <div className="cursor-pointer flex justify-center mt-12">
-      <Link href='/blog' className=" bg-black p-3 rounded-2xl">View more Stories</Link>
+      <Link href='/blog' className="bg-black p-3 rounded-2xl">View more Stories</Link>
       </div>
 
       

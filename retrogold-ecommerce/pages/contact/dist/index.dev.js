@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Navigation = _interopRequireDefault(require("@/components/Shared/Navigation"));
+var _Navigation = _interopRequireDefault(require("@/components/Shared/Navigation/Navigation"));
 
 var _head = _interopRequireDefault(require("next/head"));
 

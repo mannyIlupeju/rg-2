@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 
 
 import ImageRender from './Images';
-import Carousel from '../../Shared/Carousel';
-import { images } from '/next.config';
+
 import {useGlobalContext} from '@/ Context/context'
 
 
@@ -34,14 +33,12 @@ const Hero = ({hero}) => {
     },3000);
 
     return ()=> clearInterval(intervalid);
-  },[currentIndex])
+  },[heroImg.length,currentIndex,setCurrentIndex])
 
 
   return (    
-      <>
-        <ImageRender hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
-        {/* <Carousel currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} heroImg={heroImg}></Carousel>          */}
-      </>
+    <ImageRender hero={hero} currentIndex={currentIndex} styles={heroOverlay}/>
+      
   );
 }
 

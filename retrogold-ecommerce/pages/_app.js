@@ -11,39 +11,37 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
-  const [isLoading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      console.log('route change complete')
-      setLoading(true)
-    }
+    // Simplify the event handlers to just toggle the loading state
+    const start = () => setLoading(true);
+    const end = () => setLoading(false);
 
-    const handleRouteChangeComplete = () => {
-      setLoading(false)
-    }
+    // Listen for route changes to start and complete, to toggle loading state
+    router.events.on('routeChangeStart', start);
+    router.events.on('routeChangeComplete', end);
+    router.events.on('routeChangeError', end); // Also consider route change errors
 
-    router.events.on('routeChangeStart', handleRouteChange)
-    router.events.on('routeChangeComplete', handleRouteChangeComplete)
-
+    // Clean up event listeners on component unmount
     return () => {
-      router.events.off('routeChangeStart', handleRouteChange)
-      router.events.off('routeChangeComplete', handleRouteChangeComplete)
-    }
-  }, [router.events])
+      router.events.off('routeChangeStart', start);
+      router.events.off('routeChangeComplete', end);
+      router.events.off('routeChangeError', end);
+    };
+  }, [router.events]);
 
   return (
-    <>      
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <AppContext>
-            <AuthenticationCheck>
-              <Component {...pageProps} />
-            </AuthenticationCheck>
-          </AppContext>
-        </PersistGate>
-      
-      </Provider>
-    </>
-  ) 
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppContext>
+          <AuthenticationCheck>
+            {/* Conditionally render the Loading component based on the loading state */}
+            {loading && <Loading />}
+            <Component {...pageProps} />
+          </AuthenticationCheck>
+        </AppContext>
+      </PersistGate>
+    </Provider>
+  );
 }

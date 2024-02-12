@@ -9,10 +9,7 @@ const {
   isProfileHovered, 
   isProfileDropdownHovered, 
   handleProfileDropDownMouseEnter, 
-  handleProfileDropDownMouseLeave, 
-  toggleLoginModal, 
-  toggleRegisterModal,
-  
+  handleProfileDropDownMouseLeave,  
   SignOut
 } = useGlobalContext()
 
@@ -32,7 +29,7 @@ const content = (
 
 const shouldProfileShowDropdown = isProfileHovered || isProfileDropdownHovered
 const primaryLabel = "Sign Out"
-const styleClass = "w-1/3 bg-white rounded-lg p-4 flex flex-col gap-2 absolute top-16 right-24 z-10 text-zinc-800"
+
 
   return (
     <Dropdown

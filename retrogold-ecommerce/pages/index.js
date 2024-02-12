@@ -5,7 +5,7 @@ import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
 import Blog from '/components/Blog/Blog'
 import Footer from '@/components/Shared/Footer/footer'
-import Navigation from '@/components/Shared/Navigation'
+import Navigation from '@/components/Shared/Navigation/Navigation'
 import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
 import ProfileDrop from '@/components/Dropdown/ProfileDrop'
 import Calltoaction from '@/components/CallToAction/calltoaction'
@@ -13,26 +13,29 @@ import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
+import SearchDropdrown from '@/components/Dropdown/SearchDropdown'
 
 
 
 
 export default function Home({ hero, quote, blog, calltoAction }) {
-  const { 
-    isOpenMenu, 
-    isSignIn, 
-    isUserRegistered, 
-    isHovered, 
-    isDropdownHovered, 
-    isProfileHovered, 
-    isProfileDropdownHovered
+  const {
+    isOpenMenu,
+    isSignIn,
+    isUserRegistered,
+    isHovered,
+    isDropdownHovered,
+    isProfileHovered,
+    isProfileDropdownHovered,
+    isSearchValue
   } = useGlobalContext()
 
   const shouldShowDropdown = isHovered || isDropdownHovered
-  const shouldProfileShowDropdown = isProfileHovered
-  
- 
-  
+  const shouldProfileShowDropdown = isProfileHovered || isProfileDropdownHovered
+  const showSearchDropdown = isSearchValue || false
+
+
+
 
   return (
     <>
@@ -46,11 +49,12 @@ export default function Home({ hero, quote, blog, calltoAction }) {
       <main className="h-min">
         <>
           <Navigation />
+          {showSearchDropdown && <SearchDropdrown/>}
           {isOpenMenu && <RespMenu />}
           {isSignIn && <Login />}
           {isUserRegistered && <Register />}
-          {shouldShowDropdown && <WelcomeDrop/>}
-          {shouldProfileShowDropdown && <ProfileDrop/>}
+          {shouldShowDropdown && <WelcomeDrop />}
+          {shouldProfileShowDropdown && <ProfileDrop />}
           <Landing hero={hero} />
           <Quotes quote={quote} />
           <Experience />
@@ -96,6 +100,7 @@ export async function getStaticProps() {
       quote,
       blog,
       calltoAction,
-    }
+    },
+    revalidate: 60,
   }
 }

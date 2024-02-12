@@ -20,9 +20,8 @@ const transporter = nodemailer.createTransport({
 
 connectDB();
 
-async function handler(req, res) {
+async function handler(req, res) { 
   if (req.method === "POST") {
-    console.log(req.body);
     const { email, name, password, retype } = req.body;
     
     if (!name || typeof name !== 'string') {

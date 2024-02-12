@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '@/components/Shared/Navigation'
+import Navigation from '@/components/Shared/Navigation/Navigation'
 import Head from 'next/head'
 import ContactForm from '../../components/Shared/Forms/ContactForm'
 import Footer from '@/components/Shared/Footer/footer'

@@ -4,6 +4,7 @@ import { FaWindows } from 'react-icons/fa';
 import { useRouter } from 'next/router'
  import { initializeCart } from '../store'
 import { useSelector, useDispatch } from 'react-redux'
+import searchDev from '@/pages/api/search/dist/search.dev';
 
 
 //set up createContext
@@ -30,6 +31,23 @@ const AppContext = ({ children }) => {
   const [overflowHiddenCount, setOverflowHiddenCount] = useState(0);
   const [shopifyCartID, setShopifyCartID] = useState(null)
   const [cartData, setCartData] = useState({})
+  const [showSearchDropdown, setSearchDropdown] = useState(false)
+  const [searchValues, setSearchValues] = useState(null)
+  const [isSearchValue, setIsSearchValue] = useState(false)
+
+
+  
+  useEffect(() => {
+    setIsSearchValue(!!searchValues && searchValues.length > 0);
+    }, [searchValues]);
+
+
+
+  const hideDropdown = () => {
+    setIsSearchValue(false);
+  };
+
+
 
  
   const dispatch = useDispatch();
@@ -167,12 +185,13 @@ const AppContext = ({ children }) => {
     setIsHovered(false);
   }
 
+  const handleShowSearchDropDown = () => {
+    setSearchDropdown(true)
+  }
+
 
 
 /******************************************* */
-
-
-
 /*****Profile Modal  */
 
 const displayProfileModal = () => {
@@ -225,10 +244,6 @@ const handleProfileDropDownMouseLeave = () => {
   }
 
 
-
-
-
-
   const SignOut = (e) => {
     e.preventDefault();
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -236,15 +251,6 @@ const handleProfileDropDownMouseLeave = () => {
     router.push('/');
 
   }
-
-
-
-
-
-
-
-
-    
 
         
   return (
@@ -300,7 +306,15 @@ const handleProfileDropDownMouseLeave = () => {
       displayProfileModal,
       removeProfileModal,
       handleProfileDropDownMouseEnter,
-      handleProfileDropDownMouseLeave
+      handleProfileDropDownMouseLeave,
+      handleShowSearchDropDown,
+      setSearchDropdown,
+      searchValues,
+      setSearchValues,
+      isSearchValue,
+      setIsSearchValue,
+      hideDropdown
+      
       
       }}
     >

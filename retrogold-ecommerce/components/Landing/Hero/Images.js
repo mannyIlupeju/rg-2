@@ -9,7 +9,7 @@ const ImageRender = ({ hero, currentIndex }) => {
         alt="hero Images"
         fill={true}
         unoptimized
-        priority
+        loading='lazy'
       />
       <div className="absolute bottom-1/4 lg:bottom-1/4 text-center w-3/5 translate-x-1/5 text-white font-extrabold text-2xl md:text-6xl lg:text-7xl">
         <h1 className="text-center text-white font-extrabold text-5xl md:text-6xl lg:text-7xl">

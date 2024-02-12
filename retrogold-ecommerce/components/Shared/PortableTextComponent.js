@@ -57,10 +57,10 @@ const components = {
 
     // Ex. 2: rendering custom styles
     h3: ({children}) => (
-      <h3 className="text-3xl text-primary text-zinc-700 text-center">{children}</h3>
+      <h3 className="text-3xl text-zinc-700 text-center">{children}</h3>
     ),
     h2: ({children}) => (
-      <h2 className="text-xl text-primary my-8 text-zinc-700">{children}</h2>
+      <h2 className="text-xl my-8 text-zinc-700">{children}</h2>
     ),
     p: ({children}) => {
       <p className="text-xl font-extrabold text-zinc-700">{children}</p>

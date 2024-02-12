@@ -41,3 +41,20 @@ export async function getFilteredBlogs(userSearch) {
   const filteredBlog= blogSearch.filter((blog) => slugifiedSearch === blog.slugCurrent)
   return filteredBlog;
 }
+
+
+//Fetch Search Results from Sanity 
+export async function searchSanity(query){
+  const sanityQuery = `*[_type == "blog" && title match "${query}*"]{
+   title,
+   slug,
+   tag
+  }`
+
+  const results = await sanityClient.fetch(sanityQuery);
+  return results.map((post) => ({
+    type: 'blogPost',
+    ...post,
+  }));
+
+}
