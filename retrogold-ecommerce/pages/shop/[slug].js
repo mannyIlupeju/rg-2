@@ -253,6 +253,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
       </Head>
       {isOpenMenu ? <RespMenu /> : ''}
+      {isItemChosen && <Cart />}
       <Navigation />
 
       <Breadcrumb />

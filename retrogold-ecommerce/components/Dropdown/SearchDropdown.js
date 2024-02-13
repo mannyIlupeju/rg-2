@@ -1,12 +1,11 @@
 import Dropdown from './Dropdown'
-import React, {useState} from 'react'
+import React from 'react'
 import { useGlobalContext } from '@/ Context/context';
 import Link from 'next/link'
 
 export default function SearchDropdown() {
 
   const { searchValues, isSearchValue, hideDropdown} = useGlobalContext()
-  console.log(searchValues);
 
   const content = (
     <>

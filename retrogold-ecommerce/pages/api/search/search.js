@@ -6,10 +6,6 @@ async function handler(req, res) {
       return;
   }
 
-  const userSearch = req.body.userSearch; // Assuming you're passing search as a query parameter
-  console.log(userSearch);
-
-
     try{
       const userSearch = req.body.userSearch; // Assuming you're passing search as a query parameter
       
@@ -20,8 +16,6 @@ async function handler(req, res) {
       
       const sanityResults = await searchSanity(userSearch);
       const shopifyResults = await searchShopify(userSearch);
-
-      console.log(shopifyResults);
       
       
       if(sanityResults || shopifyResults){

@@ -16,8 +16,7 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function handler(req, res) {
-  var userSearch, _userSearch, sanityResults, shopifyResults, combinedResults;
-
+  var userSearch, sanityResults, shopifyResults, combinedResults;
   return regeneratorRuntime.async(function handler$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -32,14 +31,11 @@ function handler(req, res) {
           return _context.abrupt("return");
 
         case 3:
+          _context.prev = 3;
           userSearch = req.body.userSearch; // Assuming you're passing search as a query parameter
 
-          console.log(userSearch);
-          _context.prev = 5;
-          _userSearch = req.body.userSearch; // Assuming you're passing search as a query parameter
-
-          if (_userSearch) {
-            _context.next = 10;
+          if (userSearch) {
+            _context.next = 8;
             break;
           }
 
@@ -48,38 +44,37 @@ function handler(req, res) {
           });
           return _context.abrupt("return");
 
+        case 8:
+          _context.next = 10;
+          return regeneratorRuntime.awrap((0, _apiUtil.searchSanity)(userSearch));
+
         case 10:
-          _context.next = 12;
-          return regeneratorRuntime.awrap((0, _apiUtil.searchSanity)(_userSearch));
-
-        case 12:
           sanityResults = _context.sent;
-          _context.next = 15;
-          return regeneratorRuntime.awrap((0, _apiUtil.searchShopify)(_userSearch));
+          _context.next = 13;
+          return regeneratorRuntime.awrap((0, _apiUtil.searchShopify)(userSearch));
 
-        case 15:
+        case 13:
           shopifyResults = _context.sent;
-          console.log(shopifyResults);
 
           if (sanityResults || shopifyResults) {
             combinedResults = [].concat(_toConsumableArray(sanityResults), _toConsumableArray(shopifyResults));
             res.status(200).json(combinedResults);
           }
 
-          _context.next = 23;
+          _context.next = 20;
           break;
 
-        case 20:
-          _context.prev = 20;
-          _context.t0 = _context["catch"](5);
+        case 17:
+          _context.prev = 17;
+          _context.t0 = _context["catch"](3);
           console.log('Error fetching response:', _context.t0);
 
-        case 23:
+        case 20:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[5, 20]]);
+  }, null, null, [[3, 17]]);
 }
 
 var _default = handler;
