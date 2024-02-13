@@ -110,7 +110,7 @@ function searchShopify(query) {
               'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB
             },
             body: JSON.stringify({
-              query: "\n        {\n          products(first:5, query:\"title:'".concat(query, "'\") {\n            edges {\n              node {\n                id\n                title\n                handle\n                vendor\n                descriptionHtml\n              }\n            }\n          }\n        }\n      ")
+              query: "\n        {\n          products(first:5, query:\"title:'".concat(query, "'\") {\n            edges {\n              node {\n                id\n                title\n                handle\n                vendor\n                descriptionHtml\n                images(first: 4) {\n                edges {\n                node {\n                  originalSrc\n                  altText\n                }\n              }\n            }\n              }\n            }\n          }\n        }\n      ")
             })
           }));
 

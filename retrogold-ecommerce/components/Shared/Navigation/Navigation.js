@@ -68,7 +68,6 @@ const Navigation = () => {
 			});
 			
 			const data = await response.json();
-			console.log(data);
 			setSearchValues(data)
 
 		} catch (error) {

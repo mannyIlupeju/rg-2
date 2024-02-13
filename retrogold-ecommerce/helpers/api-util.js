@@ -70,6 +70,14 @@ export async function searchShopify(query){
                 handle
                 vendor
                 descriptionHtml
+                images(first: 4) {
+                edges {
+                node {
+                  originalSrc
+                  altText
+                }
+              }
+            }
               }
             }
           }
