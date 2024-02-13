@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function SearchDropdown() {
 
   const { searchValues, isSearchValue, hideDropdown} = useGlobalContext()
-  console.log();
+  console.log(searchValues);
 
   const content = (
     <>
@@ -16,9 +16,16 @@ export default function SearchDropdown() {
           <ul>
             {searchValues?.map((values, index) => (
               <li key={index} onClick={hideDropdown}>
-                <Link href={`/blog/${values.slug.current}`}>
+                { values.type === 'blogPost' ? 
+                (<Link href={`/blog/${values.slug.current}`}>
                   <p>{values.title}</p>
-                </Link>
+                </Link>) :
+                values.type === 'product' ? (
+                  <Link href={`/shop/${values.handle}`}>
+                    <p>{values.title}</p>
+                  </Link>
+                ) : null
+                }
               </li>
             ))}
           </ul>

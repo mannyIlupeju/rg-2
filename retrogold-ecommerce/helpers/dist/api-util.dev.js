@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAllProducts = getAllProducts;
 exports.getAllBlogs = getAllBlogs;
 exports.searchSanity = searchSanity;
+exports.searchShopify = searchShopify;
 
 var _sanity = require("@/lib/dist/sanity.dev");
 
@@ -88,6 +89,60 @@ function searchSanity(query) {
         case 5:
         case "end":
           return _context3.stop();
+      }
+    }
+  });
+}
+
+function searchShopify(query) {
+  var shopifyResponse, _ref, data;
+
+  return regeneratorRuntime.async(function searchShopify$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          console.log(query);
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(fetch("https://".concat(process.env.SHOPIFY_DOMAIN, "/api/2023-10/graphql.json"), {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB
+            },
+            body: JSON.stringify({
+              query: "\n        {\n          products(first:5, query:\"title:'".concat(query, "'\") {\n            edges {\n              node {\n                id\n                title\n                handle\n                vendor\n                descriptionHtml\n              }\n            }\n          }\n        }\n      ")
+            })
+          }));
+
+        case 3:
+          shopifyResponse = _context4.sent;
+          _context4.next = 6;
+          return regeneratorRuntime.awrap(shopifyResponse.json());
+
+        case 6:
+          _ref = _context4.sent;
+          data = _ref.data;
+          console.log(data);
+
+          if (!(!data || !data.products)) {
+            _context4.next = 12;
+            break;
+          }
+
+          console.error('No data returned from Shopify', data);
+          return _context4.abrupt("return", []);
+
+        case 12:
+          return _context4.abrupt("return", data.products.edges.map(function (_ref2) {
+            var node = _ref2.node;
+            return _objectSpread({
+              type: 'product'
+            }, node);
+          }));
+
+        case 13:
+        case "end":
+          return _context4.stop();
       }
     }
   });

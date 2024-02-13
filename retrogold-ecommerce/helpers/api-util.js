@@ -2,6 +2,7 @@
 import { sanityClient } from '@/lib/dist/sanity.dev';
 
 
+
 //Fetch Blog data from Sanity
 export async function getAllProducts() {
   const productQuery = `*[_type == "product"]{  
@@ -32,7 +33,7 @@ export async function searchSanity(query){
       slug,
       tag
     }`
-  } else {
+  }else {
     sanityQuery = `*[_type == "blog" && title match "${query}*"]{
       title,
       slug,
@@ -48,3 +49,46 @@ export async function searchSanity(query){
 
 }
 
+
+
+export async function searchShopify(query){
+  console.log(query);
+  const shopifyResponse = await fetch(`https://${process.env.SHOPIFY_DOMAIN}/api/2023-10/graphql.json`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUB
+    },
+    body: JSON.stringify({
+      query: `
+        {
+          products(first:5, query:"title:'${query}'") {
+            edges {
+              node {
+                id
+                title
+                handle
+                vendor
+                descriptionHtml
+              }
+            }
+          }
+        }
+      `,
+    }),
+  });
+
+  const {data} = await shopifyResponse.json();
+  console.log(data)
+
+  if (!data || !data.products) {
+    console.error('No data returned from Shopify', data);
+    return [];
+  }
+
+  return data.products.edges.map(({node}) => ({
+    type: 'product',
+    ...node,
+  }))
+  
+}
