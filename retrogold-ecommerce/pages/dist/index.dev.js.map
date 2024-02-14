@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["Index"],"mappings":";;;;;;;AAAA;;;;AAEe,SAASA,KAAT,GAAiB,CAE/B","sourcesContent":["import Home from './home'\n\nexport default function Index() {\n  \n}"],"file":"index.dev.js"}

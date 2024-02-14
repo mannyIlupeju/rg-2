@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["services"],"mappings":";;;;;;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,GAAM,CAKtB,CALD;;eAOeA,Q","sourcesContent":["\n\nconst services = () => {\n\n  \n\n\n}\n\nexport default services"],"file":"index.dev.js"}

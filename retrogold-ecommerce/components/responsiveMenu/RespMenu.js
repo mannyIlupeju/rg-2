@@ -31,12 +31,7 @@ const RespMenu = () => {
     [router.pathname, navLink]
   );
 
-  // useEffect(() => {
-  //   document.body.style.overflow = 'hidden';
-  //   return () => {
-  //     document.body.style.overflow = '';
-  //   };
-  // }, []);
+
 
   useEffect(() => {
     incrementOverflowHidden();
@@ -44,7 +39,7 @@ const RespMenu = () => {
     return () => {
       decrementOverflowHidden();
     };
-  }, []);
+  }, [incrementOverflowHidden, decrementOverflowHidden]);
 
   return (
     <>

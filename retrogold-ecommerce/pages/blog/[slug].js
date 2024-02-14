@@ -1,12 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Navigation from '@/components/Shared/Navigation/Navigation'
-import { sanityClient, urlFor } from '@/lib/dist/sanity.dev'
-import PortableTextComponent from '@/components/Shared/PortableTextComponent'
-import Footer from '@/components/Shared/Footer/footer'
-import Breadcrumb from '/components/Shared/Breadcrumbs'
-import RespMenu from '@/components/responsiveMenu/RespMenu'
-import { useGlobalContext } from '@/ Context/context'
+import Head from 'next/head';
+import Image from 'next/image';
+import Navigation from '@/components/Shared/Navigation/Navigation';
+import { sanityClient } from '@/lib/sanity';
+import PortableTextComponent from '@/components/Shared/PortableTextComponent';
+import Footer from '@/components/Shared/Footer/footer';
+import Breadcrumb from '/components/Shared/Breadcrumbs';
+import RespMenu from '@/components/responsiveMenu/RespMenu';
+import { useGlobalContext } from '@/ Context/context';
 
 
 

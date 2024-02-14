@@ -1,14 +1,21 @@
-import PortableTextComponent from '@/components/Shared/PortableTextComponent';
-import { sanityClient } from '@/lib/dist/sanity.dev';
+import PortableTextComponent from '../../components/Shared/PortableTextComponent';
+import { sanityClient } from '@/lib/sanity';
+
 import React from 'react';
 import Image from 'next/image'
-import Navigation from '@/components/Shared/Navigation/Navigation';
-import Login from '@/components/Authorization/Login';
-import Register from '@/components/Authorization/Register';
+// import Navigation from '@/components/Shared/Navigation/Navigation';
+import Navigation from '../../components/Shared/Navigation/Navigation'
+// import Login from '@/components/Authorization/Login';
+import Login from '../../components/Authorization/Login'
+// import Register from '@/components/Authorization/Register';
+import Register from '../../components/Authorization/Register';
 import Head from 'next/head'
-import Footer from '@/components/Shared/Footer/footer';
-import RespMenu from '@/components/responsiveMenu/RespMenu';
-import { useGlobalContext } from '@/ Context/context'
+// import Footer from '@/components/Shared/Footer/footer';
+import Footer from '../../components/Shared/Footer/footer'
+// import RespMenu from '@/components/responsiveMenu/RespMenu';
+import RespMenu from '../../components/responsiveMenu/RespMenu'
+// import { useGlobalContext } from '@/ Context/context'
+import { useGlobalContext } from '../../ Context/context';
 
 
 

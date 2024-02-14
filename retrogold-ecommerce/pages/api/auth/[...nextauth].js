@@ -1,33 +1,34 @@
 
-
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
-import User from '../models/User'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import User from '../../../models/User'
 import bcrypt from 'bcryptjs';
-import dbConnect from '../../lib/mongodb/dbConnect'// Adjust the path according to your file structure
+import connectDB from '@/lib/mongoose';
+
+
+
 
 export default NextAuth({
   providers: [   
-    Providers.Credentials({
+    CredentialsProvider({
       async authorize(credentials) {
-        await dbConnect();
-
-        const user = await User.findOne({ email: credentials.email });
-
-        if (!user) {
-          throw new Error('No user found with that email');
+        try {
+         console.log(Providers);
+         connectDB();
+         const user = await User.findOne({ email: credentials.email });
+         if (!user) {
+           throw new Error('No user found with that email');
+          }
+          
+          const isValid = await bcrypt.compare(credentials.password, user.password);
+          
+          if (!isValid) {
+            throw new Error('Invalid password');
+          }
+          return { email: user.email, name: user.name, role: user.role };
+        } catch(error){
+          throw new Error(error.message);
         }
-
-        // Verify password
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-
-        if (!isValid) {
-          // Invalid password
-          throw new Error('Invalid password');
-        }
-
-        // If credentials are valid, return the user object
-        return { email: user.email, name: user.name, role: user.role };
       }
     })
   ]

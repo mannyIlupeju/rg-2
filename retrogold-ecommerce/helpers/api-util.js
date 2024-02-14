@@ -1,6 +1,4 @@
-
-import { sanityClient } from '@/lib/dist/sanity.dev';
-
+import { sanityClient } from "@/lib/sanity";
 
 
 //Fetch Blog data from Sanity

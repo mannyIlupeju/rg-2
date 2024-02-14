@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation from '@/components/Shared/Navigation/Navigation'
-import { sanityClient } from '@/lib/dist/sanity.dev';
+import { sanityClient } from '@/lib/sanity';
 import Head from 'next/head'
 import Image from 'next/image'
 import Footer from '@/components/Shared/Footer/footer';
@@ -22,7 +22,6 @@ const Blog = ({ blog }) => {
     isHovered,
     isDropdownHovered,
     isProfileHovered,
-    isProfileDropdownHovered
   } = useGlobalContext()
 
 
