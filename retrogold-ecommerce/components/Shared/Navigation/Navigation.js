@@ -111,7 +111,7 @@ const Navigation = () => {
             />
             <input
               type='text'
-              className='searchInput bg-gray-300 p-1 border-black w-96'
+              className='searchInput bg-gray-300 p-1 border-black w-96 text-zinc-900'
               value={inputValue}
               onChange={handleInput}
               autoComplete='off'

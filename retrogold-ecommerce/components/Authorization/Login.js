@@ -8,7 +8,7 @@ const Login = () => {
   const [hidePassword, setHidePassword] = useState(false);
   const [message, setMessage] = useState('');
 
-  const { setIsSignIn, setIsToken, toggleLoginModal, toggleRegisterModal, incrementOverflowHidden, decrementOverflowHidden } = useGlobalContext();
+  const { setIsToken, toggleLoginModal, toggleRegisterModal, incrementOverflowHidden, decrementOverflowHidden } = useGlobalContext();
   const modalRef = useRef();
 
 
@@ -18,7 +18,7 @@ const Login = () => {
     return () => {
       decrementOverflowHidden();
     };
-  }, []);
+  }, [incrementOverflowHidden, decrementOverflowHidden]);
 
 
 
@@ -92,7 +92,7 @@ const Login = () => {
                 required
               />
               {hidePassword ?
-                <FaEyeSlash className="absolute top-2 right-5 text-zinc-800 cursor-pointer" onClick={togglePasswordVisibility} /> :
+                <FaEyeSlash className="absolute top-2 right-5  text-zinc-800 cursor-pointer" onClick={togglePasswordVisibility} /> :
                 <FaEye className="absolute top-2 right-5 text-zinc-800 cursor-pointer" onClick={togglePasswordVisibility} />
               }
             </div>

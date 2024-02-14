@@ -36,10 +36,7 @@ const AppContext = ({ children }) => {
   const [isSearchValue, setIsSearchValue] = useState(false)
 
 
-  
-  // useEffect(() => {
-  //   setIsSearchValue(!!searchValues && searchValues.length > 0);
-  //   }, [searchValues]);
+
 
     useEffect(()=> {
       if(searchValues != null){

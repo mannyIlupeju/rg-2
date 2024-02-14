@@ -8,7 +8,7 @@ const Register = () => {
   const [userData, setUserData] = useState({ name: '', email: '', password: '', retype: '' });
   const [hidePassword, setHidePassword] = useState({ password: true, retype: true });
 
-  const { closeRegisterModal, setIsUserRegistered, loginModal, toggleRegisterModal, incrementOverflowHidden, decrementOverflowHidden } = useGlobalContext();
+  const { closeRegisterModal, setIsUserRegistered, toggleLoginModal, toggleRegisterModal, incrementOverflowHidden, decrementOverflowHidden } = useGlobalContext();
 
   const modalRef = useRef();
 
@@ -26,7 +26,7 @@ const Register = () => {
     return () => {
       decrementOverflowHidden();
     };
-  }, []);
+  }, [incrementOverflowHidden, decrementOverflowHidden]);
 
 
 
@@ -90,19 +90,19 @@ const Register = () => {
               <input type={!hidePassword.password ? 'text' : 'password'} name="password" id="password1" className="p-2 formInput text-gray-800" value={userData.password} onChange={(e) => {
                 setUserData({ ...userData, password: e.target.value })
               }} required />
-              {!hidePassword.password ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('password')} />}
+              {!hidePassword.password ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('password')} /> : <FaEyeSlash className="relative bottom-9 left-60 md:left-80 text-zinc-800" onClick={() => togglePasswordVisibility('password')} />}
               </div>
               
 
               <div className="flex flex-col gap-2">
-               <label htmlFor="name" className="text-gray-800">
+               <label htmlFor="name" className="text-gray-800 ">
                     Retype Password:
                 </label>
            
               <input type={!hidePassword.retype ? 'text' : 'password'} name="retype" id="password2" className="p-2 formInput text-gray-800" value={userData.retype} onChange={(e) => {
                 setUserData({ ...userData, retype: e.target.value })
               }} required />
-              {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')}/> : <FaEyeSlash className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')} />}
+              {!hidePassword.retype ? <FaEye className="relative bottom-9 left-60 text-zinc-800" onClick={() => togglePasswordVisibility('retype')}/> : <FaEyeSlash className="relative bottom-9 left-60 md:left-80 text-zinc-800" onClick={() => togglePasswordVisibility('retype')} />}
               </div>
           
 
@@ -111,7 +111,7 @@ const Register = () => {
               
               <div className="flex flex-row gap-1 justify-center text-lg mt-4">
                 <p className="text-gray-800">Already got an account?</p>
-                <p onClick={loginModal} className="text-green-500">Login</p>
+                <p onClick={toggleLoginModal} className="text-green-500 cursor-pointer">Login</p>
               </div>
             </form>
           

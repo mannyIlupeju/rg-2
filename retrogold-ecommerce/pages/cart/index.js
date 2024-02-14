@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import Footer from '@/components/Shared/Footer/footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
-import { onRemove, toggleCartItemQuantity, initializeCart } from '../../store'
+import { onRemove, toggleCartItemQuantity } from '../../store'
 import { handleToggle, handleRemove, handleCheckOut } from '../../util/cartFunctions/functions'
 import { useGlobalContext } from '@/ Context/context'
 
@@ -17,13 +17,8 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 const Cart = ({ cartId }) => {
 
   const cartItems = useSelector((state) => state.cart)
-  const cartQuantity = useSelector((state) => state.totalQuantity)
-  const quantity = useSelector((state) => state.quantity)
   const totalPrice = useSelector((state) => state.totalPrice)
-
-
-  const { isOpenMenu, cartData, setCartData, shopifyCartID } = useGlobalContext()
-  const [totalAmount, setTotalAmount] = useState(null)
+  const { isOpenMenu, setCartData} = useGlobalContext() 
   const dispatch = useDispatch()
 
 
@@ -40,7 +35,7 @@ const Cart = ({ cartId }) => {
 
 
 
-
+ useEffect(()=> {
   async function fetchData() {
 
     if (cartId) {
@@ -68,9 +63,10 @@ const Cart = ({ cartId }) => {
     }
   }
 
-  useEffect(() => {
-    fetchData();
-  }, [cartId]);
+  fetchData();
+}, [cartId, setCartData]);
+
+
 
 
   return (
@@ -94,7 +90,7 @@ const Cart = ({ cartId }) => {
               <div className="flex flex-col gap-8 justify-center">
                 {cartItems.map((items, index) => {
 
-                  const { image, currency, id, merchandiseId, price, quantity, title, vendor } = items
+                  const { image, id, price, quantity, title, vendor } = items
 
                   return (
                     <div key={index}>

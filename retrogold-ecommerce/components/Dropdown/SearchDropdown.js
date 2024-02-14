@@ -3,13 +3,12 @@ import React, { useState } from 'react'
 import { useGlobalContext } from '@/ Context/context';
 import Link from 'next/link'
 import Image from 'next/image'
-import { current } from '@reduxjs/toolkit';
+
 
 export default function SearchDropdown() {
 
     const { searchValues, isSearchValue, hideDropdown } = useGlobalContext()
     const [currentIndex, setCurrentIndex] = useState(0)
-    // console.log(searchValues[0].images.edges);
 
     const content = (
         <>
@@ -31,7 +30,7 @@ export default function SearchDropdown() {
                                             </Link>) :
                                             type === 'product' ? (
                                                 <Link href={`/shop/${handle}`}>
-                                                    <div className="flex flex-row gap-2 items-center text-xl">
+                                                    <div className="flex flex-row gap-2 items-center text-lg">
                                                         <Image
                                                             src={images?.edges[0].node.originalSrc}
                                                             width="50"

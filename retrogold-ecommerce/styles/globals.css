@@ -457,7 +457,8 @@ textarea {
   input[type=tel],
   input[type = number],
   input[type = date]{
-    width: 18rem;
+    max-width: 18rem;
+   
   }
 
   textarea {
