@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation/Navigation';
-import Footer from '@/components/Shared/Footer/footer';
+import Footer from '@/components/Shared/Footer/Footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
@@ -18,7 +18,7 @@ const Cart = ({ cartId }) => {
 
   const cartItems = useSelector((state) => state.cart)
   const totalPrice = useSelector((state) => state.totalPrice)
-  const { isOpenMenu, setCartData} = useGlobalContext() 
+  const { isOpenMenu, setCartData } = useGlobalContext()
   const dispatch = useDispatch()
 
 
@@ -35,36 +35,36 @@ const Cart = ({ cartId }) => {
 
 
 
- useEffect(()=> {
-  async function fetchData() {
+  useEffect(() => {
+    async function fetchData() {
 
-    if (cartId) {
-      try {
-        const response = await fetch('/api/shopifyCart/fetchCart', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ cartId })
-        })
+      if (cartId) {
+        try {
+          const response = await fetch('/api/shopifyCart/fetchCart', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cartId })
+          })
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch items from cart');
+          if (!response.ok) {
+            throw new Error('Failed to fetch items from cart');
+          }
+
+          const data = await response.json();
+
+          setCartData(data);
+
+        } catch (error) {
+          console.error('Error fetching items from cart:', error);
+          throw error;
         }
-
-        const data = await response.json();
-
-        setCartData(data);
-
-      } catch (error) {
-        console.error('Error fetching items from cart:', error);
-        throw error;
       }
     }
-  }
 
-  fetchData();
-}, [cartId, setCartData]);
+    fetchData();
+  }, [cartId, setCartData]);
 
 
 

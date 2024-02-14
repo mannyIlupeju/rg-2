@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Navigation from '@/components/Shared/Navigation/Navigation'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
-import Footer from '@/components/Shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/Footer'
 import Link from 'next/link'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'

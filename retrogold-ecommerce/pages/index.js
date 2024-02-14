@@ -4,11 +4,11 @@ import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
 import Experience from '/components/Experience/experience'
 import Blog from '/components/Blog/Blog'
-import Footer from '@/components/Shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/Footer'
 import Navigation from '@/components/Shared/Navigation/Navigation'
 import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
 import ProfileDrop from '@/components/Dropdown/ProfileDrop'
-import Calltoaction from '@/components/CallToAction/calltoaction'
+import Calltoaction from '@/components/CallToAction/Calltoaction'
 import { useGlobalContext } from '@/ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
@@ -49,7 +49,7 @@ export default function Home({ hero, quote, blog, calltoAction }) {
       <main className="h-min">
         <>
           <Navigation />
-          {showSearchDropdown && <SearchDropdrown/>}
+          {showSearchDropdown && <SearchDropdrown />}
           {isOpenMenu && <RespMenu />}
           {isSignIn && <Login />}
           {isUserRegistered && <Register />}

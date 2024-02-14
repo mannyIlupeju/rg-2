@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import PortableTextComponent from '@/components/Shared/PortableTextComponent';
 import Navigation from '@/components/Shared/Navigation/Navigation'
-import Footer from '@/components/Shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/Footer'
 import { sanityClient } from '/lib/sanity'
 
 const Privacy = ({ data }) => {

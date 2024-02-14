@@ -11,7 +11,7 @@ import Login from '../../components/Authorization/Login'
 import Register from '../../components/Authorization/Register';
 import Head from 'next/head'
 // import Footer from '@/components/Shared/Footer/footer';
-import Footer from '../../components/Shared/Footer/footer'
+import Footer from '../../components/Shared/Footer/Footer'
 // import RespMenu from '@/components/responsiveMenu/RespMenu';
 import RespMenu from '../../components/responsiveMenu/RespMenu'
 // import { useGlobalContext } from '@/ Context/context'

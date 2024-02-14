@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
 import Navigation from '@/components/Shared/Navigation/Navigation'
-import Footer from '@/components/Shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/Footer'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import Accordion from '@/components/Shared/Accordion'
 import Relatedproducts from '@/components/Shared/RelatedProducts';

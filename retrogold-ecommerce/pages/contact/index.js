@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '@/components/Shared/Navigation/Navigation'
 import Head from 'next/head'
 import ContactForm from '../../components/Shared/Forms/ContactForm'
-import Footer from '@/components/Shared/Footer/footer'
+import Footer from '@/components/Shared/Footer/Footer'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login';
 import Register from '@/components/Authorization/Register'
