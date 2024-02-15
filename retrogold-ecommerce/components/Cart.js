@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../ Context/context';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 import { onRemove, toggleCartItemQuantity } from '../store'
 import {useSelector, useDispatch} from 'react-redux'

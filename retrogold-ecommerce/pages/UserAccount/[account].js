@@ -19,28 +19,17 @@ dotenv.config()
 
 
 const Account = ({ user }) => {
-  const { setIsToken, SignOut } = useGlobalContext();
+  const { SignOut } = useGlobalContext();
   const [visibleComponent, setVisibleComponent] = useState(null)
 
 
   const firstName = user?.name.split(' ')[0];
-
-  const components = ['orders', 'address', 'personalInfo', 'signInSecurity']
 
   const toggleSelection = (componentName) => {
     setVisibleComponent(prevComponent =>
       prevComponent === componentName ? null : componentName)
   }
 
-  const router = useRouter();
-
-  // const SignOut = (e) => {
-  //   e.preventDefault();
-  //   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  //   setIsToken(null);
-  //   router.push('/');
-
-  // }
 
 
   return (

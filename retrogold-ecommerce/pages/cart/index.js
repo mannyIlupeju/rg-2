@@ -3,13 +3,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '@/components/Shared/Navigation/Navigation';
-import Footer from '/components/Shared/Footer/Footer';
+import Footer from '../../components/Shared/Footer/Footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Cookies from 'cookie';
 import { useSelector, useDispatch } from 'react-redux'
 import { onRemove, toggleCartItemQuantity } from '../../store'
 import { handleToggle, handleRemove, handleCheckOut } from '../../util/cartFunctions/functions'
-import { useGlobalContext } from '@/ Context/context'
+import { useGlobalContext } from '../../ Context/context'
 
 import { FaMinus, FaPlus } from 'react-icons/fa';
 

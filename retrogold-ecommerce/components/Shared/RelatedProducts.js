@@ -1,6 +1,4 @@
 import React from 'react';
-import { sanityClient } from '/lib/sanity'
-import { urlFor } from '@/lib/sanity';
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -18,7 +16,7 @@ const Relatedproducts = ({ currentProduct, allProducts }) => {
       </div>
         <div className="flex flex-col md:flex-row md:flex-wrap gap-10">
           {filterProducts.map((items)=>{
-            const{images, priceRange, title, vendor, shortDescription, handle, id} = items
+            const{images, priceRange, title, vendor, handle, id} = items
         
             
             return (
@@ -32,8 +30,6 @@ const Relatedproducts = ({ currentProduct, allProducts }) => {
                     <p className="font-semibold">{title}</p>
                     <p>${priceRange.minVariantPrice.amount}</p>
                   </div>
-          
-                  {/* <p className="text-zinc-500 text-xs">{shortDescription[0].children[0].text}</p> */}
                 </div>
               </Link>
               

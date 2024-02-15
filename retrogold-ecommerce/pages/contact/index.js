@@ -6,7 +6,7 @@ import Footer from '@/components/Shared/Footer/Footer'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login';
 import Register from '@/components/Authorization/Register'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 
 const Contact = () => {
   const { isOpenMenu, isSignIn, isUserRegistered } = useGlobalContext();
