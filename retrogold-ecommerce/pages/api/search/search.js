@@ -1,4 +1,4 @@
-import { searchSanity, searchShopify } from '@/helpers/api-util';
+import { searchSanity, searchShopify } from '../../../helpers/api-util';
 
 async function handler(req, res) {
   if (req.method !== "POST") {
