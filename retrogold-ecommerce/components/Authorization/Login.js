@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaEye, FaEyeSlash, FaTimes } from 'react-icons/fa';
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 
 const Login = () => {
   const [checkUserData, setCheckUserData] = useState({ email: '', password: '' });

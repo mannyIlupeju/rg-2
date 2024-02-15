@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from './Dropdown'
 import Link from 'next/link'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 
 const ProfileDrop = () => {
 

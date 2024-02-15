@@ -1,7 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 import Dropdown from './Dropdown'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 
 
 const WelcomeDrop = () => {

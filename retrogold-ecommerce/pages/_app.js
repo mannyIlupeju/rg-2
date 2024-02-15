@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-import AppContext from '@/ Context/context'
+import AppContext from '../ Context/context'
 import {useRouter} from 'next/router'
 import {useState, useEffect, StrictMode} from 'react'
 import { Provider } from 'react-redux'

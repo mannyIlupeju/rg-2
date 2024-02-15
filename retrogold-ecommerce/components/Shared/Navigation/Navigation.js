@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../../ Context/context';
 import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";

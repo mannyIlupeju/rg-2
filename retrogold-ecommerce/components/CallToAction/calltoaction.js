@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 
 import Image from 'next/image'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 
 const Calltoaction = ({calltoAction}) => {
   const inputRef = useRef(null)

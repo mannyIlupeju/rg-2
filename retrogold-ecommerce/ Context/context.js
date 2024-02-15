@@ -1,10 +1,8 @@
 import {createContext, useContext,  useState, useEffect} from 'react';
-import { sanityClient } from '../lib/sanity';
-import { FaWindows } from 'react-icons/fa';
 import { useRouter } from 'next/router'
  import { initializeCart } from '../store'
-import { useSelector, useDispatch } from 'react-redux'
-import searchDev from '@/pages/api/search/dist/search.dev';
+import {  useDispatch } from 'react-redux'
+
 
 
 //set up createContext

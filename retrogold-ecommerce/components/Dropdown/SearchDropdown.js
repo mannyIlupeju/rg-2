@@ -1,6 +1,6 @@
 import Dropdown from './Dropdown'
 import React, { useState } from 'react'
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 import Link from 'next/link'
 import Image from 'next/image'
 

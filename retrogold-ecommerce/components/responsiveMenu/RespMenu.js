@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { FaTimes } from 'react-icons/fa';
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 

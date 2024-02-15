@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaSearch } from 'react-icons/fa';
-
-import { getFilteredProducts, getFilteredBlogs } from '@/helpers/api-util';
-
-import { useGlobalContext } from '@/ Context/context';
-
-
+import { useGlobalContext } from '../../../ Context/context';
 
 
 
 
 const Search = () => {
-	const [inputValue, setInputValue] = useState('')
-	const [suggestion, setSuggestions] = useState([]);
-	const[returnedValue, setReturnedValue] = useState([])
-
-
-	const { activateSearch, showSearch, setShowSearch } = useGlobalContext()
+	const { activateSearch, showSearch} = useGlobalContext()
 	
 	return (
 		<div className='flex justify-end gap-2 border-zinc-500'>

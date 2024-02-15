@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 
 import ImageRender from './Images';
 
-import {useGlobalContext} from '@/ Context/context'
+import {useGlobalContext} from '../../../ Context/context'
 
 
 
