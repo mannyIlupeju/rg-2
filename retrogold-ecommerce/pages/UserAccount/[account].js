@@ -6,7 +6,7 @@ import Navigation from '@/components/Shared/Navigation/Navigation'
 import PersonalInfo from '@/components/AccountInformation/PersonalInfo'
 import SignInSecurity from '@/components/AccountInformation/SignInSecurity'
 import Orders from '@/components/AccountInformation/OrdersComponent'
-import Footer from '/components/Shared/Footer/Footer'
+import Footer from '../../components/Shared/Footer'
 import { FaChevronRight } from "react-icons/fa";
 import { MongoClient } from 'mongodb';
 import jwt from 'jsonwebtoken';

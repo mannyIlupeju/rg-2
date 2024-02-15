@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Navigation from '@/components/Shared/Navigation/Navigation';
 import { sanityClient } from '@/lib/sanity';
 import PortableTextComponent from '@/components/Shared/PortableTextComponent';
-import Footer from '/components/Shared/Footer/Footer';
+import Footer from '../../components/Shared/Footer'
 import Breadcrumb from '/components/Shared/Breadcrumbs';
 import RespMenu from '@/components/responsiveMenu/RespMenu';
 import { useGlobalContext } from '@/ Context/context';

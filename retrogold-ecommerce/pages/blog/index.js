@@ -3,7 +3,7 @@ import Navigation from '@/components/Shared/Navigation/Navigation'
 import { sanityClient } from '@/lib/sanity';
 import Head from 'next/head'
 import Image from 'next/image'
-import Footer from '@/components/Shared/Footer/Footer';
+import Footer from '../../components/Shared/Footer';
 import Link from 'next/link'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
