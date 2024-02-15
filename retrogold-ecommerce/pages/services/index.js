@@ -6,7 +6,7 @@ import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
 import ProfileDrop from '@/components/Dropdown/ProfileDrop'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
-import { useGlobalContext } from '@/ Context/context'
+import { useGlobalContext } from '../../ Context/context'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import BookAppointment from '@/components/CalendarBooking/cal-com'
 
@@ -19,7 +19,6 @@ const Services = () => {
     isHovered,
     isDropdownHovered,
     isProfileHovered,
-    isProfileDropdownHovered
   } = useGlobalContext();
 
   const shouldShowDropdown = isHovered || isDropdownHovered

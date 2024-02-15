@@ -8,7 +8,7 @@ import Footer from '@/components/Shared/Footer/Footer'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import Accordion from '@/components/Shared/Accordion'
 import Relatedproducts from '@/components/Shared/RelatedProducts';
-import { useGlobalContext } from '@/ Context/context';
+import { useGlobalContext } from '../../ Context/context';
 import Breadcrumb from '/components/Shared/Breadcrumbs'
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
@@ -17,7 +17,7 @@ import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import Cart from '@/components/Cart';
-import { addToCart, toggleCartItemQuantity } from '../../store'
+import { addToCart } from '../../store'
 import client from '../../util/shopify/shopifyClient'
 
 

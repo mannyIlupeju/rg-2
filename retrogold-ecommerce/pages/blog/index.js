@@ -8,7 +8,7 @@ import Footer from '../../components/Shared/Footer/Footer';
 import RespMenu from '@/components/responsiveMenu/RespMenu'
 import Login from '@/components/Authorization/Login'
 import Register from '@/components/Authorization/Register'
-import { useGlobalContext } from '@/ Context/context'
+import { useGlobalContext } from '../../ Context/context'
 import WelcomeDrop from '@/components/Dropdown/WelcomeDrop'
 import ProfileDrop from '@/components/Dropdown/ProfileDrop'
 
