@@ -1,1 +1,0 @@
-{"version":3,"sources":["productSearch.js"],"names":["handler","req","res"],"mappings":";;;;;;;AAEA,SAAeA,OAAf,CAAuBC,GAAvB,EAA4BC,GAA5B;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;eAKeF,O","sourcesContent":["\n\nasync function handler(req, res) {\n\n}\n\n\nexport default handler"],"file":"productSearch.dev.js"}
