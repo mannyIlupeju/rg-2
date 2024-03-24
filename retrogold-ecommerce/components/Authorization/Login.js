@@ -63,6 +63,7 @@ const Login = () => {
         <div className="text-center mb-4">
           <h1 className="uppercase text-2xl text-slate-900">Login</h1>
         </div>
+        
         <form className="flex flex-col justify-center gap-3" onSubmit={handleSubmit}>
           {/* Email Input */}
           <div className="flex flex-col gap-3">
