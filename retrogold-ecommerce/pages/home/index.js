@@ -35,10 +35,6 @@ export default function Home({ hero, quote, blog, calltoAction }) {
   const showSearchDropdown = isSearchValue || false
 
 
-
-
-
-
   return (
     <>
       <Head>
@@ -57,7 +53,7 @@ export default function Home({ hero, quote, blog, calltoAction }) {
           {isUserRegistered && <Register />}
           {shouldShowDropdown && <WelcomeDrop />}
           {shouldProfileShowDropdown && <ProfileDrop />}
-          <Landing hero={hero} />
+          <Landing/>
           <Quotes quote={quote} />
           <Experience />
           <Blog blog={blog} />
@@ -76,11 +72,6 @@ const blogQuery = `*[_type == "blog"]{
   tag, 
   slug
 }`
-const heroQuery = `*[_type == 'hero']{
-  headline,
-  "heroImages":images.asset->url,
-  _id
-}`
 const quoteQuery = `*[_type == 'quote']`
 const calltoActionQuery = `*[_type ==  'callToAction']{
   headline, 
@@ -92,13 +83,11 @@ const calltoActionQuery = `*[_type ==  'callToAction']{
 // getStaticProps works when rendering from a headless CMS
 export async function getStaticProps() {
   const blog = await sanityClient.fetch(blogQuery)
-  const hero = await sanityClient.fetch(heroQuery)
   const quote = await sanityClient.fetch(quoteQuery)
   const calltoAction = await sanityClient.fetch(calltoActionQuery)
 
   return {
     props: {
-      hero,
       quote,
       blog,
       calltoAction,

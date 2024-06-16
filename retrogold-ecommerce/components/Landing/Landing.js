@@ -1,11 +1,9 @@
 import React from 'react';
 import Hero from './Hero/Hero';
 
-
-
-const Landing = ({ hero }) => {
+const Landing = () => {
   return (
-    <Hero hero={hero} />
+    <Hero/>
   );
 }
 
