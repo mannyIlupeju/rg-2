@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const Blog = ({ blog }) => {
     const mainImageBlog = {
-        width: '520px',
+        width: '50rem',
         height: 'auto',
         borderRadius: '0.5rem'
     }
@@ -15,8 +15,8 @@ const Blog = ({ blog }) => {
 
 
     const smallImageBlog = {
-        width: '340px',
-        height: '250px',
+        width: '34rem',
+        height: '25rem',
         borderRadius: '0.5rem',
         objectFit: 'cover'
     }
@@ -24,12 +24,11 @@ const Blog = ({ blog }) => {
 
 
     return (
-
-
-        <div className="mx-auto bg-white text-zinc-100 xl:px-28 md:px-2 p-20">
+        <div className="mx-auto bg-white text-zinc-100 xl:px-28 md:px-2 px-5 pt-48">
+            
             <div className="flex justify-start items-center ">
                 <div className="text-zinc-800">
-                    <h1 className="text-5xl">Latest Blog Posts</h1>
+                    <h1 className="md:text-5xl text-4xl">Latest Blog Posts</h1>
                     <p className="text-medium">Uplifting, motivating stories about the world today</p>
                 </div>
             </div>
@@ -42,7 +41,7 @@ const Blog = ({ blog }) => {
                             <div className="bg-red-500 w-fit px-2 mb-4 rounded-lg">
                                 <span>{blog[0].tag}</span>
                             </div>
-                            <Image src={blog[0].mainImage} alt="Intro to candle magic" style={mainImageBlog} width={250} height={250} />
+                            <Image src={blog[0].mainImage} alt="Intro to candle magic" style={mainImageBlog} width={400} height={400} />
                         </div>
 
                         <div>
@@ -71,8 +70,8 @@ const Blog = ({ blog }) => {
                                 src={blog[i + 1].mainImage}
                                 alt='Intro to candle magic'
                                 className="smallImageBlog w-full h-auto md:w-auto"
-                                width={200}
-                                height={200}
+                                width={400}
+                                height={400}
                                 loading='lazy'
                             />
                             <div className="text-sm font-light mt-4 lg:px-2 md:px-4 px-8 text-zinc-700">
@@ -90,7 +89,7 @@ const Blog = ({ blog }) => {
                 <Link href='/blog' className="bg-black p-3 rounded-2xl">View more Stories</Link>
             </div>
 
-
+            
         </div>
 
     );

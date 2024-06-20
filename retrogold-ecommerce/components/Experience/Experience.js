@@ -24,17 +24,17 @@ const Experience = () => {
 
     return (
 
-        <section className="relative bg-white z-2 p-20">
+        <section className="relative bg-white z-2 pt-20">
             <motion.div
                 className="flex justify-center"
                 viewport={{ once: false }}
             >
                 <div className="absolute z-10 ">
-                    <h1 className="text-zinc-800 text-4xl lg:text-3xl font-medium text-center">The Retrogold Experience</h1>
+                    <h1 className="text-zinc-800 md:text-4xl text-3xl font-medium text-center">The Retrogold Experience</h1>
                 </div>
 
 
-                <motion.div className="flex flex-col md:flex-row justify-center gap-4"
+                <motion.div className="flex flex-col lg:flex-row justify-center gap-4"
                     initial={"offscreen"}
                     whileInView={{
                         y: 80,
@@ -48,36 +48,36 @@ const Experience = () => {
 
 
                     <motion.div style={{ translateY: x }}
-                        className="p-3 cursor-pointer"
+                        className="p-3 cursor-pointer w-full"
                     >
                         <Image
                             src='/images/shop.JPG'
                             alt="shop Image"
-                            className="experienceImage imageParallax1 justify-items-end"
-                            width={200}
-                            height={200}
+                            className="experienceImage justify-items-end"
+                            width={800}
+                            height={800}
                             loading='lazy'
                             ref={imageElement1}
                         />
-                        <div className="flex justify-center relative bottom-56">
+                        <div className="flex justify-center relative md:bottom-56 bottom-28">
                             <Link href='/shop' className="text-3xl p-2 text-zinc-800 experience-link cursor-pointer">Shop</Link>
                         </div>
                     </motion.div>
 
 
                     <motion.div style={{ translateY: y }}
-                        className="p-3 cursor-pointer"
+                        className="p-3 cursor-pointer w-full"
                     >
                         <Image
                             src='/images/services.jpg'
                             alt="shop Image"
-                            className="experienceImage imageParallax2"
+                            className="experienceImage "
                             ref={imageElement2}
-                            width={200}
-                            height={200}
+                            width={800}
+                            height={800}
                             loading='lazy'
                         />
-                        <div className="flex justify-center relative bottom-56">
+                        <div className="flex justify-center relative md:bottom-56 bottom-28">
                             <Link href="/services" className="text-3xl p-2 text-zinc-800 experience-link">Services</Link>
                         </div>
                     </motion.div>

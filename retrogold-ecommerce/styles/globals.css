@@ -2,6 +2,7 @@
 
 
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -184,12 +185,9 @@ box-shadow: 2px 5px 15px 2px #000000;
 
 
 .experienceImage {
-  width: 400px;
-  height: 400px;
-  
-  background-color: var(--yellow);  
-  padding: 10px;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .heroText {
@@ -410,19 +408,17 @@ textarea {
 
 /**Media Queries**/
 @media screen and (max-width: 323px) {
-  .experienceImage {
-    width: 30%;
-  }
-}
+ 
 
-.loginStyle {
+  .loginStyle {
     background:var(--yellow);
-    color: hsl(0, 17%, 95%);
-}
+  color: hsl(0, 17%, 95%);
+  }
 
-.sideCart {
-  overflow-y: auto;
+  .sideCart {
+    overflow-y: auto;
 
+  }
 }
 
 
@@ -500,6 +496,7 @@ width: 100%; /* Full width on small screens */
   .mainTarotBox {
     width: 30rem;
   }
+
 }
 
 
@@ -507,9 +504,8 @@ width: 100%; /* Full width on small screens */
 @media only screen and (max-width: 767px) {
   .loginStyle {
     width: 80%;
-    /* take up most of the screen width */
     padding: 2rem 3rem;
-    /* reduce padding */
+  
   }
 
   .formInput {
@@ -520,6 +516,8 @@ width: 100%; /* Full width on small screens */
     width: 100%;
     /* make the button full width for easier tapping */
   }
+
+
 }
 
 /* Tablets */
@@ -527,5 +525,14 @@ width: 100%; /* Full width on small screens */
   .loginStyle {
     width: 80%;
     /* give a bit more margin on the sides */
+  }
+
+}
+
+@media only screen and (max-width:450px) {
+  .experienceImage {
+    width: 100%;
+    height: 100%;
+    object-fit:cover
   }
 }
