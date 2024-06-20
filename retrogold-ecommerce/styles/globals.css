@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
+
 
 
 @tailwind base;
@@ -34,34 +35,38 @@ html {
 }
 
 body {
-  font-family: 'Manrope', serif;
+  font-family: 'Cantata', serif;
   overflow-x: hidden;
-  background: var(--white);
+  background:white;
 }
 
-.section-background {
-  background: linear-gradient(180deg, rgb(221, 221, 213) 32%, rgba(135,137,192,1) 100%);
-}
+
 
 .overlay {
   position: fixed;
   top: 0;
   left:0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.295);
   z-index: 3;
+}
+
+.heroOverlay {
+ background-color: rgba(199, 29, 29, 0.973);
+ width: 100%;
+ height: 100%;
 }
 
 
 .navigationStyle {
 /* justify-content:space-between; */
 padding: 0 4rem 0 4rem;
-background: var(--white);
+background-color: white;
 gap: 2rem;
 z-index: 10;
 cursor: pointer;
-color: var(--white);
+color: var(--teaGreen);
 }
 
 .navigation.hidden {
@@ -74,12 +79,14 @@ color: var(--white);
 
 
 .heroImages {
-  background-color: linear-gradient(rgba(68, 67, 67, 0.979), rgba(0, 0, 0, 0.5));
+  background-color: linear-gradient(rgba(168, 42, 42, 0.979), rgba(0, 0, 0, 0.5));
   background-repeat: no-repeat;
   position: relative;
   width: 100vw;
+  max-width: 100%;
+  height: auto;
   background-position: center;
-  height: 80vh
+ 
   
 }
 
@@ -404,7 +411,7 @@ textarea {
 /**Media Queries**/
 @media screen and (max-width: 323px) {
   .experienceImage {
-    height: 283px
+    width: 30%;
   }
 }
 

@@ -26,11 +26,11 @@ const Blog = ({ blog }) => {
     return (
 
 
-        <div className="container mx-auto text-zinc-100 xl:px-28 md:px-2 my-12 p-12">
+        <div className="mx-auto bg-white text-zinc-100 xl:px-28 md:px-2 p-20">
             <div className="flex justify-start items-center ">
                 <div className="text-zinc-800">
                     <h1 className="text-5xl">Latest Blog Posts</h1>
-                    <p className="text-medium mt-4">Uplifting, motivating stories about the world today</p>
+                    <p className="text-medium">Uplifting, motivating stories about the world today</p>
                 </div>
             </div>
 

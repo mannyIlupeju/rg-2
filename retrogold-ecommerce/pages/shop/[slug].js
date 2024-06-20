@@ -339,7 +339,7 @@ const ProductDetails = ({ product, allProducts }) => {
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-col gap-4 text-sm w-80">
+              <div className="mt-8 flex flex-col gap-4 text-sm w-96">
                 <Accordion title="Product Description" content={desc} id="productDesc" />
 
               </div>

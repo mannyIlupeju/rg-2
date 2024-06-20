@@ -39,8 +39,8 @@ const About = ({ data }) => {
 
       <main>
         <div className="container mx-auto p-8 md:p-12 py-24 lg:p-24 flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row gap-10 items-center text-zinc-700">
-            <article className="flex-1 leading-relaxed text-lg">
+          <div className="flex flex-col md:flex-row gap-10 text-zinc-700">
+            <article className="flex-1 text-lg items-start">
               <PortableTextComponent detail={aboutUs} />
             </article>
             <div className="flex-shrink-0">

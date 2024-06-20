@@ -44,8 +44,8 @@ export default function Home({ hero, quote, blog, calltoAction }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-min">
-        <>
+      <main className="h-screen" >
+        <div className="h-screen">
           <Navigation />
           {showSearchDropdown && <SearchDropdrown />}
           {isOpenMenu && <RespMenu />}
@@ -58,9 +58,9 @@ export default function Home({ hero, quote, blog, calltoAction }) {
           <Experience />
           <Blog blog={blog} />
           <Calltoaction calltoAction={calltoAction} />
-        </>
+          <Footer />
+        </div>
       </main>
-      <Footer />
     </>
   )
 }

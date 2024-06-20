@@ -47,8 +47,7 @@ const Calltoaction = ({ calltoAction }) => {
 
 
     return (
-        <div>
-            <div className="md:pb-28 p-12">
+            <div className="md:pb-28 p-20 bg-white">
                 <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 max-w-screen-xl mx-auto">
                     <div className="md:w-1/2 w-full text-left max-w-xl">
                         <div className="text-gray-600 whitespace-normal">
@@ -87,7 +86,6 @@ const Calltoaction = ({ calltoAction }) => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -35,7 +35,7 @@ const SampleImageComponent = ({value, isInline}) => {
   return (
     <div className="">
     <Image src= {urlFor(value).image(value).width(500).url()}
-      alt=" "
+      alt="Founder of Retrogold, Bimbo Afolabi "
       loading="lazy"
       style={{
         // Display alongside text if image appears inside a block text span
@@ -52,7 +52,7 @@ const SampleImageComponent = ({value, isInline}) => {
 const components = {
   block: {
     // Ex. 1: customizing common block types
-    h1: ({children}) => <h1 className="text-4xl mb-8">{children}</h1>,
+    h1: ({children}) => <h1 className="text-3xl mb-8">{children}</h1>,
   
 
     // Ex. 2: rendering custom styles
@@ -63,7 +63,7 @@ const components = {
       <h2 className="text-xl my-8 text-zinc-700">{children}</h2>
     ),
     p: ({children}) => {
-      <p className="text-xl font-extrabold text-zinc-700">{children}</p>
+      <p className="text-xl font-extrabold text-zinc-700 leading-loose">{children}</p>
     }
   },
 

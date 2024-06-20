@@ -21,7 +21,7 @@ async function handler (req, res){
   if(req.method === 'POST'){
     const email = req.body.email
     const userEmail = email.toLowerCase()
-    console.log(userEmail)
+   
     
     if(!userEmail || !userEmail.includes('@') || userEmail === ''){
       return res.status(422).json({message: 'Please enter a correct email address'})

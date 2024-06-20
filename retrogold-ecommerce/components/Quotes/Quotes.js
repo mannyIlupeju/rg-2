@@ -17,15 +17,15 @@ const Quotes = ({ quote }) => {
   }, [quote.length]);
 
   return (
-   <section className="container mx-auto p-20">
-    <div className="flex flex-col md:flex-row justify-center items-center rounded-lg space-y-8 md:space-y-0 md:space-x-8 max-w-screen-lg mx-auto">
-      <div className="flex justify-center w-full md:w-1/2">
-        <Image src="/images/quotes.jpeg" alt="woman meditating" className="w-full h-auto rounded-md object-cover" width={50} height={50} unoptimized/>
-      </div>
-      <div className="flex flex-col justify-center w-full md:w-1/2 text-zinc-700 space-y-4">
-        <p className="text-lg md:text-xl font-light text-gray-700">{quote[currentIndex].quote}</p>
-        <figcaption className="mt-2 self-end text-gray-700">- {quote[currentIndex].author}</figcaption>
-      </div>
+   <section className="container-width bg-white lg:p-20 p-4 ">
+      <div className="flex flex-col md:flex-row justify-center items-center rounded-lg p-5 gap-4 max-w-screen-lg mx-auto">
+        <div className="flex justify-center w-full md:w-1/2">
+          <Image src="/images/quotes.jpeg" alt="woman meditating" className="w-full h-auto rounded-md object-cover" width={50} height={50} unoptimized/>
+        </div>
+        <div className="flex flex-col justify-center w-full md:w-1/2 text-zinc-700 space-y-4">
+          <p className="text-lg md:text-xl font-light text-gray-700">{quote[currentIndex].quote}</p>
+          <figcaption className="mt-2 self-end text-gray-700">- {quote[currentIndex].author}</figcaption>
+        </div>
     </div>
   </section>
 

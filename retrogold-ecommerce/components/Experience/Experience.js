@@ -24,13 +24,13 @@ const Experience = () => {
 
     return (
 
-        <section className="relative experienceBg z-2 ">
+        <section className="relative bg-white z-2 p-20">
             <motion.div
-                className="p-12 flex justify-center"
+                className="flex justify-center"
                 viewport={{ once: false }}
             >
-                <div className="absolute z-10 mb-8">
-                    <h1 className="text-zinc-800 text-4xl font-medium text-center">The Retrogold Experience</h1>
+                <div className="absolute z-10 ">
+                    <h1 className="text-zinc-800 text-4xl lg:text-3xl font-medium text-center">The Retrogold Experience</h1>
                 </div>
 
 
