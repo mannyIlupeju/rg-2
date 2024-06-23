@@ -32,11 +32,7 @@ const NavLinks = ({ links }) => (
 );
 
 
-gsap.registerPlugin(useGSAP);
 
-useGSAP(()=>{
-  gsap.to(.navigationStyle)
-})
 
 
 //Navigation component
