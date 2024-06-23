@@ -19,6 +19,7 @@ import SearchDropdrown from '@/components/Dropdown/SearchDropdown'
 
 
 export default function Home({ hero, quote, blog, calltoAction }) {
+  console.log(blog[0].description[0].children[0].text)
   const {
     isOpenMenu,
     isSignIn,

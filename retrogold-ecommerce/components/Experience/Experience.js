@@ -24,17 +24,15 @@ const Experience = () => {
 
     return (
 
-        <section className="relative bg-white z-2 pt-20">
+        <section className="relative bg-white z-2">
             <motion.div
                 className="flex justify-center"
                 viewport={{ once: false }}
             >
-                <div className="absolute z-10 ">
-                    <h1 className="text-zinc-800 md:text-4xl text-3xl font-medium text-center">The Retrogold Experience</h1>
-                </div>
+            
 
 
-                <motion.div className="flex flex-col lg:flex-row justify-center gap-4"
+                <motion.div className="flex flex-col lg:flex-row justify-center"
                     initial={"offscreen"}
                     whileInView={{
                         y: 80,
@@ -59,7 +57,7 @@ const Experience = () => {
                             loading='lazy'
                             ref={imageElement1}
                         />
-                        <div className="flex justify-center relative md:bottom-56 bottom-28">
+                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-40 -translate-y-60">
                             <Link href='/shop' className="text-3xl p-2 text-zinc-800 experience-link cursor-pointer">Shop</Link>
                         </div>
                     </motion.div>
@@ -77,7 +75,7 @@ const Experience = () => {
                             height={800}
                             loading='lazy'
                         />
-                        <div className="flex justify-center relative md:bottom-56 bottom-28">
+                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-40 -translate-y-60">
                             <Link href="/services" className="text-3xl p-2 text-zinc-800 experience-link">Services</Link>
                         </div>
                     </motion.div>

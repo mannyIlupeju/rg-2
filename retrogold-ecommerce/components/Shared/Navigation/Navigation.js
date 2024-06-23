@@ -8,6 +8,11 @@ import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";
 import { debounce } from '../../../helpers/debounce'
 import Search from '../Search/Search'
+import {useRef} from 'react';
+import gsap from 'gsap';
+import {useGSAP} from "@gsap/react"
+
+
 
 
 
@@ -21,12 +26,17 @@ const NavLink = ({ name, href }) => {
 };
 
 const NavLinks = ({ links }) => (
-	<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center text-zinc-700  hidden'>
+	<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center text-gray-100  hidden'>
 		{links.map(link => <NavLink key={link.name} {...link} />)}
 	</div>
 );
 
 
+gsap.registerPlugin(useGSAP);
+
+useGSAP(()=>{
+  gsap.to(.navigationStyle)
+})
 
 
 //Navigation component
@@ -87,15 +97,15 @@ const Navigation = () => {
 	
 
 	return (
-    <nav className='flex justify-between flex-row gap-2 navigationStyle'>
+    <nav className='flex justify-between flex-row gap-2 navigationStyle fixed w-full'>
       <div className='flex justify-center order-2 lg:order-1'>
         <Link href='/home'>
           <Image
-            src='/images/Retrogold (6) (1).png'
+            src='/images/retrogold_white.png'
             alt='retrogoldlogo'
             className='imageBox'
-            width={250}
-            height={250}
+            width={450}
+            height={450}
           />
         </Link>
       </div>
@@ -111,7 +121,7 @@ const Navigation = () => {
             />
             <input
               type='text'
-              className='searchInput bg-gray-300 p-1 border-black w-96 text-zinc-900'
+              className='searchInput bg-gray-300 p-1 border-black w-96 text-gray-100'
               value={inputValue}
               onChange={handleInput}
               autoComplete='off'
@@ -147,7 +157,7 @@ const Navigation = () => {
         ) : (
           <IoPerson
             className='relative'
-            color='black'
+            color='white'
             size='1.8rem'
             onMouseEnter={displayWelcomeModal}
             onMouseLeave={removeWelcomeModal}
@@ -156,7 +166,7 @@ const Navigation = () => {
 
         <div className='flex flex-row justify-end'>
           <Link href='/cart' className='flex flex-row'>
-            <FaShoppingCart size='1.8rem' color='black' />
+            <FaShoppingCart size='1.8rem' color='white' />
             {cartItems ? (
               <div className='mx-2 text-zinc-800 font-semibold'>
                 <span>{totalQuantity}</span>
@@ -170,9 +180,9 @@ const Navigation = () => {
         <FaBars color='black' size='1.5rem' onClick={toggleRespMenu} />
       </div>
 
-      <div className='flex justify-end order-3 lg:hidden items-center'>
+      <div className='flex flex-row justify-end order-3 lg:hidden items-center'>
         <Link href='/cart'>
-          <FaShoppingCart size='1.8rem' color='black' />
+          <FaShoppingCart size='1.8rem' color='white' />
           {cartItems ? (
             <div className='mx-2 text-zinc-800 font-semibold'>
               <span>{totalQuantity}</span>

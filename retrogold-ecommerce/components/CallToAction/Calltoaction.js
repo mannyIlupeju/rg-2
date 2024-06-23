@@ -48,10 +48,10 @@ const Calltoaction = ({ calltoAction }) => {
 
     return (
             <div className="md:pb-28 p-20 bg-white">
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 max-w-screen-xl mx-auto">
-                    <div className="md:w-1/2 w-full text-left max-w-xl">
+                <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 max-w-screen-xl mx-auto">
+                    <div className="md:w-1/3 w-full text-left max-w-xl">
                         <div className="text-gray-600 whitespace-normal">
-                            <h1 className="text-xl md:text-2xl font-bold w-3/4">{calltoAction[0].headline}</h1>
+                            <h1 className="text-xl md:text-2xl font-bold md:w-3/4 w-full">{calltoAction[0].headline}</h1>
                             <p className="text-xl mt-8 font-semibold">{calltoAction[0].sub_headline}</p>
                         </div>
 

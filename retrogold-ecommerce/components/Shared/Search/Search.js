@@ -11,7 +11,7 @@ const Search = () => {
 	return (
 		<div className='flex justify-end gap-2 border-zinc-500'>
 			<div className='relative right-3'>
-				<FaSearch size='1.5rem' color='black' onClick={activateSearch} className={showSearch ? 'hidden' : ''} />
+				<FaSearch size='1.5rem' color='white' onClick={activateSearch} className={showSearch ? 'hidden' : ''} />
 			</div>
 		</div>
 	);

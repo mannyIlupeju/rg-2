@@ -113,7 +113,7 @@ const Cart = ({ cartId }) => {
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
                                 <button onClick={() => handleRemove(id, cartId, quantity, onRemoveCallback)}>
-                                  <p>On Remove</p>
+                                  <p>Remove</p>
                                 </button>
                               </div>
                             </div>

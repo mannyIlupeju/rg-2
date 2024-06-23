@@ -17,7 +17,7 @@ const Quotes = ({ quote }) => {
   }, [quote.length]);
 
   return (
-   <section className="container-width bg-white lg:p-20 p-4 ">
+   <section className="container-width bg-white lg:pt-20 p-4 ">
       <div className="flex flex-col md:flex-row justify-center items-center rounded-lg p-5 gap-4 max-w-screen-lg mx-auto">
         <div className="flex justify-center w-full md:w-1/2">
           <Image src="/images/quotes.jpeg" alt="woman meditating" className="w-full h-auto rounded-md object-cover" width={50} height={50} unoptimized/>
