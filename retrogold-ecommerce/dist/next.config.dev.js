@@ -11,8 +11,12 @@ module.exports = {
       hostname: 'cdn.sanity.io',
       port: '',
       pathname: '/images/foypmm2m/production/**'
-    }],
-    domains: ["cdn.shopify.com"]
+    }, {
+      protocol: 'https',
+      hostname: 'cdn.shopify.com',
+      port: '',
+      pathname: '/s/files/**'
+    }]
   },
   transpilePackages: ['gsap']
 }, nextConfig;

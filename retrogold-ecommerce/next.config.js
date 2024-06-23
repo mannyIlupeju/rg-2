@@ -12,9 +12,15 @@ module.exports = {
         port: '',
         pathname: '/images/foypmm2m/production/**',
         
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
+        port: '',
+        pathname: '/s/files/**',
+
       }
-    ],
-    domains: ["cdn.shopify.com"]
+    ]
   },
   transpilePackages: ['gsap'],
 }, nextConfig
