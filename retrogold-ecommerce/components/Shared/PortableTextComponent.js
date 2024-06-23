@@ -52,18 +52,18 @@ const SampleImageComponent = ({value, isInline}) => {
 const components = {
   block: {
     // Ex. 1: customizing common block types
-    h1: ({children}) => <h1 className="text-3xl mb-8">{children}</h1>,
+    p: ({children}) => <p className="text-4xl mb-8">{children}</p>,
   
 
     // Ex. 2: rendering custom styles
-    h3: ({children}) => (
-      <h3 className="text-3xl text-zinc-700 text-center">{children}</h3>
+    p: ({children}) => (
+      <p className="text-4xl text-zinc-700 text-center">{children}</p>
     ),
-    h2: ({children}) => (
-      <h2 className="text-xl my-8 text-zinc-700">{children}</h2>
+    p: ({children}) => (
+      <p className="text-4xl my-8 text-zinc-700">{children}</p>
     ),
     p: ({children}) => {
-      <p className="text-xl font-extrabold text-zinc-700 leading-loose">{children}</p>
+      <p className="text-4xl font-extrabold text-zinc-700 leading-loose">{children}</p>
     }
   },
 
@@ -84,7 +84,6 @@ const components = {
 
 
 const PortableTextComponent = (props) => {
-  console.log(props)
   
   return (
     <>

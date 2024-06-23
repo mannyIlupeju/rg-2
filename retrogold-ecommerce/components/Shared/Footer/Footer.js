@@ -40,7 +40,7 @@ const Footer = () => {
                 <div className="flex flex-col lg:gap-8 md:gap-2">
                     <Link href='/home'>
                         <Image
-                            src='/images/Retrogold (7) (1).png'
+                            src='/images/retrogold-white.png'
                             alt="retrogoldlogo"
                             className="footer-imageBox"
                             width={200}

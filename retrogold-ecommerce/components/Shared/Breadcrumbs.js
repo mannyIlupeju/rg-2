@@ -11,7 +11,7 @@ const Breadcrumb = () => {
   
 
   return (
-    <nav className="bg-gray-200 py-2 px-4 breadcrumbs text-sm">
+    <nav className="bg-gray-200 py-2 p-4 breadcrumbs text-sm">
       <ol className="list-reset flex text-gray-700">
         <li>
           <Link href="/">Home</Link>

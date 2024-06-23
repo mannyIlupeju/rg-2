@@ -44,6 +44,7 @@ const Navigation = () => {
 	
 	const totalQuantity = useSelector(state => state.totalQuantity);
   const navRef = useRef();
+  const [imageSrc, SetImageSrc] = useState('/images/retrogold-gray.png')
 	const [inputValue, setInputValue] = useState('');
 	const {
     mainNavRef,
@@ -103,7 +104,9 @@ const Navigation = () => {
         trigger:navRef.current,
         start: "top top",
         end: () => "+=" + document.documentElement.scrollHeight,
-        toggleClass: {targets: navRef.current, className:"navigationScroll"}
+        toggleClass: {targets: navRef.current, className:"navigationScroll"},
+        onEnter: () => SetImageSrc('/images/retrogold-black.png'),
+        onLeaveBack: () => SetImageSrc('/images/retrogold-gray.png')
       }
       
     })
@@ -112,15 +115,16 @@ const Navigation = () => {
 	
 
 	return (
-    <nav className='flex justify-between flex-row gap-2 navigationStyle fixed w-full h-fit' ref={navRef}>
-      <div className='flex justify-center order-2 lg:order-1'>
+    <nav className='flex justify-between flex-row gap-8 navigationStyle fixed w-full ' ref={navRef}>
+      <div className='flex justify-center order-2 lg:order-1 items-center'>
         <Link href='/home'>
           <Image
-            src='/images/retrogold_white.png'
+            src={imageSrc}
             alt='retrogoldlogo'
             className='imageBox'
-            width={450}
-            height={450}
+            width={1000}
+            height={1000}
+            loading='lazy'
           />
         </Link>
       </div>
@@ -159,7 +163,7 @@ const Navigation = () => {
       <div className='lg:flex flex-row lg:items-center lg:order-3 gap-8 hidden'>
         <Search />
 
-        {isToken ? (
+        {/* {isToken ? (
           <Link href='/userAccount/account'>
             <span
           
@@ -176,7 +180,7 @@ const Navigation = () => {
             onMouseEnter={displayWelcomeModal}
             onMouseLeave={removeWelcomeModal}
           />
-        )}
+        )} */}
 
         <div className='flex flex-row justify-end'>
           <Link href='/cart' className='flex flex-row'>

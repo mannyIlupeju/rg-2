@@ -267,7 +267,7 @@ const ProductDetails = ({ product, allProducts }) => {
 
       <main>
         <div className="bg-white productDetailFonts">
-          <div className=" container mx-auto w-fit grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-16 px-16">
+          <div className=" container mx-auto w-fit grid grid-cols-1 md:grid-cols-2 md:gap-16 justify-center py-48 px-16">
             <div className="flex flex-col justify-end md:gap-10 gap-4 overflow-hidden w-fit">
 
               <div>

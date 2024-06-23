@@ -60,19 +60,23 @@ body {
 }
 
 
+
 .navigationStyle {
-/* justify-content:space-between; */
-padding: 0 4rem 0 4rem;
 gap: 2rem;
+height: 10%;
+padding: 4rem;
 z-index: 10;
 cursor: pointer;
 color: var(--teaGreen);
+transition: background-color 0.5s ease, color 0.5s ease, height 0.5s ease;
 }
 
 .navigationScroll {
   background-color: white;
   color: black;
-  height: 9rem;
+  height: 10%;
+  padding: 4rem;
+  transition: background-color 0.5s ease, color 0.5s ease, height 0.5s ease;
 }
 
 .navigation.hidden {
@@ -236,10 +240,10 @@ input[type=email] {
 }
 
 .imageBox {
-  width: 20rem;
-  height: auto;
+  width: 100%;
   max-width: 100%;
-
+  display: flex;
+  align-items: center;
 }
 
 .productImageBox {

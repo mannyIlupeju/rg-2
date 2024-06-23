@@ -25,7 +25,7 @@ const Contact = () => {
       {isSignIn && <Login />}
       {isUserRegistered && <Register />}
 
-      <main className="container mx-auto min-h-screen flex items-center justify-center">
+      <main className="container mx-auto min-h-screen flex items-center justify-cente py-24">
         <div className="flex flex-col items-center justify-center w-full py-12 px-4 sm:px-6 lg:py-24 lg:px-8">
           <div className="lg:grid lg:grid-cols-3 lg:gap-12 w-full max-w-5xl">
 

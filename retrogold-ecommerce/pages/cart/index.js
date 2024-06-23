@@ -86,8 +86,8 @@ const Cart = ({ cartId }) => {
         <div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${cartItems.length ? "" : "h-screen"}`}>
           {cartItems.length ?
             <>
-              <h1 className="flex justify-center text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700 pt-14">Your Cart</h1>
-              <div className="flex flex-col gap-8 justify-center">
+              <h1 className="flex justify-center text-xl sm:text-2xl md:text-3xl font-bold text-zinc-700 pt-32">Your Cart</h1>
+              <div className="flex flex-col py-24 gap-8 justify-center">
                 {cartItems.map((items, index) => {
 
                   const { image, id, price, quantity, title, vendor } = items

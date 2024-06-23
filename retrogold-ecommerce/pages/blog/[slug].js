@@ -34,7 +34,7 @@ const BlogPost = ({ data }) => {
       <Navigation />
       <Breadcrumb item={blogDetail} />
       <main>
-        <div className="text-zinc-100 md:px-60 bg-white pb-36 px-4 pt-12">
+        <div className="text-zinc-100 md:px-60 bg-white pb-36 px-4 py-48">
           <div className="text-zinc-700 mb-12">
             <h1 className="text-4xl font-semibold mb-2">{blogDetail.title}</h1>
             <span className="text-sm">Written by: {blogDetail.author.name}</span>
