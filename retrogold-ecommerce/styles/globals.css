@@ -532,6 +532,10 @@ width: 100%; /* Full width on small screens */
     /* make the button full width for easier tapping */
   }
 
+  .imageBox{
+    width:70%;
+  }
+
 
 }
 
@@ -550,4 +554,6 @@ width: 100%; /* Full width on small screens */
     height: 100%;
     object-fit:cover
   }
+
+ 
 }

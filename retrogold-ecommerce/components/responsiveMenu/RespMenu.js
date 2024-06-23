@@ -44,10 +44,10 @@ const RespMenu = () => {
   return (
     <>
       
-      <main className="bg-white flex flex-col absolute z-10 top-0 w-screen h-screen">
+      <main className="bg-white flex flex-col absolute z-10 top-0 w-screen h-screen py-4">
         <div>
           <Link href='/home'>
-            <Image src='/images/Retrogold (6) (1).png' alt='retrogoldlogo' className='imageBox' width={250} height={250} />
+            <Image src='/images/retrogold-black.png' alt='retrogoldlogo' className='imageBox' width={250} height={250} />
           </Link>
           <button className="absolute top-5 right-4" onClick={toggleRespMenu}>
             <FaTimes size="1.5rem" color="black" />
