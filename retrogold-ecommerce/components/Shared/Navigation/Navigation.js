@@ -122,8 +122,8 @@ const Navigation = () => {
             src={imageSrc}
             alt='retrogoldlogo'
             className='imageBox'
-            width={1000}
-            height={1000}
+            width={200}
+            height={200}
             loading='lazy'
           />
         </Link>
@@ -195,7 +195,7 @@ const Navigation = () => {
       </div>
 
       <div className='flex items-center lg:hidden order-1'>
-        <FaBars color='black' size='1.5rem' onClick={toggleRespMenu} />
+        <FaBars  size='1.5rem' onClick={toggleRespMenu} />
       </div>
 
       <div className='flex flex-row justify-end order-3 lg:hidden items-center'>
