@@ -13,6 +13,7 @@ module.exports = {
       pathname: '/images/foypmm2m/production/**'
     }],
     domains: ["cdn.shopify.com"]
-  }
+  },
+  transpilePackages: ['gsap']
 }, nextConfig;
 //# sourceMappingURL=next.config.dev.js.map

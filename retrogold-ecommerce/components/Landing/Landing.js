@@ -2,7 +2,9 @@ import React from 'react';
 import Image from 'next/image'
 
 
+
 const Landing = () => {
+  
     return (
     <div className="heroOverlay relative h-4/6 flex-col justify-center items-center w-full">
       <div className="heroOverlay">

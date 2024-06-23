@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -6,12 +6,15 @@ import { useGlobalContext } from '../../../ Context/context';
 import { FaShoppingCart, FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux'
 import { IoPerson } from "react-icons/io5";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { debounce } from '../../../helpers/debounce'
 import Search from '../Search/Search'
-import {useRef} from 'react';
-import gsap from 'gsap';
 import {useGSAP} from "@gsap/react"
 
+
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
 
@@ -26,10 +29,11 @@ const NavLink = ({ name, href }) => {
 };
 
 const NavLinks = ({ links }) => (
-	<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center text-gray-100  hidden'>
+	<div className='lg:flex lg:gap-4 gap-2 text-md font-bold lg:text-lg lg:items-center   hidden'>
 		{links.map(link => <NavLink key={link.name} {...link} />)}
 	</div>
 );
+
 
 
 
@@ -39,8 +43,10 @@ const NavLinks = ({ links }) => (
 const Navigation = () => {
 	
 	const totalQuantity = useSelector(state => state.totalQuantity);
+  const navRef = useRef();
 	const [inputValue, setInputValue] = useState('');
 	const {
+    mainNavRef,
     searchBar,
     deactivateSearch,
     toggleRespMenu,
@@ -50,6 +56,7 @@ const Navigation = () => {
     displayProfileModal,
     removeProfileModal,
     setSearchValues,
+    boxRef
 
   } = useGlobalContext();
 	
@@ -61,7 +68,7 @@ const Navigation = () => {
 	}));
 
 
-
+  
 
 
 
@@ -89,11 +96,23 @@ const Navigation = () => {
 		debouncedSearch(userSearch)
 	}
 
+
+  useGSAP(() => {
+    gsap.to(navRef.current, {
+      scrollTrigger: {
+        trigger:navRef.current,
+        start: "top top",
+        end: () => "+=" + document.documentElement.scrollHeight,
+        toggleClass: {targets: navRef.current, className:"navigationScroll"}
+      }
+      
+    })
+  });
 		
 	
 
 	return (
-    <nav className='flex justify-between flex-row gap-2 navigationStyle fixed w-full'>
+    <nav className='flex justify-between flex-row gap-2 navigationStyle fixed w-full h-fit' ref={navRef}>
       <div className='flex justify-center order-2 lg:order-1'>
         <Link href='/home'>
           <Image
@@ -143,7 +162,7 @@ const Navigation = () => {
         {isToken ? (
           <Link href='/userAccount/account'>
             <span
-              className='text-gray-800'
+          
               onMouseEnter={displayProfileModal}
               onMouseLeave={removeProfileModal}
             >
@@ -153,7 +172,6 @@ const Navigation = () => {
         ) : (
           <IoPerson
             className='relative'
-            color='white'
             size='1.8rem'
             onMouseEnter={displayWelcomeModal}
             onMouseLeave={removeWelcomeModal}
@@ -162,9 +180,9 @@ const Navigation = () => {
 
         <div className='flex flex-row justify-end'>
           <Link href='/cart' className='flex flex-row'>
-            <FaShoppingCart size='1.8rem' color='white' />
+            <FaShoppingCart size='1.8rem' />
             {cartItems ? (
-              <div className='mx-2 text-zinc-800 font-semibold'>
+              <div className='mx-2 font-semibold'>
                 <span>{totalQuantity}</span>
               </div>
             ) : null}
@@ -178,9 +196,9 @@ const Navigation = () => {
 
       <div className='flex flex-row justify-end order-3 lg:hidden items-center'>
         <Link href='/cart'>
-          <FaShoppingCart size='1.8rem' color='white' />
+          <FaShoppingCart size='1.8rem'  />
           {cartItems ? (
-            <div className='mx-2 text-zinc-800 font-semibold'>
+            <div className='mx-2  font-semibold'>
               <span>{totalQuantity}</span>
             </div>
           ) : null}

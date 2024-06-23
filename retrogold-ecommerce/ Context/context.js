@@ -1,4 +1,4 @@
-import {createContext, useContext,  useState, useEffect} from 'react';
+import {createContext, useContext,  useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router'
  import { initializeCart } from '../store'
 import {  useDispatch } from 'react-redux'
@@ -33,8 +33,10 @@ const AppContext = ({ children }) => {
   const [searchValues, setSearchValues] = useState(null)
   const [isSearchValue, setIsSearchValue] = useState(false)
 
+  const mainNavRef = useRef(null)
 
 
+    
 
     useEffect(()=> {
       if(searchValues != null){
@@ -259,6 +261,7 @@ const handleProfileDropDownMouseLeave = () => {
         
   return (
     <GlobalContext.Provider value={{ 
+      mainNavRef,
       currentIndex,
       setCurrentIndex,
       isOpenMenu,

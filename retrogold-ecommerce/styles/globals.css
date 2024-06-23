@@ -69,6 +69,12 @@ cursor: pointer;
 color: var(--teaGreen);
 }
 
+.navigationScroll {
+  background-color: white;
+  color: black;
+  height: 9rem;
+}
+
 .navigation.hidden {
   display: none;
 }
@@ -232,6 +238,7 @@ input[type=email] {
 .imageBox {
   width: 20rem;
   height: auto;
+  max-width: 100%;
 
 }
 

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRef } from 'react'
 import { sanityClient } from '/lib/sanity'
 import Landing from '/components/Landing/Landing'
 import Quotes from '/components/Quotes/Quotes'
@@ -21,6 +22,7 @@ import SearchDropdrown from '@/components/Dropdown/SearchDropdown'
 export default function Home({ hero, quote, blog, calltoAction }) {
   console.log(blog[0].description[0].children[0].text)
   const {
+    mainNavRef,
     isOpenMenu,
     isSignIn,
     isUserRegistered,
@@ -35,8 +37,8 @@ export default function Home({ hero, quote, blog, calltoAction }) {
   const shouldProfileShowDropdown = isProfileHovered || isProfileDropdownHovered
   const showSearchDropdown = isSearchValue || false
 
-
-
+  
+  
 
   return (
     <>
@@ -48,7 +50,7 @@ export default function Home({ hero, quote, blog, calltoAction }) {
       </Head>
 
       <main className="h-screen">
-        <div className="h-screen">
+        <div className="h-screen" ref={mainNavRef}>
           <Navigation />
           {showSearchDropdown && <SearchDropdrown />}
           {isOpenMenu && <RespMenu />}

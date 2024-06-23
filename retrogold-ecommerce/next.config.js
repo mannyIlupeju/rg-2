@@ -15,5 +15,6 @@ module.exports = {
       }
     ],
     domains: ["cdn.shopify.com"]
-  }
+  },
+  transpilePackages: ['gsap'],
 }, nextConfig
