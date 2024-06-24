@@ -30,9 +30,10 @@ const Contact = () => {
           <div className="lg:grid lg:grid-cols-3 lg:gap-12 w-full max-w-5xl">
 
             <div className="lg:col-span-1 space-y-8 text-zinc-700">
-              <h1 className="text-4xl font-bold  mb-4">Get in Touch</h1>
+              <h1 className="text-3xl font-bold  mb-4">Get in Touch</h1>
               <p>
-                We respond to each and every message as soon as possible; it may take 2-3 business days for us to get back to you via email. PS. We recommend adding info@retrogoldlife.com to your contacts to ensure our responses land in your inbox.
+                We respond to each and every message as soon as possible; it may take 2-3 business days for us to get back to you via email. PS.
+                We recommend adding retrogoldlifestyle@gmail.com to your contacts to ensure our responses land in your inbox.
               </p>
 
               <h2 className="text-2xl font-medium mt-8 mb-4">In the meantime, here is some information that may answer your question</h2>

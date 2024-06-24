@@ -139,10 +139,8 @@ const Cart = ({ cartId }) => {
               <div className="flex justify-center">
                 <Image src='/images/shopping-cart-10925.png' width={40} height={40} alt="shopping cart icon" />
               </div>
-              <div className="mt-4">
+              <div className="py-48">
                 <h1 className="text-6xl font-bold text-zinc-700">Cart is Empty</h1>
-              </div>
-              <div className="mt-24">
                 <button className="text-2xl btn"><Link href='/shop'>Back To Shop</Link></button>
               </div>
             </div>

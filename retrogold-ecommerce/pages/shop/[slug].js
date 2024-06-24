@@ -34,10 +34,12 @@ const ProductDetails = ({ product, allProducts }) => {
   const availableForSale = variants.edges[0].node.availableForSale;
   const price = priceRange.minVariantPrice.amount;
 
+  console.log(quantityAvailable)
+
 
 
   const [quantity, setQuantity] = useState(1)
-
+  const [message, setMessage] = useState('product is sold out')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [inStockMessage, setInStockMessage] = useState(false)
   const dispatch = useDispatch()
@@ -333,7 +335,15 @@ const ProductDetails = ({ product, allProducts }) => {
 
 
                   <div className="mt-8">
-                    <button className="bg-black px-20 py-2 text-sm uppercase text-white" onClick={() => onAdd(title, vendor, price, quantity, id, variants, productImage)}>Add to Cart</button>
+                    <button className={`${quantityAvailable ? `bg-black px-20` : 'bg-gray-400 p-4'} py-2 text-sm uppercase text-white`} 
+                      onClick={() => {
+                        if(quantityAvailable != 0){
+                          onAdd(title, vendor, price, quantity, id, variants, productImage)
+                        }
+                      }
+                      }>
+                      {quantityAvailable ? 'Add to Cart' : 'Sold Out'}
+                    </button>
                   </div>
 
                 </div>
@@ -344,9 +354,6 @@ const ProductDetails = ({ product, allProducts }) => {
 
               </div>
             </div>
-
-
-
           </div>
 
           <div className="flex justify-center">

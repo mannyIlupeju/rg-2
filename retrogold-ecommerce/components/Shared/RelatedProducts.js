@@ -11,7 +11,7 @@ const Relatedproducts = ({ currentProduct, allProducts }) => {
 
 
   return (
-    <div className="container w-full overflow-x-auto mx-auto relative mb-4 bg-white">
+    <div className="container w-full overflow-x-auto  mx-auto relative mb-4 bg-white">
       <div className="">
       <h2 className="text-zinc-800">Related Products</h2>
       </div>
