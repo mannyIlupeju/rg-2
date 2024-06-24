@@ -46,7 +46,7 @@ const Cart = ({cartId}) => {
   return (
     <div className={`overflow-y-auto ${isItemChosen ? "overlay" : ""}`} onClick={closeOverlay}>
         {(isItemChosen) ?
-        <div className="bg-gray-300 relative left-2/3 z-99 top-24 p-8 sideCart lg:w-2/6 w-full">
+        <div className="bg-gray-300 absolute left-2/3 z-99 top-24 p-8 sideCart lg:w-2/6 w-full">
               <div className="text-zinc-700 flex justify-between">
                 <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
                 <FaTimes color="black" size="2rem" onClick={closeCartModal} className="cursor-pointer"/>
@@ -61,7 +61,7 @@ const Cart = ({cartId}) => {
                     <div className="border-t-4 border-gray-400" key={index}>
                           <div className="flex gap-4 mt-4">
                             <div>
-                              {imageUrl && <Image src={imageUrl} alt={title} width="40" height="40" className="cartImage" unoptimized />}
+                              {imageUrl && <Image src={imageUrl} alt={title} width={20} height={20} className="cartImage" unoptimized />}
                             </div>
                             <div className="flex flex-col gap-4 text-zinc-700">
                               <h1 className="text-lg"><span className="font-bold">{vendor}</span></h1>
@@ -76,7 +76,7 @@ const Cart = ({cartId}) => {
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
                                 <button onClick={() => handleRemove(lineId)}>
-                                  <p>On Remove</p>
+                                  <p>Remove</p>
                                 </button>
                               </div>
                             </div>

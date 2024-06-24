@@ -115,7 +115,7 @@ const Navigation = () => {
 	
 
 	return (
-    <nav className='flex justify-between flex-row gap-8 navigationStyle fixed z-2 w-full ' ref={navRef}>
+    <nav className='flex justify-between flex-row gap-8 navigationStyle fixed w-full ' ref={navRef}>
       <div className='flex justify-center order-2 lg:order-1 items-center'>
         <Link href='/home'>
           <Image
