@@ -32,6 +32,7 @@ const AppContext = ({ children }) => {
   const [showSearchDropdown, setSearchDropdown] = useState(false)
   const [searchValues, setSearchValues] = useState(null)
   const [isSearchValue, setIsSearchValue] = useState(false)
+  const [sideCartId, setSideCartId] = useState()
 
   const mainNavRef = useRef(null)
 
@@ -320,7 +321,9 @@ const handleProfileDropDownMouseLeave = () => {
       setSearchValues,
       isSearchValue,
       setIsSearchValue,
-      hideDropdown
+      hideDropdown,
+      sideCartId,
+      setSideCartId
       
       
       }}

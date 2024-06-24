@@ -18,11 +18,16 @@ const Cart = ({ cartId }) => {
 
   const cartItems = useSelector((state) => state.cart)
   const totalPrice = useSelector((state) => state.totalPrice)
-  const { isOpenMenu, setCartData } = useGlobalContext()
+  const { isOpenMenu, setCartData, sideCartId, setSideCartId} = useGlobalContext()
   const dispatch = useDispatch()
 
 
 
+  useEffect(() => {
+    setSideCartId(cartId)
+  }, [setSideCartId, sideCartId, cartId]);
+
+  
 
 
   function onRemoveCallback(id) {

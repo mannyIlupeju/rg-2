@@ -117,7 +117,7 @@ const Navigation = () => {
 	return (
     <nav className='flex justify-between flex-row gap-8 navigationStyle fixed w-full ' ref={navRef}>
       <div className='flex justify-center order-2 lg:order-1 items-center'>
-        <Link href='/home'>
+        <Link href='/home' aria-label='go to homepage'>
           <Image
             src={imageSrc}
             alt='retrogoldlogo'

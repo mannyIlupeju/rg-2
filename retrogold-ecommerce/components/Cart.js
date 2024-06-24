@@ -4,16 +4,19 @@ import { useGlobalContext } from '../ Context/context';
 import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa';
 import { onRemove, toggleCartItemQuantity } from '../store'
 import {useSelector, useDispatch} from 'react-redux'
-import {handleToggle, handleRemove} from '../util/cartFunctions/functions'
+import {handleToggle, handleRemove, handleCheckOut} from '../util/cartFunctions/functions'
 //Sidebar Cart view component
 
 const Cart = ({cartId}) => {
+
   
-  const {isItemChosen, closeCartModal } = useGlobalContext()
+  const {isItemChosen, closeCartModal, sideCartId } = useGlobalContext()
   const dispatch = useDispatch()
   const totalPrice = useSelector((state) => state.totalPrice)
   const cartItems = useSelector((state)=> state.cart)
 
+
+  console.log(sideCartId)
   
 
   useEffect(() => {
@@ -27,7 +30,6 @@ const Cart = ({cartId}) => {
 
   const closeOverlay = () => {
     if(isItemChosen){
-      console.log(isItemChosen)
       !isItemChosen
     }
   }
@@ -75,7 +77,7 @@ const Cart = ({cartId}) => {
                                 <h1 className="text-xl">${price}</h1>
                               </div>
                               <div className=" text-zinc-700 font-bold underline">
-                                <button onClick={() => handleRemove(lineId)}>
+                            <button onClick={() => handleRemove(id, cartId, quantity, onRemoveCallback)}>
                                   <p>Remove</p>
                                 </button>
                               </div>
@@ -90,7 +92,9 @@ const Cart = ({cartId}) => {
                     </div>
 
                     <div className="mt-4">
-                      <button className="btn">Checkout</button>
+                      <button className="btn" onClick={()=>{handleCheckOut(sideCartId)}}>
+                        Checkout
+                      </button>
                     </div>
               </div>
             </div>

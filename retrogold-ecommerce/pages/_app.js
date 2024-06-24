@@ -1,4 +1,7 @@
 import '../styles/globals.css'
+import Lenis from 'lenis'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import AppContext from '../ Context/context'
 import {useRouter} from 'next/router'
 import {useState, useEffect} from 'react'
@@ -9,9 +12,16 @@ import AuthenticationCheck from '../ Context/AuthenticationCheck'
 import { PersistGate } from 'redux-persist/integration/react'
 
 
+
 export default function App({ Component, pageProps }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+
+  
+
+
+
+  
 
   useEffect(() => {
     // Simplify the event handlers to just toggle the loading state
