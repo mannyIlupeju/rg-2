@@ -11,18 +11,18 @@ const Relatedproducts = ({ currentProduct, allProducts }) => {
 
 
   return (
-    <div className="container w-full overflow-x-auto  mx-auto relative mb-4 bg-white">
-      <div className="">
+    <div className="md:container container-width w-full overflow-x-auto  mx-auto relative mb-4 bg-white">
+      <div className="flex">
       <h2 className="text-zinc-800">Related Products</h2>
       </div>
         
-          <div className="flex flex-col md:flex-row gap-10 ">
+          <div className="flex flex-col md:flex-row gap-10">
             {filterProducts.map((items)=>{
               const{images, priceRange, title, vendor, handle, id} = items
               return (
                 <Link href={`/shop/${handle}`} key={id}>
                   <div className="relatedProductBlock">
-                    <div className="my-2 h-auto">
+                    <div className="my-2 h-auto sm:items-center">
                     <Image src={images.edges[0].node.originalSrc} alt="" className="relatedProductImage" width="250" height="250"/>
                     </div>
                     <div className="text-zinc-700 mb-4">

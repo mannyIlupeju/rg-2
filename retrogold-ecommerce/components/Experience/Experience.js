@@ -57,7 +57,7 @@ const Experience = () => {
                             loading='lazy'
                             ref={imageElement1}
                         />
-                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-40 -translate-y-60">
+                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-32 -translate-y-60">
                             <Link href='/shop' className="text-3xl p-2 text-zinc-800 experience-link cursor-pointer">Shop</Link>
                         </div>
                     </motion.div>
@@ -75,7 +75,7 @@ const Experience = () => {
                             height={800}
                             loading='lazy'
                         />
-                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-40 -translate-y-40">
+                        <div className="absolute md:-translate-y-96 md:translate-x-80 xl:-translate-y-50 translate-x-28 -translate-y-40">
                             <Link href="/services" className="text-3xl p-2 text-zinc-800 experience-link">Services</Link>
                         </div>
                     </motion.div>
